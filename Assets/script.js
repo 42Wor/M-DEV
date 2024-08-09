@@ -60,7 +60,7 @@ form.addEventListener('submit', async (e) => {
       'Accept': 'application/json'
     },
     body: JSON.stringify({
-      'access_key': 'f6c7f1bb-957f-454e-b806-61bc84a5e24d', // Replace with your Web3Forms access key
+      'access_key': '', // Replace with your Web3Forms access key   f6c7f1bb-957f-454e-b806-61bc84a5e24d    
       'form_name': 'Contact Form',
       'data': jsonData // Send data as a string
     })
