@@ -243,28 +243,16 @@
   const messageDiv = document.getElementById('message');
   const loadingDiv = document.getElementById('loading');
   const formContainer = document.getElementById('c-form');
-  const successMessage = 'Thank you for contacting us!';
-  const errorMessage = 'Error submitting form. Please try again.';
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     loadingDiv.style.display = 'block';
     messageDiv.style.display = 'block';
-
-    // Netlify Forms will handle the form submission
-    // We'll just display a success or error message based on the submission result
-    form.addEventListener('netlify:success', () => {
-      messageDiv.textContent = successMessage;
-      loadingDiv.style.display = 'none';
-      setTimeout(() => {
-        formContainer.style.display = 'none'; // close the form container after 2 seconds
-      }, 2000);
-    });
-
-    form.addEventListener('netlify:error', () => {
-      messageDiv.textContent = errorMessage;
-      loadingDiv.style.display = 'none';
-    });
+    messageDiv.textContent = 'Thank you for contacting us!';
+    loadingDiv.style.display = 'none';
+    setTimeout(() => {
+      formContainer.style.display = 'none'; // close the form container after 2 seconds
+    }, 2000);
   });
 </script>
 
