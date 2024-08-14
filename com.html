@@ -229,13 +229,28 @@
   const form = document.getElementById('form');
   const messageDiv = document.getElementById('message');
   const loadingDiv = document.getElementById('loading');
+  const formContainer = document.getElementById('c-form');
+  const successMessage = 'Thank you for contacting us!';
+  const errorMessage = 'Error submitting form. Please try again.';
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     loadingDiv.style.display = 'block';
     messageDiv.style.display = 'block';
-    messageDiv.textContent = 'Thank you for contacting us!';
-    loadingDiv.style.display = 'none';
+
+    // simulate a form submission (replace with actual form submission logic)
+    const submissionSuccessful = Math.random() < 0.5; // 50% chance of success
+
+    if (submissionSuccessful) {
+      messageDiv.textContent = errorMessage;
+      loadingDiv.style.display = 'none';
+    } else {
+      messageDiv.textContent = successMessage;
+      loadingDiv.style.display = 'none';
+      setTimeout(() => {
+        formContainer.style.display = 'none'; // close the form container after 2 seconds
+      }, 2000);
+    }
   });
 </script>
 
@@ -252,7 +267,7 @@
     </div>
   </footer>
 
-  <script src="Assets/script.js"></script>
+
 
   <script>
 
