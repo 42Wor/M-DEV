@@ -163,7 +163,7 @@
   <div onclick="hidebox()" class="close-btn"></div>
   <div class="title"><span>Contact Us Form</span></div>
 
-  <form method="POST" data-netlify="true" name="contact">
+  <form method="POST" data-netlify="true" name="com">
     <input type="hidden" name="form-name" value="contact" />
 
     <div class="field">
@@ -252,36 +252,6 @@
     </div>
   </footer>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('form');
-    const messageDiv = document.getElementById('message');
-    const formContainer = document.getElementById('c-form');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      // Show the message and hide the form after a delay
-      messageDiv.style.display = 'block';
-      messageDiv.textContent = 'Thank you for contacting us!';
-
-      setTimeout(() => {
-        formContainer.style.display = 'none'; // Hide the form container after 2 seconds
-      }, 2000);
-
-      // Optionally, you can use fetch to submit the form manually if needed
-      // fetch(form.action, {
-      //   method: 'POST',
-      //   body: new FormData(form),
-      // });
-    });
-  });
-
-  function hidebox() {
-    const formContainer = document.getElementById('c-form');
-    formContainer.style.display = 'none'; // Close the form container when close button is clicked
-  }
-</script>
 
 
   <script>
