@@ -66,80 +66,28 @@ function resetMessageBoxColor() {
     document.getElementById("submit-button").disabled = true;
 
 
-    var formData = new FormData(this);
+    // No need to fetch or send data to a custom endpoint
 
-    var jsonData = {};
-
-
-    for (var pair of formData.entries()) {
-
-      jsonData[pair[0]] = pair[1];
-
-    }
+    // Netlify Forms will automatically handle the form submission
 
 
-    fetch('/contact', {
+    setTimeout(function() {
 
-      method: 'POST',
+      messageBox.textContent = "";
 
-      headers: {
+      messageBox.style.display = "none";
 
-        'Content-Type': 'application/x-www-form-urlencoded'
+      // Hide additional fields if necessary
 
-      },
+      var numberField = document.querySelector(".phoneField");
 
-      body: new URLSearchParams(jsonData).toString()
+      if (numberField) numberField.style.display = "none";
 
-    })
+      var supportField = document.querySelector(".supportfield");
 
-    .then(response => response.json())
+      if (supportField) supportField.style.display = "none";
 
-    .then(data => {
-
-      if (data.success) {
-
-        messageBox.textContent = "Message Submitted Successfully!";
-
-        messageBox.style.backgroundColor = "green";
-
-        messageBox.style.color = "beige";
-
-        document.getElementById("submit-button").disabled = false;
-
-        document.getElementById("form").reset();
-
-
-        setTimeout(function() {
-
-          messageBox.textContent = "";
-
-          messageBox.style.display = "none";
-
-          // Hide additional fields if necessary
-
-          var numberField = document.querySelector(".phoneField");
-
-          if (numberField) numberField.style.display = "none";
-
-          var supportField = document.querySelector(".supportfield");
-
-          if (supportField) supportField.style.display = "none";
-
-        }, 2000);
-
-      } else {
-
-        messageBox.textContent = "An error occurred while submitting the form.";
-
-      }
-
-    })
-
-    .catch(error => {
-
-      messageBox.textContent = "An error occurred while submitting the form.";
-
-    });
+    }, 2000);
 
   });
 // from end
