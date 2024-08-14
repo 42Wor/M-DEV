@@ -165,7 +165,7 @@
 
   <div class="title"><span>Contact Us Form</span></div>
 
-  <form action="/contact" method="POST" class="container m-4 pl-4" id="form" netlify data-netlify-honeypot="bot-field" data-netlify-form="true" name="contact">
+  <form action="/contact" method="POST" class="container m-4 pl-4" id="form" data-netlify-form="true" name="contact">
 
     <input type="hidden" name="form-name" value="contact" />
 
@@ -205,7 +205,7 @@
 
     </div>
 
-    <p>For quicker assistance, contact us on Social Media. Email responses may take 1-2 business days.</p>
+    <p>For quicker assistance, contact us on <a href="https://twitter.com/yourtwitterhandle">Twitter</a>, <a href="https://facebook.com/yourfacebookpage">Facebook</a>, or <a href="https://instagram.com/yourinstagramhandle">Instagram</a>. Email responses may take 1-2 business days.</p>
 
     <div class="button field is-grouped" style="display: flex; justify-content: center;">
 
@@ -225,35 +225,6 @@
 
 </div>
 
-<script>
-  const form = document.getElementById('form');
-  const messageDiv = document.getElementById('message');
-  const loadingDiv = document.getElementById('loading');
-  const formContainer = document.getElementById('c-form');
-  const successMessage = 'Thank you for contacting us!';
-  const errorMessage = 'Error submitting form. Please try again.';
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    loadingDiv.style.display = 'block';
-    messageDiv.style.display = 'block';
-
-    // simulate a form submission (replace with actual form submission logic)
-    const submissionSuccessful = Math.random() < 0.5; // 50% chance of success
-
-    if (submissionSuccessful) {
-      messageDiv.textContent = errorMessage;
-      loadingDiv.style.display = 'none';
-    } else {
-      messageDiv.textContent = successMessage;
-      loadingDiv.style.display = 'none';
-      setTimeout(() => {
-        formContainer.style.display = 'none'; // close the form container after 2 seconds
-      }, 2000);
-    }
-  });
-</script>
-
     </section>
 
   </body>
@@ -267,7 +238,35 @@
     </div>
   </footer>
 
+<script>
+  const form = document.getElementById('form');
+  const messageDiv = document.getElementById('message');
+  const loadingDiv = document.getElementById('loading');
+  const formContainer = document.getElementById('c-form');
+  const successMessage = 'Thank you for contacting us!';
+  const errorMessage = 'Error submitting form. Please try again.';
 
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    loadingDiv.style.display = 'block';
+    messageDiv.style.display = 'block';
+
+    // Netlify Forms will handle the form submission
+    // We'll just display a success or error message based on the submission result
+    form.addEventListener('netlify:success', () => {
+      messageDiv.textContent = successMessage;
+      loadingDiv.style.display = 'none';
+      setTimeout(() => {
+        formContainer.style.display = 'none'; // close the form container after 2 seconds
+      }, 2000);
+    });
+
+    form.addEventListener('netlify:error', () => {
+      messageDiv.textContent = errorMessage;
+      loadingDiv.style.display = 'none';
+    });
+  });
+</script>
 
   <script>
 
