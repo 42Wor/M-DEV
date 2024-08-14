@@ -158,39 +158,38 @@
         <div class="button field is-grouped" style="display: flex; justify-content: center;">
           <div class="control"><button class="button is-primary" onclick="showbox()">Contact Form</button></div>
         </div>
-<div id="c-form" class="contact-box">
-  <div onclick="hidebox()" class="close-btn"></div>
-  <div class="title"><span>Contact Us Form</span></div>
-  <form method="POST" class="container m-4 pl-4" id="form" netlify data-netlify-honeypot="bot-field">
-    <input type="hidden" name="form-name" value="contact" />
-    <input type="hidden" name="bot-field" />
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Enter Your Name" name="name" required />
-      </div>
+
+<form method="POST" class="container m-4 pl-4" id="form" data-netlify="true" data-netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="bot-field" />
+  <!-- Form fields -->
+  <div class="field">
+    <label class="label">Name</label>
+    <div class="control">
+      <input class="input" type="text" placeholder="Enter Your Name" name="name" required />
     </div>
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control">
-        <input class="input" type="email" placeholder="Enter Your Email" name="email" required />
-      </div>
+  </div>
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control">
+      <input class="input" type="email" placeholder="Enter Your Email" name="email" required />
     </div>
-    <div class="field">
-      <label class="label">Message</label>
-      <div class="control">
-        <textarea class="input" placeholder="Enter Your Message" name="message" rows="4" required></textarea>
-      </div>
+  </div>
+  <div class="field">
+    <label class="label">Message</label>
+    <div class="control">
+      <textarea class="input" placeholder="Enter Your Message" name="message" rows="4" required></textarea>
     </div>
-    <p>For quicker assistance, contact us on Social Media. Email responses may take 1-2 business days.</p>
-    <div class="button field is-grouped" style="display: flex; justify-content: center;">
-      <div class="control">
-        <button class="button is-primary" type="submit" id="submit-button">Submit</button>
-      </div>
+  </div>
+  <p>For quicker assistance, contact us on Social Media. Email responses may take 1-2 business days.</p>
+  <div class="button field is-grouped" style="display: flex; justify-content: center;">
+    <div class="control">
+      <button class="button is-primary" type="submit" id="submit-button">Submit</button>
     </div>
-    <div id="message" style="display: none; font-weight: bold; color: #033b77; padding: 8px; background-color: beige; border-radius: 4px; margin-top: 10px; border-color: aquamarine;"></div>
-  </form>
-</div>
+  </div>
+  <div id="message" style="display: none; font-weight: bold; color: #033b77; padding: 8px; background-color: beige; border-radius: 4px; margin-top: 10px; border-color: aquamarine;"></div>
+</form>
+
 
     </section>
 
