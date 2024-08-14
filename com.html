@@ -233,21 +233,9 @@
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     loadingDiv.style.display = 'block';
-    fetch('/contact', {
-      method: 'POST',
-      body: new FormData(form)
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      messageDiv.style.display = 'block';
-      messageDiv.textContent = 'Thank you for contacting us!';
-      loadingDiv.style.display = 'none';
-    })
-    .catch((error) => {
-      messageDiv.style.display = 'block';
-      messageDiv.textContent = 'Error submitting form. Please try again.';
-      loadingDiv.style.display = 'none';
-    });
+    messageDiv.style.display = 'block';
+    messageDiv.textContent = 'Thank you for contacting us!';
+    loadingDiv.style.display = 'none';
   });
 </script>
 
