@@ -50,46 +50,7 @@ function resetMessageBoxColor() {
   messageBox.style.backgroundColor = "beige";
   messageBox.style.color = "green";
 }
-// from start
-  document.getElementById("form").addEventListener("submit", async function(e) {
 
-    e.preventDefault();
-
-    resetMessageBoxColor();
-
-    var messageBox = document.getElementById("message");
-
-    messageBox.textContent = "Submitting..";
-
-    messageBox.style.display = "block";
-
-    document.getElementById("submit-button").disabled = true;
-
-
-    // No need to fetch or send data to a custom endpoint
-
-    // Netlify Forms will automatically handle the form submission
-
-
-    setTimeout(function() {
-
-      messageBox.textContent = "";
-
-      messageBox.style.display = "none";
-
-      // Hide additional fields if necessary
-
-      var numberField = document.querySelector(".phoneField");
-
-      if (numberField) numberField.style.display = "none";
-
-      var supportField = document.querySelector(".supportfield");
-
-      if (supportField) supportField.style.display = "none";
-
-    }, 2000);
-
-  });
 // from end
 function handleCVFile() {
   // Define the file URL
