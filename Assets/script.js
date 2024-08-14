@@ -40,40 +40,7 @@ cancelBtn.onclick = function(){
 }
 
 // Side Navigation Bar Close While We Click On Navigation Links
-const form = document.getElementById('contactForm');
-const messageStatus = document.getElementById('messageStatus');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  const data = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-
-  const jsonData = JSON.stringify(data); // Convert data object to string
-
-  const response = await fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      'access_key': 'f6c7f1bb-957f-454e-b806-61bc84a5e24d', // Replace with your Web3Forms access key
-      'form_name': 'Contact Form',
-      'data': jsonData // Send data as a string
-    })
-  });
-
-  const result = await response.json();
-  if (result.success) {
-    messageStatus.innerHTML = 'Message sent successfully!';
-    form.reset();
-  } else {
-    messageStatus.innerHTML = 'Error sending message. Please try again.';
-  }
-});
 // Function to handle change event of the subject select
 
 
