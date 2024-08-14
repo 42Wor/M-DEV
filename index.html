@@ -200,52 +200,79 @@
        <a href="chat.html"><button>Let's Chat</button></a>
       </div>
     </div>
-   <form name="home" method="POST" data-netlify="true" id="contactForm">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
-        <br>
-        <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true">
-        <br>
-        <label for="message">Your Message:</label>
-        <textarea id="message" name="message" rows="6" placeholder="Your Message" required aria-required="true"></textarea>
-        <br>
-        <p>Note: It may take 1-2 business days to receive a reply via email. For immediate assistance, we recommend contacting us through social media.</p>
-        <br>
-        <div id="messageStatus"></div>
-        <button type="submit" id="sendButton">Send Message</button>
-    </form>
+  <form method="POST" data-netlify="true" name="com">
+    <input type="hidden" name="form-name" value="com" />
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Enter Your Name" name="name" required />
+      </div>
+    </div>
 
-            const form = event.target;
-            const statusDiv = document.getElementById('messageStatus');
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input class="input" type="email" placeholder="Enter Your Email" name="email" required />
+      </div>
+    </div>
 
-            // Prepare form data
-            const formData = new FormData(form);
+    <div class="field">
+      <label class="label">Message</label>
+      <div class="control">
+        <textarea class="input" placeholder="Enter Your Message" name="message" rows="4" required></textarea>
+      </div>
+    </div>
 
-            // Submit form data using Fetch API
-            fetch('/', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    statusDiv.textContent = 'Message sent successfully!';
-                    statusDiv.className = 'success';
-                } else {
-                    statusDiv.textContent = 'There was a problem sending your message.';
-                    statusDiv.className = 'error';
-                }
-            })
-            .catch(() => {
-                statusDiv.textContent = 'There was a problem sending your message.';
-                statusDiv.className = 'error';
-            });
-        });
-    </script>
+    <p>For quicker assistance, contact us on <a href="https://twitter.com/yourtwitterhandle">Twitter</a>, <a href="https://facebook.com/yourfacebookpage">Facebook</a>, or <a href="https://instagram.com/yourinstagramhandle">Instagram</a>. Email responses may take 1-2 business days.</p>
+
+    <div class="button field is-grouped" style="display: flex; justify-content: center;">
+      <div class="control">
+        <button class="button is-primary" type="submit" id="submit-button">Submit</button>
+      </div>
+    </div>
+
+    <div id="message" style="display: none; font-weight: bold; color: #033b77; padding: 8px; background-color: beige; border-radius: 4px; margin-top: 10px; border-color: aquamarine;"></div>
+  </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('form');
+    const messageDiv = document.getElementById('message');
+    const formContainer = document.getElementById('c-form');
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Show the message and hide the form after a delay
+        messageDiv.style.display = 'block';
+        messageDiv.textContent = 'Thank you for contacting us!';
+
+        setTimeout(() => {
+          formContainer.style.display = 'none'; // Hide the form container after 2 seconds
+        }, 2000);
+
+        // Optionally, you can use fetch to submit the form manually if needed
+        // fetch(form.action, {
+        //   method: 'POST',
+        //   body: new FormData(form),
+        // });
+      });
+    } else {
+      console.error('Form element not found');
+    }
+  });
+
+  function hidebox() {
+    const formContainer = document.getElementById('c-form');
+    if (formContainer) {
+      formContainer.style.display = 'none'; // Close the form container when close button is clicked
+    } else {
+      console.error('Form container element not found');
+    }
+  }
+</script>
         <div class="ssmedis" id="ssmedia" style="display: block;">
 
           <div style="margin-top: 25px;" class="text">
