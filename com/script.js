@@ -51,66 +51,97 @@ function resetMessageBoxColor() {
   messageBox.style.color = "green";
 }
 // from start
-document.getElementById("form").addEventListener("submit", async function(e) {
-  e.preventDefault();
-  resetMessageBoxColor();
-  var messageBox = document.getElementById("message");
-  messageBox.textContent = "Submitting..";
-  messageBox.style.display = "block";
-  document.getElementById("submit-button").disabled = true;
+  document.getElementById("form").addEventListener("submit", async function(e) {
 
-  var currentDate = new Date();
-  var day = String(currentDate.getDate()).padStart(2, "0");
-  var month = String(currentDate.getMonth() + 1).padStart(2, "0");
-  var year = currentDate.getFullYear();
-  var hours = String(currentDate.getHours()).padStart(2, "0");
-  var minutes = String(currentDate.getMinutes()).padStart(2, "0");
-  var seconds = String(currentDate.getSeconds()).padStart(2, "0");
-  var timestamp = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    e.preventDefault();
 
-  var formData = new FormData(this);
-  var jsonData = {};
+    resetMessageBoxColor();
 
-  for (var pair of formData.entries()) {
-    jsonData[pair[0]] = pair[1];
-  }
+    var messageBox = document.getElementById("message");
 
-  jsonData['Timestamp'] = timestamp;
+    messageBox.textContent = "Submitting..";
 
-  const response = await fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      'access_key': 'f6c7f1bb-957f-454e-b806-61bc84a5e24d', // Replace with your Web3Forms access key
-      'form_name': 'Contact Form',
-      'data': jsonData // Send data as a string
+    messageBox.style.display = "block";
+
+    document.getElementById("submit-button").disabled = true;
+
+
+    var formData = new FormData(this);
+
+    var jsonData = {};
+
+
+    for (var pair of formData.entries()) {
+
+      jsonData[pair[0]] = pair[1];
+
+    }
+
+
+    fetch('/contact', {
+
+      method: 'POST',
+
+      headers: {
+
+        'Content-Type': 'application/x-www-form-urlencoded'
+
+      },
+
+      body: new URLSearchParams(jsonData).toString()
+
     })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+      if (data.success) {
+
+        messageBox.textContent = "Message Submitted Successfully!";
+
+        messageBox.style.backgroundColor = "green";
+
+        messageBox.style.color = "beige";
+
+        document.getElementById("submit-button").disabled = false;
+
+        document.getElementById("form").reset();
+
+
+        setTimeout(function() {
+
+          messageBox.textContent = "";
+
+          messageBox.style.display = "none";
+
+          // Hide additional fields if necessary
+
+          var numberField = document.querySelector(".phoneField");
+
+          if (numberField) numberField.style.display = "none";
+
+          var supportField = document.querySelector(".supportfield");
+
+          if (supportField) supportField.style.display = "none";
+
+        }, 2000);
+
+      } else {
+
+        messageBox.textContent = "An error occurred while submitting the form.";
+
+      }
+
+    })
+
+    .catch(error => {
+
+      messageBox.textContent = "An error occurred while submitting the form.";
+
+    });
+
   });
-
-  const result = await response.json();
-  if (result.success) {
-    messageBox.textContent = "Message Submitted Successfully!";
-    messageBox.style.backgroundColor = "green";
-    messageBox.style.color = "beige";
-    document.getElementById("submit-button").disabled = false;
-    document.getElementById("form").reset();
-
-    setTimeout(function() {
-      messageBox.textContent = "";
-      messageBox.style.display = "none";
-      // Hide additional fields if necessary
-      var numberField = document.querySelector(".phoneField");
-      if (numberField) numberField.style.display = "none";
-      var supportField = document.querySelector(".supportfield");
-      if (supportField) supportField.style.display = "none";
-    }, 2000);
-  } else {
-    messageBox.textContent = "An error occurred while submitting the form.";
-  }
-});
 // from end
 function handleCVFile() {
   // Define the file URL
