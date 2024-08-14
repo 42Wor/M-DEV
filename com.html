@@ -165,7 +165,7 @@
 
   <div class="title"><span>Contact Us Form</span></div>
 
-  <form action="/contact" method="POST" class="container m-4 pl-4" id="form" netlify data-netlify-honeypot="bot-field">
+  <form action="/contact" method="POST" class="container m-4 pl-4" id="form" netlify data-netlify-honeypot="bot-field" data-netlify-form="true" name="contact">
 
     <input type="hidden" name="form-name" value="contact" />
 
@@ -219,9 +219,37 @@
 
     <div id="message" style="display: none; font-weight: bold; color: #033b77; padding: 8px; background-color: beige; border-radius: 4px; margin-top: 10px; border-color: aquamarine;"></div>
 
+    <div id="loading" style="display: none; font-weight: bold; color: #033b77; padding: 8px; background-color: beige; border-radius: 4px; margin-top: 10px; border-color: aquamarine;">Loading...</div>
+
   </form>
 
-      </div>
+</div>
+
+<script>
+  const form = document.getElementById('form');
+  const messageDiv = document.getElementById('message');
+  const loadingDiv = document.getElementById('loading');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    loadingDiv.style.display = 'block';
+    fetch('/contact', {
+      method: 'POST',
+      body: new FormData(form)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      messageDiv.style.display = 'block';
+      messageDiv.textContent = 'Thank you for contacting us!';
+      loadingDiv.style.display = 'none';
+    })
+    .catch((error) => {
+      messageDiv.style.display = 'block';
+      messageDiv.textContent = 'Error submitting form. Please try again.';
+      loadingDiv.style.display = 'none';
+    });
+  });
+</script>
 
     </section>
 
