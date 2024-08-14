@@ -163,8 +163,7 @@
   <div onclick="hidebox()" class="close-btn"></div>
   <div class="title"><span>Contact Us Form</span></div>
 
-  <form method="POST" data-netlify="true" name="com" id="contact-form">
-
+  <form method="POST" data-netlify="true" name="contact">
     <input type="hidden" name="form-name" value="contact" />
 
     <div class="field">
@@ -201,36 +200,45 @@
 </div>
 
 
+
     </section>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contact-form'); // Updated ID
-  const messageDiv = document.getElementById('message');
-  const formContainer = document.getElementById('c-form');
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('form');
+    const messageDiv = document.getElementById('message');
+    const formContainer = document.getElementById('c-form');
 
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-      // Show the message and hide the form after a delay
-      messageDiv.style.display = 'block';
-      messageDiv.textContent = 'Thank you for contacting us!';
+        // Show the message and hide the form after a delay
+        messageDiv.style.display = 'block';
+        messageDiv.textContent = 'Thank you for contacting us!';
 
-      setTimeout(() => {
-        formContainer.style.display = 'none'; // Hide the form container after 2 seconds
-      }, 2000);
+        setTimeout(() => {
+          formContainer.style.display = 'none'; // Hide the form container after 2 seconds
+        }, 2000);
 
-      // Optionally, you can use fetch to submit the form manually if needed
-      // fetch(form.action, {
-      //   method: 'POST',
-      //   body: new FormData(form),
-      // });
-    });
-  } else {
-    console.error('Form element not found');
+        // Optionally, you can use fetch to submit the form manually if needed
+        // fetch(form.action, {
+        //   method: 'POST',
+        //   body: new FormData(form),
+        // });
+      });
+    } else {
+      console.error('Form element not found');
+    }
+  });
+
+  function hidebox() {
+    const formContainer = document.getElementById('c-form');
+    if (formContainer) {
+      formContainer.style.display = 'none'; // Close the form container when close button is clicked
+    } else {
+      console.error('Form container element not found');
+    }
   }
-});
-
 </script>
 
   </body>
@@ -243,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     </div>
   </footer>
+
 
 
 
