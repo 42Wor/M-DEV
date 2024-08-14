@@ -1,0 +1,140 @@
+form_name  : Contact Form
+data  : {"name":"dfsd","email":"sdsdda@dgt","message":"fdgg"}form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : {"name":"dfsd","email":"sdsdda@dgt","message":"fdgg"}form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]form_name  : Contact Form
+data  : [object Object]Hey,
+
+Surjith here from Web3Forms.
+
+I saw you've recently tried Web3Forms for Contact Form. Did you setup correctly and received your first email?
+
+Can you reply? Even if you have not set it up yet, just let me know. Even a thumbs-up 👍 emoji will also help. But please do reply to me!
+
+If it's not working for you, make sure you check our [troubleshooting guide](https://docs.web3forms.com/getting-started/troubleshooting).
+
+**Quick question:** Why did you decide to use Web3Forms? How did you find us? Do you have any dislikes so far?
+
+Thanks so much for your time!
+
+~Surjith
+
+If you have a question or need help, Join us on [Discord Chat](https://discord.gg/wv2QX2txBQ)
+
+ Don't want me to email you again? [unsubscribe](https://web3creative.mailcoach.app/unsubscribe/25d46e0b-65a0-4c84-b7fb-b9f5ecbad98d/1ccbfb2e-3b41-4606-9f5c-686b7ca40a2a)
+Hello, 
+
+ Thank you for using Web3Forms, your ACCESS KEY is :: f6c7f1bb-957f-454e-b806-61bc84a5e24d  
+
+  Your Private key is: l2l8ow10usnohf[image: Google]
+maaz was granted access to your Google account
+
+
+wwork4287@gmail.com
+
+If you did not grant access, you should check this activity and secure your
+account.
+Check activity
+<https://accounts.google.com/AccountChooser?Email=wwork4287@gmail.com&continue=https://myaccount.google.com/alert/nt/1722915842000?rfn%3D127%26rfnc%3D1%26eid%3D2761975914557345011%26et%3D0>
+You can also see security activity at
+https://myaccount.google.com/notifications
+You received this email to let you know about important changes to your
+Google Account and services.
+© 2024 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA
+
+
+Did you sign in to Mozilla?
+
+Help us keep your account safe by approving your sign-in on:
+
+Firefox on Windows 10
+Monday, Aug 5, 2024
+10:03:12 AM (PKT)
+
+If yes, here is your authorization code:
+
+020899
+
+It expires in 5 minutes.
+
+If you didn’t take this action, change your password right away:
+https://accounts.firefox.com/settings/change_password?email=wwork4287%40gmail.com
+For more info, visit Mozilla Support:
+https://support.mozilla.org/kb/im-having-problems-my-firefox-account
+
+Mozilla. 149 New Montgomery St, 4th Floor, San Francisco, CA 94105
+
+Mozilla Accounts Privacy Notice
+https://www.mozilla.org/privacy/mozilla-accounts/
+
+Mozilla Accounts Terms of Service
+https://www.mozilla.org/about/legal/terms/services/
+
+
+Did you sign in to Firefox?
+
+Help us keep your account safe by approving your sign-in on:
+
+Firefox on Windows 10
+Monday, Aug 5, 2024
+9:59:20 AM (PKT)
+
+If yes, here is your authorization code:
+
+716833
+
+It expires in 5 minutes.
+
+If you didn’t take this action, change your password right away:
+https://accounts.firefox.com/settings/change_password?email=wwork4287%40gmail.com
+For more info, visit Mozilla Support:
+https://support.mozilla.org/kb/im-having-problems-my-firefox-account
+
+Mozilla. 149 New Montgomery St, 4th Floor, San Francisco, CA 94105
+
+Mozilla Accounts Privacy Notice
+https://www.mozilla.org/privacy/mozilla-accounts/
+
+Mozilla Accounts Terms of Service
+https://www.mozilla.org/about/legal/terms/services/
+[42Wor/42wor.github.io] pages build and deployment workflow run
+
+Repository: 42Wor/42wor.github.io
+Workflow: pages build and deployment
+Duration: 22.0 seconds
+Finished: 2024-08-04 22:12:17 UTC
+
+View results: https://github.com/42Wor/42wor.github.io/actions/runs/10239635475
+
+Jobs:
+  * build cancelled (2 annotations)
+  * deploy skipped (0 annotations)
+  * report-build-status skipped (0 annotations)
+
+-- 
+You are receiving this because you are subscribed to this thread.
+Manage your GitHub Actions notifications: https://github.com/settings/notifications
+[image: Google]
+A new sign-in on Windows
+
+
+wwork4287@gmail.com
+We noticed a new sign-in to your Google Account on a Windows device. If
+this was you, you don’t need to do anything. If not, we’ll help you secure
+your account.
+Check activity
+<https://accounts.google.com/AccountChooser?Email=wwork4287@gmail.com&continue=https://myaccount.google.com/alert/nt/1722790374000?rfn%3D325%26rfnc%3D1%26eid%3D874378386635765664%26et%3D0>
+You can also see security activity at
+https://myaccount.google.com/notifications
+You received this email to let you know about important changes to your
+Google Account and services.
+© 2024 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA

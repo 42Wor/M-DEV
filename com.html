@@ -1,289 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <title>Come Soon</title>
+
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
+    <title>comm</title>
+    <link rel="stylesheet" href="com/style.css">
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="icon" type="image/x-icon" href="Assets/Images/M.png">
-    <link rel="stylesheet" href="Assets/style.css">
-    <style>
-        /* Your CSS code here */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-        header {
-            text-align: center;
-            padding: 1em 0;
-            width: 100%;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-        }
-        p {
-            font-size: 1.2em;
-            margin-bottom: 1em;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        main {
-            background-color: #82bbff;
-            padding: 2em;
-            margin: 1em 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 1300px;
-        }
-        .social-media-icons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1em;
-        }
-        .social-media-icons a {
-            margin: 0 0.5em;
-        }
-        .social-media-icons img {
-            width: 60px;
-            height: 60px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 0.5em;
-        }
-        input, textarea {
-            padding: 0.5em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 1em;
-        }
-        textarea {
-            resize: vertical;
-        }
-        #messageStatus {
-            color: red;
-            margin-bottom: 1em;
-        }
-        button {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 0.8em 1.5em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .text a {
-            text-decoration: none;
-            color: #ffffff;
-        }
-        .text a:hover {
-            color: #8293ff;
-        }
-        footer {
-            background-color: #6aa1ff;
-            color: #000;
-            text-align: center;
-            padding: 1em 0;
-            width: 100%;
-            position: fixed;
-            bottom: 0;
-        }
-        footer a {
-            color: #2f522b;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-            color: #23527c;
-        }
-        .button {
-  text-align: center;
-  margin-top: 20px;
-}
+  <style>
 
-.button a {
-  text-decoration: none;
-}
+    .header {
+      padding: 3px;
+      outline: none;
+      font-size: 18px;
+      font-weight: 600;
+      background: #377a77;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border-radius: 0px;
+      text-align: center;
+    }
 
-.button button {
-  background-color: #4CAF50; /* green background */
-  color: #000000; /* white text */
-  padding: 50px 100px; /* padding to make the button bigger */
-  border: none; /* remove default border */
-  border-radius: 50px; /* rounded corners */
-  cursor: pointer; /* change cursor to a hand when hovering */
-  font-size: 18px; /* larger font size */
-  transition: background-color 0.3s ease-in-out; /* smooth transition effect */
-}
+    .header:hover {
+      background-color: #fff;
+      border-color: #377a77;
+      color: #377a77;
+      padding: 3px;
+      cursor: pointer;
+    }
 
-.button button:hover {
-  background-color: #000000; /* darker green background on hover */
-    color: #3e8e41;
-}
+    .box-content {
+      padding: 5px;
+    }
 
-    </style>
-</head>
-<body>
-    <header>
+    .box{
+      border: 2px solid #377a77;
+      border-radius: 4px;
+      margin-bottom: 50px;
+      position: absolute;
+      max-width: 700px;
+    }
 
-        <h1>Under Development</h1>
-        <p><strong>Created By:</strong><a href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a> </p>
-        <p>Thank you for visiting my website! We’re currently working hard to bring you something exciting and innovative. This page is under development, but I’m thrilled about the upcoming features and content that will be available soon.</p>
-        <p>If you're interested in exploring collaboration opportunities or have a project idea that you believe could benefit from a fresh perspective, I would love to hear from you. Feel free to reach out to me through the <a href="#">Contact Form</a>, or connect with me on <a href="#">social media</a>. I’m always open to new ideas and partnerships that align with our shared goals and passions.</p>
-        <p>Stay tuned for updates as we continue to enhance and expand our offerings. Your patience and interest are greatly appreciated!</p>
+    .contact-box {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);          opacity: 0;
+      visibility: hidden;
+      border: 3px solid #377a77;
+      background-color: rgb(240, 248, 255, 1);
+      position: fixed;
+      width: 85%;
+      max-width: 1000px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 6px 6px rgb(0 0 0 / 25%);
+      font-family: 'Poppins', sans-serif;
+      z-index: 999997;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
 
-        <div class="button">
-       <a href="chat.html"><button>Let's Chat</button></a></header>
-    <main>
-        <div class="social-media-icons">
-            <a href="#" target="_blank" rel="noopener noreferrer"><img src="Assets/Images/SM/WA.svg" alt="WhatsApp"></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><img src="Assets/Images/SM/Di.svg" alt="Discord"></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><img src="Assets/Images/SM/IG.svg" alt="Instagram"></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><img src="Assets/Images/SM/X.svg" alt="Twitter"></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><img src="Assets/Images/SM/yt.svg" alt="YouTube"></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><img src="Assets/Images/SM/FB.svg" alt="Facebook"></a>
-        </div>
+    .contact-box.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .close-btn{
+      width: 23px;
+      height: 23px;
+      border-radius: 8px;
+      z-index: 999999;
+      position: absolute;
+      top: 7px;
+      right: 3px;
+      background: url(Assets/Images/close-icon.svg) 0 0 / 23px 23px no-repeat;
+      transition: all 0.4s ease;
+    }
+
+    .close-btn:hover {
+      opacity: 0.2;
+      transition: all 0.4s ease;
+    }
 
 
-    </div>
-        <form id="contactForm">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" placeholder="Your Name" required>
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
-            <label for="message">Your Message:</label>
-            <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
-            <p>Note: It may take 1-2 business days to receive a reply via email. For immediate assistance, we recommend contacting us through social media.</p>
-            <div id="messageStatus"></div>
-            <button type="submit" id="sendButton">Send Message</button>
-        </form>
-        <div class="ssmedis" id="ssmedia" style="display: block;">
+  </style>
 
-          <div style="margin-top: 25px;" class="text">
-            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"                                      target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="#"                           target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#"                                  target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#"       target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="#"                             target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="#"                                   target="_blank"><i class="fab fa-discord"></i></a>
+  <header>
+
+    <nav>
+
+      <div class="navbar">
+
+        <div class="logo">
+<!--
+          <div class="image">
+            <img src="Assets/Images/M.png" alt=""/>
+          </div>-->
+
+          <div class="text">
+            <a href="https://maazwaheed.netlify.app/">MY Project Studio</a>
           </div>
 
         </div>
-    </main>
 
-    <footer>
-        <div class="text">
-            <span>Created By <a href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a> | &#169; 2024-2??? All Rights Reserved | <a href="UserAgreement/index.html" target="_blank" rel="noopener noreferrer">Terms & Conditions</a></span>
+
+        <div class="media-icons">
+
+          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"                                      target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#"                           target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#"                                  target="_blank"><i class="fab fa-github"></i></a>
+          <a href="#"       target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="#"                             target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="#"                                   target="_blank"><i class="fab fa-discord"></i></a>
+
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput-jquery.min.js"></script>
 
-<script>
+      </div>
 
-    const form = document.getElementById('contactForm');
+      <div style="display: none;" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
 
-    const messageStatus = document.getElementById('messageStatus');
+    </nav>
 
+  </header>
 
-    form.addEventListener('submit', async (e) => {
+  <body>
 
-        e.preventDefault();
+    <section class="about" id="about">
 
-        try {
+      <div class="content">
 
-            const formData = new FormData(form);
+        <div class="emojji">
+          <img class="catfix"  height="130px" width="140px" src="com/Images/server.png">
+          <img class="server1" height="130px" width="140px" src="com/Images/server.png">
+          <img class="server2" height="140px" width="140px" src="com/Images/server.png">
+          <img class="server3" height="150px" width="140px" src="com/Images/server1.png">
+        </div>
 
-            const data = {};
+        <br>
 
-            formData.forEach((value, key) => {
+        <div class="title"><span>Under Development</span></div>
+        <p><strong>Created By:</strong><a href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a> </p>
+        <p style="text-align: center; font-size: large;">
+        Thank you for visiting my website! We’re currently working hard to bring you something exciting and innovative. This page is under development, but I’m thrilled about the upcoming features and content that will be available soon.
+        </p>
 
-                data[key] = value;
+        <h4>Please check back later.</h4>
 
-            });
+        <div class="button field is-grouped" style="display: flex; justify-content: center;">
+          <div class="control"><button class="button is-primary" onclick="showbox()">Contact Form</button></div>
+        </div>
 
+<div id="c-form" class="contact-box">
+  <div onclick="hidebox()" class="close-btn"></div>
+  <div class="title"><span>Contact Us Form</span></div>
+  <form action="/contact" method="POST" class="container m-4 pl-4" id="form" data-netlify="true" data-netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="contact" />
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Enter Your Name" name="name" required />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input class="input" type="email" placeholder="Enter Your Email" name="email" required />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Message</label>
+      <div class="control">
+        <textarea class="input" placeholder="Enter Your Message" name="message" rows="4" required></textarea>
+      </div>
+    </div>
+    <p>For quicker assistance, contact us on Social Media. Email responses may take 1-2 business days.</p>
+    <div class="button field is-grouped" style="display: flex; justify-content: center;">
+      <div class="control">
+        <button class="button is-primary" type="submit" id="submit-button">Submit</button>
+      </div>
+    </div>
+    <div id="message" style="display: none; font-weight: bold; color: #033b77; padding: 8px; background-color: beige; border-radius: 4px; margin-top: 10px; border-color: aquamarine;"></div>
+  </form>
+</div>
 
-            // Basic validation
+      </div>
 
-            if (!data.name || !data.email || !data.message) {
+    </section>
 
-                messageStatus.innerHTML = 'Please fill in all fields.';
+  </body>
 
-                return;
+  <footer>
 
-            }
+    <div class="text">
 
+      <span>Developed By <a href="https://github.com/42wor">Maaz Waheed</a> | &#169; 2024 All Rights Reserved | <a href="UserAgreement/index.html" target="_blank" >Terms & Conditions</a>
 
-            const jsonData = JSON.stringify(data); // Convert data object to string
+    </div>
+  </footer>
 
+  <script src="Assets/script.js"></script>
 
-            const response = await fetch('https://api.web3forms.com/submit', {
+  <script>
 
-                method: 'POST',
+    function showbox() {
+      document.getElementById('c-form').classList.add('show');
+    }
 
-                headers: {
+    function hidebox() {
+      document.getElementById('c-form').classList.remove('show');
+    }
 
-                    'Content-Type': 'application/json',
+  </script>
 
-                    'Accept': 'application/json'
-
-                },
-
-                body: JSON.stringify({
-
-                    'access_key': 'f6c7f1bb-957f-454e-b806-61bc84a5e24d', // Replace with your Web3Forms access key
-
-                    'form_name': 'Contact Form',
-
-                    'data': jsonData // Send data as a string
-
-                })
-
-            });
-
-
-            const result = await response.json();
-
-            if (result.success) {
-
-                messageStatus.innerHTML = 'Message sent successfully!';
-
-                form.reset();
-
-            } else {
-
-                messageStatus.innerHTML = 'Error sending message. Please try again.';
-
-            }
-
-        } catch (error) {
-
-            messageStatus.innerHTML = 'An error occurred. Please try again.';
-
-        }
-
-    });
-
-</script>
+</html>

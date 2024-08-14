@@ -13,12 +13,7 @@ window.onscroll = function() {
   }
 
 }
-function openprojectlink(){
-    window. open ('Project/python/python_basics_codes.html')
-}
-function com(){
-    window. open ('com.html')
-}
+
 // Side NavIgation Menu JS Code
 let body = document.querySelector("body");
 let navBar = document.querySelector(".navbar");
@@ -40,18 +35,47 @@ cancelBtn.onclick = function(){
 }
 
 // Side Navigation Bar Close While We Click On Navigation Links
-const form = document.getElementById('contactForm');
-const messageStatus = document.getElementById('messageStatus');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  const data = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
+let navLinks = document.querySelectorAll(".menu li a");
+for (var i = 0; i < navLinks.length; i++) {
+  navLinks[i].addEventListener("click" , function() {
+    navBar.classList.remove("active");
+    menuBtn.style.opacity = "1";
+    menuBtn.style.pointerEvents = "auto";
   });
+}
 
-  const jsonData = JSON.stringify(data); // Convert data object to string
+
+function resetMessageBoxColor() {
+  var messageBox = document.getElementById("message");
+  messageBox.style.backgroundColor = "beige";
+  messageBox.style.color = "green";
+}
+// from start
+document.getElementById("form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  resetMessageBoxColor();
+  var messageBox = document.getElementById("message");
+  messageBox.textContent = "Submitting..";
+  messageBox.style.display = "block";
+  document.getElementById("submit-button").disabled = true;
+
+  var currentDate = new Date();
+  var day = String(currentDate.getDate()).padStart(2, "0");
+  var month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  var year = currentDate.getFullYear();
+  var hours = String(currentDate.getHours()).padStart(2, "0");
+  var minutes = String(currentDate.getMinutes()).padStart(2, "0");
+  var seconds = String(currentDate.getSeconds()).padStart(2, "0");
+  var timestamp = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+
+  var formData = new FormData(this);
+  var jsonData = {};
+
+  for (var pair of formData.entries()) {
+    jsonData[pair[0]] = pair[1];
+  }
+
+  jsonData['Timestamp'] = timestamp;
 
   const response = await fetch('https://api.web3forms.com/submit', {
     method: 'POST',
@@ -68,15 +92,26 @@ form.addEventListener('submit', async (e) => {
 
   const result = await response.json();
   if (result.success) {
-    messageStatus.innerHTML = 'Message sent successfully!';
-    form.reset();
+    messageBox.textContent = "Message Submitted Successfully!";
+    messageBox.style.backgroundColor = "green";
+    messageBox.style.color = "beige";
+    document.getElementById("submit-button").disabled = false;
+    document.getElementById("form").reset();
+
+    setTimeout(function() {
+      messageBox.textContent = "";
+      messageBox.style.display = "none";
+      // Hide additional fields if necessary
+      var numberField = document.querySelector(".phoneField");
+      if (numberField) numberField.style.display = "none";
+      var supportField = document.querySelector(".supportfield");
+      if (supportField) supportField.style.display = "none";
+    }, 2000);
   } else {
-    messageStatus.innerHTML = 'Error sending message. Please try again.';
+    messageBox.textContent = "An error occurred while submitting the form.";
   }
 });
-// Function to handle change event of the subject select
-
-
+// from end
 function handleCVFile() {
   // Define the file URL
   var fileUrl = 'Assets/MBK_CV.pdf'; // Replace this with the actual file URL
@@ -100,26 +135,20 @@ function handleCVFile() {
 
 
 
+function HireMeLink() {
+    window.open('https://www.linkedin.com/in/', '_blank'); // Replace with your target URL
+  }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+function openProjectPage(id) {
+    window.open('https://https://maazwaheed.netlify.app/Project/#' + id, '_blank'); // Replace with your target URL
+  }
+ 
 
 
 function AskForCookieConsent() {
-    fetch('https://42wor.github.io/Assets/cookie.html').then(response => response.text()).then(html => {
+    fetch('https://https://maazwaheed.netlify.app/Assets/cookie.html').then(response => response.text()).then(html => {
         document.getElementById('cookie').innerHTML = html;
         const termsVersion = document.getElementById('termsVersion').innerText.split(': ')[1];
         checkCookie(termsVersion);
@@ -171,9 +200,3 @@ function getCookie(name) {
 function hideCookieNotice() {
     document.getElementById('cookieNotice').style.display = 'none';
 }
-window.addEventListener('error', function(event) {
-  if (event.target.status === 404) {
-    // Redirect the user to a custom 404 page
-    window.location.href = '/404.html';
-  }
-});
