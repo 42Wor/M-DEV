@@ -7,6 +7,7 @@
   text-decoration: none;
   scroll-behavior: smooth;
 }
+
 .container {
   display: grid;
   grid-template-rows: 0px auto 1fr auto 50px;
@@ -360,7 +361,7 @@ section .button button{
   background: #74bf54;
   color: #252424;
   border: 2px solid transparent;
-  cursor: pointer;
+  cursor: url('Images/cursor1.png'), pointer;
   transition: all 0.01s ease;
 }
 section .button button:hover{
@@ -676,7 +677,7 @@ form button {
   font-size: medium;
   border-radius:60px;
   padding:15px 25px;
-  cursor:pointer;
+  cursor: url('Images/cursor.png'), pointer;
 }
 form button:hover {
   opacity:0.4;
@@ -768,4 +769,27 @@ footer.text span a {
 footer.text span a:hover {
   text-decoration: none;
   color: #15dcdc;
+}
+
+
+
+
+
+
+
+body {
+
+  cursor: url('Images/cursor.png'), auto;
+
+}
+
+a {
+
+  cursor: url('Images/c.png'), pointer;
+
+}
+p {
+
+  cursor: url('Images/c1.png'), auto;
+
 }
