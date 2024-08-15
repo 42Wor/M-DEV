@@ -86,7 +86,7 @@ function handleCVFile() {
 
 
 function AskForCookieConsent() {
-    fetch('https://42wor.github.io/Assets/cookie.html').then(response => response.text()).then(html => {
+    fetch('Assets/cookie.html').then(response => response.text()).then(html => {
         document.getElementById('cookie').innerHTML = html;
         const termsVersion = document.getElementById('termsVersion').innerText.split(': ')[1];
         checkCookie(termsVersion);
