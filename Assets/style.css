@@ -1,0 +1,789 @@
+/* Google Font CDN Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 0px auto 1fr auto 50px;
+  grid-template-columns: 1fr 4fr 1fr;
+  height: 100vh;
+  grid-template-areas:
+    "header header header"
+    "left-aside banner right-aside"
+    "left-aside main right-aside"
+    "left-aside low-content right-aside"
+    "footer footer footer";
+  grid-gap: 180px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+@media (max-width: 678px) {
+  .container {
+    grid-template-rows: 5px 5px 50px 1fr 50px 50px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "banner"
+      "left-aside"
+      "main"
+      "right-aside"
+      "low-content"
+      "footer";
+  }
+}
+
+a:visited{
+  color: #0ea971;
+}
+a:hover{
+  color: #9eb5f7;
+}
+
+/* Custom Scroll Bar CSS */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: white;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(180, 180, 180);
+    border-radius: 120px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(180, 180, 180);
+}
+/* navbar styling */
+nav{
+  position: fixed;
+  width: 100%;
+  padding: 3px 0;
+  z-index: 998;
+  transition: all 0.03s ease;
+  font-family: 'Ubuntu', sans-serif;
+}
+nav.sticky{
+  background: #6aa1ff;
+  padding: 1px -100px;
+}
+nav .navbar{
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 150px;
+}
+
+.logo .text {
+  margin: auto;
+}
+nav .navbar .logo a{
+  font-weight: 50;
+  font-size: 30px;
+  color: #000000;
+}
+nav.sticky .navbar .logo a{
+  color: #000000;
+}
+
+nav .navbar .menu{
+  display: flex;
+  position: relative;
+}
+nav .navbar .menu li{
+  list-style: none;
+  margin: 15px;
+}
+.navbar .menu a{
+  font-size: 18px;
+  font-weight: 800;
+  color: #010330;
+  padding: 60px 0;
+  transition: all 0.01s ease;
+}
+.navbar .menu a:hover{
+  color: rgba(21, 49, 228, 0.54);
+}
+nav.sticky .menu a{
+  color: #000000;
+}
+nav.sticky .menu a:hover{
+  color: #1531E489;
+}
+.navbar .media-icons a{
+  color: #7a7a7a;
+  font-size: 20px;
+  margin: 6px;
+}
+.media-icons a:hover{
+  color: #000000;
+}
+nav.sticky .media-icons a{
+  color: #ffffff;
+}
+
+/* Side Navigation Menu Button CSS */
+nav .menu-btn,
+.navbar .menu .cancel-btn{
+  position: absolute;
+  color: #ffffff;
+  right: 20px;
+  top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+}
+nav .menu-btn{
+  color: #ececec;
+}
+nav.sticky .menu-btn{
+  color: #FFF;
+}
+.navbar .menu .menu-btn{
+  color: #fff;
+}
+
+/* Style for select element */
+.text .select select {
+  outline: none;
+  padding: 5px 5px;
+  border-radius: 6px;
+  font-size: 25px;
+  font-weight: 400;
+  background: #377a77;
+  width: 180px;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+  text-align: center;
+}
+
+.text .select select:hover {
+  border-color: #033b77;
+  background-color: #fff;
+  color: #033b77;
+}
+ 
+.text .select select option.selected {
+  background-color: #fff;
+  color: #5f6061;
+}
+
+.text .select select option {
+  background-color: #fff;
+  color: #033b77;
+}
+
+.ssmedis a{
+  color: #6aa1ff;;
+  font-size: 35px;
+  margin: 0 6px; 
+}
+.ssmedis a:hover{
+  color: #82bbff;
+}
+
+
+
+
+
+
+
+
+/* home section styling */
+.home{
+  height: 100vh;
+  width: 100%;
+  background: url("Images/background.png") no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Ubuntu', sans-serif;
+}
+.home .home-content{
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home .text-one{
+  font-size: 25px;
+  color: #0E2431;
+}
+.home .text-two{
+  color: #0E2431;
+  font-size: 75px;
+  font-weight: 600;
+  margin-left: -3px;
+}
+.home .text-three{
+  font-size: 40px;
+  margin: 5px 0;
+  color: #377a77;
+}
+.home .text-four{
+  font-size: 23px;
+  margin: 5px 0;
+  color: #0E2431;
+}
+.home .button{
+  margin: 14px 0;
+}
+.home .button button{
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 25px;
+  font-weight: 400;
+  background: #377a77;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+}
+.home .button button:hover{
+  border-color: #377a77;
+  background-color: #fff;
+  color: #377a77;
+}
+
+/* About Section Styling */
+/* Those Elements Where We Have Apply Same CSS,
+ I'm Selecting Directly 'Section Tag' and 'Class'  */
+section{
+  padding-top: 40px;
+}
+section .content{
+  width: 80%;
+  margin: 40px auto;
+  font-family: 'Poppins', sans-serif;
+}
+.about{  background: url("Images/background.png") ;
+}
+.about .about-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+section .title{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+section .title span{
+  color: #000000;
+  font-size: 40px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 8px;
+}
+section .title span::before,
+section .title span::after{
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #000000;
+  left: 0;
+  bottom: 0;
+}
+section .title span::after{
+  bottom: -8px;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.about .about-details .left{
+  width: 45%;
+}
+.about .left img{
+
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+
+
+.about-details .right{
+  width: 55%;
+}
+.about-details .centre{
+  width: 95%;
+}
+section  .topic{
+  color: #375959;
+  font-size: 35px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.about-details .right p{
+  text-align: justify;
+  color: #0E2431;
+}
+.about-details .centre p{
+  text-align: justify;
+  color: #0E2431;
+}
+section .button{
+  margin: 16px 0;
+}
+section .button button{
+  outline: none;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  background: #74bf54;
+  color: #252424;
+  border: 2px solid transparent;
+  cursor: url('Images/cursor1.png'), pointer;
+  transition: all 0.01s ease;
+}
+section .button button:hover{
+  border-color: #74bf54;
+  background-color: #1e1d1d;
+  color: #74bf54;
+}
+
+ /* My Skills CSS */
+ .skills{
+   background: #F0F8FF;
+ }
+ .skills .content{
+   padding: 40px 0;
+ }
+ .skills .skills-details{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+ .skills-details .text{
+   width: 70%;
+ }
+ .skills-details p{
+   color: #0E2431;
+   text-align: justify;
+ }
+.skills .skills-details .experience{
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+.skills-details .experience .num{
+  color: #0E2431;
+  font-size: 80px;
+}
+.skills-details .experience .exp{
+  color: #0E2431;
+  margin-left: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 6px;
+}
+.skills-details .boxes{
+  width: 45%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.skills-details .box{
+  width: calc(100% / 2 - 20px);
+  margin: 20px 0;
+}
+.skills-details .boxes .topic{
+  font-size: 20px;
+  color: #033b77;
+}
+.skills-details .boxes .per{
+  font-size: 60px;
+  color: #033b77;
+}
+
+/* My Services CSS */
+
+.services .boxes{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.services .boxes .box{
+  margin: 15px ;
+  width: calc(90% / 3 - 100px);
+  text-align: center;
+  border-radius: 12px;
+  padding: 30px 30px;
+  box-shadow: 10px 6px rgba(144, 182, 253, 0.65);
+  cursor: default;
+  transition: all 0.0001s ease;
+
+}
+.services .boxes .box:hover{
+  background: #6aa1ff;
+  color: #978f8f;
+}
+.services .boxes .box .icon{
+  height: 50px;
+  width: 50px;
+  background:#6aa1ff ;
+  border-radius: 80%;
+  text-align: center;
+  line-height: 50px;
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0 auto 10px auto;
+  transition: all 0.4s ease;
+}
+.boxes .box:hover .icon{
+  background-color: #e3eff6;
+  color: #6aa1ff;
+}
+.box .icon img {
+  width: 50px; /* adjust the width to your liking */
+  height: 50px; /* adjust the height to your liking */
+  border-radius: 50%; /* add a circular border radius */
+}
+.services .boxes .box:hover .topic,
+.services .boxes .box:hover p{
+  color: #b1b1b1;
+  transition: all 0.4s ease;
+}
+.services .boxes .box:hover .topic,
+.services .boxes .box:hover p{
+  color: #060449;
+}
+/* Contact Me CSS */
+.contact{
+  background: #f1fcff;
+}
+.contact .content{
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.contact .text{
+  width: 90%;
+  text-align: center;
+  margin: auto;
+}
+
+
+/* Scroll TO Top Button CSS */
+.scroll-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #65666c;
+  background-color: #a8cc25;
+  padding: 8px 15px;
+  font-size: 18px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: #92d21e;
+  cursor: pointer;
+}
+
+.scroll-button a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Responsive Media Query */
+@media (max-width: 1190px) {
+  section .content{
+    width: 100%;
+  }
+}
+@media (max-width: 1000px) {
+  .about .about-details{
+    justify-content: center;
+    flex-direction: column;
+  }
+  .about .about-details .left{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .about-details .right{
+    width: 90%;
+    margin: 40px 0;
+  }
+  .about-details .centre{
+    width: 90%;
+    margin: 10px 0;
+  }
+  .services .boxes .box{
+    margin: 20px 0;
+    width: calc(100% / 2 - 20px);
+  }
+}
+@media (max-width: 900px) {
+  .about .left img{
+    height: 150px;
+    width: 350px;
+  }
+}
+
+@media (max-width: 750px) {
+  nav .navbar{
+    width: 90%;
+  }
+  nav .navbar .menu{
+    position: fixed;
+    left: -100%;
+    top: 0;
+    background: #0E2431;
+    height: 100vh;
+    max-width: 400px;
+    width: 100%;
+    padding-top: 60px;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease;
+  }
+  .navbar.active .menu{
+    left: 0;
+  }
+  nav .navbar .menu a{
+    font-size: 23px;
+    display: block;
+    color: #fff;
+    margin: 10px 0;
+  }
+  nav.sticky .menu a:hover{
+    color: #033b77;
+  }
+  nav .navbar .media-icons{
+    display: none;
+  }
+  nav .menu-btn,
+  .navbar .menu .cancel-btn{
+    display: block;
+  }
+  .home .text-two{
+    font-size: 65px;
+  }
+  .home .text-three{
+    font-size: 35px;
+  }
+  .skills .skills-details{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .skills-details .text{
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  .skills-details .boxes{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .services .boxes .box{
+    margin: 20px 0;
+    width: 100%;
+  }
+  .contact .text{
+    width: 100%;
+}
+}
+
+@media (max-width: 500px){
+  .home .text-two{
+    font-size: 55px;
+  }
+  .home .text-three{
+    font-size: 33px;
+  }
+  .skills-details .boxes .per{
+    font-size: 50px;
+    color: #b51717;
+  }
+}
+
+
+
+
+
+/* Form */
+
+form select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+}
+form{
+  border-radius: 6px;
+  padding: 0px; 
+}
+form .control {
+  margin-top: 10px;
+}
+form .field {
+  margin-bottom: 15px;
+}
+form .label {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+form input, form textarea, form select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #010eff;
+  border-radius: 6px;
+  background-color: #e9f7fd;
+}
+form button {
+  background-color: #74bf54;
+  color: #000000;
+  border:none;
+  font-weight: bold;
+  font-size: medium;
+  border-radius:60px;
+  padding:15px 25px;
+  cursor: url('Images/cursor.png'), pointer;
+}
+form button:hover {
+  opacity:0.4;
+}
+
+/*Star rating*/
+
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 35px;
+}
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+.rating label:last-child {
+  position: static;
+}
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+.rating label:last-child .icon {
+  color: #000;
+}
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #d4e3c9;
+}
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #d4e3c9;
+}
+
+
+
+
+
+
+
+
+/* Footer CSS */
+footer {
+  background-color: #6aa1ff; /* Use hex code for consistency */
+  padding: 15px 0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+footer.text span {
+  font-size: 20px;
+  font-weight: normal;
+  color: #000000;
+}
+
+footer.text span a {
+  text-decoration: underline;
+  font-weight: 500;
+  color: #424259;
+}
+
+footer.text span a:hover {
+  text-decoration: none;
+  color: #15dcdc;
+}
+
+
+
+
+
+
+
+a {
+
+  cursor: url('Images/c.png'), pointer;
+
+}
+p {
+
+  cursor: url('Images/c1.png'), auto;
+
+}
