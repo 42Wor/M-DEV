@@ -1,0 +1,422 @@
+/* Navigation Styling */
+nav{
+  position: fixed;
+  width: 100%;
+  padding: 3px 0;
+  z-index: 998;
+  transition: all 0.03s ease;
+  font-family: 'Ubuntu', sans-serif;
+}
+nav.sticky{
+  background: #6aa1ff;
+  padding: 1px -100px;
+}
+nav .navbar{
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 150px;
+}
+
+.logo .text {
+  margin: auto;
+}
+nav .navbar .logo a{
+  font-weight: 50;
+  font-size: 30px;
+  color: #000000;
+}
+nav.sticky .navbar .logo a{
+  color: #000000;
+}
+
+nav .navbar .menu{
+  display: flex;
+  position: relative;
+}
+nav .navbar .menu li{
+  list-style: none;
+  margin: 15px;
+}
+.navbar .menu a{
+  font-size: 18px;
+  font-weight: 800;
+  color: #010330;
+  padding: 60px 0;
+  transition: all 0.01s ease;
+}
+.navbar .menu a:hover{
+  color: rgba(21, 49, 228, 0.54);
+}
+nav.sticky .menu a{
+  color: #000000;
+}
+nav.sticky .menu a:hover{
+  color: #1531E489;
+}
+.navbar .media-icons a{
+  color: #7a7a7a;
+  font-size: 20px;
+  margin: 6px;
+}
+.media-icons a:hover{
+  color: #000000;
+}
+nav.sticky .media-icons a{
+  color: #ffffff;
+}
+
+/* Side Navigation Menu Button CSS */
+nav .menu-btn,
+.navbar .menu .cancel-btn{
+  position: absolute;
+  color: #ffffff;
+  right: 20px;
+  top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+}
+nav .menu-btn{
+  color: #ececec;
+}
+nav.sticky .menu-btn{
+  color: #FFF;
+}
+.navbar .menu .menu-btn{
+  color: #fff;
+}
+
+/* Section Styling */
+section {
+  padding-top: 40px;
+}
+
+section .content {
+  width: 80%;
+  margin: 40px auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Style for select element */
+.text .select select {
+  outline: none;
+  padding: 5px 5px;
+  border-radius: 6px;
+  font-size: 25px;
+  font-weight: 400;
+  background: #377a77;
+  width: 180px;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+  text-align: center;
+}
+
+.text .select select:hover {
+  border-color: #033b77;
+  background-color: #fff;
+  color: #033b77;
+}
+
+.text .select select option.selected {
+  background-color: #fff;
+  color: #5f6061;
+}
+
+.text .select select option {
+  background-color: #fff;
+  color: #033b77;
+}
+
+.ssmedis a{
+  color: #6aa1ff;;
+  font-size: 35px;
+  margin: 0 6px;
+}
+.ssmedis a:hover{
+  color: #82bbff;
+}
+
+/* Python Section Styling */
+.python {
+  background: url("../Assets/Images/background.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.python .python-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.python .python-details .left {
+  width: 45%;
+}
+
+.python .left img {
+  object-fit: contain;
+  border-radius: 50%; /* Fixed border-radius */
+}
+
+.python .python-details .right {
+  width: 55%;
+}
+
+.python .python-details .centre {
+  width: 95%;
+}
+
+section .title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+section .title span {
+  color: #000000;
+  font-size: 40px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+section .title span::before,
+section .title span::after {
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #000000;
+  left: 0;
+  bottom: 0;
+}
+
+section .title span::after {
+  bottom: -8px;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+section .topic {
+  color: #0c1111;
+  font-size: 30px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.python .python-details .right p,
+.python .python-details .centre p {
+  text-align: justify;
+  color: #0E2431;
+}
+
+section .button {
+  margin: 16px 0;
+}
+
+section .button button {
+  outline: none;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  background: #74bf54;
+  color: #252424;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+section .button button:hover {
+  border-color: #74bf54;
+  background-color: #1e1d1d;
+  color: #74bf54;
+}
+
+/* My Services CSS */
+.service {
+  padding: 20px;
+}
+
+.content {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.box {
+  background-color: #a3c5f3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(106, 161, 255, 0.5);
+}
+
+.box pre {
+  background-color: #282727;
+  padding: 10px;
+  border-radius: 15px;
+  overflow-x: auto;
+  overflow-y: auto;
+  font-size: 15px;
+  color: #b1bdc7; /* default text color */
+}
+
+.box pre .keyword {
+  color: #15e115; /* green for keywords */
+}
+
+.box pre .string {
+  color: #ffd700; /* yellow for strings */
+}
+
+.box pre .comment {
+  color: #808080; /* gray for comments */
+}
+
+/* Scroll To Top Button CSS */
+.scroll-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #65666c;
+  background-color: #a8cc25;
+  padding: 8px 15px;
+  font-size: 18px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: #92d21e;
+  cursor: pointer;
+}
+
+.scroll-button a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Contact Me CSS */
+.contact {
+  background: #f1fcff;
+}
+
+.contact .content {
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+.contact .text {
+  width: 90%;
+  text-align: center;
+  margin: auto;
+}
+
+/* Copy Button CSS */
+.cbutto {
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 75%;
+  margin-top: 10%;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.cbutto:hover {
+  background-color: #ffffff;
+  color: #4CAF50;
+}
+
+/* Code Container */
+.code-container {
+  position: relative;
+  top: 10px;
+  right: 2px;
+  font-family: monospace;
+  resize: vertical;
+}
+
+.code-container button {
+  position: relative; /* Adjusted position to relative */
+}
+
+/* Copy Notification */
+.notification {
+  position: fixed;
+  top: 90%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  color: white;
+}
+
+.notification.green {
+  background-color: #3ee03e;
+}
+
+.notification.red {
+  background-color: red;
+}
+
+/* Code Box */
+.code-box {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.cbutton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cbutton:hover {
+  background-color: #0056b3;
+}
