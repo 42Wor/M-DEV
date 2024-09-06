@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Implementation Documentation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #000000;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+        h3 {
+            color: #000000;
+        }
+        h4 {
+            color: #000000;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        pre {
+            background-color: #b4bbbf;
+            border: 5px solid #070707;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+        .code-block {
+            margin: 10px 0;
+        }
+        .explanation {
+            background-color: #d9e7fd;
+            border-left: 30px solid #4f4caf;
+            padding: 10px 60px;
+            margin: 10px 0;
+            border-radius: 20px;
+        }
+        .explanation p {
+            margin: 0;
+        }
+        .explanation ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        code {
+            background-color: rgba(128, 211, 255, 0.37);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 90%;
+        }
+        .img-container {
+            text-align: center;
+        }
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .nav-section a {
+            text-decoration: none;
+            color: #4CAF50;
+            display: block;
+            margin: 5px 0;
+        }
+        .nav-section a:hover {
+            text-decoration: underline;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header img {
+            max-width: 100%;
+            height: auto;
+            border: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<header>
+
+
+    <nav>
+
+      <div class="navbar">
+
+        <div class="logo">
+<!--
+          <div class="image">
+            <img src="Assets/Images/M.png" alt=""/>
+          </div>-->
+
+          <div class="text">
+            <a href="https://maazwaheed.netlify.app/">Maaz Waheed</a>
+          </div>
+
+        </div>
+
+
+        <div class="media-icons">
+
+          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"                                      target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#"                           target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#"                                  target="_blank"><i class="fab fa-github"></i></a>
+          <a href="#"       target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="#"                             target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="#"                                   target="_blank"><i class="fab fa-discord"></i></a>
+
+        </div>
+
+      </div>
+
+      <div style="display: none;" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+
+    </nav>
+
+  </header>
+<body>
+    <header>
+        <img src="title_image.png" alt="Neural Network Documentation Title Image">
+    </header>
+
+    <h1>Neural Network Implementation Documentation</h1>
+    <div class="grid">
+
+            <div class="left">
+    <div class="nav-section">
+        <h2>Table of Contents</h2>
+        <a href="#DataPreparation"><h3>1. Data Preparation</h3></a>
+        <a href="#NetworkArchitecture"><h3>2. Network Architecture</h3></a>
+        <a href="#Training"><h3>3. Training the Neural Network</h3></a>
+        <a href="#Prediction"><h3>4. Prediction and Accuracy</h3></a>
+        <a href="#Testing"><h3>5. Testing Predictions</h3></a>
+        <a href="#Evaluation"><h3>6. Evaluation</h3></a>
+        <a href="#MathematicalOverview"><h3>7. Mathematical Overview</h3></a>
+    </div></div>
+
+    <h2 id="DataPreparation">1. Data Preparation</h2>
+    <h3>Loading and Preprocessing Data</h3>
+    <div class="code-block">
+        <pre><code>
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+
+data = pd.read_csv('train.csv')
+data = np.array(data)
+m, n = data.shape
+
+data_dev = data[0:1000].T
+Y_dev = data_dev[0]
+X_dev = data_dev[1:n]
+X_dev = X_dev / 255.  # Normalize pixel values
+
+data_train = data[1000:m].T
+Y_train = data_train[0]
+X_train = data_train[1:n]
+X_train = X_train / 255.  # Normalize pixel values
+_, m_train = X_train.shape
+        </code></pre>
+    </div>
+    <div class="explanation">
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><strong>Data Loading:</strong> Reads the dataset from a CSV file.</li>
+            <li><strong>Data Splitting:</strong> Splits the data into development (dev) and training sets.</li>
+            <li><strong>Normalization:</strong> Scales pixel values to the range [0, 1] by dividing by 255.</li>
+        </ul>
+    </div>
+
+    <h2 id="NetworkArchitecture">2. Network Architecture</h2>
+    <h3>Initialization of Parameters</h3>
+    <div class="code-block">
+        <pre><code>
+def init_params():
+    W1 = np.random.rand(10, 784) - 0.5  # Weight matrix for layer 1
+    b1 = np.random.rand(10, 1) - 0.5   # Bias vector for layer 1
+    W2 = np.random.rand(10, 10) - 0.5   # Weight matrix for layer 2
+    b2 = np.random.rand(10, 1) - 0.5   # Bias vector for layer 2
+    return W1, b1, W2, b2
+        </code></pre>
+    </div>
+    <div class="explanation">
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><strong>Weights and Biases Initialization:</strong> Randomly initializes weights and biases with values in the range [-0.5, 0.5].</li>
+        </ul>
+    </div>
+
+    <h3>Activation Functions</h3>
+    <h4>ReLU Activation Function</h4>
+    <div class="code-block">
+        <pre><code>
+def ReLU(Z):
+    return np.maximum(Z, 0)  # Element-wise ReLU activation
+        </code></pre>
+    </div>
+    <div class="explanation">
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><strong>ReLU:</strong> Applies the ReLU activation function element-wise. ReLU is defined as ReLU(Z)=max(Z,0).</li>
+        </ul>
+    </div>
+
+    <h4>Softmax Activation Function</h4>
+    <div class="code-block">
+        <pre><code>
+def softmax(Z):
+    e_Z = np.exp(Z - np.max(Z, axis=0, keepdims=True))  # Improve numerical stability
+    return e_Z / np.sum(e_Z, axis=0, keepdims=True)  # Normalize
+        </code></pre>
+    </div>
+    <div class="explanation">
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><strong>Softmax:</strong> Applies the softmax activation function, which normalizes the output to a probability distribution.</li>
+        </ul>
+    </div>
+
+    <h3>Forward Propagation</h3>
+    <div class="code-block">
+        <pre><code>
+def forward_prop(W1, b1, W2, b2, X):
+    Z1 = W1.dot(X) + b1  # Linear transformation for layer 1
+    A1 = ReLU(Z1)        # ReLU activation for layer 1
+    Z2 = W2.dot(A1) + b2  # Linear transformation for layer 2
+    A2 = softmax(Z2)     # Softmax activation for layer 2 (output layer)
+    return Z1, A1, Z2, A2
+        </code></pre>
+    </div>
+    <div class="explanation">
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><strong>Linear Transformations:</strong> Computes ZZ values for each layer using matrix multiplication and addition.</li>
+            <li><strong>Activations:</strong> Applies ReLU and softmax activation functions.</li>
+        </ul>
+    </div>
+
+    <h3>Backward Propagation</h3>
+    <div class="code-block">
+        <pre><code>
+def backward_prop(Z1, A1, Z2, A2, W1, W2, X, Y):
+    one_hot_Y = one_hot(Y)  # Convert labels to one-hot encoding
+    dZ2 = A2 - one_hot_Y  # Gradient of the loss with respect to Z2
+    dW2 = 1 / m * ...
+        </code></pre>
+    </div>
+    <div class="explanation">
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><strong>Backward Propagation:</strong> Calculates gradients with respect to weights and biases, and applies optimization steps.</li>
+        </ul>
+    </div>
+
+    <h2 id="MathematicalOverview">7. Mathematical Overview</h2>
+    <div class="img-container">
+        <img src="mathematical_overview.png" alt="Mathematical Overview Diagram">
+    </div>
+    <p>This section explains the mathematical concepts underlying the neural network implementation. The diagram above illustrates the key components.</p>
+
+</body>
+  <footer>
+
+    <div class="texts">
+
+      <span>Developed By <a href="https://github.com/42wor">Maaz Waheed</a> | &#169; 2024 All Rights Reserved | <a href="Privacy/index.html" >Terms & Conditions</a>
+    </div>
+  </footer>
+
+</html>

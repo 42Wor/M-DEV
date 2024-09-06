@@ -12,10 +12,6 @@ window.onscroll = function() {
     scrollBtn.style.display = "none";
   }
 
-}
-function openprojectlink(){
-    window. open ('https://maazwaheed.netlify.app/Project/python/')
-}
 function com(){
     window. open ('https://maazwaheed.netlify.app/com/')
 }
@@ -147,3 +143,14 @@ window.addEventListener('error', function(event) {
 
 
 
+
+}
+function python(){
+    window. open ('../Project/python/')
+}
+function Neural(){
+    window. open ('../Project/Neural Networks(MNIST)/')
+}
+function o(){
+    window. open ('https://maazwaheed.netlify.app/Project/pytnho/')
+}

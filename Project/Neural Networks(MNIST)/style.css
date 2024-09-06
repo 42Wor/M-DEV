@@ -184,7 +184,7 @@ nav.sticky .menu-btn{
     height: 380px;
     width: 350px;
   }
-}p,h4,h3 {
+}p,h4 {
   text-align: center;
 }
 
@@ -232,74 +232,6 @@ nav.sticky .menu-btn{
 }
 }
 
-
-
-
-.about {
-  background: url("https://maazwaheed.netlify.app/Assets/Images/background.png");
-  height: 100%;
-}
-section .title {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-section .title span {
-  color: #0e2431;
-  font-size: 28px;
-  font-weight: 600;
-  position: relative;
-  padding-bottom: 8px;
-  text-align: center;
-}
-section .title span::before,
-section .title span::after {
-  content: "";
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: #033b77;
-  left: 0;
-  bottom: 0;
-}
-section .title span::after {
-  bottom: -7px;
-  width: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.about .left img {
-  height: 100px;
-  width: 400px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-section .button {
-  margin: 0px 0;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-section .button button {
-  outline: none;
-  padding: 12px 20px;
-  border-radius: 20px;
-  margin: 5px 5px;
-  font-size: 18px;
-  font-weight: 600;
-  background: #74bf54;
-  color: #050505;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-section .button button:hover {
-  transition: all 0.4s ease;
-  border-color: #74bf54;
-  background-color: #1e1d1d;
-  color: #74bf54;
-}
-
 html,body {
   height: 100%;
   margin: 0;
@@ -311,62 +243,6 @@ html,body {
   justify-content: center;
   align-items: center;
 }
-
-
-
-/* Skills Section */
-.skills {
-   background: #f9f9f9;
-}
-
-
-
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.skill-box {
-  background: #2b2a2a;
-  border-radius: 20px;
-  padding:60px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.skill-box:hover {
-  transform: translateY(-30px);
-}
-
-.skill-box .icon {
-  font-size: 50px;
-  color: #818181;
-  margin-bottom: 10px;
-}
-
-.skill-box .skill-name {
-  font-size: 20px;
-  font-weight: 500;
-  color: #ffffff;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Footer CSS */
 footer {

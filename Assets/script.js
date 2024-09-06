@@ -128,7 +128,7 @@ function portfolio() {
 }
 
 function Privacy() {
-    window.open('UserAgreement/'); // Replace with your target URL
+    window.open('privacy'); // Replace with your target URL
 }
 
 function FAQs() {
