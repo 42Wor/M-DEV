@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="s.css">
+    <link rel="icon" type="image/x-icon" href="/Assets/Images/M.png">
+    <title>3D Scatter Plot Generator Documentation</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="navbar">
+                    <div class="logo">
+                        <!--
+                        <div class="image">
+                            <img src="Assets/Images/M.png" alt=""/>
+                        </div>
+                        -->
+                        <div class="text">
+                            <a href="#">MY Project Studio</a>
+                        </div>
+                    </div>
+                    <div class="media-icons">
+                        <a href="https://www.google.com/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.google.com/"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.google.com/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.google.com/"><i class="fab fa-github"></i></a>
+                        <a href="https://www.google.com/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.google.com/"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.google.com/"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </header>
+        <h1>3D Scatter Plot Generator Documentation</h1>
+        <section class="content">
+            <h1>3D Scatter Plot Generator Documentation</h1>
+            <h2>Project Overview</h2>
+            <p>The <strong>3D Scatter Plot Generator</strong> is a web application for creating and visualizing 3D scatter plots based on user-defined coordinates and colors.</p>
+
+            <h2>Features</h2>
+            <ul>
+                <li>Coordinate Input</li>
+                <li>Color Customization</li>
+                <li>Plot Generation</li>
+                <li>Error Handling</li>
+                <li>Clear Functionality</li>
+            </ul>
+
+            <h2>Dependencies</h2>
+            <ul>
+                <li>Python Libraries: <code>tkinter</code>, <code>ttk</code>, <code>tkcolorpicker</code>, <code>plotly</code>, <code>webbrowser</code>, <code>os</code></li>
+            </ul>
+
+            <h2>Installation</h2>
+            <ol>
+                <li>Install Required Python Libraries:
+                    <pre><code>pip install tkinter plotly tkcolorpicker</code></pre>
+                </li>
+                <li>Prepare Assets: Ensure you have an image file named <code>M.png</code> for the application icon.</li>
+            </ol>
+
+            <h2>Usage</h2>
+            <ol>
+                <li>Run the Application: Execute the script using Python.</li>
+                <li>Input Coordinates: Enter X, Y, and Z coordinates in the respective fields.</li>
+                <li>Select Colors: Choose colors for the plot line and markers.</li>
+                <li>Generate Plot: Click "Update Plot" to create and display the 3D scatter plot.</li>
+                <li>Clear Inputs: Click "Clear" to reset all input fields.</li>
+            </ol>
+
+            <h2>Code Explanation</h2>
+            <p>Details about the code, including functions and GUI setup.</p>
+
+            <h2>Example</h2>
+            <p>Running the script opens a GUI window where users can input data and generate a plot.</p>
+
+            <h2>Contact</h2>
+            <p>For inquiries, contact <strong>Maaz Waheed</strong>.</p>
+
+            <h2>Code Snippet</h2>
+            <textarea id="code-snippet" readonly>
+import tkinter as tk
+from tkinter import ttk, PhotoImage
+from tkcolorpicker import askcolor
+import plotly.graph_objects as go
+import plotly.io as pio
+import webbrowser
+import os
+
+# Default colors
+DEFAULT_LINE_COLOR = '#FF0000'
+DEFAULT_MARKER_COLOR = '#00FF00'
+
+def choose_color(entry):
+    color = askcolor(title="Choose Color")[1]
+    if color:
+        entry.delete(0, tk.END)
+        entry.insert(0, color)
+
+def is_valid_hex_color(color):
+    return color.startswith('#') and len(color) == 7
+
+def update_plot():
+    try:
+        x_val = float(x_entry.get())
+        y_val = float(y_entry.get())
+        z_val = float(z_entry.get())
+        line_color = line_color_entry.get() or DEFAULT_LINE_COLOR
+        marker_color = marker_color_entry.get() or DEFAULT_MARKER_COLOR
+    except ValueError:
+        error_label.config(text="Enter valid numbers for x, y, and z.")
+        return
+
+    if not is_valid_hex_color(line_color):
+        error_label.config(text="Invalid hex color for line.")
+        return
+    if not is_valid_hex_color(marker_color):
+        error_label.config(text="Invalid hex color for marker.")
+        return
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter3d(
+        x=[0, x_val],
+        y=[0, y_val],
+        z=[0, z_val],
+        mode='lines',
+        line=dict(color=line_color, width=2)
+    ))
+
+    fig.add_trace(go.Scatter3d(
+        x=[x_val],
+        y=[y_val],
+        z=[z_val],
+        mode='markers',
+        marker=dict(size=10, color=marker_color, line=dict(width=2, color='#000000'))
+    ))
+
+    fig.update_layout(
+        scene=dict(
+            xaxis=dict(title='X Axis', backgroundcolor='rgba(0,0,0,0.8)', color='white', gridcolor='rgba(255,255,255,0.2)'),
+            yaxis=dict(title='Y Axis', backgroundcolor='rgba(0,0,0,0.8)', color='white', gridcolor='rgba(255,255,255,0.2)'),
+            zaxis=dict(title='Z Axis', backgroundcolor='rgba(0,0,0,0.8)', color='white', gridcolor='rgba(255,255,255,0.2)'),
+            bgcolor='rgba(0,0,0,0.9)'
+        ),
+        paper_bgcolor='rgba(0,0,0,0.9)',
+        plot_bgcolor='rgba(0,0,0,0.9)'
+    )
+
+    html_file = 'plotly_plot.html'
+    pio.write_html(fig, file=html_file, auto_open=False)
+    webbrowser.open('file://' + os.path.realpath(html_file))
+    error_label.config(text="")
+
+def clear_inputs():
+    x_entry.delete(0, tk.END)
+    y_entry.delete(0, tk.END)
+    z_entry.delete(0, tk.END)
+    line_color_entry.delete(0, tk.END)
+    marker_color_entry.delete(0, tk.END)
+    error_label.config(text="")
+
+root = tk.Tk()
+root.title("3D Scatter Plot")
+
+logo_image = PhotoImage(file='M.png')
+root.iconphoto(True, logo_image)
+
+style = ttk.Style()
+style.configure('TLabel', font=('Arial', 12))
+style.configure('TButton', font=('Arial', 12), padding=5)
+
+frame = ttk.Frame(root, padding=20)
+frame.pack(fill=tk.BOTH, expand=True)
+
+ttk.Label(frame, text="X coordinate:").grid(row=0, column=0, sticky=tk.W, pady=5)
+x_entry = ttk.Entry(frame)
+x_entry.grid(row=0, column=1, pady=5)
+
+ttk.Label(frame, text="Y coordinate:").grid(row=1, column=0, sticky=tk.W, pady=5)
+y_entry = ttk.Entry(frame)
+y_entry.grid(row=1, column=1, pady=5)
+
+ttk.Label(frame, text="Z coordinate:").grid(row=2, column=0, sticky=tk.W, pady=5)
+z_entry = ttk.Entry(frame)
+z_entry.grid(row=2, column=1, pady=5)
+
+ttk.Label(frame, text="Line color:").grid(row=3, column=0, sticky=tk.W, pady=5)
+line_color_entry = ttk.Entry(frame)
+line_color_entry.grid(row=3, column=1, pady=5)
+ttk.Button(frame, text="Choose Line Color", command=lambda: choose_color(line_color_entry)).grid(row=3, column=2, padx=5)
+
+ttk.Label(frame, text="Marker color:").grid(row=4, column=0, sticky=tk.W, pady=5)
+marker_color_entry = ttk.Entry(frame)
+marker_color_entry.grid(row=4, column=1, pady=5)
+ttk.Button(frame, text="Choose Marker Color", command=lambda: choose_color(marker_color_entry)).grid(row=4, column=2, padx=5)
+
+ttk.Button(frame, text="Update Plot", command=update_plot).grid(row=5, column=0, columnspan=3, pady=10)
+ttk.Button(frame, text="Clear", command=clear_inputs).grid(row=6, column=0, columnspan=3, pady=10)
+
+error_label = ttk.Label(frame, foreground='red', font=('Arial', 10))
+error_label.grid(row=7, column=0, columnspan=3, pady=5)
+
+root.mainloop()
+            </textarea>
+            <button id="copy-btn">Copy Code</button>
+        </section>
+    </div>
+    <script>
+      // Function to display notification
+      function showNotification(message, type) {
+        // Assuming jc-notification has a method like this
+        jcNotification.show({
+          message: message,
+          type: type, // 'success', 'error', 'info', etc.
+          duration: 3000 // Display for 3 seconds
+        });
+      }
+
+      document.getElementById('copy-btn').addEventListener('click', function() {
+        var codeSnippet = document.getElementById('code-snippet');
+        codeSnippet.select();
+        codeSnippet.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand('copy');
+        showNotification('Code copied to clipboard!', 'success');
+      });
+    </script>
+</body>
+  <footer>
+
+    <div class="texts">
+
+      <span>Developed By <a href="https://github.com/42wor">Maaz Waheed</a> | &#169; 2024 All Rights Reserved | <a href="Privacy/index.html" >Terms & Conditions</a>
+    </div>
+  </footer>
+</html>
