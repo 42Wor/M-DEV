@@ -14,7 +14,7 @@ function Privacy() {
 }
 
 function FAQs() {
-    window.location.href = 'com/'; // Replace with your target URL
+    window.location.href = 'FAQs/'; // Replace with your target URL
 }
 
 function com() {
