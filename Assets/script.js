@@ -1,6 +1,6 @@
 // Fetches the cookie consent HTML from the provided URL and inserts it into the page.
 function AskForCookieConsent() {
-    fetch('Assets/cookie.html') // Update this URL if necessary.
+    fetch('https://maazwaheed.netlify.app/Assets/cookie.html') // Update this URL if necessary.
         .then(response => {
             if (!response.ok) { // Check if the response was successful
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -78,20 +78,7 @@ function getCookie(name) {
     }
     return null;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 // Initialize functions when the DOM is loaded.
 document.addEventListener('DOMContentLoaded', function() {
     AskForCookieConsent(); // Load the cookie consent HTML.
@@ -110,10 +97,4 @@ window.addEventListener('error', function(event) {
             window.location.href = '/404.html'; // Redirect to a custom 404 page.
         }
     }
-});
-
-
-
-
-
-
+}); 
