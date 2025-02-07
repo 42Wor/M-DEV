@@ -1,471 +1,408 @@
-/* "make good best" style.css - Improved version */
 /* Google Font CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
-
-/* CSS Variables for Reusability and Consistency */
-:root {
-    --primary-color: #377a77;        /* Example primary color */
-    --secondary-color: #0E2431;      /* Example secondary color */
-    --accent-color: #89f1ee;         /* Example accent color */
-    --text-color-dark: #0E2431;       /* Dark text color */
-    --text-color-light: #fff;        /* Light text color */
-    --bg-color-light: #f9f9f9;       /* Light background color */
-    --bg-color-dark: #2b2a2a;        /* Dark background color */
-    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Reusable box shadow */
-    --transition-duration: 0.3s;    /* Standard transition duration */
-    --font-family-primary: 'Ubuntu', sans-serif; /* Primary font family */
-    --font-family-secondary: 'Poppins', sans-serif; /* Secondary font family */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  scroll-behavior: smooth;
 }
 
-
-*,
-*::before,
-*::after { /* Apply box-sizing to pseudo-elements as well */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+a{
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
-
-body {
-    font-family: var(--font-family-secondary); /* Default font for body */
-    cursor: url('/Assets/cursor/c1.png'), auto;
-    height: 100%; /* Consider if full height is always needed, might cause scrollbar issues */
-    display: flex;
-    flex-direction: column;
+a:visited{
+  color: #ffffff;
 }
-
-html {
-    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+a:hover{
+  color: #000000;
+  transition: all 0.3s ease;
 }
-
-
-a {
-    font-weight: 600;
-    color: var(--text-color-dark); /* Default link color */
-    transition: color var(--transition-duration) ease; /* Use variable for transition */
-    text-decoration: none; /* Remove default underline for links */
-}
-
-a:visited {
-    color: #551a8b; /* Standard visited link color or customize */
-}
-
-a:hover {
-    color: var(--primary-color); /* Hover color using primary color variable */
-}
-
 
 /* Custom Scroll Bar CSS */
 ::-webkit-scrollbar {
     width: 10px;
 }
-
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
-
 ::-webkit-scrollbar-thumb {
-    background: var(--accent-color); /* Accent color for scrollbar thumb */
+    background: #89f1ee;
     border-radius: 12px;
-    transition: background-color var(--transition-duration) ease; /* Use variable for transition */
+    transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #4ea19d;
 }
-
-/* Navbar styling */
-nav {
-    position: fixed;
-    width: 100%;
-    padding: 20px 0;
-    z-index: 998;
-    transition: all var(--transition-duration) ease; /* Use variable for transition */
-    font-family: var(--font-family-primary); /* Navbar font */
+/* navbar styling */
+nav{
+  position: fixed;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 998;
+  transition: all 0.3s ease;
+  font-family: 'Ubuntu', sans-serif;
 }
-
-nav.sticky {
-    background: rgba(21, 49, 228, 0.7); /* Slightly less transparent sticky navbar */
-    padding: 13px 0;
+nav.sticky{
+  background: rgba(21, 49, 228, 0.54);
+  padding: 13px 0;
 }
-
-nav .navbar {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
+nav .navbar{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
 }
-
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .logo img {
-    width: auto; /* Adjust as needed */
-    height: 60px; /* Fixed height for logo image */
-    vertical-align: middle; /* Align image with text */
+  width: 100%;
+  height:100%;
+  float: left;
 }
 
 .logo .text {
-    margin-left: 15px; /* Adjusted spacing */
-    font-size: 28px; /* Adjusted logo text size */
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.7); /* Slightly darker logo text */
+  margin-left: 20px;
+  float: left;
+}
+nav .navbar .logo a{
+  font-weight: 500;
+  font-size: 35px;
+  color: rgba(0, 0, 0, 0.54);
+}
+nav.sticky .navbar .logo a{
+  color: #fff;
 }
 
-nav .navbar .logo a {
-    font-weight: inherit; /* Inherit font weight from parent */
-    font-size: inherit; /* Inherit font size from parent */
-    color: inherit; /* Inherit color from parent */
+nav .navbar .menu{
+  display: flex;
+  position: relative;
 }
-
-nav.sticky .navbar .logo .text,
-nav.sticky .navbar .logo a {
-    color: var(--text-color-light); /* White logo text on sticky navbar */
+nav .navbar .menu li{
+  list-style: none;
+  margin: 0 8px;
 }
-
-
-nav .navbar .menu {
-    display: flex;
-    position: relative;
+.navbar .menu a{
+  font-size: 18px;
+  font-weight: 800;
+  color: #0E2431;
+  padding: 6px 0;
+  transition: all 0.4s ease;
 }
+.navbar .menu a:hover{
+  color: #377a77;
+  transition: all 0.3s ease;
 
-nav .navbar .menu li {
-    list-style: none;
-    margin: 0 10px; /* Adjusted menu item spacing */
 }
-
-.navbar .menu a {
-    font-size: 18px;
-    font-weight: 600; /* Slightly reduced font weight for menu items */
-    color: var(--text-color-dark);
-    padding: 8px 12px; /* Added horizontal padding to menu links */
-    border-radius: 5px; /* Soften menu link corners */
-    transition: color var(--transition-duration) ease, background-color var(--transition-duration) ease; /* Added background transition */
-    display: block; /* Make menu links block for better click area */
+nav.sticky .menu a{
+  color: #FFF;
 }
-
-.navbar .menu a:hover {
-    color: var(--text-color-light);
-    background-color: var(--primary-color); /* Hover background using primary color */
+nav.sticky .menu a:hover{
+  transition: all 0.3s ease;
+  color: #0E2431;
 }
-
-nav.sticky .menu a {
-    color: var(--text-color-light);
+.navbar .media-icons a{
+  color: #7a7a7a;
+  font-size: 21px;
+  margin: 0 6px;
+  transition: all 0.3s ease;
 }
-
-nav.sticky .menu a:hover {
-    color: var(--text-color-dark);
-    background-color: var(--text-color-light); /* Hover background white on sticky navbar */
+.media-icons a:hover{
+  color: grey;
+  transition: all 0.3s ease;
 }
-
-.navbar .media-icons a {
-    color: #7a7a7a;
-    font-size: 21px;
-    margin: 0 8px; /* Adjusted media icon spacing */
-    transition: color var(--transition-duration) ease; /* Use variable for transition */
+nav.sticky .media-icons a{
+  color: #FFF;
+  transition: all 0.3s ease;
 }
-
-.navbar .media-icons a:hover {
-    color: grey;
-}
-
-nav.sticky .media-icons a {
-    color: var(--text-color-light);
-}
-
-nav.sticky .media-icons a:hover {
-    color: grey;
+nav.sticky .media-icons a:hover{
+  color: grey;
+  transition: all 0.3s ease;
 }
 
 /* Side Navigation Menu Button CSS */
 nav .menu-btn,
-.navbar .menu .cancel-btn {
-    position: absolute;
-    color: var(--text-color-light);
-    right: 20px;
-    top: 10px;
-    font-size: 23px; /* Slightly larger menu button */
-    transition: color var(--transition-duration) ease; /* Use variable for transition */
-    display: none;
+.navbar .menu .cancel-btn{
+  position: absolute;
+  color: #fff;
+  right: 20px;
+  top: 10px;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  display: none;
+}
+nav .menu-btn{
+  color: #377a77;
+}
+nav.sticky .menu-btn{
+  color: #FFF;
+}
+.navbar .menu .menu-btn{
+  color: #fff;
 }
 
-nav .menu-btn {
-    color: var(--primary-color);
-}
-
-nav.sticky .menu-btn {
-    color: var(--text-color-light);
-}
-
-.navbar .menu .menu-btn {
-    color: var(--text-color-light);
-}
 
 
 /* Responsive Media Query */
 @media (max-width: 1190px) {
-    section .content {
-        width: 95%;
-    }
+  section .content{
+    width: 95%;
+  }
 }
-
 @media (max-width: 1000px) {
-    .about .about-details {
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    .about .about-details .left {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .about-details .right,
-    .about-details .centre {
-        width: 90%;
-        margin: 30px auto; /* Centered and adjusted margin */
-        text-align: center; /* Center text in about section on smaller screens */
-    }
-
-
-    .services .boxes .box {
-        margin: 20px 0;
-        width: calc(100% / 2 - 20px);
-    }
+  .about .about-details{
+    justify-content: center;
+    flex-direction: column;
+  }
+  .about .about-details .left{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .about-details .right{
+    width: 90%;
+    margin: 40px 0;
+  }
+  .about-details .centre{
+    width: 90%;
+    margin: 0px 0;
+  }
+  .services .boxes .box{
+    margin: 20px 0;
+    width: calc(100% / 2 - 20px);
+  }
 }
-
 @media (max-width: 900px) {
-    .about .left img {
-        height: auto; /* Allow image height to adjust */
-        max-width: 100%; /* Ensure image doesn't exceed container width */
-        width: 350px; /* Default width */
-    }
-}
-
-p,
-h4,
-h3 {
-    text-align: center;
+  .about .left img{
+    height: 380px;
+    width: 350px;
+  }
+}p,h4,h3 {
+  text-align: center;
 }
 
 @media (max-width: 750px) {
-    nav .navbar {
-        width: 95%; /* Slightly wider navbar on smaller screens */
-    }
+  nav .navbar{
+    width: 90%;
+  }
+  nav .navbar .menu{
+    position: fixed;
+    left: -100%;
+    top: 0;
+    background: #0E2431;
+    height: 100vh;
+    max-width: 400px;
+    width: 100%;
+    padding-top: 60px;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease;
+  }
+  .navbar.active .menu{
+    left: 0;
+  }
+  nav .navbar .menu a{
+    font-size: 23px;
+    display: block;
+    color: #fff;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+  }
+  nav.sticky .menu a:hover{
+    color: #377a77;
+    transition: all 0.3s ease;
+  }
+  nav .navbar .media-icons{
+    display: none;
+  }
+  nav .menu-btn,
+  .navbar .menu .cancel-btn{
+    display: block;
+  }
 
-    nav .navbar .menu {
-        position: fixed;
-        left: -100%;
-        top: 0;
-        background: var(--secondary-color); /* Dark background for mobile menu */
-        height: 100vh;
-        max-width: 300px; /* Reduced max-width for mobile menu */
-        width: 100%;
-        padding-top: 60px;
-        flex-direction: column;
-        align-items: center;
-        transition: all 0.5s ease;
-    }
-
-    .navbar.active .menu {
-        left: 0;
-    }
-
-    nav .navbar .menu a {
-        font-size: 20px; /* Slightly smaller font in mobile menu */
-        display: block;
-        color: var(--text-color-light);
-        margin: 10px 0;
-        transition: color var(--transition-duration) ease; /* Use variable for transition */
-        padding: 10px 20px; /* More padding for mobile menu links */
-        border-radius: 0; /* No rounded corners in mobile menu */
-    }
-
-    nav.sticky .menu a:hover {
-        color: var(--primary-color);
-    }
-
-    nav .navbar .media-icons {
-        display: none;
-    }
-
-    nav .menu-btn,
-    .navbar .menu .cancel-btn {
-        display: block;
-    }
-
-    .contact .text {
-        width: 100%;
-    }
+  .contact .text{
+    width: 100%;
+}
 }
 
 
-/* About Section */
+
+
 .about {
-    background-image: url("https://maazwaheed.netlify.app/Assets/Images/background.png"); /* Using background-image for clarity */
-    background-size: cover; /* Cover the entire section */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent image repetition */
-    padding: 80px 0; /* Add padding to about section */
+  background: url("https://maazwaheed.netlify.app/Assets/Images/background.png");
+  height: 100%;
 }
-
 section .title {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 50px; /* Increased margin below title */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
-
 section .title span {
-    color: var(--secondary-color);
-    font-size: 32px; /* Larger title font size */
-    font-weight: 700; /* Stronger font weight for titles */
-    position: relative;
-    padding-bottom: 10px; /* Increased padding below title text */
-    text-align: center;
-    text-transform: uppercase; /* Uppercase titles for emphasis */
+  color: #0e2431;
+  font-size: 28px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 8px;
+  text-align: center;
 }
-
 section .title span::before,
 section .title span::after {
-    content: "";
-    position: absolute;
-    height: 4px; /* Thicker underline */
-    width: 100%;
-    background: var(--primary-color);
-    left: 0;
-    bottom: 0;
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #033b77;
+  left: 0;
+  bottom: 0;
 }
-
 section .title span::after {
-    bottom: -8px; /* Adjusted bottom position */
-    width: 50%; /* Shorter underline after title */
-    left: 50%;
-    transform: translateX(-50%);
+  bottom: -7px;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
 .about .left img {
-    height: auto; /* Responsive image height */
-    max-width: 100%;
-    border-radius: 15px; /* More rounded image corners */
-    box-shadow: var(--box-shadow); /* Apply box shadow to about image */
+  height: 100px;
+  width: 400px;
+  object-fit: cover;
+  border-radius: 12px;
 }
-
 section .button {
-    margin-top: 30px; /* Increased margin above buttons */
-    align-items: center;
-    display: flex;
-    justify-content: center;
+  margin: 0px 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
-
 section .button button {
-    outline: none;
-    padding: 14px 25px; /* Slightly larger button padding */
-    border-radius: 25px; /* More rounded buttons */
-    margin: 5px 10px; /* Adjusted button spacing */
-    font-size: 18px;
-    font-weight: 600;
-    background: #74bf54;
-    color: var(--text-color-dark);
-    border: 2px solid transparent;
-    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease, border-color var(--transition-duration) ease; /* More specific transitions */
-    cursor: pointer; /* Ensure buttons have pointer cursor */
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  margin: 5px 5px;
+  font-size: 18px;
+  font-weight: 600;
+  background: #74bf54;
+  color: #050505;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
 }
-
 section .button button:hover {
-    border-color: #74bf54;
-    background-color: transparent; /* Transparent background on hover */
-    color: #74bf54;
+  transition: all 0.4s ease;
+  border-color: #74bf54;
+  background-color: #1e1d1d;
+  color: #74bf54;
 }
 
-
+html,body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 .about {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 
 /* Skills Section */
 .skills {
-    background-color: var(--bg-color-light); /* Light background for skills section */
-    padding: 80px 0; /* Add padding to skills section */
+   background: #f9f9f9;
+
 }
+
 
 
 .skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px; /* Increased gap between skill boxes */
-    cursor: url('/Assets/cursor/cursor1.png'), pointer;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  cursor:url('/Assets/cursor/cursor1.png'), pointer;
 }
 
 .skill-box {
-    background: var(--bg-color-dark); /* Dark background for skill boxes */
-    border-radius: 25px; /* More rounded skill box corners */
-    padding: 50px 30px; /* Adjusted skill box padding */
-    text-align: center;
-    box-shadow: var(--box-shadow); /* Apply box shadow to skill boxes */
-    transition: transform 0.3s ease;
+  background: #2b2a2a;
+  border-radius: 20px;
+  padding:60px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
 .skill-box:hover {
-    transform: translateY(-10px); /* Reduced hover lift effect */
+  transform: translateY(-30px);
 }
 
 .skill-box .icon {
-    font-size: 60px; /* Larger skill icons */
-    color: #818181;
-    margin-bottom: 15px; /* Increased margin below icon */
+  font-size: 50px;
+  color: #818181;
+  margin-bottom: 10px;
 }
 
 .skill-box .skill-name {
-    font-size: 22px; /* Larger skill name font */
-    font-weight: 500;
-    color: var(--text-color-light);
-    cursor: url('/Assets/cursor/cursor.png'), pointer;
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+  cursor:url('/Assets/cursor/cursor.png'), pointer;
 }
 
 
-/* Cursor Styles - Grouped together */
-body,
+
+
+
+
+
+
+
+
+
+
+body{
+  cursor: url('/Assets/cursor/c1.png'), auto;
+}
+
+
+a {
+
+  cursor: url('/Assets/cursor/c.png'), pointer;
+
+}
 p {
-    cursor: url('/Assets/cursor/c1.png'), auto;
-}
 
-a,
-.skill-box .skill-name,
-section .button button { /* Include buttons in pointer cursor */
-    cursor: url('/Assets/cursor/c.png'), pointer;
-}
+  cursor: url('/Assets/cursor/c1.png'), auto;
 
+}
 
 /* Footer CSS */
 footer {
-    background-color: #6aa1ff;
-    padding: 25px 0; /* Increased footer padding */
-    text-align: center;
-    font-family: var(--font-family-secondary); /* Footer font */
+  background-color: #6aa1ff; /* Use hex code for consistency */
+  padding: 15px 0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
-footer .texts span {
-    font-size: 18px; /* Slightly smaller footer text */
-    font-weight: normal;
-    color: var(--text-color-dark);
+footer.texts span {
+  font-size: 20px;
+  font-weight: normal;
+  color: #000000;
 }
 
-footer .texts span a {
-    text-decoration: underline;
-    font-weight: 500;
-    color: var(--text-color-light);
+footer.texts span a {
+  text-decoration: underline;
+  font-weight: 500;
+  color: #ffffff;
 }
 
-footer .texts span a:hover {
-    text-decoration: none;
-    color: var(--secondary-color); /* Hover color using secondary color variable */
+footer.texts span a:hover {
+  text-decoration: none;
+  color: #000000;
 }
+
