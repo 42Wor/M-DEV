@@ -10,7 +10,7 @@ function portfolio() {
 }
 
 function Privacy() {
-    window.location.href = 'privacy'; // Replace with your target URL
+    window.location.href = 'privacy/'; // Replace with your target URL
 }
 
 function FAQs() {

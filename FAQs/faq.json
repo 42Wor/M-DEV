@@ -1,74 +1,116 @@
 [
-    {
-      "question": "What is MBK Tech Studio?",
-      "answer": "MBK Tech Studio, founded by Muhammad Bin Khalid, is a collaborative development studio focusing on open-source contributions and innovative technology solutions. We empower creators and problem-solvers through software development services and hardware projects, with an emphasis on community-driven initiatives. Our goal is to create impactful digital and hardware solutions that benefit the global tech community, fostering growth, collaboration, and the advancement of open-source technologies.",
-      "id": "0",
-      "display": "true"
-    },
-    {
-      "question": "How can I contact MBK Tech Studio?",
-      "answer": "You can contact <strong>MBK Tech Studio</strong> via the <a style='font-weight:bold;' href='https://mbktechstudio.com/Support/'>Support & Contact</a> Page on our website, though <a> Social Media </a> or by sending an Direct email to <a class='link' style='font-weight:bold;' href='mailto:support@mbktechstudio.com'>support@mbktechstudio.com</a>. We strive to respond to all inquiries within 24-48 hours.",
-      "id": "1",
-      "display": "true"
-    },
-    {
-      "question": "What services do you offer?",
-      "answer": "We offer a wide range of services, including software development, cloud solutions, DevOps consulting, and more. We are dedicated to providing tailored solutions that meet the unique needs of each client.",
-      "id": "2",
-      "display": "false"
-    },
-    {
-      "question": "Need the Documentation but It's Delayed? Here's What to Do",
-      "answer": "<ul style='text-align: left;> <li> <h3>Submit a Request on the Documentation Page</h3> </li> If you're looking for documentation for a specific project (e.g., docs.mbktechstudio.com/project1), use the contact form on that page to let me know. <li> <h3>Main Contact Form</h3> </li> If the documentation page doesn't exist yet, please submit a request through the contact form on the main site: <div class='hs'><a href='https://mbktechstudio.com/#contact' target='_blank'>mbktechstudio.com</a> </div> <li> <h3>Reach Out on Social Media</h3> </li> You can also contact me on through Social Media (Instagram Prefred). <li> <h3>Need a Faster Response?</h3> </li> Here's my Phone Number: +923264552255. Feel Free To Bully Me until I Upload The Documentation! </ul>",
-      "id": "3",
-      "display": "true"
-    },
-    {
-      "question": "Do you provide customized software development services?",
-      "answer": "Yes, we work closely with clients to deliver software solutions that fit their specific goals, from concept to deployment.",
-      "id": "4",
-      "display": "false"
-    },
-    {
-      "question": "What technologies does MBK Tech Studio work with?",
-      "answer": "We work with a wide range of modern technologies, including but not limited to JavaScript, Python, C#, Unity, AWS, Azure, Docker, Kubernetes, and various CI/CD tools. Our expertise spans both frontend and backend development, cloud solutions, and mobile app development.",
-      "id": "5",
-      "display": "true"
-    },
-    {
-      "question": "How do you ensure the security of your projects?",
-      "answer": "Security is a top priority for us. We follow best practices in coding and architecture, including regular security audits, encryption, and secure coding standards to safeguard data and protect your applications from potential threats.",
-      "id": "6",
-      "display": "true"
-    },
-    {
-      "question": "What is the process for starting a new project with MBK Tech Studio?",
-      "answer": "To start a new project, You can contact <strong>MBK Tech Studio</strong> via the <a style='font-weight:bold;' href='https://mbktechstudio.com/Support/'>Support & Contact</a> Page on our website, though <a> Social Media </a> or by sending an Direct email to <a class='link' style='font-weight:bold;' href='mailto:support@mbktechstudio.com'>support@mbktechstudio.com</a>. . We'll schedule an initial consultation to understand your requirements, provide a proposal, and outline the steps to get started.",
-      "id":"7",
-      "display": "true"
-    },
-    {
-      "question": "What are your typical project timelines?",
-      "answer": "Project timelines vary depending on the scope and complexity of the work. After an initial consultation and requirement analysis, we provide a timeline estimate tailored to your project. We aim to deliver quality work on time and within budget.",
-      "id": "8",
-      "display": "false"
-    },
-    {
-      "question": "Do you offer ongoing support after project completion?",
-      "answer": "Yes, we offer ongoing support and maintenance for all our projects. Whether it's fixing bugs, implementing new features, or ensuring system stability, our team is here to assist you long after your project goes live.",
-      "id": "9",
-      "display": "true"
-    },
-    {
-      "question": "What industries does MBK Tech Studio serve?",
-      "answer": "We serve a wide range of industries, including e-commerce, healthcare, finance, gaming, and more. Our versatile expertise allows us to deliver effective solutions across different sectors.",
-      "id": "10",
-      "display": "fa"
-    },
-    {
-      "question": "Can MBK Tech Studio help with cloud migration?",
-      "answer": "Absolutely! We specialize in cloud migration services, helping businesses transition from on-premise systems to cloud infrastructure. We ensure the migration process is smooth, secure, and aligned with your business goals.",
-      "id": "11",
-      "display": "false"
-    }
-  ]
+  {
+    "question": "What is Maaz Waheed Tech Studio?",
+    "answer": "Maaz Waheed Tech Studio, founded by Maaz Waheed, is a collaborative development studio focusing on open-source contributions and innovative technology solutions. We empower creators and problem-solvers through software development services and hardware projects, with an emphasis on community-driven initiatives. Our goal is to create impactful digital and hardware solutions that benefit the global tech community, fostering growth, collaboration, and the advancement of open-source technologies.",
+    "id": "0",
+    "display": "true"
+  },
+  {
+    "question": "How can I contact Maaz Waheed Tech Studio?",
+    "answer": "You can contact <strong>Maaz Waheed Tech Studio</strong> via the <a style='font-weight:bold;' href='https://mbktechstudio.com/Support/'>Support & Contact</a> Page on our website, though <a> Social Media </a> or by sending an Direct email to <a class='link' style='font-weight:bold;' href='mailto:support@mbktechstudio.com'>support@mbktechstudio.com</a>. We strive to respond to all inquiries within 24-48 hours.",
+    "id": "1",
+    "display": "true"
+  },
+  {
+    "question": "What services do you offer?",
+    "answer": "We offer a wide range of services, including software development, cloud solutions, DevOps consulting, and more. We are dedicated to providing tailored solutions that meet the unique needs of each client.",
+    "id": "2",
+    "display": "false"
+  },
+  {
+    "question": "Need the Documentation but It's Delayed? Here's What to Do",
+    "answer": "<ul style='text-align: left;> <li> <h3>Submit a Request on the Documentation Page</h3> </li> If you're looking for documentation for a specific project (e.g., docs.maazwaheedtechstudio.com/project1), use the contact form on that page to let me know. <li> <h3>Main Contact Form</h3> </li> If the documentation page doesn't exist yet, please submit a request through the contact form on the main site: <div class='hs'><a href='https://maazwaheedtechstudio.com/#contact' target='_blank'>maazwaheedtechstudio.com</a> </div> <li> <h3>Reach Out on Social Media</h3> </li> You can also contact me on through Social Media (Instagram Prefred). <li> <h3>Need a Faster Response?</h3> </li> Here's my Phone Number: +923264552255. Feel Free To Bully Me until I Upload The Documentation! </ul>",
+    "id": "3",
+    "display": "true"
+  },
+  {
+    "question": "Do you provide customized software development services?",
+    "answer": "Yes, we work closely with clients to deliver software solutions that fit their specific goals, from concept to deployment.",
+    "id": "4",
+    "display": "false"
+  },
+  {
+    "question": "What technologies does Maaz Waheed Tech Studio work with?",
+    "answer": "We work with a wide range of modern technologies, including but not limited to JavaScript, Python, C#, Unity, AWS, Azure, Docker, Kubernetes, and various CI/CD tools. Our expertise spans both frontend and backend development, cloud solutions, and mobile app development.",
+    "id": "5",
+    "display": "true"
+  },
+  {
+    "question": "How do you ensure the security of your projects?",
+    "answer": "Security is a top priority for us. We follow best practices in coding and architecture, including regular security audits, encryption, and secure coding standards to safeguard data and protect your applications from potential threats.",
+    "id": "6",
+    "display": "true"
+  },
+  {
+    "question": "What is the process for starting a new project with Maaz Waheed Tech Studio?",
+    "answer": "To start a new project, You can contact <strong>Maaz Waheed Tech Studio</strong> via the <a style='font-weight:bold;' href='https://mbktechstudio.com/Support/'>Support & Contact</a> Page on our website, though <a> Social Media </a> or by sending an Direct email to <a class='link' style='font-weight:bold;' href='mailto:support@mbktechstudio.com'>support@mbktechstudio.com</a>. . We'll schedule an initial consultation to understand your requirements, provide a proposal, and outline the steps to get started.",
+    "id":"7",
+    "display": "true"
+  },
+  {
+    "question": "What are your typical project timelines?",
+    "answer": "Project timelines vary depending on the scope and complexity of the work. After an initial consultation and requirement analysis, we provide a timeline estimate tailored to your project. We aim to deliver quality work on time and within budget.",
+    "id": "8",
+    "display": "false"
+  },
+  {
+    "question": "Do you offer ongoing support after project completion?",
+    "answer": "Yes, we offer ongoing support and maintenance for all our projects. Whether it's fixing bugs, implementing new features, or ensuring system stability, our team is here to assist you long after your project goes live.",
+    "id": "9",
+    "display": "true"
+  },
+  {
+    "question": "What industries does Maaz Waheed Tech Studio serve?",
+    "answer": "We serve a wide range of industries, including e-commerce, healthcare, finance, gaming, and more. Our versatile expertise allows us to deliver effective solutions across different sectors.",
+    "id": "10",
+    "display": "fa"
+  },
+  {
+    "question": "Can Maaz Waheed Tech Studio help with cloud migration?",
+    "answer": "Absolutely! We specialize in cloud migration services, helping businesses transition from on-premise systems to cloud infrastructure. We ensure the migration process is smooth, secure, and aligned with your business goals.",
+    "id": "11",
+    "display": "false"
+  },
+  {
+    "question": "What is your company culture like at Maaz Waheed Tech Studio?",
+    "answer": "At Maaz Waheed Tech Studio, we foster a collaborative and innovative environment. We value open communication, continuous learning, and a strong sense of community. We believe in empowering our team members and encouraging creativity to drive technological advancements and impactful solutions.",
+    "id": "12",
+    "display": "true"
+  },
+  {
+    "question": "Do you have case studies or examples of your previous work?",
+    "answer": "Yes, we have a portfolio showcasing some of our successful projects. While specific case studies are available upon request due to client confidentiality, we can provide examples of our work and discuss relevant projects during a consultation to demonstrate our capabilities.",
+    "id": "13",
+    "display": "true"
+  },
+   {
+    "question": "What are your pricing models?",
+    "answer": "Our pricing models are tailored to the specific needs of each project. We offer flexible options, including fixed-price contracts for well-defined projects and hourly or retainer-based models for ongoing development and support. We ensure transparency and work with you to determine the most suitable and cost-effective approach.",
+    "id": "14",
+    "display": "false"
+  },
+  {
+    "question": "How does Maaz Waheed Tech Studio contribute to open source?",
+    "answer": "Contributing to open source is a core value at Maaz Waheed Tech Studio. We actively contribute to various open-source projects, develop and maintain our own open-source initiatives, and encourage our team members to participate in the open-source community. This commitment reflects our belief in collaboration, knowledge sharing, and giving back to the tech community.",
+    "id": "15",
+    "display": "true"
+  },
+  {
+    "question": "Do you work with startups, enterprises, or both?",
+    "answer": "We work with a diverse range of clients, from startups and small businesses to large enterprises. Our adaptable approach and scalable solutions allow us to effectively cater to the unique needs and challenges of organizations of all sizes.",
+    "id": "16",
+    "display": "true"
+  },
+  {
+    "question": "Where is Maaz Waheed Tech Studio located, and do you work with international clients?",
+    "answer": "While Maaz Waheed Tech Studio is based in [Insert Location if you want to specify, e.g., Pakistan], we operate globally and work with clients from various countries. Our remote-first approach and use of modern communication tools enable us to collaborate effectively with international clients across different time zones.",
+    "id": "17",
+    "display": "true"
+  },
+  {
+    "question": "What kind of support do you offer after the project launch?",
+    "answer": "We offer comprehensive post-launch support, including bug fixing, performance monitoring, security updates, and technical assistance. We can tailor a support and maintenance plan to ensure the continued success and stability of your project, allowing you to focus on your core business.",
+    "id": "18",
+    "display": "true"
+  }
+]
