@@ -1,1 +1,2 @@
-Flask
+flask
+netlify-wsgi
