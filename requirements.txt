@@ -1,2 +1,4 @@
 flask
+pip>=23.0
+setuptools>=65.0
 netlify-wsgi
