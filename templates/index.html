@@ -6,7 +6,7 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
     <title>Maaz waheed</title>
-    <link rel="stylesheet" href="Assets/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Assets/style.css') }}">
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="icon" type="image/x-icon" href="Assets/Images/M.png">
@@ -102,6 +102,8 @@
       <span>Developed By <a href="https://github.com/42wor">Maaz Waheed</a> | &#169; 2024 All Rights Reserved | <a href="Privacy/index.html" >Terms & Conditions</a>
     </div>
   </footer>
+  <script src="{{ url_for('static', filename='Assets/script.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='Assets/links.js') }}" defer></script>
 
 
 </html>
