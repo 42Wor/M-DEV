@@ -1,15 +1,18 @@
-from flask import Flask, render_template  # Import Flask again here if needed
-from wsgi_adapter import WSGIAdapter
+# functions/api/api.py
+from flask import Flask
+from werkzeug.wrappers import Response
+from netlify_wsgi import wsgi_adapter
 
-# Import your Flask app instance from app.py
-from app import app as application  # Assuming your Flask app instance is named 'app' in app.py
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello from Flask on Netlify Functions!"
+
+# Your other Flask routes and logic here...
 
 def handler(event, context):
-    # Use WSGIAdapter to handle the request and response
-    return WSGIAdapter(application).handle(event, context)
+    return wsgi_adapter(app, event, context)
 
-# Optional: You can define your Flask app routes directly here if you prefer
-# But importing from app.py is generally cleaner.
-# @application.route("/another-route")
-# def another_route():
-#     return "This is another route handled by the function"
+if __name__ == "__main__":
+    app.run(debug=True) # For local development
