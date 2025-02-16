@@ -1,9 +1,9 @@
 [build]
-  publish = "public"  # Directory to publish static files (if any)
-  functions = "functions" # Directory containing your Netlify Functions
-  command = "pip install -r requirements.txt -t functions/api" # Install dependencies in function directory
+  publish = "public"
+  functions = "functions"
+  command = "pip install -r requirements.txt -t functions/api" # **Correct and Crucial Command**
 
 [[redirects]]
-  from = "/api/*"  # Route to trigger your Flask function
-  to = "/.netlify/functions/api/:splat" # Netlify Function path
-  status = 200      # Status code for the redirect
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
