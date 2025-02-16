@@ -1,0 +1,9 @@
+[build]
+  functions = "functions"  # Directory for Netlify Functions
+  publish = "static"     # Directory to publish static files from (e.g., your 'static' folder)
+  command = ""           # No build command needed for static files in this basic setup
+
+[[redirects]]
+  from = "/api/*"        # Route all requests starting with /api to the function
+  to = "/.netlify/functions/api/:splat" # Function path
+  status = 200
