@@ -85,7 +85,6 @@ function HireMeLink() {
 function openProjectPage(id) {
     window.open('https://https://maazwaheed.netlify.app/Project/#' + id, '_blank'); // Replace with your target URL
   }
- 
 
 
 function AskForCookieConsent() {

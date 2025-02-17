@@ -1,108 +1,89 @@
 <!DOCTYPE html>
-
 <html lang="en" dir="ltr">
 
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
-    <title>M-DEV</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Assets/style.css') }}">
-    <!-- Fontawesome CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-    <link rel="icon" type="image/x-icon" href="Assets/Images/M.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="Assets/script.js"></script>
-    <script src="Assets/links.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M-DEV</title>
 
-<div id="cookie"></div>
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Assets/style.css') }}">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Assets/Images/M.png') }}">
+
+  <!-- JS Files -->
+  <script src="{{ url_for('static', filename='Assets/script.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='Assets/links.js') }}" defer></script>
+</head>
+
+<body>
+
+  <!-- Navbar -->
   <header>
-
-
     <nav>
-
       <div class="navbar">
-
         <div class="logo">
-<!--
-          <div class="image">
-            <img src="Assets/Images/M.png" alt=""/>
-          </div>-->
-
           <div class="text">
             <a href="https://maazwaheed.netlify.app/">Maaz Waheed</a>
           </div>
-
         </div>
-
-
         <div class="media-icons">
-
           <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"                                      target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="#"                           target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="#"                                  target="_blank"><i class="fab fa-github"></i></a>
-          <a href="#"       target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="#"                             target="_blank"><i class="fab fa-youtube"></i></a>
-          <a href="#"                                   target="_blank"><i class="fab fa-discord"></i></a>
-
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
         </div>
-
       </div>
-
-      <div style="display: none;" class="menu-btn">
+      <div class="menu-btn" style="display: none;">
         <i class="fas fa-bars"></i>
       </div>
-
     </nav>
-
   </header>
 
-  <body>
-
-  <!-- skill-box-->
+  <!-- Skill Box Section -->
   <section class="about" id="about">
+    <div class="skills-container">
+      <div class="skill-box" onclick="navigateTo('{{ url_for('project') }}')">
+        <div class="icon"><i class="fas fa-project-diagram"></i></div>
+        <div class="skill-name">Project</div>
+      </div>
+      <div class="skill-box" onclick="navigateTo('{{ url_for('portfolio') }}')">
+        <div class="icon"><i class="fa fa-user"></i></div>
+        <div class="skill-name">Portfolio</div>
+      </div>
+      <div class="skill-box" onclick="navigateTo('{{ url_for('privacy') }}')">
+        <div class="icon"><i class="fas fa-lock"></i></div>
+        <div class="skill-name">Privacy</div>
+      </div>
+      <div class="skill-box" onclick="navigateTo('{{ url_for('faqs') }}')">
+        <div class="icon"><i class="fa fa-question-circle"></i></div>
+        <div class="skill-name">FAQs</div>
+      </div>
+    </div>
+  </section>
 
-
-        <div class="skills-container">
-
-          <div class="skill-box" onclick="project()">
-            <div class="icon"><i class="fas fa-project-diagram"></i></div>
-            <div class="skill-name">Project</div>
-          </div>
-
-          <div class="skill-box" onclick="portfolio()">
-            <div class="icon"><i class="fa fa-user"></i></div>
-            <div class="skill-name">portfolio</div>
-          </div>
-
-          <div class="skill-box" onclick="Privacy()">
-            <div class="icon"><i class="fas fa-lock"></i></div>
-            <div class="skill-name">Privacy</div>
-          </div>
-
-          <div class="skill-box" onclick="FAQs()">
-            <div class="icon"><i class="fa fa-question-circle"></i></div>
-            <div class="skill-name">FAQs</div>
-          </div>
-
-
-   </section>
-
-
-
-
-  </body>
-
+  <!-- Footer -->
   <footer>
-
     <div class="texts">
-
-      <span>Developed By <a href="https://github.com/42wor">Maaz Waheed</a> | &#169; 2024 All Rights Reserved | <a href="Privacy/index.html" >Terms & Conditions</a>
+      <span>Developed By <a href="https://github.com/42wor">Maaz Waheed</a> | © 2024 All Rights Reserved |
+        <a href="{{ url_for('privacy') }}">Terms & Conditions</a>
+      </span>
     </div>
   </footer>
-  <script src="{{ url_for('static', filename='Assets/script.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='Assets/links.js') }}" defer></script>
 
+  <!-- JavaScript -->
+  <script>
+    function navigateTo(url) {
+      window.location.href = url;
+    }
+  </script>
+
+</body>
 
 </html>

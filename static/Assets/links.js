@@ -1,24 +1,23 @@
-
 // Placeholder functions for different sections.
 
 function project() {
-    window.location.href = 'Project/'; // Replace with your target URL
+    window.location.href = 'Project/'; 
 }
 
 function portfolio() {
-    window.location.href = 'com/'; // Replace with your target URL
+    window.location.href = 'com/'; 
 }
 
 function Privacy() {
-    window.location.href = 'privacy/'; // Replace with your target URL
+    window.location.href = 'Privacy/'; 
 }
 
 function FAQs() {
-    window.location.href = 'FAQs/'; // Replace with your target URL
+    window.location.href = 'FAQs/'; 
 }
 
 function com() {
-       window. open ('com/')
+    window.location.href = 'com/';
 }
 
 function python() {
@@ -26,7 +25,7 @@ function python() {
 }
 
 function Neural() {
-    window.location.href = '../Project/Neural Networks(MNIST)/';
+    window.location.href = '../Project/' + encodeURIComponent('Neural Networks(MNIST)') + '/';
 }
 
 function xyz() {
@@ -34,5 +33,5 @@ function xyz() {
 }
 
 function o() {
-    window.location.href = 'https://maazwaheed.netlify.app/Project/pytnho/';
+    window.location.href = 'https://maazwaheed.netlify.app/Project/python/';
 }
