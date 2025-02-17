@@ -1,4 +1,4 @@
-# Maaz Waheed Website
+# M-DEV Website
 
 
 https://maazwaheed.netlify.app/
