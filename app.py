@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+import json
 
 app = Flask(__name__)
 
@@ -50,25 +51,35 @@ def privacy():
 def faqs():
     return render_template("FAQs/index.html")
 
+
 # Chat Page - using com/index.html as template
 @app.route("/Chat/")
 def Chat():
     return render_template("com/index.html")
 
+
 # Form Submission Route
-@app.route("/submit_form", methods=['POST'])
+@app.route("/submit_form", methods=["POST"])
 def submit_form():
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        message = request.form['message']
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        message = request.form["message"]
         print("Form Data:")
         print("Name:", name)
         print("Email:", email)
         print("Message:", message)
         # Here you can add code to save the data to a database,
         # send an email, or perform other actions with the form data.
-        return render_template("com/index.html") # Or redirect to a thank you page
+        return render_template("com/index.html")  # Or redirect to a thank you page
+
+
+@app.route("/faq")
+def faq():
+    with open("static/FAQs/faq.json") as f:
+        faq_data = json.load(f)
+    return jsonify(faq_data)
+
 
 if __name__ == "__main__":
     app.run(debug=True)  # Set debug=True for development

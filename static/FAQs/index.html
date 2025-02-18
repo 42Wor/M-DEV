@@ -3,14 +3,16 @@
 
 <head>
   <title>FAQs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Lato:wght@400;700&display=swap"
+    rel="stylesheet">
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
   <meta name="description" content="Frequently Asked Questions">
-  <link rel="stylesheet" href="{{ url_for('static', filename='FAQs/project.css') }}">  
-  <link rel="stylesheet" href="{{ url_for('static', filename='FAQs/FAQs.css') }}">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Assets/Images/M.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Assets/style.css') }}">
+  <link rel="stylesheet" href="FAQs.css">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Assets/Images/FAQs.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Assets/Images/M.png') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     .about {
@@ -30,13 +32,16 @@
       scroll-behavior: smooth;
     }
 
+
     /* Headings (H1, H2, H3) */
     h1,
     h2,
     h3 {
       font-family: 'Lato', sans-serif;
       font-weight: 700;
+      /* Bold for emphasis */
       color: #222;
+      /* Slightly darker for contrast */
       margin-bottom: 20px;
     }
 
@@ -72,13 +77,12 @@
       line-height: 1.6;
       color: #444;
     }
-
     .logo img {
-      height: 100px;
-      width: 100px;
-      object-fit: cover;
-      border-radius: 150px;
-    }
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 150px;
+}
 
     @media (max-width: 768px) {
       .faq-question {
@@ -89,58 +93,83 @@
         font-size: 14px;
       }
     }
-    
   </style>
 </head>
+<!-- navgaition menu -->
+<header>   
+    
+  <nav>
+
+    <div class="navbar">
+
+      <div class="logo">
+          <div class="image">
+          <img src="../Assets/Images/M.png" alt=""/>
+        </div>
+
+        <div class="text">
+          <a href="../">MY Project Studio</a>
+        </div>
+
+      </div>
+
+
+      <div class="media-icons">
+
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-discord"></i></a>
+
+      </div>
+
+    </div>
+
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+
+  </nav>
+
+</header>
+
 
 <body>
-  <!-- Navigation menu -->
-  <header>
-    <nav>
-      <div class="navbar">
-        <div class="logo">
-          <div class="image">
-            <img src="{{ url_for('static', filename='Assets/Images/M.png') }}" alt="" />
-          </div>
-          <div class="text">
-            <a href="../">M-DEV</a>
-          </div>
-        </div>
-        <div class="media-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-          <a href="#"><i class="fab fa-discord"></i></a>
-        </div>
-      </div>
-      <div class="menu-btn">
-        <i class="fas fa-bars"></i>
-      </div>
-    </nav>
-  </header>
+
 
   <!-- Move to top button -->
   <div class="scroll-button">
-    <a href="#"><i class="fas fa-arrow-up"></i></a>
+    <a href="#."><i class="fas fa-arrow-up"></i></a>
   </div>
 
   <!-- FAQ Section -->
-  <section class="about" id="faq-section">
+  <section class="about" id=".">
+    <br> <br> <br>
     <div class="title"><span>Frequently Asked Questions</span></div>
+
     <div class="faq-container" id="faq-container"></div>
+
     <!-- Under Development Box -->
     <div class="RedboxInfo">
       Notice: This Page Is Under Development. Information May Not Be Accurate.
     </div>
+
   </section>
 
   <footer>
-    <div class="text"></div>
-      <span> © 2024 <a href="https://mbktechstudio.com/" target="_blank">MBK Tech Studio</a>. All Rights Reserved | <a href="https://privacy.mbktechstudio.com/" target="_blank">Terms &amp; Conditions</a> | <a href="https://mbktechstudio.com/FAQs" target="_blank">FAQs</a> | <a href="https://mbktechstudio.com/Support/" target="_blank">Support &amp; Contact</a></span>
+
+    <div class="text">
+
+      <span> © 2024 <a href="https://mbktechstudio.com/" target="_blank">MBK Tech Studio</a>. All Rights Reserved | <a
+          href="https://privacy.mbktechstudio.com/" target="_blank">Terms &amp; Conditions</a> | <a
+          href="https://mbktechstudio.com/FAQs" target="_blank">FAQs</a> | <a href="https://mbktechstudio.com/Support/"
+          target="_blank">Support &amp; Contact</a></span>
+
     </div>
+
   </footer>
 
   <!-- Scripts -->
@@ -148,53 +177,60 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput-jquery.min.js"></script>
   <script>
+
     document.addEventListener('DOMContentLoaded', function () {
-      // Fetch the FAQ data from the Flask app
-      fetch('/faq')
+      fetch('faq.json')
         .then(response => response.json())
         .then(data => {
           const faqContainer = document.getElementById('faq-container');
 
           // Get the query parameter value for 'Q'
           const urlParams = new URLSearchParams(window.location.search);
-          const queryId = urlParams.get('Q');
+          const queryId = urlParams.get('Q'); // Extracts the 'Q' parameter
           let scrollToFaq = null;
 
           // Render FAQs
           data.forEach(item => {
-            if (['True', 'true', '1', 'Yes', 'yes', 'Y', 'y'].includes(item.display)) {
+            // Check if item.display is true
+            const validDisplayValues = [
+              "true", "True", "1", "Yes", "yes", "Y", "y"
+            ];
+
+            if (validDisplayValues.includes(item.display)) {
               const faqItem = document.createElement('div');
               faqItem.classList.add('faq-item');
 
               const faqQuestion = document.createElement('div');
               faqQuestion.classList.add('faq-question');
-              faqQuestion.id = item.id;
+              faqQuestion.id = item.id; // Set ID for matching
               faqQuestion.innerHTML = item.question;
 
               const faqAnswer = document.createElement('div');
               faqAnswer.classList.add('faq-answer');
 
-              // Capitalize the first letter of the answer, skipping <a> tags
+              // Capitalize text outside <a> tags
               const capitalizedAnswer = item.answer.replace(/(<a\b[^>]*>.*?<\/a>)|(\b\w)/g, (match, anchor, word) => {
-                return anchor ? anchor : word.toUpperCase();
+                return anchor ? anchor : word.toUpperCase(); // Skip <a> content, capitalize other words
               });
 
-              faqAnswer.innerHTML = `<div style="padding: 20px;">${capitalizedAnswer}</div>`;
+              faqAnswer.innerHTML = `<div style='padding: 20px;'>${capitalizedAnswer}</div>`;
               faqItem.appendChild(faqQuestion);
               faqItem.appendChild(faqAnswer);
               faqContainer.appendChild(faqItem);
 
+              // Check if this FAQ matches the query parameter
               if (item.id === queryId) {
-                faqItem.classList.add('active');
-                scrollToFaq = faqItem;
+                faqItem.classList.add('active'); // Open the matching FAQ
+                scrollToFaq = faqItem; // Store reference to scroll later
               }
             }
           });
 
+          // Scroll to the matched FAQ if found
           if (scrollToFaq) {
-            const headerOffset = document.querySelector('header').offsetHeight || 0;
+            const headerOffset = document.querySelector('header').offsetHeight || 0; // Get header height
             const elementPosition = scrollToFaq.getBoundingClientRect().top + window.scrollY;
-            const offsetPosition = elementPosition - headerOffset - 100;
+            const offsetPosition = elementPosition - headerOffset - 100; // Adjust by header height and add extra spacing
 
             window.scrollTo({
               top: offsetPosition,
@@ -203,8 +239,10 @@
 
             setTimeout(function () {
               const url = new URL(window.location);
-              url.search = ''; // Remove query params
+              url.search = ''; // Remove query parameters
               window.history.replaceState({}, document.title, url);
+              console.log("url");
+
             }, 500);
           }
 
@@ -217,8 +255,11 @@
           });
         })
         .catch(error => console.error('Error fetching FAQ data:', error));
+
     });
+
   </script>
+
 </body>
 
 </html>
