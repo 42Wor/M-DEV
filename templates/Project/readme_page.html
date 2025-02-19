@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>README: {{ readme_filename }}</title>
+</head>
+  <!-- navgaition menu -->
+  <header>
+
+
+    <nav>
+
+      <div class="navbar">
+
+        <div class="logo">
+            <div class="image">
+            <img src="{{ url_for('static', filename='Assets/Images/M.png') }}" alt=""/>
+          </div>
+
+          <div class="text">
+            <a href="../">M-DEV</a>
+          </div>
+
+        </div>
+
+        <ul class="menu">
+            <li><a href="../">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Feedback</a></li>
+            <div class="cancel-btn">
+              <i class="fas fa-times"></i>
+            </div>
+          </ul>
+
+        <div class="media-icons">
+
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+
+        </div>
+
+      </div>
+
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+
+    </nav>
+
+  </header>
+
+<body>
+    <div class="readme-container">
+        {{ readme_html|safe }}
+    </div>
+</body>
+</html>

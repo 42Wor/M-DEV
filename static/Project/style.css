@@ -1,0 +1,655 @@
+/* Further Updated CSS - Refinements and Best Practices - .right Removed */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap");
+
+/* --- CSS Variables for Colors --- */
+:root {
+  --primary-color: #007bff;
+  --primary-darker-color: #0056b3;
+  --text-color-dark: #333;
+  --text-color-medium: #555;
+  --background-light: #f8f9fa;
+  --background-white: #fff;
+  --gray-scrollbar-thumb: #a0a0a0;
+  --gray-scrollbar-thumb-hover: #808080;
+  --gray-light: #f1f1f1;
+  --border-color: #eee;
+  --nav-sticky-background: #e0f7fa;
+}
+
+/* =================================
+   1. Reset and General Styles
+   ================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+body, html {
+    font-family: 'Poppins', sans-serif;
+    height: 100%; /* Important for viewport height */
+    margin: 0;     /* Reset margin */
+    position: static; /* Default position - corrected from fixed */
+    color: var(--text-color-dark);
+    background-color: var(--background-light);
+}
+
+.links {
+  font-weight: 600;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+.links:visited {
+  color: var(--primary-color);
+}
+
+.links:hover {
+  color: var(--primary-darker-color);
+}
+
+a {
+  transition: color 0.3s ease;
+  color: var(--primary-color);
+}
+
+a:visited {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--primary-darker-color);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-scrollbar-thumb);
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-scrollbar-thumb-hover);
+}
+
+.scroll-button a {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: var(--background-white);
+  background: var(--primary-color);
+  padding: 8px 14px;
+  font-size: 18px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 999;
+}
+
+.scroll-button a:hover {
+    background: var(--primary-darker-color);
+}
+
+
+/* =================================
+   2. Navigation Styles
+   ================================= */
+
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 15px 0;
+  z-index: 998;
+  transition: all 0.3s ease;
+  background: var(--background-white);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+nav.sticky {
+  background: var(--nav-sticky-background);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 10px 0;
+}
+
+nav .navbar {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+nav .menu-btn,
+.navbar .menu .cancel-btn {
+  position: absolute;
+  color: var(--text-color-dark);
+  right: 20px;
+  top: 25px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+}
+
+nav .menu-btn {
+  color: var(--primary-color);
+}
+
+nav.sticky .menu-btn {
+  color: var(--text-color-dark);
+}
+
+.navbar .menu .menu-btn {
+  color: var(--background-white);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.logo .text {
+  margin-left: 0;
+}
+
+nav .navbar .logo a {
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--text-color-dark);
+}
+
+nav.sticky .navbar .logo a {
+  color: var(--text-color-dark);
+}
+
+nav .navbar .menu {
+  display: flex;
+  position: relative;
+}
+
+nav .navbar .menu li {
+  list-style: none;
+  margin: 0 12px;
+}
+
+.navbar .menu a {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color-medium);
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar .menu a:hover {
+  color: var(--background-white);
+  background: var(--primary-color);
+}
+
+nav.sticky .menu a {
+  color: var(--text-color-medium);
+}
+
+nav.sticky .menu a:hover {
+  color: var(--background-white);
+  background: var(--primary-color);
+}
+
+.navbar .media-icons a {
+  color: var(--text-color-medium);
+  font-size: 20px;
+  margin: 0 8px;
+  transition: color 0.3s ease;
+}
+
+.navbar .media-icons a:hover {
+  color: var(--primary-color);
+}
+
+nav.sticky .media-icons a {
+  color: var(--text-color-medium);
+}
+
+@media(max-width: 960px) {
+    nav .navbar .menu {
+        display: none;
+    }
+    nav .menu-btn,
+    .navbar .menu .cancel-btn {
+        display: block;
+    }
+}
+
+@media(max-width: 400px) {
+  nav .navbar .logo a {
+      font-size: 24px;
+  }
+  .logo img {
+      width: 35px;
+  }
+}
+
+
+/* =================================
+   3. Footer Styles
+   ================================= */
+
+   footer {
+    padding: 20px 0;
+    position: static; /* Keep as static for now */
+    bottom: auto;
+    left: auto; /* Change from 0 to auto */
+    right: auto; /* Change from 0 to auto */
+    background-color: var(--background-light);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    max-width: 1200px; /* Add a maximum width - adjust as needed, maybe match your content width */
+    margin-left: auto;  /* Add auto margins to center horizontally */
+    margin-right: auto; /* Add auto margins to center horizontally */
+    display: block;     /* Ensure it's a block element for margin auto to work */
+}
+
+.texts {
+    color: var(--text-color-medium);
+}
+.texts a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+.texts a:hover {
+    color: var(--primary-darker-color);
+}
+
+
+/* =================================
+   4. Grid Layout Styles - .right Removed
+   ================================= */
+
+.grid {
+    display: block; /* Changed from flex to block for single column layout */
+    height: auto; /* Adjusted height to auto, as no longer flex item */
+    margin-top: 60px;          /* Adjust if navbar/footer height is different */
+    margin-bottom: 0;          /* Corrected to 0 or adjust as needed */
+    padding: 20px; /* Add padding to the main content area */
+    box-sizing: border-box; /* Include padding in width/height */
+    overflow-y: auto; /* If content within grid needs scroll */
+    width: 75%; /* Set a width for the main content area */
+    margin-left: auto;
+    margin-right: auto; /* Center the main content area */
+    background-color: var(--background-white); /* Optional background for main content */
+}
+
+.left {
+    height: auto; /* Adjusted height as .grid is no longer flex container */
+    width: 25%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: var(--background-white);
+    border-right: 1px solid var(--border-color);
+    float: left; /* Float left to position sidebar beside main content (if desired) */
+    margin-top: 60px; /* Align top with main content margin-top */
+    position: sticky; /* Optional: Sticky sidebar */
+    top: 60px; /* Adjust top position based on navbar height */
+    height: calc(100vh - 60px); /* Ensure sidebar height */
+    overflow-y: auto; /* Scroll if sidebar content is long */
+}
+
+/* Clearfix for floated elements if needed */
+.grid::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+@media (max-width: 750px) {
+    .grid {
+        width: 100%; /* Full width on smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+        margin-top: 50px;      /* Adjust if navbar height is different */
+        margin-bottom: 0;      /* Corrected to 0 or adjust as needed */
+        margin-left: 0;
+        margin-right: 0; /* Full width, no centering */
+    }
+    .left{
+        display: none; /* Hide sidebar on smaller screens */
+    }
+
+    footer {
+        position: static; /* Ensure footer is static on smaller screens too */
+        padding: 15px 0;
+    }
+}
+
+
+/* =================================
+   5. About Section and Title Styles
+   ================================= */
+
+.about {
+    width: 100%;
+    display: block;
+    padding-top: 20px; /* Add some padding at the top of the section */
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.title span {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--text-color-dark);
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.title span::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 150px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+@media (max-width: 750px) {
+    .title span {
+        font-size: 2em;
+    }
+    .title span::after {
+        width: 100px;
+    }
+}
+
+
+/* =================================
+   6. Modal Styles
+   ================================= */
+
+#about{
+    color: var(--text-color-dark);
+}
+#overlay {
+    display:block;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.7);
+    z-index:9999;
+}
+#modal {
+    color: var(--text-color-medium);
+    padding: 30px;
+    border-radius: 10px;
+    width: 95%;
+    max-width: 800px;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: var(--background-white);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    margin: 5% auto;
+}
+#modal h2 {
+    font-size:28px;
+    margin-bottom:15px;
+    color: #d80000; /* Kept as is, assuming intentional color */
+    text-align:center;
+}
+#modal h3 {
+    font-size:24px;
+    color: var(--text-color-dark);
+    margin-top: 25px;
+}
+#modal p {
+    font-size:18px;
+    line-height:1.7;
+    margin-bottom:15px;
+}
+#modal ul {
+    margin-bottom:15px;
+    padding-left:25px;
+    list-style-type: disc;
+}
+#modal li {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+.modal button {
+    padding:12px 25px;
+    border:none;
+    border-radius: 8px;
+    cursor:pointer;
+    font-weight: 500;
+    font-size:16px;
+    transition:background-color 0.3s ease;
+    margin: 5px;
+}
+#backToTerm {
+    background-color: #6c757d; /* Kept as is, assuming intentional color */
+    color: var(--background-white);
+    margin-right:10px;
+}
+#backToTerm:hover {
+    background-color: #5a6268; /* Kept as is, assuming intentional color */
+}
+#agreeButton {
+    background-color:#28a745; /* Kept as is, assuming intentional color */
+    color: var(--background-white);
+}
+#agreeButton:hover {
+    background-color:#218838; /* Kept as is, assuming intentional color */
+}
+#disagreeButton {
+    background-color: #dc3545; /* Kept as is, assuming intentional color */
+    color: var(--background-white);
+}
+#disagreeButton:hover {
+    background-color: #c82333; /* Kept as is, assuming intentional color */
+}
+.container {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top: 20px;
+}
+.DateTimePara {
+    font-family: 'Ubuntu', sans-serif;
+    font-size:16px;
+    color: var(--background-white);
+    background-color: var(--primary-color);
+    padding:12px 20px;
+    border:2px solid var(--primary-color);
+    border-radius:8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-weight: 500;
+    text-align: center;
+}
+.button-container {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width:600px) {
+    #modal {
+        width:98%;
+        height:auto;
+        margin: 1% auto;
+        max-height: 95vh;
+        padding: 20px;
+    }
+    #modal h2 {
+        font-size: 24px;
+    }
+    #modal p, #modal li {
+        font-size: 16px;
+    }
+}
+
+
+/* =================================
+   7. Left Sidebar Styles - Adjusted for .right Removal
+   ================================= */
+
+.left a{
+    color: var(--text-color-medium);
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.left a:hover {
+    color: var(--background-white);
+    text-decoration: none;
+    background-color: var(--primary-color);
+}
+.left h3{
+    margin-bottom: 15px;
+    color: var(--text-color-dark);
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+
+/* =================================
+   8. Firefox Scrollbar Styles
+   ================================= */
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-scrollbar-thumb) var(--gray-light);
+}
+/* WebKit Scrollbar (Chrome, Safari) - Defined above, no need to repeat */
+
+
+/* =================================
+   9. Project Boxes Styles - Added/Moved from Project/index.html
+   ================================= */
+/* --- Project Boxes Styles - REVISED STARTING POINT --- */
+.services#Projects .content .boxes .box {
+  width: calc(33% - 20px); /* Adjust box width and spacing for 3 columns */
+  margin: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px; /* Slightly less rounded corners */
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  padding: 20px; /* Adjusted padding */
+  text-align: left; /* Align text to the left within the box */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smoother transitions */
+  background-color: var(--background-white); /* White box background */
+  border: 1px solid var(--border-color); /* Light gray border */
+  position: relative; /* For absolute positioning of link if needed */
+}
+
+.services#Projects .content .boxes .box:hover {
+  transform: translateY(-4px); /* Less pronounced hover lift */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18); /* Slightly stronger shadow on hover */
+  background-color: var(--gray-light); /* Very light gray background on hover */
+}
+
+.services#Projects .content .boxes .box .icon {
+  height: 60px; /* Smaller icon area */
+  width: 60px;
+  background-color: var(--primary-color); /* Theme color for icon background */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 60px; /* Vertically center icon */
+  font-size: 20px; /* Icon size */
+  margin-bottom: 15px; /* Space below icon */
+  color: var(--background-white); /* White icon color */
+  float: left; /* Float icon to the left */
+  margin-right: 15px; /* Space to the right of the icon */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition */
+}
+
+.services#Projects .content .boxes .box:hover .icon {
+  background-color: var(--background-white); /* White icon background on hover */
+  color: var(--primary-color); /* Theme color icon on hover */
+}
+
+.services#Projects .content .boxes .box .icon i,
+.services#Projects .content .boxes .box .icon img {
+  font-size: 24px; /* Icon/Image size */
+  line-height: 60px; /* Vertically center icon/image */
+}
+
+.services#Projects .content .boxes .box .topic {
+  font-size: 20px; /* Topic font size */
+  font-weight: 600; /* Bolder topic text */
+  color: var(--text-color-dark); /* Dark text color for topic */
+  margin-bottom: 5px; /* Reduced space below topic */
+  transition: color 0.2s ease-in-out; /* Smooth transition */
+  display: block; /* Ensure topic is a block element */
+  overflow: hidden;        /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  white-space: nowrap;    /* Prevent text wrapping */
+}
+
+.services#Projects .content .boxes .box:hover .topic {
+  color: var(--primary-color); /* Theme color for topic on hover */
+}
+
+.services#Projects .content .boxes .box p {
+  color: var(--text-color-medium); /* Medium gray for paragraph text */
+  font-size: 16px; /* Paragraph font size */
+  line-height: 1.5; /* Adjusted line height */
+  transition: color 0.2s ease-in-out; /* Smooth transition */
+}
+
+.services#Projects .content .boxes .box:hover p {
+  color: var(--text-color-dark); /* Darker paragraph text on hover */
+}
+
+/* Clearfix to prevent content after floated icon from wrapping incorrectly */
+.services#Projects .content .boxes .box::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style for the link that wraps the entire box - NO CHANGES NEEDED HERE IF YOU USED PREVIOUS CODE */
+.services#Projects .content .boxes .box .box-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px; /* Match box padding */
+  box-sizing: border-box;
+  border-radius: inherit;
+}
