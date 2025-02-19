@@ -1,0 +1,160 @@
+/* Project/readme.css - Styles for the README content display */
+
+.readme-container {
+    max-width: 900px; /* Adjust as needed for your desired content width */
+    margin: 20px auto; /* Center the container and add some top/bottom margin */
+    padding: 30px;
+    background-color: #fff; /* White background for readability */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    font-family: 'Roboto', sans-serif; /* Ensure consistent font */
+    color: #333; /* Default text color */
+    line-height: 1.6; /* Good line height for readability */
+    word-wrap: break-word; /* Prevent content overflow */
+    overflow-x: auto; /* Enable horizontal scrolling if content is wider than container */
+}
+
+/* --- Style elements within the README content --- */
+
+/* Headings within README */
+.readme-container h1,
+.readme-container h2,
+.readme-container h3,
+.readme-container h4,
+.readme-container h5,
+.readme-container h6 {
+    font-weight: 700;
+    margin-top: 1.5em; /* Spacing above headings */
+    margin-bottom: 0.5em; /* Spacing below headings */
+    line-height: 1.2;
+    color: #222; /* Slightly darker heading color */
+}
+
+.readme-container h1 {
+    font-size: 2.5em;
+    border-bottom: 2px solid #eee; /* Underline for h1 */
+    padding-bottom: 0.3em;
+}
+
+.readme-container h2 {
+    font-size: 2em;
+    border-bottom: 1px solid #eee; /* Underline for h2 */
+    padding-bottom: 0.2em;
+}
+
+.readme-container h3 {
+    font-size: 1.6em;
+}
+
+.readme-container h4 {
+    font-size: 1.4em;
+}
+
+.readme-container h5 {
+    font-size: 1.2em;
+}
+
+.readme-container h6 {
+    font-size: 1em;
+    font-weight: bold; /* Make h6 bold by default */
+}
+
+
+/* Paragraphs within README */
+.readme-container p {
+    margin-bottom: 1em;
+    color: #555; /* Slightly lighter text for body copy */
+}
+
+/* Links within README */
+.readme-container a {
+    color: #007bff; /* Link color - consistent with style.css */
+    text-decoration: none; /* No underline by default */
+    transition: color 0.3s ease;
+}
+
+.readme-container a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Lists within README */
+.readme-container ul,
+.readme-container ol {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-left: 25px; /* Indentation for lists */
+}
+
+.readme-container li {
+    margin-bottom: 0.5em;
+}
+
+/* Code blocks within README */
+.readme-container pre {
+    background-color: #f8f8f8; /* Light gray background for code blocks */
+    color: #333; /* Code text color */
+    padding: 10px 15px;
+    border-radius: 5px;
+    overflow-x: auto; /* Horizontal scroll for long code lines */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+    margin: 1em 0;
+    border: 1px solid #ddd; /* Light border for code blocks */
+}
+
+/* Inline code within README */
+.readme-container code {
+    background-color: #eee;
+    color: #333;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Blockquotes within README */
+.readme-container blockquote {
+    border-left: 5px solid #ccc;
+    padding-left: 15px;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: #777;
+    background-color: #f9f9f9; /* Light background for blockquotes */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Horizontal rules (hr) within README */
+.readme-container hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 2em 0;
+}
+
+/* Images within README - make them responsive within the container */
+.readme-container img {
+    max-width: 100%; /* Ensure images don't exceed container width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Prevent inline spacing issues */
+    margin: 1em auto; /* Center images and add vertical margin */
+}
+
+
+/* --- Responsive adjustments for smaller screens --- */
+@media (max-width: 768px) {
+    .readme-container {
+        padding: 20px; /* Reduce padding on smaller screens */
+        margin: 10px auto; /* Adjust margins on smaller screens */
+    }
+
+    .readme-container h1 {
+        font-size: 2em; /* Smaller h1 on mobile */
+    }
+
+    .readme-container h2 {
+        font-size: 1.7em; /* Smaller h2 on mobile */
+    }
+
+    .readme-container h3 {
+        font-size: 1.4em; /* Smaller h3 on mobile */
+    }
+}

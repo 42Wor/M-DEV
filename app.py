@@ -13,8 +13,8 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/Project/")  # Main page route
-def Project():
+@app.route("/project/")  # Main page route
+def project():
     readme_files_base_names = []  # Store base filenames (without .md)
     try:
         for filename in os.listdir(README_FOLDER):

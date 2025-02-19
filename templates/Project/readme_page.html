@@ -1,64 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>README: {{ readme_filename }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <meta charset="UTF-8">
+  <title>README: {{ readme_filename }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='Project/readme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Project/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-  <!-- navgaition menu -->
-  <header>
-
-
-    <nav>
-
-      <div class="navbar">
-
-        <div class="logo">
-            <div class="image">
-            <img src="{{ url_for('static', filename='Assets/Images/M.png') }}" alt=""/>
+    <!-- Navigation Header -->
+    <header>
+      <nav>
+          <div class="navbar">
+              <div class="logo">
+                  <div class="image">
+                      <img src="{{ url_for('static', filename='Assets/Images/M.png') }}" alt="M-DEV Logo"/>
+                  </div>
+                  <div class="text">
+                      <a href="{{ url_for('home') }}">M-DEV</a>
+                  </div>
+              </div>
+              <ul class="menu">
+                  <li><a href="{{ url_for('home') }}">Home</a></li>
+                  <li><a href="#">About Us</a></li>
+                  <div class="cancel-btn">
+                      <i class="fas fa-times"></i>
+                  </div>
+              </ul>
+              <div class="media-icons">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-github"></i></a>
+                  <a href="#"><i class="fab fa-linkedin"></i></a>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+                  <a href="#"><i class="fab fa-discord"></i></a>
+              </div>
           </div>
-
-          <div class="text">
-            <a href="../">M-DEV</a>
+          <div class="menu-btn">
+              <i class="fas fa-bars"></i>
           </div>
-
-        </div>
-
-        <ul class="menu">
-            <li><a href="../">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Feedback</a></li>
-            <div class="cancel-btn">
-              <i class="fas fa-times"></i>
-            </div>
-          </ul>
-
-        <div class="media-icons">
-
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-          <a href="#"><i class="fab fa-discord"></i></a>
-
-        </div>
-
-      </div>
-
-      <div class="menu-btn">
-        <i class="fas fa-bars"></i>
-      </div>
-
-    </nav>
-
+      </nav>
   </header>
-
 <body>
-    <div class="readme-container">
-        {{ readme_html|safe }}
+  <div class="readme-container">
+    {{ readme_html|safe }}
+  </div>
+  <!-- Footer -->
+  <footer>
+    <div class="texts">
+      <span>
+        Created By <a class="links" href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a> | © 2024
+        All Rights Reserved |
+        <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Terms &
+          Conditions</a>
+        |
+        <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+      </span>
     </div>
+  </footer>
 </body>
+
+
+
 </html>
