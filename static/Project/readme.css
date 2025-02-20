@@ -1,160 +1,740 @@
-/* Project/readme.css - Styles for the README content display */
+/* readme.css - Comprehensive CSS for Markdown READMEs */
+/* This CSS file is designed to style Markdown README documents for a clean, readable, and consistent look. */
+/* It includes theming variables, styles for all common Markdown elements, and responsive adjustments. */
+/* --- Table of Contents --- */
+/* 1. Reset and Basic Styles */
+/* 2. CSS Variables (Custom Properties) - :root Theming Section */
+/* 3. .readme-container - Main Container Styles */
+/* 4. Headings (h1, h2, h3, h4, h5, h6) Styles */
+/* 5. Paragraphs (p) Styles */
+/* 6. Strong/Bold and Emphasis/Italic (strong, b, em, i) Styles */
+/* 7. Links (a) Styles */
+/* 8. Lists (ul, ol, li) Styles */
+/* 9. Code Blocks (pre) Styles */
+/* 10. Inline Code (code) Styles */
+/* 11. Blockquotes (blockquote) Styles */
+/* 12. Horizontal Rules (hr) Styles */
+/* 13. Tables (table, th, td) Styles */
+/* 14. Images (img) Styles */
+/* 15. Responsive Adjustments - Media Query (@media (max-width: 768px)) */
+/* 16. Typography Utilities */
+/* 17. Spacing Utilities (Margin & Padding) */
+/* 18. Border Utilities */
+/* 19. Background Utilities */
+/* 20. List Style Utilities */
+/* 21. Copyable Code Box */
+/* 22. Code Styling Variations */
+/* 23. Table Styling Variations */
+/* 24. Image Styling Variations */
+/* 25. Link Styling Variations */
+/* 26. Heading Styling Variations */
+/* 27. Blockquote Styling Variations */
+/* 28. Responsive Utilities (Visibility) */
+/* 29. Dark Theme Variations */
+/* 30. Accent Color Themes */
+/* 31. Print Styles */
 
-.readme-container {
-    max-width: 900px; /* Adjust as needed for your desired content width */
-    margin: 20px auto; /* Center the container and add some top/bottom margin */
-    padding: 30px;
-    background-color: #fff; /* White background for readability */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-    font-family: 'Roboto', sans-serif; /* Ensure consistent font */
-    color: #333; /* Default text color */
-    line-height: 1.6; /* Good line height for readability */
-    word-wrap: break-word; /* Prevent content overflow */
-    overflow-x: auto; /* Enable horizontal scrolling if content is wider than container */
+
+/* 1. Reset and Basic Styles */
+/* Basic reset to ensure consistent rendering across browsers */
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem; /* Base font size */
+    line-height: 1.5; /* Default line height */
+    font-family: var(--readme-font-family); /* Inherit font family from root */
+    color: var(--readme-text-color); /* Default text color */
+    background-color: var(--readme-body-bg-color, #fff); /* Default body background, fallback to white */
 }
 
-/* --- Style elements within the README content --- */
+/* Box-sizing to border-box for easier layout control */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
-/* Headings within README */
+/* Remove default link styles (handled in Links section) */
+a {
+    text-decoration: none;
+    color: inherit; /* Inherit color to be styled specifically */
+}
+
+/* --- Variables for theming --- */
+/* 2. CSS Variables (Custom Properties) - :root Theming Section */
+:root {
+    /* --- Base Colors --- */
+    --readme-body-bg-color: #f9fafb; /* Very light gray body background */
+    --readme-bg-color: #ffffff; /* White or off-white container background */
+    --readme-text-color: #374151; /* Dark gray text */
+    --readme-heading-color: #111827; /* Even darker gray for headings */
+    --readme-link-color: #2563eb; /* Blue link color */
+    --readme-link-hover-color: #1d4ed8; /* Darker blue link hover color */
+    --readme-border-color: #e5e7eb; /* Light gray border color */
+    --readme-hr-color: #d1d5db; /* Slightly darker horizontal rule color */
+    --readme-paragraph-color: #4b5563; /* Gray paragraph text color */
+
+    /* --- Code Block Colors --- */
+    --readme-code-bg-color: #f3f4f6; /* Light gray code block background */
+    --readme-code-text-color: #1e293b; /* Darker gray code text color */
+    --readme-inline-code-bg-color: #edf2f7; /* Lighter gray inline code background */
+
+    /* --- Blockquote Colors --- */
+    --readme-blockquote-bg-color: #f9fafb; /* Very light gray blockquote background */
+    --readme-blockquote-border-color: #cbd5e0; /* Light gray blockquote border color */
+    --readme-blockquote-text-color: #6b7280; /* Muted gray blockquote text */
+
+    /* --- Font Family --- */
+    --readme-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --readme-monospace-font-family: 'Menlo', Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    /* --- Spacing Variables --- */
+    --readme-container-max-width: 960px; /* Maximum width of the main container */
+    --readme-container-margin-y: 2rem; /* Vertical margin for the container */
+    --readme-container-padding-y: 2.5rem; /* Vertical padding for the container */
+    --readme-container-padding-x: 3.5rem; /* Horizontal padding for the container */
+    --readme-heading-margin-bottom: 0.8rem; /* Bottom margin for headings */
+    --readme-paragraph-margin-bottom: 1.3rem; /* Bottom margin for paragraphs */
+    --readme-list-margin-y: 1.2rem; /* Vertical margin for lists */
+    --readme-list-item-margin-bottom: 0.6rem; /* Bottom margin for list items */
+    --readme-code-block-margin-y: 1.6rem; /* Vertical margin for code blocks */
+    --readme-blockquote-margin-y: 1.8rem; /* Vertical margin for blockquotes */
+    --readme-table-margin-y: 1.7rem; /* Vertical margin for tables */
+    --readme-hr-margin-y: 2.6rem; /* Vertical margin for horizontal rules */
+    --readme-image-margin-y: 1.9rem; /* Vertical margin for images */
+
+    /* --- Border Radius --- */
+    --readme-container-border-radius: 0.6rem; /* Border radius for the container */
+    --readme-code-block-border-radius: 0.4rem; /* Border radius for code blocks */
+    --readme-inline-code-border-radius: 0.3rem; /* Border radius for inline code */
+    --readme-blockquote-border-radius: 0.3rem; /* Border radius for blockquotes */
+    --readme-image-border-radius: 0.3rem; /* Border radius for images */
+
+    /* --- Font Sizes --- */
+    --readme-base-font-size: 1rem; /* Base font size */
+    --readme-h1-font-size: 2.5rem; /* h1 font size */
+    --readme-h2-font-size: 2rem; /* h2 font size */
+    --readme-h3-font-size: 1.75rem; /* h3 font size */
+    --readme-h4-font-size: 1.5rem; /* h4 font size */
+    --readme-h5-font-size: 1.25rem; /* h5 font size */
+    --readme-h6-font-size: 1rem; /* h6 font size */
+    --readme-code-font-size: 0.9rem; /* Code font size */
+    --readme-table-font-size: 0.9rem; /* Table font size */
+
+    /* --- Font Weights --- */
+    --readme-heading-font-weight: 700; /* Font weight for headings */
+    --readme-strong-font-weight: 600; /* Font weight for strong/bold text */
+    --readme-th-font-weight: 600; /* Font weight for table headers */
+}
+
+/* 3. .readme-container - Main Container Styles */
+.readme-container {
+    max-width: var(--readme-container-max-width);
+    margin: var(--readme-container-margin-y) auto;
+    padding: var(--readme-container-padding-y) var(--readme-container-padding-x);
+    background-color: var(--readme-bg-color);
+    border-radius: var(--readme-container-border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Slightly stronger shadow */
+    font-family: var(--readme-font-family);
+    color: var(--readme-text-color);
+    line-height: 1.7; /* Adjusted line height */
+    word-wrap: break-word;
+    overflow-x: auto;
+    position: relative; /* For potential sticky elements inside */
+}
+
+/* 4. Headings (h1, h2, h3, h4, h5, h6) Styles */
+/* Common heading styles */
 .readme-container h1,
 .readme-container h2,
 .readme-container h3,
 .readme-container h4,
 .readme-container h5,
 .readme-container h6 {
-    font-weight: 700;
-    margin-top: 1.5em; /* Spacing above headings */
-    margin-bottom: 0.5em; /* Spacing below headings */
-    line-height: 1.2;
-    color: #222; /* Slightly darker heading color */
+    font-weight: var(--readme-heading-font-weight);
+    margin-top: 2.2rem; /* Slightly increased top margin */
+    margin-bottom: var(--readme-heading-margin-bottom);
+    line-height: 1.2; /* Tighter line height for headings */
+    color: var(--readme-heading-color);
+    letter-spacing: -0.01em; /* Slight letter spacing adjustment */
 }
 
+/* Specific heading styles */
 .readme-container h1 {
-    font-size: 2.5em;
-    border-bottom: 2px solid #eee; /* Underline for h1 */
-    padding-bottom: 0.3em;
+    font-size: var(--readme-h1-font-size);
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--readme-border-color);
 }
 
 .readme-container h2 {
-    font-size: 2em;
-    border-bottom: 1px solid #eee; /* Underline for h2 */
-    padding-bottom: 0.2em;
+    font-size: var(--readme-h2-font-size);
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--readme-border-color);
 }
 
 .readme-container h3 {
-    font-size: 1.6em;
+    font-size: var(--readme-h3-font-size);
 }
 
 .readme-container h4 {
-    font-size: 1.4em;
+    font-size: var(--readme-h4-font-size);
 }
 
 .readme-container h5 {
-    font-size: 1.2em;
+    font-size: var(--readme-h5-font-size);
 }
 
 .readme-container h6 {
-    font-size: 1em;
+    font-size: var(--readme-h6-font-size);
     font-weight: bold; /* Make h6 bold by default */
+    color: var(--readme-paragraph-color); /* Slightly muted h6 color */
 }
 
-
-/* Paragraphs within README */
+/* 5. Paragraphs (p) Styles */
 .readme-container p {
-    margin-bottom: 1em;
-    color: #555; /* Slightly lighter text for body copy */
+    margin-bottom: var(--readme-paragraph-margin-bottom);
+    color: var(--readme-paragraph-color);
+    font-size: var(--readme-base-font-size);
+    line-height: 1.7; /* Consistent line height */
 }
 
-/* Links within README */
+/* 6. Strong/Bold and Emphasis/Italic (strong, b, em, i) Styles */
+/* Strong and bold text */
+.readme-container strong, .readme-container b {
+    font-weight: var(--readme-strong-font-weight);
+    color: var(--readme-heading-color); /* Slightly darker for emphasis */
+}
+
+/* Emphasis and italic text */
+.readme-container em, .readme-container i {
+    font-style: italic;
+    color: inherit; /* Inherit paragraph color for emphasis */
+}
+
+/* 7. Links (a) Styles */
 .readme-container a {
-    color: #007bff; /* Link color - consistent with style.css */
-    text-decoration: none; /* No underline by default */
-    transition: color 0.3s ease;
+    color: var(--readme-link-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out; /* Transition for underline too */
 }
 
 .readme-container a:hover {
-    color: #0056b3; /* Darker blue on hover */
-    text-decoration: underline; /* Underline on hover */
+    color: var(--readme-link-hover-color);
+    text-decoration: underline;
 }
 
-/* Lists within README */
+/* 8. Lists (ul, ol, li) Styles */
 .readme-container ul,
 .readme-container ol {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding-left: 25px; /* Indentation for lists */
+    margin-top: var(--readme-list-margin-y);
+    margin-bottom: var(--readme-list-margin-y);
+    padding-left: 1.75rem; /* Adjusted list indentation */
 }
 
 .readme-container li {
-    margin-bottom: 0.5em;
+    margin-bottom: var(--readme-list-item-margin-bottom);
+    line-height: 1.6; /* Adjust line height in lists for better spacing */
 }
 
-/* Code blocks within README */
+/* Nested lists - slightly reduced indentation */
+.readme-container ul ul,
+.readme-container ol ol,
+.readme-container ul ol,
+.readme-container ol ul {
+    padding-left: 1.25rem;
+    margin-bottom: 0; /* Reduce margin for nested lists */
+    margin-top: 0.5rem;
+}
+
+/* 9. Code Blocks (pre) Styles */
 .readme-container pre {
-    background-color: #f8f8f8; /* Light gray background for code blocks */
-    color: #333; /* Code text color */
-    padding: 10px 15px;
-    border-radius: 5px;
-    overflow-x: auto; /* Horizontal scroll for long code lines */
-    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
-    margin: 1em 0;
-    border: 1px solid #ddd; /* Light border for code blocks */
+    background-color: var(--readme-code-bg-color);
+    color: var(--readme-code-text-color);
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--readme-code-block-border-radius);
+    overflow-x: auto;
+    font-family: var(--readme-monospace-font-family);
+    margin: var(--readme-code-block-margin-y) 0;
+    border: 1px solid var(--readme-border-color);
+    font-size: var(--readme-code-font-size);
+    line-height: 1.5;
+    tab-size: 4; /* Standard tab size for code */
+    white-space: pre-wrap; /* Allow line wrapping within code blocks */
 }
 
-/* Inline code within README */
+/* 10. Inline Code (code) Styles */
 .readme-container code {
-    background-color: #eee;
-    color: #333;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--readme-inline-code-bg-color);
+    color: var(--readme-code-text-color);
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--readme-inline-code-border-radius);
+    font-family: var(--readme-monospace-font-family);
+    font-size: var(--readme-code-font-size);
 }
 
-/* Blockquotes within README */
+/* 11. Blockquotes (blockquote) Styles */
 .readme-container blockquote {
-    border-left: 5px solid #ccc;
-    padding-left: 15px;
-    margin: 1.5em 0;
+    border-left: 0.4rem solid var(--readme-blockquote-border-color);
+    padding-left: 1.5rem;
+    margin: var(--readme-blockquote-margin-y) 0;
     font-style: italic;
-    color: #777;
-    background-color: #f9f9f9; /* Light background for blockquotes */
-    padding-top: 10px;
-    padding-bottom: 10px;
+    color: var(--readme-blockquote-text-color); /* Using blockquote specific text color */
+    background-color: var(--readme-blockquote-bg-color);
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-radius: var(--readme-blockquote-border-radius);
+    quotes: "“" "”" "‘" "’"; /* Proper quotes for blockquotes */
 }
 
-/* Horizontal rules (hr) within README */
+.readme-container blockquote::before {
+    content: open-quote;
+    font-size: 2rem;
+    line-height: 0.1;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+    color: var(--readme-blockquote-border-color); /* Quote color same as border */
+}
+
+.readme-container blockquote p {
+    margin-bottom: 0; /* Remove bottom margin for paragraphs inside blockquotes */
+}
+
+/* 12. Horizontal Rules (hr) Styles */
 .readme-container hr {
     border: 0;
-    border-top: 1px solid #ccc;
-    margin: 2em 0;
+    border-top: 1px solid var(--readme-hr-color);
+    margin: var(--readme-hr-margin-y) 0;
+    clear: both; /* Ensure hr clears floats */
 }
 
-/* Images within README - make them responsive within the container */
+/* 13. Tables (table, th, td) Styles */
+.readme-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--readme-table-margin-y) 0;
+    text-align: left;
+}
+
+.readme-container th,
+.readme-container td {
+    border: 1px solid var(--readme-border-color);
+    padding: 0.8rem 1rem; /* Adjusted table cell padding */
+    font-size: var(--readme-table-font-size); /* Table font size variable */
+    line-height: 1.5;
+}
+
+.readme-container th {
+    font-weight: var(--readme-th-font-weight);
+    background-color: #f8f8f8; /* Slightly different light gray for table headers */
+    color: var(--readme-heading-color); /* Header text color */
+}
+
+.readme-container tbody tr:nth-child(even) td {
+    background-color: #fefefe; /* Even row background for striped tables */
+}
+
+/* 14. Images (img) Styles */
 .readme-container img {
-    max-width: 100%; /* Ensure images don't exceed container width */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Prevent inline spacing issues */
-    margin: 1em auto; /* Center images and add vertical margin */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: var(--readme-image-margin-y) auto;
+    border-radius: var(--readme-image-border-radius); /* Optional: Rounded corners for images */
 }
 
-
+/* 15. Responsive Adjustments - Media Query (@media (max-width: 768px)) */
 /* --- Responsive adjustments for smaller screens --- */
 @media (max-width: 768px) {
     .readme-container {
-        padding: 20px; /* Reduce padding on smaller screens */
-        margin: 10px auto; /* Adjust margins on smaller screens */
+        padding: 1.75rem;
+        margin: 1.25rem auto;
+        border-radius: 0.4rem; /* Slightly smaller border radius on mobile */
     }
 
     .readme-container h1 {
-        font-size: 2em; /* Smaller h1 on mobile */
+        font-size: 2.2rem; /* Slightly reduced h1 size on mobile */
     }
 
     .readme-container h2 {
-        font-size: 1.7em; /* Smaller h2 on mobile */
+        font-size: 1.8rem; /* Slightly reduced h2 size on mobile */
     }
 
     .readme-container h3 {
-        font-size: 1.4em; /* Smaller h3 on mobile */
+        font-size: 1.5rem; /* Slightly reduced h3 size on mobile */
     }
+
+    .readme-container h4 {
+        font-size: 1.2rem; /* Slightly reduced h4 size on mobile */
+    }
+    .readme-container h5, .readme-container h6 {
+        font-size: 1.1rem; /* Slightly reduced h5, h6 size on mobile */
+    }
+
+    .readme-container th,
+    .readme-container td {
+        padding: 0.6rem; /* Reduced table cell padding on mobile */
+        font-size: 0.8rem; /* Reduced table font size on mobile */
+    }
+
+    .readme-container pre,
+    .readme-container code {
+        font-size: 0.8rem; /* Reduced code font size on mobile */
+        padding: 1rem 1.2rem; /* Slightly reduced code padding on mobile */
+        border-radius: 0.3rem; /* Smaller code border radius on mobile */
+    }
+
+    .readme-container blockquote {
+        padding-left: 1rem; /* Reduced blockquote padding on mobile */
+        border-left-width: 0.3rem; /* Reduced blockquote border width on mobile */
+        border-radius: 0.2rem; /* Smaller blockquote border radius on mobile */
+        margin: 1.5rem 0; /* Adjusted blockquote margin on mobile */
+    }
+
+    .readme-container ul, .readme-container ol {
+        padding-left: 1.2rem; /* Reduced list indentation on mobile */
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* 16. Typography Utilities */
+/* Utility classes for text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* Utility classes for font weight */
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+
+/* Utility classes for font size */
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-base { font-size: var(--readme-base-font-size); }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-5xl { font-size: 3rem; }
+.text-6xl { font-size: 4rem; }
+
+/* Utility classes for line height */
+.leading-none { line-height: 1; }
+.leading-tight { line-height: 1.25; }
+.leading-snug { line-height: 1.375; }
+.leading-normal { line-height: 1.5; }
+.leading-relaxed { line-height: 1.625; }
+.leading-loose { line-height: 2; }
+
+/* Utility classes for letter spacing */
+.tracking-tighter { letter-spacing: -0.05em; }
+.tracking-tight { letter-spacing: -0.025em; }
+.tracking-normal { letter-spacing: 0; }
+.tracking-wide { letter-spacing: 0.025em; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-widest { letter-spacing: 0.1em; }
+
+/* 17. Spacing Utilities (Margin & Padding) */
+/* Margin utilities */
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.25rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-10 { margin-top: 2.5rem; }
+.mt-12 { margin-top: 3rem; }
+.mt-16 { margin-top: 4rem; }
+.mt-20 { margin-top: 5rem; }
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.25rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+.mb-20 { margin-bottom: 5rem; }
+.my-0 { margin-top: 0; margin-bottom: 0; }
+.my-1 { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.my-3 { margin-top: 0.75rem; margin-bottom: 0.75rem; }
+.my-4 { margin-top: 1rem; margin-bottom: 1rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Padding utilities */
+.p-0 { padding: 0; }
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.p-10 { padding: 2.5rem; }
+.p-12 { padding: 3rem; }
+.p-16 { padding: 4rem; }
+.p-20 { padding: 5rem; }
+.pt-0 { padding-top: 0; }
+.pt-1 { padding-top: 0.25rem; }
+.pt-2 { padding-top: 0.5rem; }
+.pt-3 { padding-top: 0.75rem; }
+.pt-4 { padding-top: 1rem; }
+.pt-5 { padding-top: 1.25rem; }
+.pt-6 { padding-top: 1.5rem; }
+.pt-8 { padding-top: 2rem; }
+.pt-10 { padding-top: 2.5rem; }
+.pt-12 { padding-top: 3rem; }
+.pt-16 { padding-top: 4rem; }
+.pt-20 { padding-top: 5rem; }
+.pb-0 { padding-bottom: 0; }
+.pb-1 { padding-bottom: 0.25rem; }
+.pb-2 { padding-bottom: 0.5rem; }
+.pb-3 { padding-bottom: 0.75rem; }
+.pb-4 { padding-bottom: 1rem; }
+.pb-5 { padding-bottom: 1.25rem; }
+.pb-6 { padding-bottom: 1.5rem; }
+.pb-8 { padding-bottom: 2rem; }
+.pb-10 { padding-bottom: 2.5rem; }
+.pb-12 { padding-bottom: 3rem; }
+.pb-16 { padding-bottom: 4rem; }
+.pb-20 { padding-bottom: 5rem; }
+.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+
+/* 18. Border Utilities */
+.border { border: 1px solid var(--readme-border-color); }
+.border-0 { border-width: 0; }
+.border-2 { border-width: 2px; }
+.border-4 { border-width: 4px; }
+.border-t { border-top-width: 1px; border-top-style: solid; border-top-color: var(--readme-border-color); }
+.border-b { border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--readme-border-color); }
+.border-l { border-left-width: 1px; border-left-style: solid; border-left-color: var(--readme-border-color); }
+.border-r { border-right-width: 1px; border-right-style: solid; border-right-color: var(--readme-border-color); }
+.rounded { border-radius: var(--readme-container-border-radius); }
+.rounded-sm { border-radius: 0.2rem; }
+.rounded-md { border-radius: 0.4rem; }
+.rounded-lg { border-radius: 0.6rem; }
+.rounded-full { border-radius: 9999px; }
+.rounded-none { border-radius: 0; }
+
+/* 19. Background Utilities */
+.bg-white { background-color: #ffffff; }
+.bg-gray-100 { background-color: #f9fafb; }
+.bg-gray-200 { background-color: #edf2f7; }
+.bg-gray-300 { background-color: #e2e8f0; }
+.bg-gray-400 { background-color: #cbd5e0; }
+.bg-gray-500 { background-color: #a0aec0; }
+.bg-gray-600 { background-color: #718096; }
+.bg-gray-700 { background-color: #4a5568; }
+.bg-gray-800 { background-color: #2d3748; }
+.bg-gray-900 { background-color: #1a202c; }
+.bg-primary { background-color: var(--readme-link-color); color: white; }
+.bg-secondary { background-color: var(--readme-heading-color); color: white; }
+.bg-code { background-color: var(--readme-code-bg-color); }
+.bg-blockquote { background-color: var(--readme-blockquote-bg-color); }
+
+/* 20. List Style Utilities */
+.list-none { list-style-type: none; padding-left: 0; }
+.list-disc { list-style-type: disc; }
+.list-decimal { list-style-type: decimal; }
+
+/* 21. Copyable Code Box */
+.code-copy-container {
+    position: relative; /* For positioning the copy button */
+    margin-bottom: 1.5rem; /* Spacing below the code box */
+}
+
+.code-copy-container pre {
+    padding-right: 3rem; /* Make space for the copy button */
+    margin-bottom: 0; /* Remove default pre margin bottom to align with button */
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem; /* Adjust vertical position as needed */
+    right: 0.5rem; /* Adjust horizontal position as needed */
+    background-color: var(--readme-inline-code-bg-color); /* Button background color */
+    color: var(--readme-code-text-color); /* Button text color */
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem; /* Smaller font size for button */
+    cursor: pointer;
+    opacity: 0.7; /* Slightly faded initially */
+    transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.copy-button:hover,
+.copy-button:focus {
+    opacity: 1; /* Fully visible on hover/focus */
+    background-color: var(--readme-link-hover-color); /* Change background on hover */
+    color: white; /* Change text color on hover for contrast */
+}
+
+.copy-button:active {
+    background-color: var(--readme-link-color); /* Slightly different active state */
+}
+
+/* 22. Code Styling Variations */
+.code-theme-dark pre {
+    background-color: #282a36; /* Dracula background */
+    color: #f8f8f2; /* Dracula foreground */
+    border-color: #44475a; /* Dracula comment */
+}
+
+.code-theme-monokai pre {
+    background-color: #272822; /* Monokai background */
+    color: #f8f8f2; /* Monokai foreground */
+    border-color: #75715e; /* Monokai comment */
+}
+
+/* 23. Table Styling Variations */
+.table-striped tbody tr:nth-child(odd) td {
+    background-color: #fefefe;
+}
+.table-striped tbody tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 2px solid var(--readme-border-color);
+}
+
+/* 24. Image Styling Variations */
+.img-rounded { border-radius: 0.5rem; }
+.img-circle { border-radius: 50%; }
+.img-shadow { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.img-border { border: 4px solid var(--readme-border-color); }
+.img-grayscale { filter: grayscale(100%); }
+.img-grayscale:hover { filter: grayscale(0%); transition: filter 0.3s ease-in-out; }
+
+/* 25. Link Styling Variations */
+.link-underline { text-decoration: underline; }
+.link-no-underline { text-decoration: none; }
+.link-bold { font-weight: bold; }
+.link-italic { font-style: italic; }
+.link-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    background-color: var(--readme-link-color);
+    color: white;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+}
+.link-button:hover {
+    background-color: var(--readme-link-hover-color);
+    text-decoration: none;
+}
+
+/* 26. Heading Styling Variations */
+.heading-center { text-align: center; }
+.heading-underline h1, .heading-underline h2, .heading-underline h3, .heading-underline h4, .heading-underline h5, .heading-underline h6 {
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--readme-heading-color);
+}
+.heading-bold h1, .heading-bold h2, .heading-bold h3, .heading-bold h4, .heading-bold h5, .heading-bold h6 {
+    font-weight: 900;
+}
+
+/* 27. Responsive Utilities (Visibility) */
+.hidden { display: none !important; }
+.block { display: block !important; }
+.inline-block { display: inline-block !important; }
+.inline { display: inline !important; }
+
+@media (min-width: 768px) {
+    .md\:hidden { display: none !important; }
+    .md\:block { display: block !important; }
+    .md\:inline-block { display: inline-block !important; }
+    .md\:inline { display: inline !important; }
+}
+
+@media (min-width: 1024px) {
+    .lg\:hidden { display: none !important; }
+    .lg\:block { display: block !important; }
+    .lg\:inline-block { display: inline-block !important; }
+    .lg\:inline { display: inline !important; }
+}
+
+/* 28. Dark Theme Variations */
+.theme-dark :root {
+    --readme-body-bg-color: #121212; /* Dark body background */
+    --readme-bg-color: #1e1e1e; /* Dark container background */
+    --readme-text-color: #d4d4d4; /* Light gray text for dark theme */
+    --readme-heading-color: #ffffff; /* White headings for dark theme */
+    --readme-link-color: #60a5fa; /* Lighter blue link for dark theme */
+    --readme-link-hover-color: #3b82f6; /* Darker blue link hover for dark theme */
+    --readme-border-color: #333333; /* Darker border color for dark theme */
+    --readme-hr-color: #444444; /* Darker hr color for dark theme */
+    --readme-paragraph-color: #a3a3a3; /* Slightly lighter paragraph text for dark theme */
+    --readme-code-bg-color: #2d2d2d; /* Darker code block background for dark theme */
+    --readme-code-text-color: #ffffff; /* White code text for dark theme */
+    --readme-inline-code-bg-color: #3a3a3a; /* Slightly darker inline code background for dark theme */
+    --readme-blockquote-bg-color: #252525; /* Darker blockquote background for dark theme */
+    --readme-blockquote-border-color: #555555; /* Darker blockquote border for dark theme */
+    --readme-blockquote-text-color: #b3b3b3; /* Lighter blockquote text for dark theme */
+}
+
+/* 29. Accent Color Themes */
+/* Example Accent: Red */
+.theme-accent-red :root {
+    --readme-link-color: #dc2626; /* Red accent link color */
+    --readme-link-hover-color: #b91c1c; /* Darker red accent link hover */
+}
+
+/* Example Accent: Green */
+.theme-accent-green :root {
+    --readme-link-color: #16a34a; /* Green accent link color */
+    --readme-link-hover-color: #15803d; /* Darker green accent link hover */
+}
+
+/* Example Accent: Purple */
+.theme-accent-purple :root {
+    --readme-link-color: #7c3aed; /* Purple accent link color */
+    --readme-link-hover-color: #6d28d9; /* Darker purple accent link hover */
+}
+
+/* 30. Print Styles */
+@media print {
+    body {
+        font-size: 12pt;
+        color: #000;
+        background-color: #fff;
+    }
+    .readme-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border: none;
+    }
+    .readme-container h1 { font-size: 24pt; border-bottom: 2pt solid #000; }
+    .readme-container h2 { font-size: 20pt; border-bottom: 1pt solid #000; }
+    .readme-container h3 { font-size: 18pt; }
+    .readme-container h4 { font-size: 16pt; }
+    .readme-container h5 { font-size: 14pt; }
+    .readme-container h6 { font-size: 12pt; font-weight: bold; }
+    .readme-container pre { border: 1pt solid #ccc; }
+    .readme-container table { border-collapse: collapse; }
+    .readme-container th, .readme-container td { border: 1pt solid #ccc; padding: 6pt; }
+    .readme-container img { max-width: 100%; height: auto; }
+    .link-button { background-color: transparent !important; color: blue !important; text-decoration: underline !important; } /* Print button links as text */
+    .hidden, .md\:hidden, .lg\:hidden { display: none !important; } /* Hide utility classes in print */
 }
