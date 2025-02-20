@@ -1,22 +1,20 @@
-# M-DEV Website
+# Example README with Bash Code
 
+This is an example README file.
 
-https://maazwaheed.netlify.app/
+## Bash Code Example
 
+Here's a bash command:
 
-https://maazwaheed.netlify.app/FAQS/
+```bash
+echo "Hello from a bash script!"
+ls -l /tmp
+```
 
+You can copy the bash code above.
 
-https://maazwaheed.netlify.app/Privacy/
+## Python Code Example (for comparison)
 
-
-https://maazwaheed.netlify.app/Project/
-
-
-https://maazwaheed.netlify.app/UserAgreement/
-
-
-https://maazwaheed.netlify.app/portfolio/
-
-
-https://maazwaheed.netlify.app/com/
+```python
+print("Hello from Python!")
+```

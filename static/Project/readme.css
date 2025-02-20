@@ -261,6 +261,7 @@ a {
 }
 
 /* 10. Inline Code (code) Styles */
+/* 10. Inline Code (code) Styles */
 .readme-container code {
     background-color: var(--readme-inline-code-bg-color);
     color: var(--readme-code-text-color);
@@ -738,3 +739,5 @@ a {
     .link-button { background-color: transparent !important; color: blue !important; text-decoration: underline !important; } /* Print button links as text */
     .hidden, .md\:hidden, .lg\:hidden { display: none !important; } /* Hide utility classes in print */
 }
+
+
