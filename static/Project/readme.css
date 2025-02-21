@@ -60,66 +60,67 @@ a {
 
 /* --- Variables for theming --- */
 /* 2. CSS Variables (Custom Properties) - :root Theming Section */
+/* Cool Theme */
 :root {
-    /* --- Base Colors --- */
-    --readme-body-bg-color: #f9fafb; /* Very light gray body background */
-    --readme-bg-color: #ffffff; /* White or off-white container background */
-    --readme-text-color: #374151; /* Dark gray text */
-    --readme-heading-color: #111827; /* Even darker gray for headings */
-    --readme-link-color: #2563eb; /* Blue link color */
-    --readme-link-hover-color: #1d4ed8; /* Darker blue link hover color */
-    --readme-border-color: #e5e7eb; /* Light gray border color */
-    --readme-hr-color: #d1d5db; /* Slightly darker horizontal rule color */
-    --readme-paragraph-color: #4b5563; /* Gray paragraph text color */
+    /* --- Base Colors - Dark Mode Inspired --- */
+    --readme-body-bg-color: #181818; /* Dark charcoal body background */
+    --readme-bg-color: #222222; /* Slightly lighter container background */
+    --readme-text-color: #e0e0e0; /* Light gray text */
+    --readme-heading-color: #ffffff; /* White for headings - strong contrast */
+    --readme-link-color: #64b5f6; /* Vibrant blue link color */
+    --readme-link-hover-color: #bbdefb; /* Lighter blue link hover - subtle highlight */
+    --readme-border-color: #424242; /* Darker gray border color */
+    --readme-hr-color: #616161; /* Medium gray horizontal rule color */
+    --readme-paragraph-color: #bdbdbd; /* Slightly lighter paragraph text color */
 
-    /* --- Code Block Colors --- */
-    --readme-code-bg-color: #f3f4f6; /* Light gray code block background */
-    --readme-code-text-color: #1e293b; /* Darker gray code text color */
-    --readme-inline-code-bg-color: #edf2f7; /* Lighter gray inline code background */
+    /* --- Code Block Colors - Monokai Inspired --- */
+    --readme-code-bg-color: #272822; /* Darker code block background - Monokai */
+    --readme-code-text-color: #f8f8f2; /* Off-white code text - Monokai */
+    --readme-inline-code-bg-color: #383838; /* Slightly lighter inline code background */
 
-    /* --- Blockquote Colors --- */
-    --readme-blockquote-bg-color: #f9fafb; /* Very light gray blockquote background */
-    --readme-blockquote-border-color: #cbd5e0; /* Light gray blockquote border color */
-    --readme-blockquote-text-color: #6b7280; /* Muted gray blockquote text */
+    /* --- Blockquote Colors - Subtle Contrast --- */
+    --readme-blockquote-bg-color: #2e2e2e; /* Slightly lighter blockquote background */
+    --readme-blockquote-border-color: #424242; /* Darker gray blockquote border color */
+    --readme-blockquote-text-color: #9e9e9e; /* Muted gray blockquote text */
 
-    /* --- Font Family --- */
-    --readme-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --readme-monospace-font-family: 'Menlo', Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /* --- Font Family - Modern & Readable --- */
+    --readme-font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    --readme-monospace-font-family: 'Fira Code', 'Droid Sans Mono', 'monospace'; /* Keeping Fira Code, adding Droid Sans Mono */
 
-    /* --- Spacing Variables --- */
-    --readme-container-max-width: 960px; /* Maximum width of the main container */
-    --readme-container-margin-y: 2rem; /* Vertical margin for the container */
-    --readme-container-padding-y: 2.5rem; /* Vertical padding for the container */
-    --readme-container-padding-x: 3.5rem; /* Horizontal padding for the container */
-    --readme-heading-margin-bottom: 0.8rem; /* Bottom margin for headings */
-    --readme-paragraph-margin-bottom: 1.3rem; /* Bottom margin for paragraphs */
-    --readme-list-margin-y: 1.2rem; /* Vertical margin for lists */
-    --readme-list-item-margin-bottom: 0.6rem; /* Bottom margin for list items */
-    --readme-code-block-margin-y: 1.6rem; /* Vertical margin for code blocks */
-    --readme-blockquote-margin-y: 1.8rem; /* Vertical margin for blockquotes */
-    --readme-table-margin-y: 1.7rem; /* Vertical margin for tables */
-    --readme-hr-margin-y: 2.6rem; /* Vertical margin for horizontal rules */
-    --readme-image-margin-y: 1.9rem; /* Vertical margin for images */
+    /* --- Spacing Variables - Slightly more relaxed --- */
+    --readme-container-max-width: 1000px; /* Slightly wider container */
+    --readme-container-margin-y: 2.5rem; /* A bit more vertical margin */
+    --readme-container-padding-y: 3rem; /* More vertical padding */
+    --readme-container-padding-x: 4rem; /* More horizontal padding */
+    --readme-heading-margin-bottom: 1rem; /* More bottom margin for headings */
+    --readme-paragraph-margin-bottom: 1.5rem; /* More bottom margin for paragraphs */
+    --readme-list-margin-y: 1.4rem; /* Slightly more vertical margin for lists */
+    --readme-list-item-margin-bottom: 0.7rem; /* Slightly more bottom margin for list items */
+    --readme-code-block-margin-y: 1.8rem; /* Slightly more vertical margin for code blocks */
+    --readme-blockquote-margin-y: 2rem; /* Slightly more vertical margin for blockquotes */
+    --readme-table-margin-y: 1.9rem; /* Slightly more vertical margin for tables */
+    --readme-hr-margin-y: 2.8rem; /* Slightly more vertical margin for horizontal rules */
+    --readme-image-margin-y: 2.1rem; /* Slightly more vertical margin for images */
 
-    /* --- Border Radius --- */
-    --readme-container-border-radius: 0.6rem; /* Border radius for the container */
-    --readme-code-block-border-radius: 0.4rem; /* Border radius for code blocks */
-    --readme-inline-code-border-radius: 0.3rem; /* Border radius for inline code */
-    --readme-blockquote-border-radius: 0.3rem; /* Border radius for blockquotes */
-    --readme-image-border-radius: 0.3rem; /* Border radius for images */
+    /* --- Border Radius - Slightly more rounded --- */
+    --readme-container-border-radius: 0.7rem; /* Slightly more rounded container */
+    --readme-code-block-border-radius: 0.5rem; /* Slightly more rounded code blocks */
+    --readme-inline-code-border-radius: 0.4rem; /* Slightly more rounded inline code */
+    --readme-blockquote-border-radius: 0.4rem; /* Slightly more rounded blockquotes */
+    --readme-image-border-radius: 0.4rem; /* Slightly more rounded images */
 
-    /* --- Font Sizes --- */
-    --readme-base-font-size: 1rem; /* Base font size */
-    --readme-h1-font-size: 2.5rem; /* h1 font size */
-    --readme-h2-font-size: 2rem; /* h2 font size */
-    --readme-h3-font-size: 1.75rem; /* h3 font size */
-    --readme-h4-font-size: 1.5rem; /* h4 font size */
-    --readme-h5-font-size: 1.25rem; /* h5 font size */
-    --readme-h6-font-size: 1rem; /* h6 font size */
-    --readme-code-font-size: 0.9rem; /* Code font size */
-    --readme-table-font-size: 0.9rem; /* Table font size */
+    /* --- Font Sizes - Slightly larger for readability in dark mode --- */
+    --readme-base-font-size: 1.05rem; /* Slightly larger base font size */
+    --readme-h1-font-size: 2.7rem; /* Slightly larger h1 font size */
+    --readme-h2-font-size: 2.2rem; /* Slightly larger h2 font size */
+    --readme-h3-font-size: 1.9rem; /* Slightly larger h3 font size */
+    --readme-h4-font-size: 1.6rem; /* Slightly larger h4 font size */
+    --readme-h5-font-size: 1.35rem; /* Slightly larger h5 font size */
+    --readme-h6-font-size: 1.1rem; /* Slightly larger h6 font size */
+    --readme-code-font-size: 0.95rem; /* Slightly larger code font size */
+    --readme-table-font-size: 0.95rem; /* Slightly larger table font size */
 
-    /* --- Font Weights --- */
+    /* --- Font Weights - Keeping similar emphasis --- */
     --readme-heading-font-weight: 700; /* Font weight for headings */
     --readme-strong-font-weight: 600; /* Font weight for strong/bold text */
     --readme-th-font-weight: 600; /* Font weight for table headers */

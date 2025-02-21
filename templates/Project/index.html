@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Project READMEs</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Nunito+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <!-- Fira Code for code blocks -->
     <link rel="stylesheet" href="{{ url_for('static', filename='Project/style.css') }}">
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Assets/Images/M.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-    <!-- Navigation Header -->
-    <header>
-        <nav>
-            <div class="navbar">
-                <div class="logo">
-                    <div class="image">
-                        <img src="{{ url_for('static', filename='Assets/Images/M.png') }}" alt="M-DEV Logo"/>
-                    </div>
-                    <div class="text">
-                        <a href="{{ url_for('home') }}">M-DEV</a>
-                    </div>
+<!-- Navigation Header -->
+<header>
+    <nav>
+        <div class="navbar">
+            <div class="logo">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='Assets/Images/M.png') }}" alt="M-DEV Logo" />
                 </div>
-                <ul class="menu">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Feedback</a></li>
-                    <div class="cancel-btn">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </ul>
-                <div class="media-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+                <div class="text">
+                    <a href="{{ url_for('home') }}">M-DEV</a>
                 </div>
             </div>
-            <div class="menu-btn">
-                <i class="fas fa-bars"></i>
+            <ul class="menu">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Feedback</a></li>
+                <div class="cancel-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+            </ul>
+            <div class="media-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
             </div>
-        </nav>
-    </header>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+</header>
+
 <body>
 
 
@@ -82,20 +91,23 @@
     <footer>
         <div class="texts">
             <span>
-                Created By <a class="links" href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a> | © 2024 All Rights Reserved |
-                <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> |
-                <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                Created By <a class="links" href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a> |
+                © 2024 All Rights Reserved |
+                <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Terms &
+                    Conditions</a> |
+                <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Privacy
+                    Policy</a>
             </span>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('projectSearch');
             const projectBoxesContainer = document.getElementById('projectBoxesContainer');
             const projectBoxes = projectBoxesContainer.querySelectorAll('.project-box');
 
-            searchInput.addEventListener('input', function() {
+            searchInput.addEventListener('input', function () {
                 const searchTerm = searchInput.value.toLowerCase();
 
                 projectBoxes.forEach(box => {
@@ -110,4 +122,5 @@
         });
     </script>
 </body>
+
 </html>
