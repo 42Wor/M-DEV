@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        :root {
+            --bg-body: #8FBC8F; /* Glass Green Color - Dark Sea Green */
+            --text-secondary: #b0b0b0; /* Keeping for placeholder color */
+            --border-radius: 8px; /* Slightly smaller border-radius for a bit more modern look */
+            --cool-input-bg: rgba(255, 255, 255, 0.7); /* Soft white background for input */
+            --cool-input-border: #ddd; /* Light gray border */
+            --cool-input-focus-border: #bbb; /* Slightly darker border on focus */
+        }
+        body {
+            background: var(--bg-body);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .login-container {
+            text-align: center; /* Keep text-align center if you want to center text within the container */
+            max-width: 400px; /* Keep max-width if you want to limit input width */
+            width: 100%; /* Keep width 100% within max-width */
+        }
+        .form-control {
+            background-color: var(--cool-input-bg); /* Apply soft white background */
+            border: 1px solid var(--cool-input-border); /* Add light gray border */
+            border-radius: var(--border-radius); /* Apply border-radius */
+            padding: 0.75rem; /* Add some padding inside the input */
+            color: #333; /* Darker text color for better contrast on white background */
+            transition: border-color 0.2s ease-in-out; /* Smooth border color transition on focus */
+            display: block; /* Ensure form-control is a block-level element to take full width if needed */
+            margin: 0 auto; /* Center the input horizontally within its container (login-container) */
+        }
+        .form-control::placeholder {
+            color: var(--text-secondary); /* Keep placeholder color */
+        }
+        .form-control:focus {
+            outline: none; /* Remove default focus outline */
+            border-color: var(--cool-input-focus-border); /* Slightly darker border on focus */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on focus for a bit more depth */
+            background-color: white; /* Slightly brighten background on focus */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container"> <!-- Removed container, row, col - login-container is now directly in body -->
+        <h2 class="mb-4">Enter Key</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="post">
+            <label for="password" style="display: none;">Password:</label> <!-- Changed label for to password -->
+            <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password"> <!-- Changed name to password, type to password, id to password, placeholder text -->
+        </div>
+        </form>
+    </div>
+</body>
+</html>

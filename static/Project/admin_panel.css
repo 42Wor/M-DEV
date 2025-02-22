@@ -1,0 +1,77 @@
+/* static/admin_panel.css */
+
+/* Style for the main content area of the admin panel */
+main {
+    padding: 20px;
+    background-color: #fff; /* White background for the main content area */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+main h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee; /* Light border under the heading */
+    padding-bottom: 10px;
+}
+
+main ul {
+    list-style: none; /* Remove default list bullets */
+    padding-left: 0; /* Reset default padding */
+}
+
+main li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9; /* Light gray background for each list item */
+    border-radius: 5px;
+    border: 1px solid #eee; /* Light border for list items */
+    display: flex; /* Use flexbox to align links nicely */
+    justify-content: space-between; /* Space out the file name and action links */
+    align-items: center; /* Vertically align items in the list item */
+}
+
+main li:hover {
+    background-color: #f0f0f0; /* Slightly darker on hover */
+}
+
+main li a {
+    text-decoration: none;
+    color: #333; /* Default link color */
+}
+
+main li a:hover {
+    text-decoration: underline; /* Underline on hover for file names */
+}
+
+/* Style for the action links (Edit, Delete) */
+main li a:nth-child(n+2) { /* Target links starting from the second one in each li (Edit, Delete) */
+    margin-left: 15px; /* Space between file name and action links */
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #e0e0e0; /* Light gray background for action buttons */
+    color: #555;
+    font-size: 0.9em; /* Slightly smaller font size for action buttons */
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+main li a:nth-child(n+2):hover {
+    background-color: #d0d0d0; /* Slightly darker on hover for action buttons */
+    text-decoration: none; /* Remove underline on hover for action buttons */
+}
+
+/* Style for the "Create New File" link */
+main p a {
+    display: inline-block; /* Make it behave like a block but inline */
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue background for create button */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+main p a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

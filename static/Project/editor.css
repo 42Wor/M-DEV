@@ -1,0 +1,132 @@
+/* static/Project/editor.css */
+
+/* --- General Styles (You might have these in style.css already) --- */
+body {
+    font-family: sans-serif; /* Or your preferred font */
+    margin: 0; /* Reset default body margin */
+    padding: 0; /* Reset default body padding */
+    background-color: #f0f2f5; /* Light background for the whole page */
+    color: #333; /* Default text color */
+}
+
+.container {
+    max-width: 1200px; /* Adjust as needed */
+    margin: 20px auto; /* Center container horizontally */
+    padding: 20px;
+    background-color: #fff; /* White background for content area */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for container */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #007bff; /* Example link color */
+}
+
+nav a:hover {
+    color: #0056b3; /* Darker shade on hover */
+    text-decoration: underline; /* Add underline on hover for navigation links */
+}
+
+main {
+    padding: 20px 0;
+}
+
+h2 {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+    color: #777;
+}
+
+
+/* --- Editor Specific Styles --- */
+.editor-container {
+    display: flex;
+    height: 80vh; /* Adjust as needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Prevent content overflow from breaking layout */
+}
+
+.editor-pane, .preview-pane {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc; /* You had this in inline styles, but it's redundant with .editor-container's border */
+    overflow: auto; /* For scrollbars if content is long */
+    border: none; /* Remove individual pane borders as .editor-container has the main border */
+}
+
+.editor-pane {
+    border-right: 1px solid #ccc; /* Add separator between panes */
+}
+.preview-pane {
+    background-color: #f9f9f9;
+    border-left: 1px solid #ccc; /* Add separator between panes */
+}
+
+
+.editor-pane textarea {
+    width: 100%;
+    height: 95%; /* Adjust as needed */
+    font-family: monospace, monospace; /* Monospace for code-like feel */
+    border: none;
+    resize: none; /* Prevent manual resizing */
+    outline: none; /* Remove default focus outline */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in width/height calculation */
+}
+
+
+/* --- Form Actions (Save, Cancel buttons) --- */
+.form-actions {
+    margin-top: 20px;
+    text-align: right; /* Align buttons to the right */
+}
+
+.form-actions button, .form-actions a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none; /* Remove underline from Cancel link */
+    display: inline-block; /* Ensure consistent spacing */
+    margin-left: 10px; /* Space between buttons */
+    transition: background-color 0.3s ease;
+    border: none; /* Remove default button border */
+}
+
+.form-actions .save-button {
+    background-color: #007bff; /* Blue for Save button */
+    color: white;
+}
+
+.form-actions .save-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.form-actions .cancel-button {
+    background-color: #6c757d; /* Gray for Cancel button */
+    color: white;
+}
+
+.form-actions .cancel-button:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+}
