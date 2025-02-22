@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='Assets/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Assets/cookie.css') }}"> <!-- Link to cookie.css -->
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Assets/Images/M.png') }}">
@@ -17,7 +18,10 @@
   <!-- JS Files -->
   <script src="{{ url_for('static', filename='Assets/script.js') }}" defer></script>
   <script src="{{ url_for('static', filename='Assets/links.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script> <!-- Link to script.js for cookie functionality -->
+
 </head>
+
 
 <body>
 
@@ -77,11 +81,35 @@
     </div>
   </footer>
 
+  <!-- Cookie Banner Include -->
+  {% include 'cookie.html' %}  
+
   <!-- JavaScript -->
   <script>
     function navigateTo(url) {
       window.location.href = url;
     }
+
+    function hideCookieNotice() {
+      document.getElementById('cookieNotice').style.display = 'none';
+    }
+
+    function SaveCookie() {
+      // Set a cookie to remember consent for, say, 30 days
+      const expiryDays = 30;
+      const expiryDate = new Date();
+      expiryDate.setDate(expiryDate.getDate() + expiryDays);
+      document.cookie = "cookieConsent=accepted; expires=" + expiryDate.toUTCString() + "; path=/"; // "path=/" makes it available across the site
+      hideCookieNotice();
+      console.log("Cookie consent accepted and cookie set.");
+    }
+
+    // Check if cookie consent is already given on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      if (document.cookie.indexOf("cookieConsent=accepted") > -1) {
+        hideCookieNotice(); // Hide banner if consent cookie exists
+      }
+    });
   </script>
 
 </body>

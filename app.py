@@ -1,17 +1,14 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session, make_response
 import json
 import markdown
 import os
 from functools import wraps
-import secrets  # <--- Correct import for secrets module
+import secrets
+import datetime  # Import the datetime module
 
 app = Flask(__name__)
-
-# Use a secure method to generate a secret key
-app.secret_key = secrets.token_hex(16)  # Generate a random secret key
-
+app.secret_key = secrets.token_hex(16)
 README_FOLDER = "templates/Project/projectmd"
-
 ADMIN_PASSWORD = "'"
 
 # --- Authentication Decorator ---
@@ -155,7 +152,10 @@ def preview_markdown():
 # Home Page
 @app.route("/")
 def home():
-    return render_template("index.html")
+    resp = make_response(render_template("index.html")) # Create a response object
+    now = datetime.datetime.now()
+    resp.set_cookie('last_visit', now.strftime("%Y-%m-%d %H:%M:%S")) # Set the cookie
+    return resp
 
 
 
@@ -238,6 +238,11 @@ def faq():
     with open("static/FAQs/faq.json") as f:
         faq_data = json.load(f)
     return jsonify(faq_data)
+
+# --- 404 Error Handler ---
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
 
 
 if __name__ == "__main__":
