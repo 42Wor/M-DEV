@@ -96,7 +96,7 @@ def new_editor():
 
 
 # --- Admin and Login ---
-@app.route('/admin')
+@app.route('/admin/')
 @login_required
 def admin():
     readme_files_base_names = []
