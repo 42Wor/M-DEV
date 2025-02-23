@@ -28,7 +28,7 @@ def login_required(f):
 
 # --- Markdown Editor Routes ---
 @app.route('/editor/<filename>', methods=['GET', 'POST'])
-@login_required  # Protect the editor
+#@login_required   Protect the editor
 def editor(filename):
     file_path = os.path.join(README_FOLDER, filename)
     if request.method == 'POST':
@@ -73,7 +73,7 @@ def editor(filename):
 
 
 @app.route('/editor/new', methods=['GET', 'POST'])
-@login_required # Protect new file creation too
+#@login_required # Protect new file creation too
 def new_editor():
     if request.method == 'POST':
         filename = request.form['new_filename']
