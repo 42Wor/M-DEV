@@ -1,132 +1,355 @@
-/* static/Project/editor.css */
+/* static/Project/editor.css - Enhanced and "Cooler" Styles */
 
-/* --- General Styles (You might have these in style.css already) --- */
+/* --- Color Palette --- */
+:root {
+    --primary-color: #007bff;        /* Primary blue for buttons, accents */
+    --primary-dark-color: #0056b3;   /* Darker shade of primary for hover */
+    --secondary-color: #6c757d;      /* Secondary grey for muted elements */
+    --secondary-dark-color: #545b62; /* Darker secondary for hover */
+    --accent-color: #28a745;         /* Accent green for save button */
+    --accent-dark-color: #218838;    /* Darker accent for save hover */
+    --background-color: #f8f9fa;     /* Light grey page background */
+    --card-background-color: #ffffff; /* White for editor container */
+    --text-color-dark: #343a40;       /* Dark grey for main text */
+    --text-color-light: #6c757d;      /* Light grey for secondary text */
+    --border-color: #dee2e6;         /* Light grey for borders */
+    --code-background-color: #e9ecef; /* Very light grey for code blocks */
+    --code-text-color: #212529;       /* Darker text for code */
+}
+
+/* --- General Page Styling --- */
 body {
-    font-family: sans-serif; /* Or your preferred font */
-    margin: 0; /* Reset default body margin */
-    padding: 0; /* Reset default body padding */
-    background-color: #f0f2f5; /* Light background for the whole page */
-    color: #333; /* Default text color */
+    font-family: 'Roboto', sans-serif; /* Modern sans-serif font (you might need to link this in HTML) */
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased; /* Improve font rendering on webkit browsers */
+    -moz-osx-font-smoothing: grayscale;    /* Improve font rendering on Firefox on macOS */
 }
 
-.container {
-    max-width: 1200px; /* Adjust as needed */
-    margin: 20px auto; /* Center container horizontally */
-    padding: 20px;
-    background-color: #fff; /* White background for content area */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for container */
+.editor-page-container {
+    margin: 30px auto; /* Increased top/bottom margin */
+    background-color: var(--card-background-color);
+    padding: 90px; /* Increased padding */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+    border-radius: 100px; /* More rounded corners */
 }
+
 
 header {
     text-align: center;
-    margin-bottom: 20px;
+    padding-bottom: 25px; /* Increased padding */
+    border-bottom: 2px solid var(--border-color); /* Thicker border */
+    margin-bottom: 30px; /* Increased margin */
 }
 
-header h1 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #007bff; /* Example link color */
-}
-
-nav a:hover {
-    color: #0056b3; /* Darker shade on hover */
-    text-decoration: underline; /* Add underline on hover for navigation links */
-}
-
-main {
-    padding: 20px 0;
+h1 {
+    color: var(--primary-color); /* Primary color for title */
+    margin-bottom: 15px; /* Increased margin */
+    font-size: 2.5em;       /* Larger font size */
+    font-weight: 700;       /* Bold font weight */
+    letter-spacing: -0.02em; /* Slightly reduce letter spacing for a tighter look */
 }
 
 h2 {
-    color: #555;
-    margin-bottom: 15px;
+    margin-top: 25px; /* Increased margin */
+    margin-bottom: 20px; /* Increased margin */
+    font-size: 1.8em;       /* Slightly larger h2 */
+    color: var(--text-color-dark);
+}
+
+main {
+    padding-bottom: 30px; /* Increased padding */
 }
 
 footer {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid #ccc;
-    color: #777;
+    padding-top: 25px; /* Increased padding */
+    border-top: 2px solid var(--border-color); /* Thicker border */
+    color: var(--text-color-light);
+    font-size: 0.9em;       /* Slightly smaller footer text */
+}
+
+/* --- Flash Messages --- */
+.flash-messages {
+    margin-bottom: 25px; /* Increased margin */
+}
+
+.alert {
+    padding: 12px 20px; /* Increased padding */
+    margin-bottom: 15px; /* Increased margin */
+    border-radius: 6px; /* Slightly more rounded */
+    border: 1px solid transparent;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* --- Form Styling --- */
+form .form-group {
+    margin-bottom: 20px; /* Increased margin */
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px; /* Increased margin */
+    font-weight: 600;       /* Semi-bold label */
+    color: var(--text-color-dark);
+}
+
+form .form-control {
+    width: 100%;
+    padding: 12px 15px; /* Increased padding */
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Slightly more rounded */
+    box-sizing: border-box;
+    font-size: 1.1em;       /* Slightly larger font size */
+    color: var(--text-color-dark);
+    background-color: var(--card-background-color); /* White input background */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transitions */
+}
+
+form .form-control:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Primary color on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* More subtle focus shadow */
+}
+
+form .form-check {
+    margin-bottom: 20px; /* Increased margin */
+    padding-left: 1.5em; /* Adjust padding to align text with checkbox */
+    position: relative;  /* For custom checkbox styling */
+}
+
+form .form-check-input {
+    position: absolute;
+    margin-left: -1.5em;
+    top: 0.2em; /* Adjust vertical alignment */
+}
+
+/* --- Custom Checkbox Styling (Optional, for more "coolness") --- */
+form .form-check-input {
+    appearance: none; /* Remove default checkbox appearance */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none;    /* For Firefox */
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--secondary-color);
+    border-radius: 4px;
+    background-color: var(--card-background-color);
+    cursor: pointer;
+    position: absolute;
+    margin-left: -1.5em;
+    top: 0.2em;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+form .form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%23fff' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3e%3c/svg%3e"); /* Checkmark SVG */
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+form .form-check-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Focus shadow on checkbox */
 }
 
 
-/* --- Editor Specific Styles --- */
+/* --- Editor and Preview Layout --- */
 .editor-container {
     display: flex;
-    height: 80vh; /* Adjust as needed */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden; /* Prevent content overflow from breaking layout */
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* More rounded editor container */
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Lighter shadow for editor area */
 }
 
 .editor-pane, .preview-pane {
-    flex: 1;
-    padding: 15px;
-    border: 1px solid #ccc; /* You had this in inline styles, but it's redundant with .editor-container's border */
-    overflow: auto; /* For scrollbars if content is long */
-    border: none; /* Remove individual pane borders as .editor-container has the main border */
+    padding: 20px; /* Increased padding */
+    box-sizing: border-box;
 }
 
 .editor-pane {
-    border-right: 1px solid #ccc; /* Add separator between panes */
+    width: 60%;
+    border-right: 1px solid var(--border-color);
+    background-color: var(--card-background-color); /* White editor background */
 }
+
 .preview-pane {
-    background-color: #f9f9f9;
-    border-left: 1px solid #ccc; /* Add separator between panes */
+    width: 40%;
+    background-color: var(--background-color); /* Light grey for preview background */
+    overflow-y: auto;
+    border-left: none; /* Remove redundant left border */
 }
 
-
-.editor-pane textarea {
+.editor-pane textarea.editor-textarea { /* Target textarea with class editor-textarea inside editor-pane */
     width: 100%;
-    height: 95%; /* Adjust as needed */
-    font-family: monospace, monospace; /* Monospace for code-like feel */
+    height: 75vh; /* Slightly increased editor height */
+    font-family: 'FiraCode', monospace; /* Monospace font for code (you might need to link this) */
+    font-size: 1.1em;
+    line-height: 1.7;
     border: none;
-    resize: none; /* Prevent manual resizing */
-    outline: none; /* Remove default focus outline */
+    outline: none;
+    resize: vertical;
+    box-sizing: border-box;
+    color: var(--text-color-dark);
+    background-color: transparent; /* Make textarea background transparent to inherit from editor-pane */
+}
+
+.preview-pane .preview-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    word-wrap: break-word;
+    color: var(--text-color-dark);
     padding: 10px;
-    box-sizing: border-box; /* Include padding in width/height calculation */
+    background-color: var(--card-background-color); /* White background for preview content */
+    border-radius: 6px; /* Rounded corners for preview content area */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inset shadow for depth */
+}
+
+/* --- Code Blocks in Preview --- */
+.preview-pane .preview-content pre {
+    background-color: var(--code-background-color);
+    color: var(--code-text-color);
+    padding: 12px 15px;
+    border-radius: 6px;
+    overflow-x: auto; /* Horizontal scroll for long code lines */
+    font-family: 'FiraCode', monospace; /* Monospace font for code */
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+.preview-pane .preview-content code { /* Inline code */
+    background-color: var(--code-background-color);
+    color: var(--code-text-color);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'FiraCode', monospace;
+    font-size: 0.95em;
 }
 
 
-/* --- Form Actions (Save, Cancel buttons) --- */
+/* --- Form Actions (Buttons) --- */
 .form-actions {
-    margin-top: 20px;
-    text-align: right; /* Align buttons to the right */
+    margin-top: 30px; /* Increased margin */
+    text-align: center;
 }
 
 .form-actions button, .form-actions a {
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 25px; /* Increased padding */
+    margin: 8px; /* Increased margin */
+    border: none;
+    border-radius: 8px; /* More rounded buttons */
     cursor: pointer;
-    font-size: 16px;
-    text-decoration: none; /* Remove underline from Cancel link */
-    display: inline-block; /* Ensure consistent spacing */
-    margin-left: 10px; /* Space between buttons */
-    transition: background-color 0.3s ease;
-    border: none; /* Remove default button border */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 500;       /* Medium font weight for buttons */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transitions */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
 }
 
 .form-actions .save-button {
-    background-color: #007bff; /* Blue for Save button */
-    color: white;
+    background-color: var(--accent-color); /* Green save button */
+    color: var(--card-background-color); /* White text on save button */
 }
 
 .form-actions .save-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: var(--accent-dark-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
 }
 
-.form-actions .cancel-button {
-    background-color: #6c757d; /* Gray for Cancel button */
-    color: white;
+.form-actions .view-page-button, .form-actions .admin-button {
+    background-color: var(--secondary-color); /* Secondary grey for other buttons/links */
+    color: var(--card-background-color); /* White text on secondary buttons */
 }
 
-.form-actions .cancel-button:hover {
-    background-color: #5a6268; /* Darker gray on hover */
+.form-actions .view-page-button:hover, .form-actions .admin-button:hover {
+    background-color: var(--secondary-dark-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+}
+
+/* --- Responsive (Improved) --- */
+@media (max-width: 992px) { /* Adjust breakpoint for larger tablets/smaller laptops */
+    .editor-page-container {
+        margin: 20px; /* Reduce container margin on smaller screens */
+        padding: 20px;
+    }
+    h1 {
+        font-size: 2.2em; /* Slightly smaller title on smaller screens */
+    }
+    h2 {
+        font-size: 1.6em; /* Slightly smaller h2 on smaller screens */
+    }
+    .editor-pane, .preview-pane {
+        padding: 15px; /* Reduced padding in editor/preview panes */
+    }
+    .form-actions button, .form-actions a {
+        padding: 10px 20px; /* Slightly smaller button padding */
+        font-size: 1em;     /* Slightly smaller button font size */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .editor-page-container {
+        margin: 15px; /* Further reduce container margin on mobile */
+        padding: 15px;
+    }
+    .editor-container {
+        flex-direction: column; /* Stack editor and preview on smaller screens */
+    }
+    .editor-pane, .preview-pane {
+        width: 100%; /* Full width when stacked */
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+     .preview-pane {
+        border-bottom: none; /* Remove bottom border for preview pane when stacked */
+    }
+    .editor-pane textarea.editor-textarea {
+        height: 60vh; /* Adjust editor height for stacked layout */
+    }
+    h1 {
+        font-size: 2em; /* Even smaller title on mobile */
+    }
+    h2 {
+        font-size: 1.4em; /* Even smaller h2 on mobile */
+    }
+}
+
+/* --- Optional: Print Styles (for better printing) --- */
+@media print {
+    body {
+        background-color: #fff; /* White background for printing */
+        color: #000;         /* Black text for printing */
+    }
+    .editor-page-container {
+        box-shadow: none;    /* Remove shadow in print */
+        border: none;       /* Remove border in print */
+        margin: 0;          /* Reset margins for print */
+        padding: 0;         /* Reset padding for print */
+    }
+    header, .form-actions, .flash-messages, footer, form .form-group, form .form-check, .editor-pane {
+        display: none;       /* Hide editor UI elements in print */
+    }
+    .preview-pane {
+        width: 100%;         /* Full width for preview in print */
+        border: none;       /* Remove preview border in print */
+        padding: 0;         /* Reset preview padding in print */
+    }
+    .preview-pane .preview-content {
+        box-shadow: none;    /* Remove inset shadow in print */
+        padding: 0;         /* Reset preview content padding in print */
+    }
 }

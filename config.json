@@ -1,0 +1,4 @@
+{
+    "secret_key": "your_really_strong_secret_key_here",
+    "secret_key_permission": "off"  
+  }

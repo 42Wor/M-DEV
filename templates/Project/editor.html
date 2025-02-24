@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Markdown Editor - {{ filename }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Project/editor.css') }}">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Markdown Editor - {{ filename }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='Project/editor.css') }}">
+        <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-primitives-d9abecd14f1e.css" />
+        <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-93aded0ee8a1.css" />
+        <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/global-8bed0685a4b5.css" />
+        <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/github-a954a02d9269.css" />
+      <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/profile-a657309cdf66.css" />
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/insights-c5cddd751d33.css" />
+    
+        <!-- Include Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    </head>
 <body>
-    <div class="container">
+    <div class="editor-page-container">
         <header>
             <h1>Markdown Editor</h1>
-            <nav>
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="{{ url_for('project') }}">Projects</a>
-                <a href="{{ url_for('admin') }}">Admin Panel</a>
-                <a href="{{ url_for('admin_logout') }}">Logout</a>
-            </nav>
         </header>
 
         <main>
             <h2>{% if filename == 'new_file.md' %}Create New File{% else %}Editing: {{ filename }}{% endif %}</h2>
 
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-actions">
+                <button type="submit" class="save-button">Save</button>
+                <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}" class="view-page-button">View Page</a>
+                <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
+            </div>
             <form method="POST">
                 <input type="hidden" name="action" id="action" value="save"> <!-- Hidden input for action type - default is 'save' -->
 
@@ -45,24 +65,21 @@
 
                 <div class="editor-container">
                     <div class="editor-pane">
-                        <textarea id="markdown-editor" name="markdown_content" placeholder="Write your Markdown here...">{{ markdown_content|e }}</textarea>
+                        <textarea id="markdown-editor" name="markdown_content" class="form-control editor-textarea" placeholder="Write your Markdown here...">{{ markdown_content|e }}</textarea>
                     </div>
                     <div class="preview-pane">
                         <h2>Preview</h2>
-                        <div id="markdown-preview">
+                        <div id="markdown-preview" class="preview-content">
                             <!-- Preview will be loaded here by JavaScript -->
                         </div>
                     </div>
                 </div>
-                <div class="form-actions">
-                    <button type="submit" class="save-button">Save</button>
-                    <a href="{{ url_for('project') }}" class="cancel-button">Cancel</a>
-                </div>
+
             </form>
         </main>
 
         <footer>
-            <p>© Your Website 2024</p>
+            <p>© Your Website 2025</p>
         </footer>
     </div>
 
@@ -89,12 +106,7 @@
         }
 
         markdownEditor.addEventListener('input', updatePreview);
-        updatePreview();
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('markdown-editor').value = `{{ markdown_content|e }}`;
-            updatePreview();
-        });
+        updatePreview(); // Initial preview on page load
 
         saveAsNewCheckbox.addEventListener('change', function() {
             if (saveAsNewCheckbox.checked) {

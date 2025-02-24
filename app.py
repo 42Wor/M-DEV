@@ -5,9 +5,11 @@ import os
 from functools import wraps
 import secrets
 import datetime  # Import the datetime module
-
+from datetime import timedelta  # Import timedelta from datetime module
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
+app.permanent_session_lifetime = timedelta(minutes=30)
+
 README_FOLDER = "templates/Project/projectmd"
 ADMIN_PASSWORD = "'"
 
@@ -28,52 +30,31 @@ def login_required(f):
 
 # --- Markdown Editor Routes ---
 @app.route('/editor/<filename>', methods=['GET', 'POST'])
-#@login_required   Protect the editor
+@login_required  # Protect the editor
 def editor(filename):
     file_path = os.path.join(README_FOLDER, filename)
+    print(f"Debug: Attempting to open file at path: {file_path}") # Debug 1: Check file path
+
     if request.method == 'POST':
-        markdown_content = request.form['markdown_content']
-        action = request.form.get('action')  # Get the action type from the form
-
-        if action == 'save_as_new':
-            new_filename_base = request.form.get('new_filename_save_as')
-            if not new_filename_base:
-                flash('New filename is required for "Save As New".', 'error')
-                return render_template('Project/editor.html', filename=filename, markdown_content=markdown_content) # Re-render editor with error
-
-            new_filename = new_filename_base + ".md" # Add .md extension
-            new_file_path = os.path.join(README_FOLDER, new_filename)
-
-            if os.path.exists(new_file_path):
-                flash(f'File "{new_filename}" already exists. Choose a different name.', 'error')
-                return render_template('Project/editor.html', filename=filename, markdown_content=markdown_content) # Re-render editor with error
-
-            try:
-                with open(new_file_path, 'w', encoding='utf-8') as f:
-                    f.write(markdown_content)
-                return redirect(url_for('readme_page', filename=os.path.splitext(new_filename)[0])) # Redirect to new page
-            except Exception as e:
-                return f"Error saving new file: {e}", 500
-
-        else:  # Default 'save' action (overwrite existing)
-            try:
-                with open(file_path, 'w', encoding='utf-8') as f:
-                    f.write(markdown_content)
-                return redirect(url_for('readme_page', filename=os.path.splitext(filename)[0])) # Redirect to saved page
-            except Exception as e:
-                return f"Error saving file: {e}", 500
+        # ... (POST request handling - save logic - no need to change for now) ...
+        pass # Keep your existing POST handling logic
 
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             markdown_content = f.read()
+            print(f"Debug: Successfully read content from file.") # Debug 2: File read success
+            print(f"Debug: First 50 chars of markdown_content: {markdown_content[:50]}") # Debug 3: Sample of content
     except FileNotFoundError:
+        print(f"Debug: File not found at path: {file_path}") # Debug 4: File not found error
         return "File not found.", 404
+    except Exception as e:
+        print(f"Debug: Error reading file: {e}") # Debug 5: Other file reading errors
+        return f"Error reading file: {e}", 500
 
+    print(f"Debug: Rendering editor.html with filename: {filename}") # Debug 6: Before render template
     return render_template('Project/editor.html', filename=filename, markdown_content=markdown_content)
-
-
 @app.route('/editor/new', methods=['GET', 'POST'])
-#@login_required # Protect new file creation too
+@login_required # Protect new file creation too
 def new_editor():
     if request.method == 'POST':
         filename = request.form['new_filename']
@@ -147,7 +128,6 @@ def preview_markdown():
     markdown_text = data.get('markdown', '')
     html_content = markdown.markdown(markdown_text)
     return jsonify({'html_content': html_content})
-
 
 # Home Page
 @app.route("/")
