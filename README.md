@@ -12,3 +12,4 @@ The M-DEV Website is a web application built using Flask. It serves as a portfol
 - **Chat Page**: Interactive chat feature.
 - **FAQs and Privacy Pages**: Informational pages.
 
+ 
