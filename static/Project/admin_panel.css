@@ -1,77 +1,668 @@
-/* static/admin_panel.css */
+/* admin_panel.css - Cool Dark Theme Stylesheet for Admin Panel */
 
-/* Style for the main content area of the admin panel */
-main {
-    padding: 20px;
-    background-color: #fff; /* White background for the main content area */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+/* ----------------------------------------------------------------------- */
+/*                      Table of Contents                                  */
+/* ----------------------------------------------------------------------- */
+/*
+    1.  Variables and Root Styles (Cool Dark Theme)
+    2.  Basic Reset and Box-Sizing
+    3.  Body Styles & General Typography (Dark Theme)
+    4.  Links (Cool Theme)
+    5.  Lists
+    6.  Site Header (Dark Theme)
+        6.1  Main Navigation
+        6.2  Navbar Container & Layout
+        6.3  Logo Styling (Cool Theme)
+        6.4  Mobile Menu Button & Cancel Button (Dark Theme)
+        6.5  Main Menu (Desktop & Mobile - Dark Theme)
+        6.6  Menu Items & Links (Cool Theme)
+        6.7  Social Icons (Cool Theme)
+    7.  Main Container
+    8.  Admin Main Content (Dark Theme)
+    9.  Admin Panel Header (Cool Theme)
+        9.1  Admin Panel Title (Cool Theme)
+        9.2  Admin Actions (Cool Theme)
+        9.3  Admin Action Items & Links (Cool Theme)
+    10. Manage Files Section (Box Layout - Cool Theme)
+        10.1 Manage Files Heading (Cool Theme)
+        10.2 File List (Grid Container - Dark Theme)
+        10.3 File Item (Box - Cool Theme)
+        10.4 File Name & Link (Cool Theme)
+        10.5 File Actions Container (Dark Theme)
+        10.6 File Action Buttons (Edit, Delete - Cool Theme)
+        10.7 Create New File Link & Button (Cool Theme)
+    11. Site Footer (Dark Theme)
+        11.1 Footer Texts & Copyright (Dark Theme)
+        11.2 Footer Links (Cool Theme)
+    12. Utility Classes (Buttons - Cool Theme)
+    13. Responsive Design (Dark Theme Adjustments)
+        13.1 Mobile Menu (768px Breakpoint - Dark Theme)
+        13.2 Admin Panel Header Responsiveness (Dark Theme)
+        13.3 Manage Files Section Responsiveness (600px Breakpoint - Dark Theme)
+    14. Scrollbar Styling (Optional - Webkit Browsers - Dark Theme)
+*/
+
+
+/* ----------------------------------------------------------------------- */
+/* 1. Variables and Root Styles (Cool Dark Theme)                           */
+/* ----------------------------------------------------------------------- */
+
+:root {
+    /* Cool & Modern Color Palette - Dark Theme Inspired */
+
+    /* Primary Palette -  Modern Blue Tones */
+    --primary-color: #64B5F6;         /* Soft, Modern Blue */
+    --primary-color-dark: #2196F3;    /* Slightly Darker, More Active Blue */
+    --primary-color-light: #90CAF9;   /* Lighter, Subtle Blue */
+
+    /* Secondary Palette - Teal/Aqua for a Fresh Feel */
+    --secondary-color: #26A69A;       /* Teal, Success/Info */
+    --secondary-color-dark: #00897B;  /* Darker Teal, Deeper Action */
+    --secondary-color-light: #80CBC4;  /* Lighter Teal, Muted Success */
+
+    /* Danger Palette -  Muted Red/Orange for Soft Alert */
+    --danger-color: #EF5350;          /* Soft Red, Danger/Alert */
+    --danger-color-dark: #E53935;     /* Darker Red, Stronger Alert */
+    --danger-color-light: #FFCDD2;    /* Lighter Red, Gentle Warning */
+
+    /* Accent & Neutral Palette -  Vibrant Cyan for Pop & Dark Neutrals */
+    --accent-color: #00BCD4;          /* Vibrant Cyan, Key Accent */
+    --accent-color-dark: #00ACC1;     /* Darker Cyan, Focused Accent */
+    --light-gray: #212121;           /* Dark Background Gray - Near Black */
+    --gray: #424242;                 /* Medium Dark Gray - UI Elements */
+    --dark-gray: #BDBDBD;            /* Light Gray -  Text on Dark Backgrounds, Muted UI */
+    --text-color-dark: #E0E0E0;      /* Light Text - Primary Text on Dark */
+    --text-color-light: #FAFAFA;     /* Very Light Text -  Highlights, Strong Contrast */
+
+    /* Font Family - Keeping Roboto and Montserrat for Modern Look */
+    --font-family-base: 'Roboto', sans-serif;
+    --font-family-accent: 'Montserrat', sans-serif;
+    --font-family-code: 'Fira Code', monospace;
+
+    /* Spacing & Radius - Maintaining Consistent Spacing */
+    --border-radius-base: 10px;      /* Slightly More Rounded Corners for Modern Feel */
+    --border-radius-small: 7px;      /* Smaller Elements, Slightly Rounded */
+    --spacing-small: 0.6rem;        /* Slightly Increased Small Spacing */
+    --spacing-medium: 1.2rem;       /* Slightly Increased Medium Spacing */
+    --spacing-large: 2.5rem;        /* Slightly Increased Large Spacing */
 }
 
-main h2 {
-    color: #333;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #eee; /* Light border under the heading */
-    padding-bottom: 10px;
+
+/* ----------------------------------------------------------------------- */
+/* 2. Basic Reset and Box-Sizing                                            */
+/* ----------------------------------------------------------------------- */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
-main ul {
-    list-style: none; /* Remove default list bullets */
-    padding-left: 0; /* Reset default padding */
+
+/* ----------------------------------------------------------------------- */
+/* 3. Body Styles & General Typography (Dark Theme)                         */
+/* ----------------------------------------------------------------------- */
+
+body {
+    font-family: var(--font-family-base);
+    color: var(--text-color-dark);
+    background-color: var(--light-gray); /* Dark background from variables */
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
-main li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f9f9f9; /* Light gray background for each list item */
-    border-radius: 5px;
-    border: 1px solid #eee; /* Light border for list items */
-    display: flex; /* Use flexbox to align links nicely */
-    justify-content: space-between; /* Space out the file name and action links */
-    align-items: center; /* Vertically align items in the list item */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-accent);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-small);
+    color: var(--text-color-light); /* Light text for headings on dark bg */
 }
 
-main li:hover {
-    background-color: #f0f0f0; /* Slightly darker on hover */
+p {
+    margin-bottom: var(--spacing-small);
 }
 
-main li a {
+
+/* ----------------------------------------------------------------------- */
+/* 4. Links (Cool Theme)                                                    */
+/* ----------------------------------------------------------------------- */
+
+a {
     text-decoration: none;
-    color: #333; /* Default link color */
+    color: var(--primary-color-light); /* Lighter primary for links on dark */
+    transition: color 0.3s ease-in-out;
 }
 
-main li a:hover {
-    text-decoration: underline; /* Underline on hover for file names */
+a:hover {
+    color: var(--primary-color); /* Slightly darker on hover for contrast */
+    text-decoration: underline;
 }
 
-/* Style for the action links (Edit, Delete) */
-main li a:nth-child(n+2) { /* Target links starting from the second one in each li (Edit, Delete) */
-    margin-left: 15px; /* Space between file name and action links */
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #e0e0e0; /* Light gray background for action buttons */
-    color: #555;
-    font-size: 0.9em; /* Slightly smaller font size for action buttons */
-    border: 1px solid #ddd;
-    transition: background-color 0.3s ease;
+a:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
-main li a:nth-child(n+2):hover {
-    background-color: #d0d0d0; /* Slightly darker on hover for action buttons */
-    text-decoration: none; /* Remove underline on hover for action buttons */
+
+/* ----------------------------------------------------------------------- */
+/* 5. Lists                                                                */
+/* ----------------------------------------------------------------------- */
+
+ul {
+    list-style: none;
+    padding-left: 0;
 }
 
-/* Style for the "Create New File" link */
-main p a {
-    display: inline-block; /* Make it behave like a block but inline */
-    padding: 10px 20px;
-    background-color: #007bff; /* Blue background for create button */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+li {
+    margin-bottom: 0.4em;
 }
 
-main p a:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+
+/* ----------------------------------------------------------------------- */
+/* 6. Site Header (Dark Theme)                                              */
+/* ----------------------------------------------------------------------- */
+
+/* 6.1 Main Navigation */
+.site-header {
+    background-color: var(--light-gray); /* Dark header background */
+    border-bottom: 1px solid var(--gray); /* Darker border for separation */
+    padding: var(--spacing-small) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* 6.2 Navbar Container & Layout */
+.main-navigation {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-medium);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 6.3 Logo Styling (Cool Theme) */
+.logo-link {
+    display: flex;
+    align-items: center;
+    color: var(--text-color-light); /* Light logo text on dark header */
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+
+.logo-image {
+    height: 40px;
+    margin-right: var(--spacing-small);
+    /* Logo image might need adjustments for dark theme if it's not inherently light */
+    /* You might consider a light version of your logo image or CSS filters */
+    /* Example CSS filter to lighten (adjust values as needed): */
+    /* filter: brightness(1.2); */
+}
+
+.logo-text {
+    font-family: var(--font-family-accent);
+    letter-spacing: 0.5px;
+}
+
+/* 6.4 Mobile Menu Button & Cancel Button (Dark Theme) */
+.menu-btn, .cancel-btn {
+    background: none;
+    color: var(--text-color-light); /* Light button icons on dark header */
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+/* 6.5 Main Menu (Desktop & Mobile - Dark Theme) */
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.main-menu {
+    display: flex;
+    margin-left: auto;
+}
+
+/* 6.6 Menu Items & Links (Cool Theme) */
+.menu-item {
+    margin-left: var(--spacing-medium);
+}
+
+.menu-link {
+    color: var(--text-color-light); /* Light menu links on dark header */
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: var(--border-radius-small);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.menu-link:hover {
+    background-color: var(--gray); /* Slightly lighter gray on hover */
+}
+
+/* 6.7 Social Icons (Cool Theme) */
+.social-icons {
+    display: flex;
+    margin-left: var(--spacing-large);
+}
+
+.social-icon-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    margin-left: var(--spacing-small);
+    border-radius: 50%;
+    color: var(--text-color-light); /* Light icons on dark background */
+    background-color: var(--gray); /* Darker gray background for icons */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.social-icon-link:hover {
+    background-color: var(--dark-gray); /* Lighter gray on hover */
+    color: var(--text-color-dark);      /* Darker text/icon color on hover */
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 7. Main Container                                                      */
+/* ----------------------------------------------------------------------- */
+
+.container {
+    max-width: 1200px;
+    margin: var(--spacing-large) auto;
+    padding: 0 var(--spacing-medium);
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 8. Admin Main Content (Dark Theme)                                       */
+/* ----------------------------------------------------------------------- */
+
+.admin-main-content {
+    background-color: var(--gray); /* Slightly lighter gray for content area */
+    padding: var(--spacing-large);
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for dark theme */
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 9. Admin Panel Header (Cool Theme)                                       */
+/* ----------------------------------------------------------------------- */
+
+/* 9.1 Admin Panel Header Section */
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-large);
+    border-bottom: 2px solid var(--dark-gray); /* Lighter border for dark theme */
+    padding-bottom: var(--spacing-medium);
+}
+
+/* 9.2 Admin Panel Title (Cool Theme) */
+.admin-panel-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color-light); /* Light title text on dark theme */
+}
+
+/* 9.3 Admin Actions (Cool Theme) */
+.admin-actions {
+    display: flex;
+}
+
+.admin-action-item {
+    margin-left: var(--spacing-medium);
+}
+
+.admin-action-link {
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: var(--border-radius-small);
+    color: var(--text-color-light); /* Light action link text */
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 10. Manage Files Section (Box Layout - Cool Theme)                       */
+/* ----------------------------------------------------------------------- */
+
+/* 10.1 Manage Files Section */
+.manage-files-section {
+    margin-bottom: var(--spacing-large);
+}
+
+/* 10.2 Manage Files Heading (Cool Theme) */
+.manage-files-heading {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-large);
+    color: var(--text-color-light); /* Light heading text on dark theme */
+    text-align: center;
+}
+
+/* 10.3 File List (Grid Container - Dark Theme) */
+.file-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-medium);
+    padding: 0;
+}
+
+/* 10.4 File Item (Box - Cool Theme) */
+.file-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--spacing-medium);
+    border: 1px solid var(--dark-gray); /* Lighter border for boxes in dark theme */
+    border-radius: var(--border-radius-base);
+    background-color: var(--light-gray); /* Slightly lighter box background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Adjusted shadow for dark boxes */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.file-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced hover shadow */
+}
+
+/* 10.5 File Name & Link (Cool Theme) */
+.file-name {
+    margin-bottom: var(--spacing-small);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-color-light); /* Light file name text */
+}
+
+.file-link {
+    color: var(--primary-color-light); /* Lighter primary for file links */
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 10.6 File Actions Container (Dark Theme) */
+.file-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--spacing-medium);
+}
+
+/* 10.7 File Action Buttons (Edit, Delete - Cool Theme) */
+.file-action {
+    display: inline-block;
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: var(--border-radius-small);
+    color: var(--text-color-dark); /* Dark text on action buttons */
+    margin-left: var(--spacing-small);
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.file-action-edit {
+    background-color: var(--secondary-color); /* Teal edit button */
+    color: var(--text-color-dark); /* Ensure text is readable */
+}
+
+.file-action-delete {
+    background-color: var(--danger-color); /* Red delete button */
+    color: var(--text-color-dark); /* Ensure text is readable */
+}
+
+.file-action-edit:hover {
+    background-color: var(--secondary-color-dark); /* Darker teal on hover */
+}
+
+.file-action-delete:hover {
+    background-color: var(--danger-color-dark); /* Darker red on hover */
+}
+
+/* 10.8 Create New File Link & Button (Cool Theme) */
+.create-new-file-link {
+    margin-top: var(--spacing-large);
+    text-align: center;
+}
+
+.create-button {
+    display: inline-block;
+    padding: var(--spacing-small) var(--spacing-large);
+    background-color: var(--primary-color); /* Primary blue create button */
+    color: var(--text-color-dark); /* Dark text on create button */
+    border-radius: var(--border-radius-small);
+    font-weight: 500;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.create-button:hover {
+    background-color: var(--primary-color-dark); /* Darker blue on hover */
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 11. Site Footer (Dark Theme)                                            */
+/* ----------------------------------------------------------------------- */
+
+/* 11.1 Site Footer */
+.site-footer {
+    background-color: var(--dark-gray); /* Dark footer background */
+    color: var(--dark-gray); /* Muted text color for footer initially - will be overridden below */
+    padding: var(--spacing-medium) 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* 11.2 Footer Texts & Copyright (Dark Theme) */
+.footer-texts {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-medium);
+}
+
+.footer-copyright {
+    display: block;
+    margin-bottom: var(--spacing-small);
+    color: var(--dark-gray); /* Muted copyright text */
+}
+
+/* 11.3 Footer Links (Cool Theme) */
+.footer-link {
+    color: var(--primary-color-light); /* Lighter primary for footer links */
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+    color: var(--primary-color); /* Slightly darker on hover */
+    text-decoration: underline;
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 12. Utility Classes (Buttons - Cool Theme)                               */
+/* ----------------------------------------------------------------------- */
+
+.button-style-solid-blue {
+    background-color: var(--primary-color);
+    color: var(--text-color-dark); /* Dark text on blue buttons */
+}
+
+.button-style-solid-blue:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.button-style-solid-green {
+    background-color: var(--secondary-color);
+    color: var(--text-color-dark); /* Dark text on green buttons */
+}
+
+.button-style-solid-green:hover {
+    background-color: var(--secondary-color-dark);
+}
+
+.button-style-solid-danger {
+    background-color: var(--danger-color);
+    color: var(--text-color-dark); /* Dark text on danger buttons */
+}
+
+.button-style-solid-danger:hover {
+    background-color: var(--danger-color-dark);
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 13. Responsive Design (Dark Theme Adjustments)                           */
+/* ----------------------------------------------------------------------- */
+
+/* 13.1 Mobile Menu (768px Breakpoint - Dark Theme) */
+@media (max-width: 768px) {
+    .main-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        height: 100%;
+        background-color: var(--light-gray); /* Dark mobile menu background */
+        flex-direction: column;
+        padding-top: var(--spacing-large);
+        transition: right 0.35s ease-out;
+        align-items: stretch;
+        z-index: 101;
+        overflow-y: auto;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.4); /* Deeper shadow for mobile menu */
+    }
+
+    .main-menu.active {
+        right: 0;
+    }
+
+    .menu-item {
+        margin-left: 0;
+        padding: var(--spacing-medium) var(--spacing-large);
+        border-bottom: 1px solid var(--dark-gray); /* Lighter border in mobile menu */
+        text-align: left;
+    }
+
+    .menu-item:last-child {
+        border-bottom: none;
+    }
+
+    .menu-link {
+        display: block;
+        padding: var(--spacing-medium) var(--spacing-large);
+        color: var(--text-color-light); /* Light text in mobile menu */
+    }
+
+    .menu-btn, .cancel-btn {
+        display: block;
+    }
+
+    .menu-btn {
+        margin-left: var(--spacing-small);
+    }
+
+    .cancel-btn {
+        position: absolute;
+        top: var(--spacing-medium);
+        right: var(--spacing-medium);
+        z-index: 102;
+        display: none;
+    }
+
+    .cancel-btn.show {
+        display: block;
+    }
+
+    .menu-btn.hide {
+        display: none;
+    }
+
+    .social-icons {
+        display: none;
+    }
+}
+
+/* 13.2 Admin Panel Header Responsiveness (Dark Theme) */
+@media (max-width: 768px) {
+    .admin-panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-panel-title {
+        margin-bottom: var(--spacing-medium);
+    }
+
+    .admin-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-action-item {
+        margin-left: 0;
+        margin-bottom: var(--spacing-small);
+        width: 100%;
+    }
+
+    .admin-action-link {
+        display: block;
+        text-align: center;
+    }
+
+    .create-new-file-link {
+        text-align: center;
+    }
+}
+
+/* 13.3 Manage Files Section Responsiveness (600px Breakpoint - Dark Theme) */
+@media (max-width: 600px) {
+    .file-list {
+        grid-template-columns: 1fr;
+    }
+
+    .manage-files-heading {
+        font-size: 1.6rem;
+    }
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 14. Scrollbar Styling (Optional - Webkit Browsers - Dark Theme)         */
+/* ----------------------------------------------------------------------- */
+/* Customize scrollbar for Webkit browsers (Chrome, Safari) in Dark Theme */
+::-webkit-scrollbar {
+    width: 12px; /* Slightly wider for dark theme */
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--light-gray); /* Darker track */
+    border-radius: var(--border-radius-small);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--gray); /* Lighter thumb for contrast */
+    border-radius: var(--border-radius-small);
+    border: 3px solid var(--light-gray); /* Add border to thumb to stand out */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--dark-gray); /* Even lighter on hover */
 }
