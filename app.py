@@ -1,3 +1,6 @@
+''' =================================
+   1. Imports and Configurations
+   ================================= '''
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session, make_response
 import json
 import markdown
@@ -6,13 +9,23 @@ from functools import wraps
 import secrets
 import datetime  # Import the datetime module
 from datetime import timedelta  # Import timedelta from datetime module
+
+''' =================================
+   2. Flask App Initialization and Secret Key
+   ================================= '''
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 app.permanent_session_lifetime = timedelta(minutes=30)
 
+''' =================================
+   3. Project Settings and Constants
+   ================================= '''
 README_FOLDER = "templates/Project/projectmd"
 ADMIN_PASSWORD = "'"
 
+''' =================================
+   4. Authentication Decorator
+   ================================= '''
 # --- Authentication Decorator ---
 def login_required(f):
     @wraps(f)
@@ -24,10 +37,9 @@ def login_required(f):
 # --- End Authentication Decorator ---
 
 
-# ... (rest of your existing routes: home, project, readme_page, static, com, Privacy, FAQs, Chat, submit_form, faq) ...
-
-
-
+''' =================================
+   5. Markdown Editor Routes
+   ================================= '''
 # --- Markdown Editor Routes ---
 @app.route('/editor/<filename>', methods=['GET', 'POST'])
 @login_required  # Protect the editor
@@ -53,6 +65,7 @@ def editor(filename):
 
     print(f"Debug: Rendering editor.html with filename: {filename}") # Debug 6: Before render template
     return render_template('Project/editor.html', filename=filename, markdown_content=markdown_content)
+
 @app.route('/editor/new', methods=['GET', 'POST'])
 @login_required # Protect new file creation too
 def new_editor():
@@ -74,8 +87,12 @@ def new_editor():
             return f"Error creating file: {e}", 500
 
     return render_template('Project/editor.html', filename='new_file.md', markdown_content='') # Empty editor for new file
+# --- End Markdown Editor Routes ---
 
 
+''' =================================
+   6. Admin Panel and Login Routes
+   ================================= '''
 # --- Admin and Login ---
 @app.route('/admin/')
 @login_required
@@ -107,8 +124,12 @@ def admin_login():
 def admin_logout():
     session.pop('logged_in', None)
     return redirect(url_for('home')) # Or admin login page
+# --- End Admin and Login ---
 
 
+''' =================================
+   7. File Deletion Route (Admin Feature)
+   ================================= '''
 # ---  File Deletion (Admin Feature) ---
 @app.route('/admin/delete/<filename>')
 @login_required
@@ -121,7 +142,11 @@ def admin_delete_file(filename):
         return "File not found.", 404
     except Exception as e:
         return f"Error deleting file: {e}", 500
+# --- End File Deletion Route ---
 
+''' =================================
+   8. Markdown Preview Route
+   ================================= '''
 @app.route('/preview', methods=['POST'])
 def preview_markdown():
     data = request.get_json()
@@ -129,6 +154,11 @@ def preview_markdown():
     html_content = markdown.markdown(markdown_text)
     return jsonify({'html_content': html_content})
 
+
+''' =================================
+   9. Main Application Routes (Home, Project, Readme, Static)
+   ================================= '''
+# --- Main Application Routes ---
 # Home Page
 @app.route("/")
 def home():
@@ -171,8 +201,13 @@ def readme_page(filename):
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
+# --- End Main Application Routes ---
 
 
+''' =================================
+   10. Additional Pages (Portfolio, Privacy, FAQs, Chat, Form Submission)
+   ================================= '''
+# --- Additional Pages ---
 # Portfolio Page
 @app.route("/com/")
 def portfolio():
@@ -218,12 +253,23 @@ def faq():
     with open("static/FAQs/faq.json") as f:
         faq_data = json.load(f)
     return jsonify(faq_data)
+# --- End Additional Pages ---
 
+
+''' =================================
+   11. Error Handling (404)
+   ================================= '''
 # --- 404 Error Handler ---
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
+# --- End Error Handling ---
 
 
+''' =================================
+   12. Main Execution Block
+   ================================= '''
+# --- Main Execution Block ---
 if __name__ == "__main__":
     app.run(debug=True)  # Set debug=True for development
+# --- End Main Execution Block ---
