@@ -14,7 +14,7 @@ from datetime import timedelta  # Import timedelta from datetime module
    2. Flask App Initialization and Secret Key
    ================================= '''
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(16)
+app.secret_key = "secrets.token_hex(16)"
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 ''' =================================
