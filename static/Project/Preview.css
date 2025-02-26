@@ -1,28 +1,24 @@
-/* Preview.css - Enhanced Markdown Preview Styling - Cool Dark Theme */
+/* Preview.css - Enhanced Markdown Preview Styling - Cool Dark & Edgy Theme */
 
 /* --------------------------------------------------
-   Color Palette - Inherited from editor.css (Dark Mode with Vibrant Accents)
-   We are assuming the color variables are defined in the parent CSS or globally.
-   If not, you would redefine them here or link editor.css before Preview.css in HTML.
-   For this example, we assume they are available.
+   Color Palette - Cool Dark & Edgy Theme (from style.css) - Inherited from editor.css
    -------------------------------------------------- */
-/* :root {  -- Color variables would be defined here if not inherited -- } */
-
+/* :root {} - Color variables are assumed to be defined in editor.css or a common stylesheet */
 
 /* --------------------------------------------------
    Base Preview Content Styling
    -------------------------------------------------- */
    .preview-pane .preview-content {
-    font-family: 'Roboto', sans-serif; /* Or your preferred body font */
-    color: var(--text-color);         /* Text color from dark theme palette */
-    line-height: 1.8;                /* Increased line height for readability */
-    font-size: 17px;                 /* Slightly larger font size for preview */
+    font-family: 'Roboto Mono', monospace; /* Edgy monospace font for preview */
+    color: var(--light-text-color-3); /* Muted paragraph text color */
+    line-height: 1.7;
+    font-size: 1rem;
     word-wrap: break-word;
     overflow-x: auto;
-    padding: 30px;                   /* Increased padding for more spacing */
-    background-color: var(--bg-color-lighter); /* Dark background from palette */
-    border-radius: 8px;              /* Rounded corners for preview content area */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    padding: 30px;
+    background-color: var(--dark-bg-color-4); /* Darker preview content background */
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger preview content shadow */
 }
 
 /* --------------------------------------------------
@@ -30,199 +26,149 @@
    -------------------------------------------------- */
 .preview-content h1, .preview-content h2, .preview-content h3,
 .preview-content h4, .preview-content h5, .preview-content h6 {
-    font-weight: bold;
-    line-height: 1.4;
-    margin-top: 1.8em;              /* Increased top margin for better spacing */
-    margin-bottom: 0.9em;
-    color: var(--text-color);         /* Text color for headings */
-    letter-spacing: -0.01em;         /* Slightly reduce letter spacing for headings */
+    font-family: 'Bebas Neue', sans-serif; /* Striking heading font */
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    color: var(--light-text-color-1); /* White heading text */
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(192, 66, 255, 0.5); /* Neon heading shadow */
 }
 
 .preview-content h1 {
-    font-size: 2.8em;                /* Larger h1 */
-    border-bottom: 3px solid var(--accent-color-primary); /* Primary accent border */
-    padding-bottom: 0.6em;
-    margin-bottom: 1em;             /* More margin below h1 */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* Subtle text shadow for h1 */
+    font-size: 2.5em;
+    border-bottom: 3px solid var(--electric-purple-2); /* Electric purple h1 border */
+    padding-bottom: 0.5em;
 }
 
 .preview-content h2 {
-    font-size: 2.2em;
-    border-bottom: 2px solid var(--accent-color-secondary); /* Secondary accent border */
-    padding-bottom: 0.5em;
-    margin-bottom: 0.9em;
+    font-size: 2em;
+    border-bottom: 2px solid var(--electric-purple-2); /* Electric purple h2 border */
+    padding-bottom: 0.4em;
 }
 
 .preview-content h3 {
     font-size: 1.8em;
-    border-bottom: 1px dashed var(--gray-color-light); /* Dashed light gray border for h3 */
-    padding-bottom: 0.4em;
-    margin-bottom: 0.8em;
+    border-bottom: 1px dashed var(--dark-bg-color-7); /* Darker dashed h3 border */
+    padding-bottom: 0.3em;
 }
 
 .preview-content h4 {
     font-size: 1.5em;
-    color: var(--accent-color-primary); /* Primary accent color for h4 */
-    margin-bottom: 0.7em;
+    color: var(--electric-purple-2); /* Electric purple h4 text */
 }
 
 .preview-content h5 {
-    font-size: 1.25em;
-    color: var(--accent-color-secondary); /* Secondary accent color for h5 */
-    margin-bottom: 0.6em;
+    font-size: 1.2em;
+    color: var(--electric-purple-2); /* Electric purple h5 text */
 }
 
 .preview-content h6 {
-    font-size: 1.1em;
-    color: var(--gray-color-medium);    /* Medium gray for h6 */
-    font-style: italic;               /* Italic style for h6 */
-    margin-bottom: 0.5em;
+    font-size: 1em;
+    color: var(--light-text-color-4); /* Muted h6 text */
+    font-style: italic;
 }
-
 
 /* --------------------------------------------------
    Paragraphs
    -------------------------------------------------- */
 .preview-content p {
-    margin-bottom: 1.5em;              /* Increased paragraph margin */
-    color: var(--gray-color-light);    /* Lighter text color for paragraphs in preview */
-    line-height: 1.9;                /* Slightly increased line height for paragraphs */
+    margin-bottom: 1.2em;
+    color: var(--light-text-color-3); /* Muted paragraph text */
 }
-.preview-content p:first-child {
-    margin-top: 0; /* Remove top margin from first paragraph after heading */
-}
-
 
 /* --------------------------------------------------
    Links
    -------------------------------------------------- */
 .preview-content a {
-    color: var(--accent-color-info);    /* Info/Cyan accent for links */
+    color: var(--electric-purple-2); /* Electric purple link text */
     text-decoration: none;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-    border-bottom: 1px solid transparent; /* Underline on hover effect */
-    padding-bottom: 1px;               /* Spacing for underline effect */
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .preview-content a:hover {
-    color: #9eeffd;                   /* Lighter info color on hover */
-    text-decoration: none;            /* Keep no text decoration */
-    border-bottom-color: var(--accent-color-info); /* Underline color on hover */
-    text-shadow: 0 0 2px var(--accent-color-info); /* Subtle text shadow on hover */
+    color: var(--light-text-color-1); /* White link text on hover */
+    text-decoration: underline;
+    text-shadow: 0 0 5px rgba(192, 66, 255, 0.6); /* Neon glow on link hover */
 }
 
-
 /* --------------------------------------------------
-   Lists - Unordered (ul) and Ordered (ol)
+   Lists - Unordered and Ordered
    -------------------------------------------------- */
 .preview-content ul, .preview-content ol {
-    padding-left: 3em;                /* Increased list indentation */
-    margin-bottom: 1.5em;
+    padding-left: 2.5em;
+    margin-bottom: 1.2em;
 }
 
 .preview-content ul {
-    list-style-type: disc;            /* Default bullet style */
+    list-style-type: disc;
 }
 
 .preview-content ol {
-    list-style-type: decimal;         /* Numbered list */
+    list-style-type: decimal;
 }
 
 .preview-content li {
-    margin-bottom: 0.8em;
-    line-height: 1.7;                /* Line height for list items */
+    margin-bottom: 0.5em;
+    color: var(--light-text-color-3); /* Muted list item text */
 }
 
 .preview-content ul li::marker {
-    color: var(--accent-color-primary); /* Bullet color for unordered lists */
+    color: var(--electric-purple-2); /* Electric purple bullet color */
 }
 
 .preview-content ol li::marker {
-    color: var(--accent-color-secondary); /* Number color for ordered lists */
-    font-weight: bold;                /* Bold numbers in ordered lists */
+    color: var(--electric-purple-2); /* Electric purple number color */
 }
 
-
 /* --------------------------------------------------
-   Code - Inline (code) and Block (pre code)
+   Code - Inline and Block
    -------------------------------------------------- */
 .preview-content code {
     font-family: 'Fira Code', monospace;
-    background-color: var(--code-bg-color); /* Code block background */
-    color: var(--accent-color-primary);    /* Primary accent color for inline code text */
-    padding: 4px 8px;                   /* Slightly more padding for inline code */
-    border-radius: 5px;
-    font-size: 0.95em;
-    border: 1px solid var(--gray-color-light); /* Light gray border for inline code */
-}
-
-.preview-content pre {
-    background-color: var(--code-bg-color); /* Code block background */
-    padding: 20px;                      /* Increased padding for code blocks */
-    border-radius: 8px;
-    overflow-x: auto;
-    margin-bottom: 1.8em;              /* Increased margin below code blocks */
-    border: 1px solid var(--gray-color-light); /* Light gray border for code blocks */
+    background-color: var(--dark-bg-color-5); /* Dark inline code bg */
+    color: var(--electric-purple-2); /* Electric purple inline code text */
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
 }
 
 .preview-content pre code {
-    display: block;                    /* Ensure block display for code inside pre */
-    padding: 0;                        /* Remove padding from code inside pre (handled by pre) */
-    background-color: transparent;      /* Transparent background for code inside pre */
-    border: none;                       /* No border for code inside pre */
-    color: var(--code-text-color);       /* Code text color */
-    font-size: 1em;                    /* Code font size in blocks */
-    line-height: 1.6;
+    display: block;
+    padding: 1rem;
+    background-color: var(--dark-bg-color-5); /* Dark code block bg */
+    color: var(--light-text-color-2); /* Light code block text */
+    border-radius: 6px;
+    overflow-x: auto;
+    border: 1px solid var(--dark-bg-color-7); /* Darker code block border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Stronger code block shadow */
 }
-
-/* Syntax Highlighting - Example (basic keyword highlighting, can be extended) */
-.preview-content .keyword { color: var(--accent-color-secondary); font-weight: bold; }
-.preview-content .string { color: var(--accent-color-info); }
-.preview-content .comment { color: var(--gray-color-medium); font-style: italic; }
-.preview-content .number { color: var(--accent-color-warning); }
-/* You would need JavaScript to actually apply these classes based on syntax */
-
 
 /* --------------------------------------------------
    Blockquotes
    -------------------------------------------------- */
 .preview-content blockquote {
-    border-left: 8px solid var(--accent-color-warning); /* Warning accent blockquote border */
-    padding-left: 25px;                 /* Increased padding for blockquotes */
-    margin: 2em 0;
+    border-left: 4px solid var(--electric-purple-2); /* Electric purple blockquote border */
+    padding-left: 1.2rem;
+    margin: 1.5em 0;
     font-style: italic;
-    color: var(--gray-color-medium);    /* Medium gray blockquote text */
-    background-color: rgba(var(--accent-color-warning-rgb), 0.08); /* Tint of warning accent */
-    padding: 25px;                      /* Increased padding for blockquotes */
-    border-radius: 8px;
-    quotes: "\201C""\201D""\2018""\2019"; /* Proper quotes for blockquotes */
+    color: var(--light-text-color-4); /* Muted blockquote text */
+    background-color: var(--dark-bg-color-5); /* Dark blockquote background */
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Stronger blockquote shadow */
 }
-
-.preview-content blockquote::before {
-    content: open-quote;                 /* Opening quote before blockquote */
-    font-size: 2em;                    /* Larger quote size */
-    color: var(--accent-color-warning); /* Quote color */
-    margin-right: 0.2em;
-    line-height: 0.1em;
-    vertical-align: -0.4em;
-}
-
-.preview-content blockquote p {
-    margin-bottom: 1em;                 /* Paragraph margin in blockquotes */
-    font-size: 1.05em;                 /* Slightly larger text in blockquotes */
-}
-
 
 /* --------------------------------------------------
-   Horizontal Rule (hr)
+   Horizontal Rule (---, ***, ___)
    -------------------------------------------------- */
 .preview-content hr {
     border: 0;
-    border-top: 2px dashed var(--gray-color-light); /* Dashed light gray horizontal rule */
-    margin: 2.5em 0;
-    opacity: 0.5;                      /* Slightly transparent hr */
+    border-top: 2px dashed var(--dark-bg-color-7); /* Darker dashed hr */
+    margin: 2em 0;
 }
-
 
 /* --------------------------------------------------
    Images
@@ -231,147 +177,67 @@
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 1.5em auto;                /* Center images and add margin */
-    border-radius: 8px;              /* Rounded corners for images */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for images */
+    margin: 1em 0;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger image shadow */
 }
-.preview-content img[alt]:not([alt=""]) { /* Style images with alt text */
-    display: block;
-    font-style: italic;
-    color: var(--gray-color-medium);    /* Medium gray alt text */
-    text-align: center;
-    margin-top: 0.5em;
-    font-size: 0.9em;
-}
-
 
 /* --------------------------------------------------
-   Tables
+   Tables (if your Markdown processor supports tables)
    -------------------------------------------------- */
 .preview-content table {
     border-collapse: collapse;
     width: 100%;
-    margin-bottom: 2em;
-    border-radius: 8px;              /* Rounded corners for tables */
-    overflow: hidden;                  /* Clip content for rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for tables */
+    margin-bottom: 1.5em;
+    background-color: var(--dark-bg-color-5); /* Dark table background */
+    color: var(--light-text-color-3); /* Muted table text */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger table shadow */
 }
 
 .preview-content th, .preview-content td {
-    border: 1px solid var(--gray-color-light); /* Light gray table cell border */
-    padding: 12px 18px;                 /* Increased cell padding */
+    border: 1px solid var(--dark-bg-color-7); /* Darker table cell border */
+    padding: 8px 12px;
     text-align: left;
 }
 
 .preview-content th {
     font-weight: bold;
-    background-color: var(--bg-color);    /* Darker background for table headers */
-    color: var(--accent-color-secondary); /* Secondary accent color for header text */
-    text-transform: uppercase;          /* Uppercase table headers */
-    letter-spacing: 0.05em;
+    background-color: var(--dark-bg-color-6); /* Even darker table header bg */
+    color: var(--light-text-color-1); /* White table header text */
+    text-transform: uppercase;
 }
-
-.preview-content tbody tr:nth-child(even) td {
-    background-color: var(--bg-color);    /* Slightly darker background for even rows */
-}
-
 
 /* --------------------------------------------------
-   Emphasis - Bold (strong, b) and Italic (em, i)
+   Emphasis - Bold and Italic
    -------------------------------------------------- */
 .preview-content strong, .preview-content b {
-    font-weight: bolder;               /* Use bolder for strong emphasis */
-    color: var(--accent-color-primary); /* Primary accent color for strong text */
+    font-weight: bold;
+    color: var(--light-text-color-1); /* White bold text */
 }
 
 .preview-content em, .preview-content i {
     font-style: italic;
-    color: var(--accent-color-secondary); /* Secondary accent color for italic text */
-}
-
-
-/* --------------------------------------------------
-   Task Lists (if supported by your Markdown processor - e.g., [x], [ ])
-   -------------------------------------------------- */
-.preview-content .task-list-item {
-    list-style-type: none;             /* Remove default list markers */
-    margin-left: -1.5em;              /* Adjust left margin to align checkbox */
-    margin-bottom: 0.6em;
-    display: flex;
-    align-items: flex-start;         /* Align checkbox and text */
-}
-
-.preview-content .task-list-item-checkbox {
-    margin-right: 0.5em;               /* Spacing between checkbox and text */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: var(--bg-color-lighter); /* Checkbox background */
-    border: 1px solid var(--gray-color-light); /* Checkbox border */
-    border-radius: 4px;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    position: relative;
-    top: 0.2em;                        /* Slightly adjust vertical alignment */
-}
-
-.preview-content .task-list-item-checkbox:checked {
-    background-color: var(--accent-color-primary); /* Checked checkbox background */
-    border-color: var(--accent-color-primary); /* Checked checkbox border */
-}
-
-.preview-content .task-list-item-checkbox:checked::before {
-    content: '\2713';                   /* Checkmark character */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--bg-color);             /* Checkmark color */
-    font-size: 12px;
-}
-
-.preview-content .task-list-item-label {
-    flex-grow: 1;                      /* Allow label to take remaining space */
-    word-break: break-word;             /* Break long words in task list labels */
-    color: var(--gray-color-light);    /* Text color for task list labels */
-    line-height: 1.7;
-}
-
-.preview-content .task-list-item-checkbox:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(var(--accent-color-primary-rgb), 0.5); /* Focus ring for checkbox */
+    color: var(--electric-purple-2); /* Electric purple italic text */
 }
 
 /* --------------------------------------------------
-   Responsive adjustments (for smaller screens - within preview pane)
+   Responsive adjustments (for smaller screens)
    -------------------------------------------------- */
 @media (max-width: 768px) {
     .preview-pane .preview-content {
-        font-size: 16px;               /* Slightly smaller font on smaller screens */
-        padding: 20px;                 /* Reduced padding on smaller screens */
+        font-size: 0.95rem;
+        padding: 20px;
     }
-    .preview-content h1 { font-size: 2.3em; }
-    .preview-content h2 { font-size: 1.9em; }
+    .preview-content h1 { font-size: 2em; }
+    .preview-content h2 { font-size: 1.8em; }
     .preview-content h3 { font-size: 1.6em; }
     .preview-content ul, .preview-content ol {
-        padding-left: 2.5em;           /* Adjust list indentation on smaller screens */
+        padding-left: 2em;
     }
-    .preview-content pre {
-        padding: 15px;                 /* Reduced code block padding on smaller screens */
-        margin-bottom: 1.5em;
-    }
-    .preview-content code, .preview-content pre code {
-        font-size: 0.9em;              /* Slightly smaller code font */
-    }
-    .preview-content blockquote {
-        padding: 20px;                 /* Reduced blockquote padding on smaller screens */
-        margin: 1.8em 0;
-    }
-    .preview-content table {
-        margin-bottom: 1.8em;
-    }
-    .preview-content th, .preview-content td {
-        padding: 10px 14px;             /* Reduced table cell padding on smaller screens */
+    .preview-content pre code {
+        padding: 0.8rem;
+        font-size: 0.85em;
     }
 }

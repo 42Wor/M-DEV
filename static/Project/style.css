@@ -1,46 +1,60 @@
-/* Cool Dark & Edgy Theme - style.css */
-/* Modern, High Contrast, with Electric Purple Accents */
-/* Author: Your AI Assistant */
-/* Date: October 26, 2023 */
-/* Version: 1.0 - Initial Dark & Edgy Theme */
+/* style.css - Header & Footer Styles Only (Extracted from Cool Dark & Edgy Theme) */
 
 /* ------------------------------------------------------- */
 /*                       Table of Contents                   */
 /* ------------------------------------------------------- */
 /*
-    1.  General Styles & Reset
-    2.  Typography (Edgy & Modern)
+    1.  Essential General Styles & Reset (for Header/Footer)
+    2.  Typography (Relevant to Header/Footer)
     3.  Header & Navigation (Dark Mode Style)
         3.1 Navbar
         3.2 Logo (Neon Accent)
         3.3 Menu (Sleek & Dark)
         3.4 Social Media Icons (Bold)
         3.5 Menu Button & Cancel Button (Striking)
-    4.  Services/Projects Section (Dark & Contrasting)
-        4.1 Content Container
-        4.2 Title (Electric Underline)
-        4.3 Project Search Bar (Dark Input)
-        4.4 Project Boxes Container (Grid Layout)
-        4.5 Project Box Styling (Elevated Dark Cards)
-    5.  Footer (Dark & Minimal)
-        5.1 Footer Content Sections
-        5.2 Copyright & Legal
-        5.3 Footer Navigation Links (Understated Light)
-        5.4 Social Media in Footer (Optional - Integrated Dark Style)
-    6.  Responsive Design (Dark Theme Optimized)
-        6.1 Mobile Devices (Smaller Screens)
-        6.2 Tablets & Medium Screens
-        6.3 Larger Screens (Desktop Enhancements)
-    7.  Animations & Transitions (Sharp & Fast)
-    8.  Color Palette & Theme Variables (Dark & Electric)
-    9.  Accessibility Considerations (High Contrast Focus)
-    10. Utility Classes (Optional, for reusability)
-    11. Comments & Spacing for Readability (Ensuring 700+ lines)
+    4.  Footer (Dark & Minimal)
+        4.1 Footer Content Sections
+        4.2 Copyright & Legal
+        4.3 Footer Navigation Links (Understated Light)
+        4.4 Social Media in Footer (Optional - Integrated Dark Style)
+        4.5 Back to Top Button (Footer Integration)
+    5.  Responsive Design (Header/Footer Specific)
+        5.1 Mobile Devices (Smaller Screens - Header/Footer)
+        5.2 Tablets & Medium Screens (Header/Footer)
+        5.3 Larger Screens (Desktop Enhancements - Header/Footer)
 */
 /* ------------------------------------------------------- */
+/* Color Palette - Cool Dark & Edgy Theme (from style.css) */
+:root {
+    /* Primary Dark Shades */
+    --dark-bg-color-1: #0e0e0e;
+    --dark-bg-color-2: #121212;
+    --dark-bg-color-3: #1a1a1a;
+    --dark-bg-color-4: #212121;
+    --dark-bg-color-5: #333;
+    --dark-bg-color-6: #444;
+    --dark-bg-color-7: #555;
 
+    /* Electric Purple Accent Shades */
+    --electric-purple-1: #9b27b0;
+    --electric-purple-2: #c042ff;
+    --electric-purple-3: #ca6eff;
+    --electric-purple-4: #d49cff;
+    --electric-purple-5: rgba(192, 66, 255, 0.1);
+    --electric-purple-6: rgba(192, 66, 255, 0.05);
+    --electric-purple-7: rgba(192, 66, 255, 0.08);
+
+    /* Light Text & Gray Shades */
+    --light-text-color-1: #fff;
+    --light-text-color-2: #e0e0e0;
+    --light-text-color-3: #bdbdbd;
+    --light-text-color-4: #9e9e9e;
+    --light-text-color-5: #888;
+    --light-text-color-6: #777;
+    --light-text-color-7: #ccc;
+}
 /* ------------------------------------------------------- */
-/* 1. General Styles & Reset */
+/* 1. Essential General Styles & Reset (for Header/Footer) */
 /* ------------------------------------------------------- */
 *,
 ::before,
@@ -52,7 +66,6 @@
 
 html {
     font-size: 16px; /* Base font size */
-    scroll-behavior: smooth; /* Smooth scrolling */
 }
 
 body {
@@ -62,7 +75,7 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 a {
@@ -80,50 +93,16 @@ ul {
 }
 
 /* ------------------------------------------------------- */
-/* 2. Typography (Edgy & Modern) */
+/* 2. Typography (Relevant to Header/Footer) */
 /* ------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Bebas Neue', sans-serif; /* Striking, tall heading font - Google Fonts */
     font-weight: 700;
-    margin-bottom: 0.6rem; /* Slightly reduced heading bottom margin */
-    line-height: 1.1; /* Tighter line height for headings */
-    color: #fff; /* White headings for maximum impact */
-    letter-spacing: 0.05em; /* Slightly increased letter spacing for headings */
-    text-transform: uppercase; /* Uppercase headings for edginess */
-}
-
-p {
-    margin-bottom: 1rem;
-    font-weight: 400;
-    color: #bdbdbd; /* Muted paragraph text color */
-}
-
-blockquote {
-    font-style: italic;
-    color: #9e9e9e; /* Muted blockquote text */
-    border-left: 4px solid #c042ff; /* Electric Purple blockquote border */
-    padding-left: 1rem;
-    margin: 1.5rem 0;
-}
-
-pre {
-    background-color: #212121; /* Darker code block background */
-    color: #f0f0f0; /* Light code text */
-    padding: 1rem;
-    border-radius: 6px; /* Slightly less rounded code block corners */
-    overflow-x: auto;
-    font-family: 'Fira Code', 'Courier New', monospace;
-    margin: 1.5rem 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker, more pronounced shadow */
-    border: 1px solid #333; /* Subtle dark border for code blocks */
-}
-
-code {
-    background-color: #333; /* Darker inline code background */
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-family: 'Fira Code', 'Courier New', monospace;
-    color: #e0e0e0; /* Light inline code text */
+    margin-bottom: 0.6rem;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 /* ------------------------------------------------------- */
@@ -136,12 +115,13 @@ header {
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid #333; /* Darker header bottom border */
+    padding: 0.5rem 0; /* Reduced vertical padding for header */
 }
 
 nav {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 0 2rem; /* Reduced horizontal padding in nav */
 }
 
 /* -------------------- 3.1 Navbar -------------------- */
@@ -303,128 +283,6 @@ nav {
 }
 
 /* ------------------------------------------------------- */
-/* 4. Services/Projects Section (Dark & Contrasting) */
-/* ------------------------------------------------------- */
-.services {
-    padding: 60px 0;
-    background-color: #1a1a1a; /* Slightly lighter dark background for services */
-    /* Subtle gradient background for services section (optional, for extra coolness) */
-    /* background: linear-gradient(to bottom, #1a1a1a 0%, #1a1a1a 80%, #212121 100%); */
-}
-
-.content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    text-align: center;
-}
-
-/* -------------------- 4.1 Content Container -------------------- */
-/* (Styles are already included in .content above) */
-
-/* -------------------- 4.2 Title (Electric Underline) -------------------- */
-.title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: #fff;
-    position: relative;
-    padding-bottom: 15px;
-    display: inline-block;
-}
-
-.title::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: #c042ff; /* Electric Purple underline */
-    border-radius: 1.5px;
-}
-
-.title span {
-    display: block;
-}
-
-/* -------------------- 4.3 Project Search Bar (Dark Input) -------------------- */
-.project-search {
-    margin-bottom: 30px;
-}
-
-.project-search input[type="text"] {
-    width: 100%;
-    max-width: 400px;
-    padding: 12px 15px;
-    background-color: #333; /* Dark search bar background */
-    border: 1px solid #555; /* Darker gray border */
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #e0e0e0; /* Light text in search bar */
-    transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Faster transitions */
-}
-
-.project-search input[type="text"]:focus {
-    outline: none;
-    border-color: #c042ff; /* Electric Purple focus border */
-    box-shadow: 0 0 5px rgba(192, 66, 255, 0.6); /* Electric Purple focus shadow */
-}
-
-.project-search input[type="text"]::placeholder {
-    color: #777; /* Darker placeholder text color */
-}
-
-/* -------------------- 4.4 Project Boxes Container -------------------- */
-.boxes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    justify-items: stretch;
-}
-
-/* -------------------- 4.5 Project Box Styling (Elevated Dark Cards) -------------------- */
-.box {
-    background-color: #212121; /* Dark project box background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Stronger box shadow */
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Faster transitions */
-    border: 1px solid #444; /* Darker border for boxes */
-}
-
-.box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Stronger hover shadow */
-}
-
-.box-link {
-    display: block;
-    padding: 30px;
-    text-align: center;
-}
-
-.box .icon {
-    font-size: 2.5rem;
-    color: #c042ff; /* Electric Purple folder icon */
-    margin-bottom: 20px;
-    opacity: 0.8; /* Slightly reduced icon opacity */
-}
-
-.box .topic {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: #fff; /* White topic text */
-}
-
-.box p {
-    font-size: 1rem;
-    color: #9e9e9e; /* Muted description color */
-}
-
-/* ------------------------------------------------------- */
 /* 5. Footer (Dark & Minimal) */
 /* ------------------------------------------------------- */
 footer {
@@ -512,30 +370,54 @@ footer {
     transform: scale(1.1);
 }
 
-
-/* -------------------- (Modified) Footer .texts  - now inside .copyright  -------------------- */
-/*  Keeping the old style for copyright info, but consider using .copyright class instead */
-footer .texts span {
-    display: block;
-    margin-bottom: 5px;
-    color: #777; /* Darker footer text color */
+/* -------------------- 5.5 Back to Top Button (Footer Integration) -------------------- */
+.back-to-top-btn {
+    position: absolute; /* Absolute positioning within footer */
+    bottom: 20px;
+    right: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Larger back to top button */
+    height: 45px;
+    background-color: #333;
+    color: #9e9e9e;
+    border-radius: 50%;
+    font-size: 1.2rem; /* Larger icon size */
+    cursor: pointer;
+    opacity: 0.8; /* Slightly transparent initially */
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease; /* Transition for opacity */
 }
 
-footer .texts span a.links {
-    color: #c042ff; /* Electric Purple link color in footer */
-    transition: color 0.2s ease;
-}
-
-footer .texts span a.links:hover {
+.back-to-top-btn:hover {
+    background-color: #c042ff;
     color: #fff;
-    text-decoration: underline;
+    opacity: 1; /* Full opacity on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.back-to-top-btn:active {
+    transform: translateY(0); /* No lift on active */
+    opacity: 0.9; /* Slight opacity reduction on active */
+}
+
+.back-to-top-btn {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transition for visibility */
+    transform: translateY(20px); /* Start slightly below position */
+}
+
+.back-to-top-btn.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 
 /* ------------------------------------------------------- */
-/* 6. Responsive Design (Dark Theme Optimized) */
+/* 6. Responsive Design (Header/Footer Specific) */
 /* ------------------------------------------------------- */
-/* -------------------- 6.1 Mobile Devices (Smaller Screens) -------------------- */
+/* -------------------- 6.1 Mobile Devices (Smaller Screens - Header/Footer) -------------------- */
 @media (max-width: 768px) {
     nav {
         padding: 1rem 1.5rem;
@@ -561,37 +443,6 @@ footer .texts span a.links:hover {
         display: none; /* Optionally hide social icons on mobile */
     }
 
-    .services {
-        padding: 40px 0; /* Reduced services padding on mobile */
-    }
-
-    .content {
-        padding: 0 1.5rem;
-    }
-
-    .title {
-        font-size: 2.2rem; /* Adjusted title size on mobile */
-        margin-bottom: 30px;
-    }
-
-    .boxes {
-        grid-template-columns: 1fr;
-        gap: 25px; /* Adjusted box spacing on mobile */
-    }
-
-    .box-link {
-        padding: 20px;
-    }
-
-    .box .icon {
-        font-size: 2rem; /* Adjusted icon size on mobile */
-        margin-bottom: 15px;
-    }
-
-    .box .topic {
-        font-size: 1.2rem; /* Adjusted topic size on mobile */
-    }
-
     footer {
         padding: 30px 0; /* Reduced footer padding on mobile */
     }
@@ -611,7 +462,7 @@ footer .texts span a.links:hover {
     }
 }
 
-/* -------------------- 6.2 Tablets & Medium Screens -------------------- */
+/* -------------------- 6.2 Tablets & Medium Screens (Header/Footer) -------------------- */
 @media (min-width: 769px) and (max-width: 992px) {
     nav {
         padding: 1rem 1.8rem;
@@ -621,29 +472,12 @@ footer .texts span a.links:hover {
         margin-left: 20px;
     }
 
-    .services {
-        padding: 50px 0;
-    }
-
-    .content {
-        padding: 0 1.8rem;
-    }
-
-    .title {
-        font-size: 2.3rem; /* Adjusted title size on tablet */
-        margin-bottom: 35px;
-    }
-
-    .boxes {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjusted box columns on tablet */
-    }
-
     footer {
         padding: 35px 0;
     }
 }
 
-/* -------------------- 6.3 Larger Screens (Desktop Enhancements) -------------------- */
+/* -------------------- 6.3 Larger Screens (Desktop Enhancements - Header/Footer) -------------------- */
 @media (min-width: 993px) {
     nav {
         padding: 1.5rem 2.5rem;
@@ -653,82 +487,9 @@ footer .texts span a.links:hover {
         margin-left: 30px;
     }
 
-    .services {
-        padding: 70px 0;
-    }
-
-    .content {
-        padding: 0 2.5rem;
-    }
-
-    .title {
-        font-size: 2.7rem; /* Larger title on larger screens */
-        margin-bottom: 45px;
-    }
-
-    .boxes {
-        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Adjusted box columns on larger screens */
-    }
-
     footer {
         padding: 45px 0;
     }
 }
 
-/* ------------------------------------------------------- */
-/* 7. Animations & Transitions (Sharp & Fast) */
-/* ------------------------------------------------------- */
-/* (Transitions are already implemented, focusing on faster, sharper feel) */
-/* Consider adding subtle animations, like element reveals or hover effects, using faster durations and sharp easing. */
-
-/* Example: Keyframe animation for a subtle pulsating effect on an element (e.g., a button) */
-/*
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.9; }
-    50% { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.9; }
-}
-
-.some-button-class:hover {
-    animation: pulse 1s ease-in-out infinite;
-}
-*/
-
-/* ------------------------------------------------------- */
-/* 8. Color Palette & Theme Variables (Dark & Electric) */
-/* ------------------------------------------------------- */
-/* Color Palette:
-    - Primary Dark Background: #121212 (almost black)
-    - Secondary Dark Background: #212121, #1a1a1a, #333
-    - Accent Color: #c042ff (Electric Purple)
-    - Light Text: #e0e0e0, #fff, #bdbdbd
-    - Muted Text/Icons: #9e9e9e, #777
-
-You can customize this further by defining CSS variables at the :root level for easy theme adjustments.
-*/
-
-/* ------------------------------------------------------- */
-/* 9. Accessibility Considerations (High Contrast Focus) */
-/* ------------------------------------------------------- */
-/* - **High Color Contrast:**  Prioritized high contrast between text and backgrounds to ensure readability in a dark theme.
-/* - Semantic HTML, alt text for images, focus states, and keyboard navigation remain important as in previous themes.
-/* - Ensure focus states are clearly visible against the dark backgrounds. You might need to customize focus styles further for optimal visibility.
-*/
-
-/* ------------------------------------------------------- */
-/* 10. Utility Classes (Optional, for reusability) */
-/* ------------------------------------------------------- */
-/* (Utility classes can be added for repeated styling patterns as needed) */
-
-/* ------------------------------------------------------- */
-/* 11. Comments & Spacing for Readability (Ensuring 700+ lines) */
-/* ------------------------------------------------------- */
-/* (This section and detailed comments continue to contribute to line count and code clarity) */
-/* Further lines can be added by:
-    - More complex animations and hover effects
-    - More specific styles for interactive elements (forms, buttons, etc.)
-    - Expanding utility classes
-    - Adding more comments and explanations
-*/
-
-/* End of Cool Dark & Edgy style.css */
+/* End of Header & Footer styles from Cool Dark & Edgy style.css */
