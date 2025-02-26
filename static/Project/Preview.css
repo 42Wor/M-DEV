@@ -19,6 +19,7 @@
     background-color: var(--dark-bg-color-4); /* Darker preview content background */
     border-radius: 8px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger preview content shadow */
+    text-align: center; /* RE-APPLIED: Center all text within preview content */
 }
 
 /* --------------------------------------------------
@@ -35,40 +36,53 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-shadow: 0 0 5px rgba(192, 66, 255, 0.5); /* Neon heading shadow */
+    text-align: center; /* RE-APPLIED: Center headings */
 }
 
 .preview-content h1 {
     font-size: 2.5em;
     border-bottom: 3px solid var(--electric-purple-2); /* Electric purple h1 border */
     padding-bottom: 0.5em;
+    display: inline-block; /* RE-APPLIED: To center border under the text */
+    text-align: center; /* Ensure text inside is centered */
+    width: auto; /* Adjust width to content */
 }
 
 .preview-content h2 {
     font-size: 2em;
     border-bottom: 2px solid var(--electric-purple-2); /* Electric purple h2 border */
     padding-bottom: 0.4em;
+    display: inline-block; /* RE-APPLIED: To center border under the text */
+    text-align: center; /* Ensure text inside is centered */
+    width: auto; /* Adjust width to content */
 }
 
 .preview-content h3 {
     font-size: 1.8em;
     border-bottom: 1px dashed var(--dark-bg-color-7); /* Darker dashed h3 border */
     padding-bottom: 0.3em;
+    display: inline-block; /* RE-APPLIED: To center border under the text */
+    text-align: center; /* Ensure text inside is centered */
+    width: auto; /* Adjust width to content */
 }
 
 .preview-content h4 {
     font-size: 1.5em;
     color: var(--electric-purple-2); /* Electric purple h4 text */
+    text-align: center; /* RE-APPLIED: Center h4 text */
 }
 
 .preview-content h5 {
     font-size: 1.2em;
     color: var(--electric-purple-2); /* Electric purple h5 text */
+    text-align: center; /* RE-APPLIED: Center h5 text */
 }
 
 .preview-content h6 {
     font-size: 1em;
     color: var(--light-text-color-4); /* Muted h6 text */
     font-style: italic;
+    text-align: center; /* RE-APPLIED: Center h6 text */
 }
 
 /* --------------------------------------------------
@@ -77,6 +91,7 @@
 .preview-content p {
     margin-bottom: 1.2em;
     color: var(--light-text-color-3); /* Muted paragraph text */
+    text-align: center; /* RE-APPLIED: Center paragraph text */
 }
 
 /* --------------------------------------------------
@@ -86,6 +101,10 @@
     color: var(--electric-purple-2); /* Electric purple link text */
     text-decoration: none;
     transition: color 0.2s ease, text-shadow 0.2s ease;
+    text-align: center; /* RE-APPLIED: Center link text */
+    display: block; /* RE-APPLIED: Make links block-level to center them if they are alone in a line */
+    margin: 0 auto; /* RE-APPLIED: Center block-level links horizontally */
+    width: fit-content; /* RE-APPLIED: Fit link width to content */
 }
 
 .preview-content a:hover {
@@ -98,8 +117,10 @@
    Lists - Unordered and Ordered
    -------------------------------------------------- */
 .preview-content ul, .preview-content ol {
-    padding-left: 2.5em;
+    padding-left: 0; /* RE-APPLIED: Remove default left padding */
     margin-bottom: 1.2em;
+    text-align: center; /* RE-APPLIED: Center list text */
+    list-style-position: inside; /* RE-APPLIED: Put markers inside list item to center them */
 }
 
 .preview-content ul {
@@ -113,6 +134,7 @@
 .preview-content li {
     margin-bottom: 0.5em;
     color: var(--light-text-color-3); /* Muted list item text */
+    text-align: center; /* RE-APPLIED: Center list item text */
 }
 
 .preview-content ul li::marker {
@@ -133,6 +155,7 @@
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
     font-size: 0.9em;
+    text-align: left; /* REVERTED: Code is typically left-aligned for readability */
 }
 
 .preview-content pre code {
@@ -144,6 +167,7 @@
     overflow-x: auto;
     border: 1px solid var(--dark-bg-color-7); /* Darker code block border */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Stronger code block shadow */
+    text-align: left; /* REVERTED: Code block is typically left-aligned for readability */
 }
 
 /* --------------------------------------------------
@@ -151,7 +175,7 @@
    -------------------------------------------------- */
 .preview-content blockquote {
     border-left: 4px solid var(--electric-purple-2); /* Electric purple blockquote border */
-    padding-left: 1.2rem;
+    padding-left: 1.2rem; /* Keep left padding for visual separation of border */
     margin: 1.5em 0;
     font-style: italic;
     color: var(--light-text-color-4); /* Muted blockquote text */
@@ -159,6 +183,7 @@
     border-radius: 6px;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Stronger blockquote shadow */
+    text-align: center; /* RE-APPLIED: Center blockquote text */
 }
 
 /* --------------------------------------------------
@@ -167,7 +192,8 @@
 .preview-content hr {
     border: 0;
     border-top: 2px dashed var(--dark-bg-color-7); /* Darker dashed hr */
-    margin: 2em 0;
+    margin: 2em auto; /* RE-APPLIED: Center hr horizontally */
+    width: 50%; /* RE-APPLIED: Reduce width for visual centering effect */
 }
 
 /* --------------------------------------------------
@@ -177,9 +203,10 @@
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 1em 0;
+    margin: 1em auto; /* RE-APPLIED: Center images horizontally */
     border-radius: 8px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger image shadow */
+    text-align: center; /* RE-APPLIED: For any potential text-align context */
 }
 
 /* --------------------------------------------------
@@ -187,19 +214,23 @@
    -------------------------------------------------- */
 .preview-content table {
     border-collapse: collapse;
-    width: 100%;
+    width: auto; /* RE-APPLIED: Adjust width to content to center properly */
     margin-bottom: 1.5em;
     background-color: var(--dark-bg-color-5); /* Dark table background */
     color: var(--light-text-color-3); /* Muted table text */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger table shadow */
+    text-align: center; /* RE-APPLIED: Center table content generally */
+    margin-left: auto; /* RE-APPLIED: Center the table itself horizontally */
+    margin-right: auto; /* RE-APPLIED: Center the table itself horizontally */
+    display: inline-block; /* RE-APPLIED: To allow centering using margin auto */
 }
 
 .preview-content th, .preview-content td {
     border: 1px solid var(--dark-bg-color-7); /* Darker table cell border */
     padding: 8px 12px;
-    text-align: left;
+    text-align: center; /* RE-APPLIED: Center text in table cells */
 }
 
 .preview-content th {
@@ -215,11 +246,13 @@
 .preview-content strong, .preview-content b {
     font-weight: bold;
     color: var(--light-text-color-1); /* White bold text */
+    text-align: center; /* RE-APPLIED: Center bold text if needed in a centered context */
 }
 
 .preview-content em, .preview-content i {
     font-style: italic;
     color: var(--electric-purple-2); /* Electric purple italic text */
+    text-align: center; /* RE-APPLIED: Center italic text if needed in a centered context */
 }
 
 /* --------------------------------------------------
@@ -229,15 +262,19 @@
     .preview-pane .preview-content {
         font-size: 0.95rem;
         padding: 20px;
+        text-align: center; /* Ensure text-align: center; is maintained in responsive mode */
     }
     .preview-content h1 { font-size: 2em; }
     .preview-content h2 { font-size: 1.8em; }
     .preview-content h3 { font-size: 1.6em; }
     .preview-content ul, .preview-content ol {
-        padding-left: 2em;
+        padding-left: 0; /* Ensure padding is removed in responsive mode */
+        list-style-position: inside; /* Ensure list markers are inside in responsive mode */
+        text-align: center; /* Ensure text-align: center; is maintained in responsive mode */
     }
     .preview-content pre code {
         padding: 0.8rem;
         font-size: 0.85em;
+        text-align: left; /* Keep code left-aligned in responsive mode */
     }
 }
