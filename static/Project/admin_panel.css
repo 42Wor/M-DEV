@@ -70,7 +70,7 @@
     --accent-color-dark: #00ACC1;     /* Darker Cyan, Focused Accent */
     --light-gray: #212121;           /* Dark Background Gray - Near Black */
     --gray: #424242;                 /* Medium Dark Gray - UI Elements */
-    --dark-gray: #BDBDBD;            /* Light Gray -  Text on Dark Backgrounds, Muted UI */
+    --dark-gray: #424242;            /* Light Gray -  Text on Dark Backgrounds, Muted UI */
     --text-color-dark: #E0E0E0;      /* Light Text - Primary Text on Dark */
     --text-color-light: #FAFAFA;     /* Very Light Text -  Highlights, Strong Contrast */
 
@@ -480,7 +480,7 @@ li {
 .footer-copyright {
     display: block;
     margin-bottom: var(--spacing-small);
-    color: var(--dark-gray); /* Muted copyright text */
+    color: #E0E0E0; /* Muted copyright text */
 }
 
 /* 11.3 Footer Links (Cool Theme) */
