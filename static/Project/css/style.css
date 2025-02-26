@@ -1,0 +1,468 @@
+/* style.css - Header & Footer Styles Only (Extracted from Cool Dark & Edgy Theme) */
+
+/* ------------------------------------------------------- */
+/*                       Table of Contents                   */
+/* ------------------------------------------------------- */
+/*
+    1.  Essential General Styles & Reset (for Header/Footer)
+    2.  Typography (Relevant to Header/Footer)
+    3.  Header & Navigation (Dark Mode Style)
+        3.1 Navbar
+        3.2 Logo (Neon Accent)
+        3.3 Menu (Sleek & Dark)
+        3.4 Social Media Icons (Bold)
+        3.5 Menu Button & Cancel Button (Striking)
+    4.  Footer (Dark & Minimal)
+        4.1 Footer Content Sections
+        4.2 Copyright & Legal
+        4.3 Footer Navigation Links (Understated Light)
+        4.4 Social Media in Footer (Optional - Integrated Dark Style)
+        4.5 Back to Top Button (Footer Integration)
+    5.  Responsive Design (Header/Footer Specific)
+        5.1 Mobile Devices (Smaller Screens - Header/Footer)
+        5.2 Tablets & Medium Screens (Header/Footer)
+        5.3 Larger Screens (Desktop Enhancements - Header/Footer)
+*/
+/* ------------------------------------------------------- */
+/* Color Palette - Cool Dark & Edgy Theme (from style.css) */
+                                          
+/* ------------------------------------------------------- */
+/* 1. Essential General Styles & Reset (for Header/Footer) */
+/* ------------------------------------------------------- */
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: 'Roboto Mono', monospace; /* Edgy, techy monospace font for body - Google Fonts */
+    background-color: #121212; /* Very dark gray, almost black body background */
+    color: #e0e0e0; /* Light gray text for high contrast */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease; /* Faster transition */
+}
+
+a:hover {
+    color: #c042ff; /* Electric Purple hover color */
+}
+
+ul {
+    list-style: none;
+}
+
+/* ------------------------------------------------------- */
+/* 2. Typography (Relevant to Header/Footer) */
+/* ------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif; /* Striking, tall heading font - Google Fonts */
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ------------------------------------------------------- */
+/* 3. Header & Navigation (Dark Mode Style) */
+/* ------------------------------------------------------- */
+header {
+    background-color: #212121; /* Dark header background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Stronger header shadow */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333; /* Darker header bottom border */
+    padding: 0.5rem 0; /* Reduced vertical padding for header */
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem; /* Reduced horizontal padding in nav */
+}
+
+/* -------------------- 3.1 Navbar -------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* -------------------- 3.2 Logo (Neon Accent) -------------------- */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo .image {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px; /* Slightly less rounded logo image */
+    overflow: hidden;
+    margin-right: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Darker logo image shadow */
+    border: 2px solid #c042ff; /* Electric Purple border for logo image */
+}
+
+.logo .image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo .text a {
+    font-size: 1.6rem; /* Slightly larger logo text */
+    font-weight: 700;
+    color: #fff; /* White logo text */
+    transition: color 0.2s ease;
+}
+
+.logo .text a:hover {
+    color: #c042ff; /* Electric Purple logo text hover */
+}
+
+/* -------------------- 3.3 Menu (Sleek & Dark) -------------------- */
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu li {
+    margin-left: 25px;
+}
+
+.menu li a {
+    font-weight: 500;
+    color: #9e9e9e; /* Muted menu link color */
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.menu li a:hover,
+.menu li a.active {
+    color: #fff; /* White menu link hover/active */
+    background-color: #333; /* Slightly lighter dark background on hover/active */
+}
+
+/* --- Mobile Menu Styles (Initially hidden) --- */
+.menu.active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px; /* Slightly narrower mobile menu */
+    height: 100vh;
+    background-color: #212121; /* Dark mobile menu background */
+    padding: 50px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Stronger mobile menu shadow */
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #212121;
+    padding: 50px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+}
+
+.menu.active li {
+    margin: 12px 0;
+}
+
+.menu.active li a {
+    display: block;
+    padding: 12px 18px;
+    border-radius: 6px;
+    text-align: left; /* Left align text in mobile menu */
+}
+
+/* -------------------- 3.4 Social Media Icons (Bold) -------------------- */
+.media-icons {
+    display: flex;
+    align-items: center;
+}
+
+.media-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: #333; /* Darker social icon background */
+    color: #9e9e9e; /* Muted social icon color */
+    border-radius: 50%;
+    margin-left: 10px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease; /* Faster transitions */
+}
+
+.media-icons a:hover {
+    background-color: #c042ff; /* Electric Purple hover background */
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* -------------------- 3.5 Menu Button & Cancel Button (Striking) -------------------- */
+.menu-btn,
+.cancel-btn {
+    font-size: 1.5rem;
+    color: #9e9e9e; /* Muted button color */
+    cursor: pointer;
+    display: none;
+    transition: transform 0.2s ease; /* Faster button transition */
+}
+
+.menu-btn:hover,
+.cancel-btn:hover {
+    transform: scale(1.1);
+}
+
+.cancel-btn {
+    position: absolute;
+    top: 15px; /* Adjusted cancel button position */
+    right: 15px;
+}
+
+/* ------------------------------------------------------- */
+/* 5. Footer (Dark & Minimal) */
+/* ------------------------------------------------------- */
+footer {
+    background-color: #121212; /* Very dark footer background - same as body */
+    color: #bdbdbd; /* Muted footer text color */
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #333; /* Darker footer top border */
+}
+
+/* -------------------- 5.1 Footer Content Sections -------------------- */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 769px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+
+/* -------------------- 5.2 Copyright & Legal -------------------- */
+.copyright {
+    margin-bottom: 15px;
+    color: #777; /* Darker copyright text color */
+}
+
+/* -------------------- 5.3 Footer Navigation Links (Understated Light) -------------------- */
+.footer-links ul {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.footer-links li {
+    margin: 0 15px;
+}
+
+.footer-links li a {
+    color: #bdbdbd; /* Muted footer link color */
+    transition: color 0.2s ease;
+}
+
+.footer-links li a:hover {
+    color: #fff; /* White hover color */
+    text-decoration: none;
+    opacity: 0.9; /* Subtle opacity change on hover */
+}
+
+/* -------------------- 5.4 Social Media in Footer (Optional - Integrated Dark Style) -------------------- */
+.footer-social-icons {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Slightly smaller footer social icons */
+    height: 30px;
+    border-radius: 50%;
+    background-color: #444; /* Darker background for footer social icons */
+    color: #9e9e9e; /* Muted icon color */
+    margin: 0 6px; /* Adjusted footer social icon spacing */
+    font-size: 0.9rem; /* Smaller icon size */
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease; /* Faster transitions */
+}
+
+.footer-social-icons a:hover {
+    background-color: #c042ff; /* Electric Purple hover background */
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* -------------------- 5.5 Back to Top Button (Footer Integration) -------------------- */
+.back-to-top-btn {
+    position: absolute; /* Absolute positioning within footer */
+    bottom: 20px;
+    right: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Larger back to top button */
+    height: 45px;
+    background-color: #333;
+    color: #9e9e9e;
+    border-radius: 50%;
+    font-size: 1.2rem; /* Larger icon size */
+    cursor: pointer;
+    opacity: 0.8; /* Slightly transparent initially */
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease; /* Transition for opacity */
+}
+
+.back-to-top-btn:hover {
+    background-color: #c042ff;
+    color: #fff;
+    opacity: 1; /* Full opacity on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.back-to-top-btn:active {
+    transform: translateY(0); /* No lift on active */
+    opacity: 0.9; /* Slight opacity reduction on active */
+}
+
+.back-to-top-btn {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transition for visibility */
+    transform: translateY(20px); /* Start slightly below position */
+}
+
+.back-to-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ------------------------------------------------------- */
+/* 6. Responsive Design (Header/Footer Specific) */
+/* ------------------------------------------------------- */
+/* -------------------- 6.1 Mobile Devices (Smaller Screens - Header/Footer) -------------------- */
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .navbar {
+        padding: 0;
+    }
+
+    .logo .text a {
+        font-size: 1.4rem; /* Adjusted logo text size on mobile */
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .media-icons {
+        display: none; /* Optionally hide social icons on mobile */
+    }
+
+    footer {
+        padding: 30px 0; /* Reduced footer padding on mobile */
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links li {
+        margin: 10px 0;
+    }
+}
+
+/* -------------------- 6.2 Tablets & Medium Screens (Header/Footer) -------------------- */
+@media (min-width: 769px) and (max-width: 992px) {
+    nav {
+        padding: 1rem 1.8rem;
+    }
+
+    .menu li {
+        margin-left: 20px;
+    }
+
+    footer {
+        padding: 35px 0;
+    }
+}
+
+/* -------------------- 6.3 Larger Screens (Desktop Enhancements - Header/Footer) -------------------- */
+@media (min-width: 993px) {
+    nav {
+        padding: 1.5rem 2.5rem;
+    }
+
+    .menu li {
+        margin-left: 30px;
+    }
+
+    footer {
+        padding: 45px 0;
+    }
+}
+
+/* End of Header & Footer styles from Cool Dark & Edgy style.css */

@@ -1,0 +1,880 @@
+/* project.css - Comprehensive Styles for Project READMEs Page */
+
+/* ----------------------------------------------------------------------- */
+/*                       Table of Contents                                 */
+/* ----------------------------------------------------------------------- */
+
+/*  1.  Global Resets and Base Styles
+    2.  Color Variables and Theme
+    3.  Typography and Fonts
+    4.  Layout and Structure
+    5.  Header and Navigation
+        5.1  Navbar Container
+        5.2  Logo Styling
+        5.3  Navigation Menu
+        5.4  Social Media Icons
+        5.5  Mobile Menu Button and Responsiveness
+    6.  Projects Section
+        6.1  Section Container
+        6.2  Title Styling
+        6.3  Project Search Bar
+        6.4  Project Boxes Grid
+        6.5  Individual Project Box
+    7.  Footer Styling
+        7.1  Footer Container
+        7.2  Text and Links
+    8.  Responsive Design Adjustments
+        8.1  Larger Desktop Screens (1440px+)
+        8.2  Desktop Screens (1200px)
+        8.3  Tablet Screens (980px)
+        8.4  Mobile Screens (600px)
+        8.5  Small Mobile Screens (480px)
+    9.  Animations and Transitions
+        9.1  Hover Effects
+        9.2  Menu Slide Animation
+    10. Utility Classes (Optional)
+         10.1 Spacing Utilities
+         10.2 Text Utilities
+    11. Code Block Styling (If Applicable)
+    12. Accessibility Considerations
+    13. Print Styles (Optional)
+    14. Vendor Prefixes (Consideration for older browsers)
+    15. Future Enhancements and Notes
+*/
+
+/* ----------------------------------------------------------------------- */
+/* 1. Global Resets and Base Styles                                        */
+/* ----------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px; /* Base font size for rem units */
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--dark-bg-color-2);
+    color: var(--light-text-color-2);
+    line-height: 1.6; /* Improved readability for text */
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent element */
+}
+
+ul, ol {
+    list-style: none; /* Remove default list styling */
+}
+
+img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto;
+    display: block; /* Prevent extra space below inline images */
+}
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 2. Color Variables and Theme                                            */
+/* ----------------------------------------------------------------------- */
+
+:root {
+    /* Primary Dark Shades */
+    --dark-bg-color-1: #0e0e0e;         /* Deepest background */
+    --dark-bg-color-2: #121212;         /* Main background */
+    --dark-bg-color-3: #1a1a1a;         /* Secondary background, header, boxes */
+    --dark-bg-color-4: #212121;         /* Hover/active backgrounds */
+    --dark-bg-color-5: #333;            /* Subtle background accents, borders */
+    --dark-bg-color-6: #444;            /* Lighter gray backgrounds */
+    --dark-bg-color-7: #555;            /* Even lighter gray backgrounds */
+
+    /* Electric Purple Accent Shades */
+    --electric-purple-1: #9b27b0;       /* Darker purple accent */
+    --electric-purple-2: #c042ff;       /* Main electric purple */
+    --electric-purple-3: #ca6eff;       /* Lighter purple for links */
+    --electric-purple-4: #d49cff;       /* Very light purple */
+    --electric-purple-5: rgba(192, 66, 255, 0.1); /* Purple with 10% opacity */
+    --electric-purple-6: rgba(192, 66, 255, 0.05); /* Purple with 5% opacity */
+    --electric-purple-7: rgba(192, 66, 255, 0.08); /* Purple with 8% opacity */
+
+    /* Light Text & Gray Shades */
+    --light-text-color-1: #fff;         /* White text, primary headings */
+    --light-text-color-2: #e0e0e0;       /* Light gray text, main body text */
+    --light-text-color-3: #bdbdbd;       /* Medium gray text, secondary text */
+    --light-text-color-4: #9e9e9e;       /* Placeholder text, muted text */
+    --light-text-color-5: #888;          /* Gray text, less important info */
+    --light-text-color-6: #777;          /* Darker gray text */
+    --light-text-color-7: #ccc;          /* Light gray border color */
+
+    /* Semantic Colors (Optional - for future expansion) */
+    --primary-color: var(--electric-purple-2); /* Primary brand color */
+    --secondary-color: var(--dark-bg-color-3); /* Secondary background or accent */
+    --success-color: #4caf50;          /* Green for success messages */
+    --error-color: #f44336;            /* Red for error messages */
+    --warning-color: #ff9800;          /* Orange for warnings */
+    --info-color: #2196f3;             /* Blue for informational messages */
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 3. Typography and Fonts                                                */
+/* ----------------------------------------------------------------------- */
+
+/* Font families are already linked in HTML, just applying styles here */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--light-text-color-1);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+}
+
+p {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--light-text-color-2);
+    margin-bottom: 1rem;
+}
+
+/* Specific typography for projects page elements */
+.services .title {
+    font-size: 3rem; /* Larger title for projects section */
+    margin-bottom: 60px;
+}
+
+.services .title span::before {
+    bottom: -15px; /* Adjust underline position for larger title */
+    height: 4px; /* Thicker underline */
+}
+
+.box .topic {
+    font-size: 1.6rem; /* Larger topic in project box */
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.box p {
+    font-size: 1.1rem; /* Slightly larger paragraph in project box */
+    color: var(--light-text-color-3);
+}
+
+footer .texts span {
+    font-size: 0.9rem; /* Slightly smaller footer text */
+    color: var(--light-text-color-3);
+}
+
+/* Code font (if you plan to add code snippets later) */
+code, pre {
+    font-family: 'Fira Code', monospace;
+    background-color: var(--dark-bg-color-4);
+    color: var(--light-text-color-2);
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    overflow-x: auto; /* Horizontal scroll for long code lines */
+    display: block; /* Ensure pre is block level */
+    margin-bottom: 1rem;
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 4. Layout and Structure                                               */
+/* ----------------------------------------------------------------------- */
+
+.container {
+    max-width: 1200px; /* Consistent container width for layout */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+section {
+    padding: 80px 0; /* Vertical padding for sections */
+}
+
+/* Specific layout for projects section */
+.services {
+    text-align: center; /* Center align content in projects section */
+}
+
+.services .content {
+    /* Content is already contained within .container */
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 5. Header and Navigation                                               */
+/* ----------------------------------------------------------------------- */
+
+header {
+    background-color: var(--dark-bg-color-3);
+    position: sticky; /* Sticky header */
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    border-bottom: 1px solid var(--dark-bg-color-5); /* Subtle border below header */
+}
+
+/* 5.1 Navbar Container */
+nav {
+    padding: 25px 20px; /* Slightly increased padding for navbar */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Match container width */
+    margin: 0 auto;
+}
+
+/* 5.2 Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo .image img {
+    height: 45px; /* Slightly larger logo */
+    margin-right: 15px;
+    border-radius: 5px; /* Optional: Rounded corners for logo */
+    transition: transform 0.3s ease-in-out; /* Hover effect for logo */
+}
+
+.logo .image img:hover {
+    transform: scale(1.1); /* Slightly enlarge logo on hover */
+}
+
+
+.logo .text a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem; /* Larger logo text */
+    color: var(--light-text-color-1);
+    transition: color 0.3s ease; /* Color transition on hover */
+}
+
+.logo .text a:hover {
+    color: var(--electric-purple-3); /* Change color on hover */
+}
+
+/* 5.3 Navigation Menu */
+.menu {
+    display: flex;
+    margin-left: auto; /* Push menu to the right */
+}
+
+.menu li {
+    margin: 0 20px; /* Increased spacing between menu items */
+}
+
+.menu li:first-child {
+    margin-left: 0; /* Remove left margin from first item */
+}
+
+.menu li:last-child {
+    margin-right: 0; /* Remove right margin from last item */
+}
+
+
+.menu li a {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    color: var(--light-text-color-2);
+    font-size: 1.1rem; /* Slightly larger menu links */
+    padding: 8px 12px; /* Padding for menu links */
+    border-radius: 5px; /* Rounded corners for menu links */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
+    position: relative; /* For pseudo-element underline */
+}
+
+.menu li a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px; /* Position underline below text */
+    width: 0;
+    height: 2px;
+    background-color: var(--electric-purple-2);
+    transition: width 0.4s ease, left 0.4s ease; /* Underline animation */
+}
+
+.menu li a:hover,
+.menu li a:focus {
+    color: var(--electric-purple-2);
+    background-color: var(--dark-bg-color-4); /* Subtle background on hover */
+}
+
+.menu li a:hover::after,
+.menu li a:focus::after {
+    width: 100%; /* Animate underline width to full */
+    left: 0; /* Start underline from the left */
+}
+
+
+/* 5.4 Social Media Icons */
+.media-icons {
+    display: flex;
+}
+
+.media-icons a {
+    display: inline-flex;
+    width: 40px; /* Slightly larger icons */
+    height: 40px;
+    background-color: var(--dark-bg-color-4);
+    color: var(--light-text-color-2);
+    border-radius: 50%;
+    margin-left: 12px; /* Increased spacing between icons */
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem; /* Larger icon size */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Added transform */
+}
+
+.media-icons a:hover,
+.media-icons a:focus {
+    background-color: var(--electric-purple-2);
+    color: var(--dark-bg-color-1);
+    transform: translateY(-2px); /* Subtle lift on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add subtle shadow on hover */
+}
+
+.media-icons a:active {
+    transform: translateY(0); /* Reset transform on active state */
+    box-shadow: none; /* Remove shadow on active state */
+}
+
+
+/* 5.5 Mobile Menu Button and Responsiveness */
+.menu-btn,
+.cancel-btn {
+    color: var(--light-text-color-1);
+    font-size: 1.8rem; /* Larger menu button icon */
+    cursor: pointer;
+    display: none; /* Hidden by default on larger screens */
+    transition: color 0.3s ease;
+}
+
+.menu-btn:hover,
+.cancel-btn:hover {
+    color: var(--electric-purple-2);
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 6. Projects Section                                                    */
+/* ----------------------------------------------------------------------- */
+
+/* 6.1 Section Container (already defined in section {} above) */
+.services {
+    padding-top: 100px; /* Increased top padding for section */
+    padding-bottom: 100px; /* Increased bottom padding for section */
+    background-color: var(--dark-bg-color-2);
+    text-align: center;
+}
+
+/* 6.2 Title Styling (already defined in .title and .services .title above) */
+.services .title {
+    margin-bottom: 70px; /* Increased margin below title */
+    letter-spacing: 1px; /* Slight letter spacing for title */
+    text-transform: uppercase; /* Optional: Uppercase title */
+}
+
+/* 6.3 Project Search Bar */
+.project-search {
+    margin-bottom: 40px; /* Increased margin below search bar */
+    padding: 0 20px; /* Horizontal padding for search container */
+}
+
+#projectSearch {
+    padding: 15px 25px; /* Increased padding for search input */
+    border: 2px solid var(--dark-bg-color-5); /* Thicker border */
+    background-color: var(--dark-bg-color-4);
+    color: var(--light-text-color-2);
+    border-radius: 8px; /* More rounded corners */
+    width: 100%;
+    max-width: 500px; /* Slightly wider search bar */
+    font-size: 1.1rem; /* Larger font size in search input */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for search bar */
+}
+
+#projectSearch:focus {
+    outline: none;
+    border-color: var(--electric-purple-2);
+    box-shadow: 0 0 8px var(--electric-purple-5); /* More pronounced focus shadow */
+}
+
+#projectSearch::placeholder {
+    color: var(--light-text-color-4);
+    font-style: italic; /* Italic placeholder text */
+}
+
+/* 6.4 Project Boxes Grid */
+.boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly wider min width */
+    gap: 40px; /* Increased gap between boxes */
+    margin-top: 30px; /* Increased top margin for boxes grid */
+    padding: 0 20px; /* Horizontal padding for boxes container */
+}
+
+/* 6.5 Individual Project Box */
+.box {
+    background-color: var(--dark-bg-color-3);
+    padding: 40px 30px; /* Increased padding inside boxes */
+    border-radius: 10px; /* More rounded corners for boxes */
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle box shadow */
+    border: 1px solid transparent; /* For hover border effect */
+}
+
+.box:hover,
+.box:focus-within { /* focus-within for accessibility if box contains focusable elements */
+    background-color: var(--dark-bg-color-4);
+    transform: translateY(-8px); /* Slightly more pronounced lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Increased shadow on hover */
+    border-color: var(--electric-purple-3); /* Highlight border on hover */
+}
+
+.box:active {
+    transform: translateY(0); /* Reset transform on active */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Reset shadow on active */
+    border-color: transparent; /* Reset border on active */
+}
+
+
+.box-link {
+    display: block; /* Make the entire box clickable */
+    color: inherit; /* Inherit text color from parent */
+    padding: 20px 0; /* Add padding to the link area for better click target */
+}
+
+
+.icon {
+    font-size: 3rem; /* Larger icon in project box */
+    color: var(--electric-purple-2);
+    margin-bottom: 25px;
+    transition: transform 0.4s ease-in-out; /* Icon hover effect */
+}
+
+.box:hover .icon,
+.box:focus-within .icon {
+    transform: scale(1.2); /* Slightly enlarge icon on box hover */
+}
+
+
+.topic {
+    font-size: 1.8rem; /* Larger topic text */
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: var(--light-text-color-1);
+    letter-spacing: 0.5px; /* Slight letter spacing for topic */
+}
+
+.box p {
+    color: var(--light-text-color-3);
+    font-size: 1.1rem;
+    line-height: 1.7; /* Improved line height for box paragraph */
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 7. Footer Styling                                                      */
+/* ----------------------------------------------------------------------- */
+
+footer {
+    background-color: var(--dark-bg-color-1);
+    color: var(--light-text-color-3);
+    padding: 30px 0; /* Increased footer padding */
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--dark-bg-color-5);
+    margin-top: 80px; /* Add margin above footer to separate from content */
+}
+
+footer .texts {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+footer .texts span {
+    display: block; /* Stack elements vertically on small screens */
+    margin-bottom: 10px; /* Spacing between footer text lines */
+}
+
+footer .texts span:last-child {
+    margin-bottom: 0; /* Remove bottom margin from last span */
+}
+
+
+footer .links {
+    color: var(--electric-purple-3);
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Added text-decoration */
+    text-decoration: none; /* Initially no underline */
+}
+
+footer .links:hover,
+footer .links:focus {
+    color: var(--electric-purple-2);
+    text-decoration: underline; /* Underline on hover/focus */
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 8. Responsive Design Adjustments                                       */
+/* ----------------------------------------------------------------------- */
+
+/* 8.1 Larger Desktop Screens (1440px+) */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1320px; /* Slightly wider container on very large screens */
+    }
+    nav {
+        padding: 30px 20px; /* Slightly larger navbar padding */
+    }
+    .services .title {
+        font-size: 3.5rem; /* Larger title on very large screens */
+    }
+    .boxes {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Wider boxes */
+    }
+}
+
+
+/* 8.2 Desktop Screens (1200px - default styles are already for this) */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1140px; /* Slightly narrower container */
+    }
+}
+
+
+/* 8.3 Tablet Screens (980px) */
+@media (max-width: 980px) {
+    nav {
+        padding: 20px 15px; /* Reduced navbar padding */
+    }
+
+    .menu-btn, .cancel-btn {
+        display: block; /* Show mobile menu buttons */
+    }
+
+    .menu {
+        position: fixed;
+        top: 0;
+        left: -100%; /* Initially hidden off-screen */
+        background-color: var(--dark-bg-color-3);
+        width: 100%;
+        height: 100vh;
+        padding-top: 90px; /* Adjust padding for mobile menu */
+        flex-direction: column;
+        align-items: center;
+        transition: left 0.4s ease;
+        overflow-y: auto; /* Enable scroll if menu items exceed viewport height */
+    }
+
+    .menu.active {
+        left: 0; /* Slide in mobile menu */
+    }
+
+    .menu li {
+        margin: 25px 0; /* Increased vertical spacing in mobile menu */
+    }
+
+    .menu li a {
+        font-size: 1.3rem; /* Larger font size in mobile menu */
+        padding: 12px 20px; /* Increased padding for mobile menu links */
+    }
+
+    .cancel-btn {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+    }
+
+    .media-icons {
+        margin-top: 40px; /* Increased margin for social icons in mobile menu */
+        justify-content: center; /* Center align social icons */
+    }
+
+    .navbar .logo {
+        margin-left: 15px; /* Reduced logo margin on mobile */
+    }
+
+    .navbar .menu {
+        margin-left: 0; /* Reset menu margin for mobile */
+    }
+
+    .services {
+        padding-top: 80px; /* Reduced section top padding on mobile */
+        padding-bottom: 80px; /* Reduced section bottom padding on mobile */
+    }
+
+    .services .title {
+        font-size: 2.75rem; /* Slightly smaller title on tablet */
+        margin-bottom: 50px; /* Reduced title margin on tablet */
+    }
+
+    .project-search {
+        margin-bottom: 30px; /* Reduced search bar margin on tablet */
+    }
+
+    .boxes {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly narrower boxes on tablet */
+        gap: 30px; /* Reduced box gap on tablet */
+        margin-top: 20px; /* Reduced boxes margin on tablet */
+    }
+
+    .box {
+        padding: 30px 25px; /* Reduced box padding on tablet */
+    }
+
+    .icon {
+        font-size: 2.75rem; /* Slightly smaller icon on tablet */
+        margin-bottom: 20px; /* Reduced icon margin on tablet */
+    }
+
+    .topic {
+        font-size: 1.6rem; /* Slightly smaller topic on tablet */
+    }
+
+    .box p {
+        font-size: 1rem; /* Slightly smaller paragraph on tablet */
+    }
+
+    footer {
+        padding: 25px 0; /* Reduced footer padding on tablet */
+        margin-top: 60px; /* Reduced footer top margin on tablet */
+    }
+}
+
+
+/* 8.4 Mobile Screens (600px) */
+@media (max-width: 600px) {
+    nav {
+        padding: 15px 10px; /* Further reduced navbar padding on mobile */
+    }
+
+    .logo .image img {
+        height: 40px; /* Smaller logo image on mobile */
+    }
+
+    .logo .text a {
+        font-size: 1.75rem; /* Smaller logo text on mobile */
+    }
+
+    .services {
+        padding-top: 60px; /* Further reduced section top padding on mobile */
+        padding-bottom: 60px; /* Further reduced section bottom padding on mobile */
+    }
+
+    .services .title {
+        font-size: 2.25rem; /* Smaller title on mobile */
+        margin-bottom: 40px; /* Further reduced title margin on mobile */
+    }
+
+    .project-search {
+        margin-bottom: 25px; /* Further reduced search bar margin on mobile */
+    }
+
+    .boxes {
+        grid-template-columns: 1fr; /* Stack boxes on mobile */
+        gap: 25px; /* Reduced box gap on mobile */
+        margin-top: 15px; /* Further reduced boxes margin on mobile */
+    }
+
+    .box {
+        padding: 25px 20px; /* Further reduced box padding on mobile */
+    }
+
+    .icon {
+        font-size: 2.5rem; /* Smaller icon on mobile */
+        margin-bottom: 15px; /* Further reduced icon margin on mobile */
+    }
+
+    .topic {
+        font-size: 1.5rem; /* Smaller topic on mobile */
+    }
+
+    .box p {
+        font-size: 0.95rem; /* Slightly smaller paragraph on mobile */
+    }
+
+    footer {
+        padding: 20px 0; /* Further reduced footer padding on mobile */
+        margin-top: 50px; /* Further reduced footer top margin on mobile */
+        font-size: 0.85rem; /* Smaller footer font size on mobile */
+    }
+}
+
+
+/* 8.5 Small Mobile Screens (480px) */
+@media (max-width: 480px) {
+    .logo .image img {
+        height: 35px; /* Even smaller logo image on very small mobiles */
+    }
+
+    .logo .text a {
+        font-size: 1.5rem; /* Even smaller logo text on very small mobiles */
+    }
+
+    .services .title {
+        font-size: 2rem; /* Even smaller title on very small mobiles */
+    }
+
+    .project-search {
+        margin-bottom: 20px; /* Further reduced search bar margin on very small mobiles */
+    }
+
+    #projectSearch {
+        padding: 12px 20px; /* Slightly reduced search input padding on very small mobiles */
+        font-size: 1rem; /* Smaller font size in search input on very small mobiles */
+    }
+
+    .boxes {
+        gap: 20px; /* Further reduced box gap on very small mobiles */
+    }
+
+    .box {
+        padding: 20px 15px; /* Further reduced box padding on very small mobiles */
+    }
+
+    .icon {
+        font-size: 2.25rem; /* Even smaller icon on very small mobiles */
+    }
+
+    .topic {
+        font-size: 1.4rem; /* Even smaller topic on very small mobiles */
+    }
+
+    .box p {
+        font-size: 0.9rem; /* Even smaller paragraph on very small mobiles */
+    }
+
+    footer {
+        padding: 15px 0; /* Further reduced footer padding on very small mobiles */
+        margin-top: 40px; /* Further reduced footer top margin on very small mobiles */
+        font-size: 0.8rem; /* Even smaller footer font size on very small mobiles */
+    }
+}
+
+
+/* ----------------------------------------------------------------------- */
+/* 9. Animations and Transitions                                          */
+/* ----------------------------------------------------------------------- */
+
+/* 9.1 Hover Effects - Already applied to various elements above */
+/* (Logo, Menu Links, Social Icons, Project Boxes) */
+
+/* 9.2 Menu Slide Animation - Already applied to .menu in responsive section */
+/* (Transition for mobile menu slide-in) */
+
+/* Optional: Add more subtle animations if desired, e.g., page load animation */
+
+
+/* ----------------------------------------------------------------------- */
+/* 10. Utility Classes (Optional - for future expansion)                   */
+/* ----------------------------------------------------------------------- */
+
+/* 10.1 Spacing Utilities - Example (can be expanded as needed) */
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: 0.5rem !important; }
+.mt-2 { margin-top: 1rem !important; }
+.mt-3 { margin-top: 1.5rem !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 0.5rem !important; }
+.mb-2 { margin-bottom: 1rem !important; }
+.mb-3 { margin-bottom: 1.5rem !important; }
+/* Add more spacing utilities (padding, margin, etc.) as needed */
+
+/* 10.2 Text Utilities - Example (can be expanded as needed) */
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+.text-bold { font-weight: bold !important; }
+.text-italic { font-style: italic !important; }
+/* Add more text utilities (font size, color variations, etc.) as needed */
+
+
+/* ----------------------------------------------------------------------- */
+/* 11. Code Block Styling (If Applicable - see section 3 for basic code styles)*/
+/* ----------------------------------------------------------------------- */
+/* Further customization for code blocks can be added here if needed */
+/* E.g., syntax highlighting, different themes for code blocks */
+
+
+/* ----------------------------------------------------------------------- */
+/* 12. Accessibility Considerations                                        */
+/* ----------------------------------------------------------------------- */
+/* - Ensure sufficient color contrast for text and interactive elements */
+/* - Use semantic HTML structure for better screen reader navigation */
+/* - Provide focus states for interactive elements (already partially addressed) */
+/* - ARIA attributes can be added for complex interactive components if needed */
+
+
+/* ----------------------------------------------------------------------- */
+/* 13. Print Styles (Optional)                                             */
+/* ----------------------------------------------------------------------- */
+/* @media print { */
+/*     body { */
+/*         background-color: #fff; */ /* White background for print */
+/*         color: #000; */           /* Black text for print */
+/*     } */
+/*     header, footer, .media-icons, .project-search { */
+/*         display: none; */       /* Hide non-essential elements for print */
+/*     } */
+/*     .services { */
+/*         padding: 20px; */       /* Reduced padding for print */
+/*     } */
+/*     .boxes { */
+/*         grid-template-columns: 1fr 1fr; */ /* Adjust grid for print layout */
+/*     } */
+/*     .box { */
+/*         box-shadow: none; */     /* Remove shadows for print */
+/*         border: 1px solid #ccc; */ /* Add border for print boxes */
+/*     } */
+/* } */
+
+
+/* ----------------------------------------------------------------------- */
+/* 14. Vendor Prefixes (Consideration for older browsers)                 */
+/* ----------------------------------------------------------------------- */
+/* - For broader browser compatibility (especially older browsers), consider */
+/*   adding vendor prefixes (e.g., -webkit-, -moz-, -ms-) for some CSS properties */
+/* - Autoprefixer tools can automate this process */
+/* - For this project, focusing on modern browsers might be sufficient, depending on target audience */
+
+
+/* ----------------------------------------------------------------------- */
+/* 15. Future Enhancements and Notes                                       */
+/* ----------------------------------------------------------------------- */
+/* - Add more sophisticated animations and interactions */
+/* - Implement different themes (light mode, etc.) using CSS variables */
+/* - Improve code block styling with syntax highlighting */
+/* - Consider using a CSS preprocessor (Sass, Less) for better organization and features */
+/* - Optimize CSS for performance (minification, compression) */
+/* - Regularly review and update CSS to maintain consistency and best practices */
