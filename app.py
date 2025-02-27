@@ -1,7 +1,7 @@
 ''' =================================
    1. Imports and Configurations
    ================================= '''
-from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session, make_response
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session, make_response,flash
 import json
 import markdown
 import os
@@ -48,8 +48,18 @@ def editor(filename):
     print(f"Debug: Attempting to open file at path: {file_path}") # Debug 1: Check file path
 
     if request.method == 'POST':
-        # ... (POST request handling - save logic - no need to change for now) ...
-        pass # Keep your existing POST handling logic
+        markdown_content = request.form['markdown_content'] # Get content from form
+        print(f"Debug: Received markdown content (first 50 chars): {markdown_content[:50]}") # Debug: Check received content
+        try:
+            with open(file_path, 'w', encoding='utf-8') as f: # Open file in write mode ('w')
+                f.write(markdown_content) # Write the content to the file
+            flash('File saved successfully!', 'success') # Optional: Flash message for success
+            print(f"Debug: File saved successfully to: {file_path}") # Debug: Save success
+            return redirect(url_for('editor', filename=filename)) # Redirect to reload the editor (optional, but good for feedback)
+        except Exception as e:
+            flash(f"Error saving file: {e}", 'error') # Optional: Flash message for error
+            print(f"Debug: Error saving file: {e}") # Debug: Save error
+            return f"Error saving file: {e}", 500
 
     try:
         with open(file_path, 'r', encoding='utf-8') as f:

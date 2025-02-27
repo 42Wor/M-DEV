@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Markdown Editor - {{ filename }}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='Project/editor.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='Project/Preview.min.css') }}">
-        <!-- Include Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Editor - {{ filename }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Project/editor.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Project/Preview.min.css') }}">
+    <!-- Include Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
 <body>
     <div class="editor-page-container">
         <header>
@@ -21,27 +25,33 @@
             <h2>{% if filename == 'new_file.md' %}Create New File{% else %}Editing: {{ filename }}{% endif %}</h2>
 
             {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <div class="flash-messages">
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">{{ message }}</div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
-            <div class="form-actions">
-                <button type="submit" class="save-button">Save</button>
-                <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}" class="view-page-button">View Page</a>
-                <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
             </div>
-            <form method="POST">
-                <input type="hidden" name="action" id="action" value="save"> <!-- Hidden input for action type - default is 'save' -->
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST"> <!-- FORM tag START here, enclosing form-actions -->
+                <div class="form-actions">
+                    <button type="submit" class="save-button">Save</button>
+                    <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}"
+                        class="view-page-button">View Page</a>
+                    <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
+                </div>
+
+
+                <input type="hidden" name="action" id="action" value="save">
+                <!-- Hidden input for action type - default is 'save' -->
 
                 {% if filename == 'new_file.md' %}
-                    <div class="form-group">
-                        <label for="new_filename">New Filename (without .md extension):</label>
-                        <input type="text" class="form-control" id="new_filename" name="new_filename" required placeholder="Enter filename">
-                    </div>
+                <div class="form-group">
+                    <label for="new_filename">New Filename (without .md extension):</label>
+                    <input type="text" class="form-control" id="new_filename" name="new_filename" required
+                        placeholder="Enter filename">
+                </div>
                 {% endif %}
 
                 <div class="form-group">
@@ -53,13 +63,15 @@
 
                 <div id="new_filename_group" class="form-group" style="display: none;"> <!-- Initially hidden -->
                     <label for="new_filename_save_as">New Filename (for Save As):</label>
-                    <input type="text" class="form-control" id="new_filename_save_as" name="new_filename_save_as" placeholder="Enter new filename">
+                    <input type="text" class="form-control" id="new_filename_save_as" name="new_filename_save_as"
+                        placeholder="Enter new filename">
                 </div>
 
 
                 <div class="editor-container">
                     <div class="editor-pane">
-                        <textarea id="markdown-editor" name="markdown_content" class="form-control editor-textarea" placeholder="Write your Markdown here...">{{ markdown_content|e }}</textarea>
+                        <textarea id="markdown-editor" name="markdown_content" class="form-control editor-textarea"
+                            placeholder="Write your Markdown here...">{{ markdown_content|e }}</textarea>
                     </div>
                     <div class="preview-pane">
                         <h2>Preview</h2>
@@ -68,8 +80,7 @@
                         </div>
                     </div>
                 </div>
-
-            </form>
+            </form> <!-- FORM tag END here, after all form elements -->
         </main>
 
         <footer>
@@ -80,9 +91,9 @@
     <script>
         const markdownEditor = document.getElementById('markdown-editor');
         const markdownPreview = document.getElementById('markdown-preview');
-        const saveAsNewCheckbox = document.getElementById('save_as_new');
-        const newFilenameGroup = document.getElementById('new_filename_group');
-        const actionInput = document.getElementById('action');
+        // const saveAsNewCheckbox = document.getElementById('save_as_new');  // Commented out
+        // const newFilenameGroup = document.getElementById('new_filename_group'); // Commented out
+        // const actionInput = document.getElementById('action'); // Commented out
 
         function updatePreview() {
             const markdownText = markdownEditor.value;
@@ -93,24 +104,25 @@
                 },
                 body: JSON.stringify({ markdown: markdownText })
             })
-            .then(response => response.json())
-            .then(data => {
-                markdownPreview.innerHTML = data.html_content;
-            });
+                .then(response => response.json())
+                .then(data => {
+                    markdownPreview.innerHTML = data.html_content;
+                });
         }
 
         markdownEditor.addEventListener('input', updatePreview);
         updatePreview(); // Initial preview on page load
 
-        saveAsNewCheckbox.addEventListener('change', function() {
-            if (saveAsNewCheckbox.checked) {
-                newFilenameGroup.style.display = 'block'; // Show new filename input
-                actionInput.value = 'save_as_new';      // Set action to 'save_as_new'
-            } else {
-                newFilenameGroup.style.display = 'none';  // Hide new filename input
-                actionInput.value = 'save';             // Set action back to 'save'
-            }
-        });
+        // saveAsNewCheckbox.addEventListener('change', function() {  // Commented out
+        //     if (saveAsNewCheckbox.checked) {
+        //         newFilenameGroup.style.display = 'block';
+        //         actionInput.value = 'save_as_new';
+        //     } else {
+        //         newFilenameGroup.style.display = 'none';
+        //         actionInput.value = 'save';
+        //     }
+        // }); // Commented out
     </script>
 </body>
+
 </html>
