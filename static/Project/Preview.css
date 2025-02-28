@@ -1,200 +1,229 @@
-/* Preview.css - Simplified Markdown Preview Styling */
+/* Preview.css */
 
-/* Base Preview Content Styling */
-.preview-pane .preview-content {
-    font-family: 'Roboto Mono', monospace;
-    color: var(--light-text-color-3);
-    line-height: 1.70;
-    font-size: 1rem;
-    word-wrap: break-word;
-    overflow-x: auto;
+/* General styles for the preview content area */
+.preview-content {
+    max-width: 900px; /* Adjust as needed for your desired width */
+    margin: 20px auto; /* Center the content and add some top/bottom margin */
     padding: 30px;
-    background-color: var(--dark-bg-color-4);
-    border-radius: 800px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
-    text-align: center;
+    background-color: var(--dark-bg-color-2); /* Use a slightly darker background for content area */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for content area */
+    font-family: 'Roboto', sans-serif; /* Default font for README content */
+    color: var(--light-text-color-2); /* Light text color for readability */
+    line-height: 1.7; /* Improved line height for readability */
+    word-wrap: break-word; /* Ensure long words don't break layout */
 }
 
-/* Headings */
-.preview-content h1, .preview-content h2, .preview-content h3,
-.preview-content h4, .preview-content h5, .preview-content h6 {
+/* Headings within the preview content */
+.preview-content h1,
+.preview-content h2,
+.preview-content h3,
+.preview-content h4,
+.preview-content h5,
+.preview-content h6 {
     font-family: 'Bebas Neue', sans-serif;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 1.5em 0 0.8em;
-    color: var(--light-text-color-1);
-    letter-spacing: 0.05em;
+    color: var(--light-text-color-1); /* White headings for contrast */
+    margin-top: 25px;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    text-shadow: 0 0 5px rgba(192, 66, 255, 0.5);
-    text-align: center;
 }
 
-.preview-content h1, .preview-content h2, .preview-content h3 {
-    display: inline-block;
-    border-bottom: 2px solid var(--electric-purple-2);
-    padding-bottom: 0.4em;
+.preview-content h1 {
+    font-size: 2.5rem;
 }
 
-.preview-content h1 { font-size: 2.5em; }
-.preview-content h2 { font-size: 2em; }
-.preview-content h3 { font-size: 1.8em; border-bottom-style: dashed; }
-.preview-content h4 { font-size: 1.5em; color: var(--electric-purple-2); }
-.preview-content h5 { font-size: 1.2em; color: var(--electric-purple-2); }
-.preview-content h6 { font-size: 1em; color: var(--light-text-color-4); font-style: italic; }
+.preview-content h2 {
+    font-size: 2rem;
+}
 
-/* Paragraphs */
+.preview-content h3 {
+    font-size: 1.75rem;
+}
+
+.preview-content h4 {
+    font-size: 1.5rem;
+}
+
+.preview-content h5 {
+    font-size: 1.25rem;
+}
+
+.preview-content h6 {
+    font-size: 1.1rem;
+}
+
+/* Paragraphs within the preview content */
 .preview-content p {
-    margin-bottom: 1.2em;
-    color: var(--light-text-color-3);
-    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1rem;
 }
 
-/* Links */
+/* Links within the preview content */
 .preview-content a {
-    color: var(--electric-purple-2);
+    color: var(--electric-purple-2); /* Electric purple links */
     text-decoration: none;
-    transition: color 0.2s ease, text-shadow 0.2s ease;
-    display: block;
-    margin: 0 auto;
-    width: fit-content;
+    transition: color 0.3s ease;
 }
 
 .preview-content a:hover {
-    color: var(--light-text-color-1);
-    text-decoration: underline;
-    text-shadow: 0 0 5px rgba(192, 66, 255, 0.6);
+    color: var(--electric-purple-3);
+    text-decoration: underline; /* Underline on hover for better visual feedback */
 }
 
-/* Lists */
-.preview-content ul, .preview-content ol {
-    padding-left: 0;
-    margin-bottom: 1.2em;
-    text-align: center;
-    list-style-position: inside;
+/* Lists within the preview content */
+.preview-content ul,
+.preview-content ol {
+    margin-left: 25px;
+    margin-bottom: 15px;
 }
-
-.preview-content ul { list-style-type: disc; }
-.preview-content ol { list-style-type: decimal; }
 
 .preview-content li {
-    margin-bottom: 0.5em;
-    color: var(--light-text-color-3);
-    text-align: center;
+    margin-bottom: 8px;
 }
 
-.preview-content ul li::marker, .preview-content ol li::marker {
-    color: var(--electric-purple-2);
-}
-
-/* Code */
-.preview-content code {
-    font-family: 'Fira Code', monospace;
-    background-color: var(--dark-bg-color-5);
-    color: var(--electric-purple-2);
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.9em;
-    text-align: left;
+/* Code blocks within the preview content */
+.preview-content pre {
+    background-color: var(--dark-bg-color-3); /* Slightly darker background for code blocks */
+    color: var(--light-text-color-2);
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto; /* Enable horizontal scrolling for long code lines */
+    margin-bottom: 20px;
+    font-family: 'Fira Code', monospace; /* Fira Code for code blocks */
+    font-size: 0.9rem;
+    line-height: 1.5;
+    position: relative; /* For positioning the copy button */
 }
 
 .preview-content pre code {
-    display: block;
-    padding: 1rem;
-    background-color: var(--dark-bg-color-5);
-    color: var(--light-text-color-2);
-    border-radius: 6px;
-    overflow-x: auto;
-    border: 1px solid var(--dark-bg-color-7);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-align: left;
+    display: block; /* Ensure code fills the pre */
+    padding: 0; /* Reset padding inside code, padding is on pre */
+    background: none; /* Remove background from code, background is on pre */
+    color: inherit; /* Inherit text color from pre */
+}
+
+/* Style for inline code (if you use `<code>` tags in README) */
+.preview-content code:not(pre code) {
+    font-family: 'Fira Code', monospace;
+    background-color: var(--dark-bg-color-4); /* Even darker for inline code */
+    color: var(--light-text-color-1);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.9rem;
 }
 
 /* Blockquotes */
 .preview-content blockquote {
-    border-left: 4px solid var(--electric-purple-2);
-    padding-left: 1.2rem;
-    margin: 1.5em 0;
+    border-left: 5px solid var(--electric-purple-2);
+    background-color: var(--dark-bg-color-3);
+    padding: 15px 20px;
+    margin: 15px 0;
     font-style: italic;
-    color: var(--light-text-color-4);
-    background-color: var(--dark-bg-color-5);
-    border-radius: 6px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-align: center;
+    color: var(--light-text-color-3);
+    border-radius: 0 6px 6px 0; /* Rounded right corners */
 }
 
-/* Horizontal Rule */
+.preview-content blockquote p {
+    margin-bottom: 0; /* Remove extra margin in blockquote paragraphs */
+}
+
+/* Horizontal Rules (---, ***, etc. in Markdown) */
 .preview-content hr {
-    border: 0;
-    border-top: 2px dashed var(--dark-bg-color-7);
-    margin: 2em auto;
-    width: 50%;
-}
-
-/* Images */
-.preview-content img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1em auto;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    border: none;
+    border-top: 1px solid var(--dark-bg-color-5);
+    margin: 25px 0;
 }
 
 /* Tables */
 .preview-content table {
+    width: 100%;
     border-collapse: collapse;
-    width: auto;
-    margin-bottom: 1.5em;
-    background-color: var(--dark-bg-color-5);
-    color: var(--light-text-color-3);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
-    text-align: center;
-    margin: 0 auto;
-    display: inline-block;
+    margin-bottom: 20px;
+    border: 1px solid var(--dark-bg-color-5);
 }
 
-.preview-content th, .preview-content td {
-    border: 1px solid var(--dark-bg-color-7);
+.preview-content th,
+.preview-content td {
+    border: 1px solid var(--dark-bg-color-5);
     padding: 8px 12px;
-    text-align: center;
+    text-align: left;
 }
 
 .preview-content th {
+    background-color: var(--dark-bg-color-4);
     font-weight: bold;
-    background-color: var(--dark-bg-color-6);
+}
+.preview-content tr:nth-child(even) td {
+    background-color: var(--dark-bg-color-3); /* Optional: striped rows for tables */
+}
+
+/* --- Code Copy Button Styles --- */
+.preview-content .code-block-container {
+    position: relative; /* Container for positioning copy button */
+    margin-bottom: 20px; /* Match margin of <pre> for consistent spacing */
+}
+
+.preview-content .code-block-container pre {
+    margin-bottom: 0; /* Remove bottom margin from <pre> as container provides it */
+}
+
+
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--electric-purple-2);
     color: var(--light-text-color-1);
-    text-transform: uppercase;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
-/* Emphasis */
-.preview-content strong, .preview-content b {
-    font-weight: bold;
-    color: var(--light-text-color-1);
+.copy-button:hover {
+    opacity: 1;
+    background-color: var(--electric-purple-3);
 }
 
-.preview-content em, .preview-content i {
-    font-style: italic;
-    color: var(--electric-purple-2);
+.copy-button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 2px var(--electric-purple-5); /* Add a subtle focus indicator */
 }
 
-/* Responsive adjustments */
+
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-    .preview-pane .preview-content {
-        font-size: 0.95rem;
+    .preview-content {
         padding: 20px;
+        margin: 10px auto; /* Reduce margin on smaller screens */
+        border-radius: 0; /* Optionally remove border-radius on small screens */
+        box-shadow: none; /* Optionally remove shadow on small screens */
     }
-    .preview-content h1 { font-size: 2em; }
-    .preview-content h2 { font-size: 1.8em; }
-    .preview-content h3 { font-size: 1.6em; }
-    .preview-content ul, .preview-content ol {
-        padding-left: 0;
-        list-style-position: inside;
+
+    .preview-content h1 {
+        font-size: 2rem;
     }
-    .preview-content pre code {
-        padding: 0.8rem;
-        font-size: 0.85em;
+
+    .preview-content h2 {
+        font-size: 1.7rem;
+    }
+
+    .preview-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .preview-content ul,
+    .preview-content ol {
+        margin-left: 20px;
+    }
+
+    .copy-button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
     }
 }

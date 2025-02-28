@@ -40,65 +40,63 @@ def login_required(f):
 ''' =================================
    5. Markdown Editor Routes
    ================================= '''
-# --- Markdown Editor Routes ---
 @app.route('/editor/<filename>', methods=['GET', 'POST'])
-@login_required  # Protect the editor
+@login_required  # Protect the editor (optional for scratch, add back later)
 def editor(filename):
     file_path = os.path.join(README_FOLDER, filename)
-    print(f"Debug: Attempting to open file at path: {file_path}") # Debug 1: Check file path
 
     if request.method == 'POST':
-        markdown_content = request.form['markdown_content'] # Get content from form
-        print(f"Debug: Received markdown content (first 50 chars): {markdown_content[:50]}") # Debug: Check received content
+        markdown_content = request.form['markdown_content']
         try:
-            with open(file_path, 'w', encoding='utf-8') as f: # Open file in write mode ('w')
-                f.write(markdown_content) # Write the content to the file
-            flash('File saved successfully!', 'success') # Optional: Flash message for success
-            print(f"Debug: File saved successfully to: {file_path}") # Debug: Save success
-            return redirect(url_for('editor', filename=filename)) # Redirect to reload the editor (optional, but good for feedback)
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(markdown_content)
+            flash('File saved successfully!', 'success')
+            return redirect(url_for('editor', filename=filename)) # Redirect to reload editor
         except Exception as e:
-            flash(f"Error saving file: {e}", 'error') # Optional: Flash message for error
-            print(f"Debug: Error saving file: {e}") # Debug: Save error
+            flash(f"Error saving file: {e}", 'error')
             return f"Error saving file: {e}", 500
 
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             markdown_content = f.read()
-            print(f"Debug: Successfully read content from file.") # Debug 2: File read success
-            print(f"Debug: First 50 chars of markdown_content: {markdown_content[:50]}") # Debug 3: Sample of content
     except FileNotFoundError:
-        print(f"Debug: File not found at path: {file_path}") # Debug 4: File not found error
         return "File not found.", 404
     except Exception as e:
-        print(f"Debug: Error reading file: {e}") # Debug 5: Other file reading errors
         return f"Error reading file: {e}", 500
 
-    print(f"Debug: Rendering editor.html with filename: {filename}") # Debug 6: Before render template
     return render_template('Project/editor.html', filename=filename, markdown_content=markdown_content)
 
+
 @app.route('/editor/new', methods=['GET', 'POST'])
-@login_required # Protect new file creation too
+@login_required # Protect new file creation (optional for scratch, add back later)
 def new_editor():
     if request.method == 'POST':
         filename = request.form['new_filename']
         if not filename.endswith(".md"):
-            filename += ".md" # Ensure .md extension
+            filename += ".md"
         file_path = os.path.join(README_FOLDER, filename)
 
         if os.path.exists(file_path):
-            return "File already exists.", 400 # Or handle differently
+            return "File already exists.", 400
 
-        markdown_content = request.form['markdown_content'] # Content for new file
+        markdown_content = request.form['markdown_content']
         try:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(markdown_content)
-            return redirect(url_for('readme_page', filename=os.path.splitext(filename)[0])) # Redirect to the new page
+            return redirect(url_for('readme_page', filename=os.path.splitext(filename)[0])) # Redirect to new page
         except Exception as e:
             return f"Error creating file: {e}", 500
 
-    return render_template('Project/editor.html', filename='new_file.md', markdown_content='') # Empty editor for new file
-# --- End Markdown Editor Routes ---
+    return render_template('Project/editor.html', filename='new_file.md', markdown_content='')
 
+
+@app.route('/preview', methods=['POST'])
+def preview_markdown():
+    data = request.get_json()
+    markdown_text = data.get('markdown', '')
+    html_content = markdown.markdown(markdown_text)
+    return jsonify({'html_content': html_content})
+# --- End Markdown Editor Routes ---
 
 ''' =================================
    6. Admin Panel and Login Routes
@@ -157,12 +155,7 @@ def admin_delete_file(filename):
 ''' =================================
    8. Markdown Preview Route
    ================================= '''
-@app.route('/preview', methods=['POST'])
-def preview_markdown():
-    data = request.get_json()
-    markdown_text = data.get('markdown', '')
-    html_content = markdown.markdown(markdown_text)
-    return jsonify({'html_content': html_content})
+
 
 
 ''' =================================
@@ -201,7 +194,8 @@ def readme_page(filename):
     try:
         with open(readme_path, "r", encoding="utf-8") as f:
             readme_content = f.read()
-            html_content = markdown.markdown(readme_content)
+            # Enable the 'toc' extension to generate header IDs
+            html_content = markdown.markdown(readme_content, extensions=['toc'])
             return render_template("Project/readme_page.html", readme_html=html_content, readme_filename=filename + ".md") # Keep .md in title for clarity if you want
     except FileNotFoundError:
         return "README file not found.", 404

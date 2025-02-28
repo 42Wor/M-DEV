@@ -26,16 +26,16 @@
 /* ------------------------------------------------------- */
 /* Color Palette - Cool Dark & Edgy Theme (from style.css) */
 :root {
-    /* Primary Dark Shades */
-    --dark-bg-color-1: #0e0e0e;
-    --dark-bg-color-2: #121212;
-    --dark-bg-color-3: #1a1a1a;
-    --dark-bg-color-4: #212121;
-    --dark-bg-color-5: #333;
-    --dark-bg-color-6: #444;
-    --dark-bg-color-7: #555;
+    /* Warmer Dark Shades (Example - slightly brownish grays) */
+    --dark-bg-color-1: #1a1614;
+    --dark-bg-color-2: #211d1b;
+    --dark-bg-color-3: #292522;
+    --dark-bg-color-4: #302b28;
+    --dark-bg-color-5: #3d3733;
+    --dark-bg-color-6: #4e4742;
+    --dark-bg-color-7: #5e5650;
 
-    /* Electric Purple Accent Shades */
+    /* Electric Purple Accent Shades (Keep or adjust) */
     --electric-purple-1: #9b27b0;
     --electric-purple-2: #c042ff;
     --electric-purple-3: #ca6eff;
@@ -44,7 +44,7 @@
     --electric-purple-6: rgba(192, 66, 255, 0.05);
     --electric-purple-7: rgba(192, 66, 255, 0.08);
 
-    /* Light Text & Gray Shades */
+    /* Light Text & Gray Shades (Keep or adjust) */
     --light-text-color-1: #fff;
     --light-text-color-2: #e0e0e0;
     --light-text-color-3: #bdbdbd;

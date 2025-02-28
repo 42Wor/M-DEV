@@ -12,8 +12,7 @@
     <!-- Fira Code for code blocks -->
     <meta charset="UTF-8">
     <title>README: {{ readme_filename }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Project/Preview.min.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='Project/Preview.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='Project/style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -53,7 +52,7 @@
 </header>
 
 <body>
-    <div class="preview-pane">
+    <div class="preview-content">
  
             {{ readme_html|safe }}
         </div>

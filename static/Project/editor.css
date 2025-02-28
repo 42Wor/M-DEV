@@ -1,397 +1,319 @@
-/* editor.css - Cool Dark & Edgy Theme - Consistent with style.css */
+/* editor.css */
+:root {
+    /* Color Palette based on Preview.css */
+    --bg-dark: #121212;             /* Very dark gray, almost black body background */
+    --bg-medium-dark: #212121;      /* Slightly darker background for content areas */
+    --bg-light-dark: #2d2d2d;       /* Lighter dark gray for code blocks, blockquotes */
+    --bg-lighter-dark: #333333;     /* Even lighter dark gray for inline code */
+    --bg-border: #444444;          /* Very light dark gray for borders, hr */
 
-/* --------------------------------------------------
-   Color Palette - Cool Dark & Edgy Theme (from style.css)
-   -------------------------------------------------- */
-   :root {
-    /* Primary Dark Shades */
-    --dark-bg-color-1: #0e0e0e;
-    --dark-bg-color-2: #121212;
-    --dark-bg-color-3: #1a1a1a;
-    --dark-bg-color-4: #212121;
-    --dark-bg-color-5: #333;
-    --dark-bg-color-6: #444;
-    --dark-bg-color-7: #555;
+    --text-light: #ffffff;          /* White text for headings */
+    --text-medium-light: #e0e0e0;    /* Light gray text for general text */
+    --text-dark-light: #cccccc;     /* Slightly darker light gray for blockquote text */
 
-    /* Electric Purple Accent Shades */
-    --electric-purple-1: #9b27b0;
-    --electric-purple-2: #c042ff;
-    --electric-purple-3: #ca6eff;
-    --electric-purple-4: #d49cff;
-    --electric-purple-5: rgba(192, 66, 255, 0.1);
-    --electric-purple-6: rgba(192, 66, 255, 0.05);
-    --electric-purple-7: rgba(192, 66, 255, 0.08);
+    --accent-primary: #9c27b0;      /* Electric purple for primary accents (links, buttons) */
+    --accent-secondary: #ba68c8;    /* Lighter purple for hover effects */
+    --accent-focus: #ce93d8;       /* Even lighter purple for focus outlines */
 
-    /* Light Text & Gray Shades */
-    --light-text-color-1: #fff;
-    --light-text-color-2: #e0e0e0;
-    --light-text-color-3: #bdbdbd;
-    --light-text-color-4: #9e9e9e;
-    --light-text-color-5: #888;
-    --light-text-color-6: #777;
-    --light-text-color-7: #ccc;
+    /* Original Editor Colors (Mapped to Palette) - for reference during transition */
+    /* --original-body-bg: #121212;        -> --bg-dark */
+    /* --original-body-text: #e0e0e0;      -> --text-medium-light */
+    /* --original-header-bg: #f0f0f0;      -> Light Gray -  Needs to be mapped to a dark theme color */
+    /* --original-header-text: #333;      -> Dark Gray - Needs to be mapped to a light theme color */
+    /* --original-main-heading-text: #555; -> Darker Gray - Needs to be mapped to a light theme color */
+    /* --original-alert-success-bg: #d4edda; -> Light Green - Needs to be mapped to a dark theme color */
+    /* --original-alert-success-text: #155724; -> Dark Green - Needs to be mapped to a light theme color */
+    /* --original-alert-error-bg: #f8d7da;   -> Light Red   - Needs to be mapped to a dark theme color */
+    /* --original-alert-error-text: #721c24;   -> Dark Red    - Needs to be mapped to a light theme color */
+    /* --original-button-bg: #5a67d8;       -> Purple-ish Blue - Similar to --accent-primary, but slightly different */
+    /* --original-button-hover-bg: #7886d7; -> Lighter Purple-ish Blue */
+    /* --original-border-color: #ccc;        -> Light Gray - Needs to be mapped to a dark theme color */
+    /* --original-preview-bg: #f9f9f9;      -> Very Light Gray - Needs to be mapped to a dark theme color */
+    /* --original-mode-toggle-bg: #f0f0f0;  -> Light Gray - Needs to be mapped to a dark theme color */
+    /* --original-mode-toggle-text: #333;  -> Dark Gray - Needs to be mapped to a light theme color */
+    /* --original-mode-toggle-border: #ccc; -> Light Gray - Needs to be mapped to a dark theme color */
+    /* --original-mode-toggle-active-bg: #5a67d8; -> Purple-ish Blue - Similar to --accent-primary, but slightly different */
+    /* --original-mode-toggle-active-text: white; */
+    /* --original-mode-toggle-active-border: #5a67d8; -> Purple-ish Blue - Similar to --accent-primary, but slightly different */
+
 }
 
-/* --------------------------------------------------
-   General Styles & Reset
-   -------------------------------------------------- */
+
 body {
-    font-family: 'Roboto Mono', monospace; /* Edgy monospace font */
-    margin: 0;
-    padding: 0;
-    background-color: var(--dark-bg-color-2); /* Dark body background */
-    color: var(--light-text-color-2); /* Light gray text */
+    font-family: 'Roboto Mono', monospace; /* Edgy, techy monospace font for body - Google Fonts */
+    background-color: var(--bg-dark); /* Very dark gray, almost black body background */
+    color: var(--text-medium-light); /* Light gray text for high contrast */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    margin: 0; /* Reset body margin to allow full width */
+    padding: 0; /* Reset body padding */
 }
-
-/* --------------------------------------------------
-   Container for the entire page
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  General Editor Page Container Styles */
+/* ------------------------------------ */
 .editor-page-container {
+    width: 100%; /* Take full width */
+    margin: 0 auto; /* Center horizontally if width is less than viewport */
+    padding: 0; /* REMOVE padding from editor-page-container */
+    background-color: var(--bg-medium-dark); /*  Darker background for the container - using medium dark now */
+    border-radius: 0; /* Remove border-radius for full page look */
+    box-shadow: none; /* REMOVE box-shadow for cleaner full page */
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-medium-light); /* Using light text color for contrast on dark container */
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: var(--dark-bg-color-4); /* Darker container background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    min-height: 100vh; /* Ensure full viewport height */
+    box-sizing: border-box;
 }
 
-/* --------------------------------------------------
-   Header Styling
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  Header Styles                       */
+/* ------------------------------------ */
 header {
     text-align: center;
-    padding: 20px 0;
-    border-bottom: 2px solid var(--dark-bg-color-7); /* Darker border */
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reduced margin */
+    padding: 10px 0;
+    background-color: var(--bg-lighter-dark); /* Darker header background */
+    color: var(--text-light); /* Light text for header */
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    font-family: 'Bebas Neue', sans-serif; /* Striking heading font */
-    color: var(--light-text-color-1); /* White header text */
-    text-shadow: 0 0 10px rgba(192, 66, 255, 0.8); /* Neon glow for header */
-    text-transform: uppercase; /* Uppercase header text */
-    letter-spacing: 0.05em; /* Letter spacing for header */
+    font-size: 2.0rem; /* Slightly smaller header font */
+    color: inherit;
+    margin-bottom: 5px; /* Reduced margin */
 }
 
-/* --------------------------------------------------
-   Main Content Area
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  Main Content Area Styles            */
+/* ------------------------------------ */
 main {
+    padding: 0; /* REMOVE padding from main */
     flex: 1;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 main h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-family: 'Bebas Neue', sans-serif; /* Striking heading font */
-    color: var(--light-text-color-1); /* White heading text */
-    text-transform: uppercase; /* Uppercase main heading */
-    letter-spacing: 0.05em; /* Letter spacing for main heading */
-    border-bottom: 3px solid var(--electric-purple-2); /* Electric Purple underline */
-    padding-bottom: 0.4em;
+    font-size: 1.6rem; /* Slightly smaller main heading */
+    color: var(--text-light); /* Lighter heading text */
+    margin-bottom: 10px; /* Reduced margin */
+    padding: 0 20px; /* Add back some horizontal padding for main heading */
 }
 
-/* --------------------------------------------------
-   Flash Messages
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  Flash Messages Styles               */
+/* ------------------------------------ */
 .flash-messages {
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced margin */
+    padding: 0 20px; /* Add horizontal padding for flash messages */
 }
 
 .alert {
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid transparent;
-    font-weight: 500;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: var(--text-light); /* Default text color for alerts */
 }
 
 .alert-success {
-    background-color: var(--dark-bg-color-5); /* Darker alert background */
-    border-color: var(--electric-purple-2); /* Electric purple border */
-    color: var(--light-text-color-1); /* White alert text */
+    background-color: rgba(76, 175, 80, 0.3); /* Green with opacity for success */
+    border: 1px solid rgba(76, 175, 80, 0.5);
+    /* color: #155724; -> Replaced with default alert text color which is --text-light now */
 }
 
-.alert-danger {
-    background-color: var(--dark-bg-color-5); /* Darker alert background */
-    border-color: var(--electric-purple-2); /* Electric purple border */
-    color: var(--light-text-color-1); /* White alert text */
+.alert-error {
+    background-color: rgba(211, 47, 47, 0.3); /* Red with opacity for error */
+    border: 1px solid rgba(211, 47, 47, 0.5);
+    /* color: #721c24;  -> Replaced with default alert text color which is --text-light now */
 }
 
-/* --------------------------------------------------
-   Form Actions - Buttons above the editor
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  Form Actions (Buttons) Styles       */
+/* ------------------------------------ */
 .form-actions {
-    margin-bottom: 20px;
     display: flex;
     gap: 10px;
+    margin-bottom: 10px; /* Reduced margin */
     justify-content: flex-start;
+    padding: 0 20px; /* Add horizontal padding for buttons */
 }
 
 .form-actions button,
 .form-actions a {
-    padding: 12px 20px;
+    padding: 8px 15px;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
-    color: var(--light-text-color-1); /* White button text */
-    background-color: var(--dark-bg-color-5); /* Dark button background */
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease; /* Added color transition */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Stronger button shadow */
-    font-weight: 500;
+    color: var(--text-light); /* Light text for buttons */
+    background-color: var(--accent-primary); /* Purple button background */
+    transition: background-color 0.3s ease;
+    display: inline-block;
 }
 
 .form-actions button:hover,
 .form-actions a:hover {
-    background-color: var(--electric-purple-2); /* Electric purple on hover */
-    color: var(--light-text-color-1); /* White text on hover */
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Stronger hover shadow */
-}
-
-.form-actions button:active,
-.form-actions a:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.form-actions .view-page-button {
-    background-color: var(--dark-bg-color-5); /* Dark view page button */
-}
-
-.form-actions .view-page-button:hover {
-    background-color: var(--electric-purple-2); /* Electric purple view page hover */
-}
-
-.form-actions .admin-button {
-    background-color: var(--dark-bg-color-5); /* Dark admin button */
-}
-
-.form-actions .admin-button:hover {
-    background-color: var(--electric-purple-2); /* Electric purple admin hover */
-}
-
-.form-actions .save-button {
-    background-color: var(--dark-bg-color-5); /* Dark save button */
-}
-
-.form-actions .save-button:hover {
-    background-color: var(--electric-purple-2); /* Electric purple save hover */
-}
-
-.form-actions .copy-markdown-button {
-    background-color: var(--dark-bg-color-5); /* Dark copy button */
-}
-
-.form-actions .copy-markdown-button:hover {
-    background-color: var(--electric-purple-2); /* Electric purple copy hover */
+    background-color: var(--accent-secondary); /* Lighter purple on hover */
 }
 
 
-/* --------------------------------------------------
-   Form Group and Input Fields
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  Form Group Styles                   */
+/* ------------------------------------ */
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 10px; /* Reduced margin */
+    padding: 0 20px; /* Add horizontal padding for form groups */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     font-weight: 500;
-    color: var(--light-text-color-4); /* Muted label text */
+    color: var(--text-light); /* Light label text */
 }
 
 .form-control {
     width: 100%;
-    padding: 12px 15px;
-    background-color: var(--dark-bg-color-5); /* Dark input background */
-    border: 1px solid var(--dark-bg-color-7); /* Darker input border */
-    border-radius: 6px;
-    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid var(--bg-border); /* Darker border color */
+    border-radius: 5px;
     box-sizing: border-box;
-    color: var(--light-text-color-2); /* Light input text */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.2s ease; /* Added background transition */
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); /* Inset shadow for depth */
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-medium-dark); /* Form control background to match container */
+    color: var(--text-medium-light); /* Text color in form control */
 }
 
-.form-control:hover {
-    background-color: var(--dark-bg-color-6); /* Even darker on hover */
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--electric-purple-2); /* Electric purple focus border */
-    box-shadow: 0 0 0 3px rgba(192, 66, 255, 0.5); /* Electric purple focus ring */
-    background-color: var(--dark-bg-color-6); /* Even darker on focus */
-}
-
-.form-control::placeholder {
-    color: var(--light-text-color-6); /* Placeholder text color */
-    font-style: italic; /* Italic placeholder */
-    opacity: 0.9; /* Slightly opaque placeholder */
-}
-
+/* ------------------------------------ */
+/*  Form Checkbox Styles                */
+/* ------------------------------------ */
 .form-check {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
+    padding: 0 20px; /* Add horizontal padding for checkboxes if you have them */
 }
 
 .form-check-input {
-    margin-top: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: var(--dark-bg-color-5); /* Dark checkbox background */
-    border: 1px solid var(--dark-bg-color-7); /* Darker checkbox border */
-    border-radius: 4px;
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    position: relative;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    margin-right: 10px;
 }
 
-.form-check-input:checked {
-    background-color: var(--electric-purple-2); /* Electric purple checkbox checked */
-    border-color: var(--electric-purple-2);
-}
 
-.form-check-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(192, 66, 255, 0.5); /* Electric purple checkbox focus ring */
-}
-
-.form-check-input:checked::before {
-    content: '\2713'; /* Unicode checkmark */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--dark-bg-color-2); /* Dark checkmark color */
-    font-size: 14px;
-}
-
-.form-check-label {
-    font-weight: normal;
-    color: var(--light-text-color-2); /* Light checkbox label text */
-    user-select: none;
-}
-
-/* --------------------------------------------------
-   Editor Container - Flex layout for editor and preview panes
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  Editor Container & Panes Styles     */
+/* ------------------------------------ */
 .editor-container {
     display: flex;
-    border: 1px solid var(--dark-bg-color-7); /* Darker container border */
-    border-radius: 8px;
+    border: 1px solid var(--bg-border); /* Darker border for editor container */
+    border-radius: 0; /* Remove border-radius for editor container */
     overflow: hidden;
-    background-color: var(--dark-bg-color-4); /* Darker editor container bg */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger container shadow */
+    flex: 1;
+    margin-bottom: 0; /* REMOVE margin below editor container */
 }
 
 .editor-pane,
 .preview-pane {
     flex: 1;
-    padding: 25px;
+    padding: 15px;
     box-sizing: border-box;
-    min-width: 0;
+    min-height: calc(100vh - 100px); /* Adjust min-height to fill viewport minus header/buttons */
+    overflow: auto;
 }
 
 .editor-pane {
-    border-right: 1px solid var(--dark-bg-color-7); /* Darker separator */
+    border-right: 1px solid var(--bg-border); /* Darker border between panes */
+    background-color: var(--bg-medium-dark); /* Editor pane background to match container */
 }
 
-.preview-pane h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-family: 'Bebas Neue', sans-serif; /* Striking heading font */
-    color: var(--light-text-color-1); /* White preview heading text */
-    text-transform: uppercase; /* Uppercase preview heading */
-    letter-spacing: 0.05em; /* Letter spacing for preview heading */
-    border-bottom: 2px dashed var(--dark-bg-color-7); /* Darker dashed underline */
-    padding-bottom: 0.3em;
+.preview-pane {
+    background-color: var(--bg-light-dark); /* Slightly lighter dark background for preview pane */
 }
 
-/* --------------------------------------------------
-   Editor Textarea Styling
-   -------------------------------------------------- */
+/* ------------------------------------ */
+/*  Editor Textarea Styles              */
+/* ------------------------------------ */
 .editor-textarea {
-    font-family: 'Fira Code', monospace; /* Monospace code font */
-    font-size: 1.1rem;
-    min-height: 450px;
-    resize: vertical;
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    line-height: 1.6;
     border: none;
     padding: 0;
+    margin: 0;
     box-shadow: none;
-    background-color: var(--dark-bg-color-5); /* Dark editor textarea bg */
-    color: var(--light-text-color-2); /* Light editor textarea text */
-    caret-color: var(--electric-purple-2); /* Electric purple cursor */
-}
-
-.editor-textarea::placeholder {
-    color: var(--light-text-color-6); /* Placeholder color */
-    font-style: italic; /* Italic placeholder */
-    opacity: 0.8;
-}
-
-.editor-textarea:focus {
-    border-color: transparent;
-    box-shadow: none;
+    height: 100%;
+    width: 100%;
+    resize: none;
+    background-color: transparent;
     outline: none;
+    color: var(--text-medium-light); /* Text color in textarea */
 }
 
-/* --------------------------------------------------
-   Footer Styling
-   -------------------------------------------------- */
-footer {
+/* ------------------------------------ */
+/*  Preview Content Styles              */
+/* (Basic - more styles in Preview.css) */
+/* ------------------------------------ */
+.preview-content {
+    padding: 10px;
+}
+
+
+/* ------------------------------------ */
+/*  Mode Toggle Buttons Styles          */
+/* ------------------------------------ */
+.mode-toggle-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 0 20px; /* Add horizontal padding for mode toggle buttons */
+}
+
+.mode-toggle-button {
+    padding: 8px 15px;
+    border: 1px solid var(--bg-border); /* Darker border for toggle buttons */
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--bg-lighter-dark); /* Darker toggle button background */
+    color: var(--text-light); /* Light text for toggle buttons */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.mode-toggle-button:hover {
+    background-color: var(--bg-medium-dark); /* Slightly darker on hover */
+}
+
+.mode-toggle-button.active {
+    background-color: var(--accent-primary); /* Purple active toggle button */
+    color: var(--text-light);
+    border-color: var(--accent-primary);
+}
+
+
+/* ------------------------------------ */
+/*  Mode-Specific Pane Visibility      */
+/* ------------------------------------ */
+.editor-mode .preview-pane {
+    display: none;
+}
+
+.preview-mode .editor-pane {
+    display: none;
+}
+
+.preview-mode .preview-pane {
+    display: block;
+}
+
+/* ------------------------------------ */
+/*  REMOVE Footer Styles - Footer is removed from HTML */
+/* ------------------------------------ */
+/* footer {
     text-align: center;
-    padding: 20px 0;
-    border-top: 2px solid var(--dark-bg-color-7); /* Darker footer border */
-    margin-top: 20px;
-    color: var(--light-text-color-4); /* Muted footer text */
-}
-
-/* --------------------------------------------------
-   Responsive adjustments (for smaller screens)
-   -------------------------------------------------- */
-@media (max-width: 768px) {
-    .editor-container {
-        flex-direction: column;
-    }
-    .editor-pane {
-        border-right: none;
-        border-bottom: 1px solid var(--dark-bg-color-7); /* Darker bottom border when stacked */
-    }
-    .form-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .form-actions button,
-    .form-actions a {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .editor-pane,
-    .preview-pane {
-        padding: 15px;
-    }
-    header h1 {
-        font-size: 2em;
-    }
-    main h2 {
-        font-size: 1.7em;
-    }
-}
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    color: #777;
+    font-size: 0.9rem;
+} */

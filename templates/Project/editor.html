@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="editor-mode"> <!-- Start in editor mode by default -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Markdown Editor - {{ filename }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Project/editor.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='Project/Preview.min.css') }}">
-    <!-- Include Google Fonts -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Project/editor.css') }}"> <!-- Link to editor.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Project/Preview.css') }}">
+    <!-- Link to Preview.css for preview styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;500&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="editor-page-container">
-        <header>
-            <h1>Markdown Editor</h1>
-        </header>
 
         <main>
             <h2>{% if filename == 'new_file.md' %}Create New File{% else %}Editing: {{ filename }}{% endif %}</h2>
@@ -28,23 +28,25 @@
             {% if messages %}
             <div class="flash-messages">
                 {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
+                <div class="alert alert-{{ category }} alert-{{ category }}">{{ message }}</div>
                 {% endfor %}
             </div>
             {% endif %}
             {% endwith %}
 
-            <form method="POST"> <!-- FORM tag START here, enclosing form-actions -->
+            <form method="POST">
                 <div class="form-actions">
                     <button type="submit" class="save-button">Save</button>
                     <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}"
                         class="view-page-button">View Page</a>
                     <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
+                    <!-- Optional Admin Panel Link -->
                 </div>
 
-
-                <input type="hidden" name="action" id="action" value="save">
-                <!-- Hidden input for action type - default is 'save' -->
+                <div class="mode-toggle-buttons">
+                    <button type="button" class="mode-toggle-button active" data-mode="editor">Editing</button>
+                    <button type="button" class="mode-toggle-button" data-mode="preview">Preview</button>
+                </div>
 
                 {% if filename == 'new_file.md' %}
                 <div class="form-group">
@@ -54,20 +56,6 @@
                 </div>
                 {% endif %}
 
-                <div class="form-group">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="save_as_new" name="save_as_new">
-                        <label class="form-check-label" for="save_as_new">Save As New File</label>
-                    </div>
-                </div>
-
-                <div id="new_filename_group" class="form-group" style="display: none;"> <!-- Initially hidden -->
-                    <label for="new_filename_save_as">New Filename (for Save As):</label>
-                    <input type="text" class="form-control" id="new_filename_save_as" name="new_filename_save_as"
-                        placeholder="Enter new filename">
-                </div>
-
-
                 <div class="editor-container">
                     <div class="editor-pane">
                         <textarea id="markdown-editor" name="markdown_content" class="form-control editor-textarea"
@@ -76,25 +64,24 @@
                     <div class="preview-pane">
                         <h2>Preview</h2>
                         <div id="markdown-preview" class="preview-content">
-                            <!-- Preview will be loaded here by JavaScript -->
+                            <!-- Preview content will be loaded here by JavaScript -->
                         </div>
                     </div>
                 </div>
-            </form> <!-- FORM tag END here, after all form elements -->
+            </form>
         </main>
 
-        <footer>
-            <p>© Your Website 2025</p>
-        </footer>
     </div>
 
     <script>
         const markdownEditor = document.getElementById('markdown-editor');
         const markdownPreview = document.getElementById('markdown-preview');
-        // const saveAsNewCheckbox = document.getElementById('save_as_new');  // Commented out
-        // const newFilenameGroup = document.getElementById('new_filename_group'); // Commented out
-        // const actionInput = document.getElementById('action'); // Commented out
-
+        const modeToggleButtons = document.querySelectorAll('.mode-toggle-button');
+        console.log("modeToggleButtons:", modeToggleButtons);
+        console.log("markdownEditor:", markdownEditor);
+        console.log("markdownPreview:", markdownPreview);
+        const htmlElement = document.documentElement;
+    
         function updatePreview() {
             const markdownText = markdownEditor.value;
             fetch('/preview', {
@@ -109,19 +96,32 @@
                     markdownPreview.innerHTML = data.html_content;
                 });
         }
-
+    
         markdownEditor.addEventListener('input', updatePreview);
         updatePreview(); // Initial preview on page load
-
-        // saveAsNewCheckbox.addEventListener('change', function() {  // Commented out
-        //     if (saveAsNewCheckbox.checked) {
-        //         newFilenameGroup.style.display = 'block';
-        //         actionInput.value = 'save_as_new';
-        //     } else {
-        //         newFilenameGroup.style.display = 'none';
-        //         actionInput.value = 'save';
-        //     }
-        // }); // Commented out
+    
+        modeToggleButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const mode = this.dataset.mode;
+                console.log("Mode button clicked:", mode);
+    
+                modeToggleButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+    
+                if (mode === 'editor') {
+                    htmlElement.classList.remove('preview-mode');
+                    htmlElement.classList.add('editor-mode');
+                } else if (mode === 'preview') {
+                    htmlElement.classList.remove('editor-mode');
+                    htmlElement.classList.add('preview-mode');
+                    updatePreview(); // RE-ENABLED this line - call updatePreview when switching to preview mode
+                }
+            });
+        });
+        document.querySelector('.save-button').addEventListener('click', function () {
+            this.textContent = "Saving...";
+            setTimeout(() => { this.textContent = "Save"; }, 1000);
+        });
     </script>
 </body>
 
