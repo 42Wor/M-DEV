@@ -1,280 +1,200 @@
-/* Preview.css - Enhanced Markdown Preview Styling - Cool Dark & Edgy Theme */
+/* Preview.css - Simplified Markdown Preview Styling */
 
-/* --------------------------------------------------
-   Color Palette - Cool Dark & Edgy Theme (from style.css) - Inherited from editor.css
-   -------------------------------------------------- */
-/* :root {} - Color variables are assumed to be defined in editor.css or a common stylesheet */
-
-/* --------------------------------------------------
-   Base Preview Content Styling
-   -------------------------------------------------- */
-   .preview-pane .preview-content {
-    font-family: 'Roboto Mono', monospace; /* Edgy monospace font for preview */
-    color: var(--light-text-color-3); /* Muted paragraph text color */
-    line-height: 1.7;
+/* Base Preview Content Styling */
+.preview-pane .preview-content {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--light-text-color-3);
+    line-height: 1.70;
     font-size: 1rem;
     word-wrap: break-word;
     overflow-x: auto;
     padding: 30px;
-    background-color: var(--dark-bg-color-4); /* Darker preview content background */
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger preview content shadow */
-    text-align: center; /* RE-APPLIED: Center all text within preview content */
+    background-color: var(--dark-bg-color-4);
+    border-radius: 800px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    text-align: center;
 }
 
-/* --------------------------------------------------
-   Headings - h1 to h6
-   -------------------------------------------------- */
+/* Headings */
 .preview-content h1, .preview-content h2, .preview-content h3,
 .preview-content h4, .preview-content h5, .preview-content h6 {
-    font-family: 'Bebas Neue', sans-serif; /* Striking heading font */
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700;
     line-height: 1.3;
-    margin-top: 1.5em;
-    margin-bottom: 0.8em;
-    color: var(--light-text-color-1); /* White heading text */
+    margin: 1.5em 0 0.8em;
+    color: var(--light-text-color-1);
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    text-shadow: 0 0 5px rgba(192, 66, 255, 0.5); /* Neon heading shadow */
-    text-align: center; /* RE-APPLIED: Center headings */
+    text-shadow: 0 0 5px rgba(192, 66, 255, 0.5);
+    text-align: center;
 }
 
-.preview-content h1 {
-    font-size: 2.5em;
-    border-bottom: 3px solid var(--electric-purple-2); /* Electric purple h1 border */
-    padding-bottom: 0.5em;
-    display: inline-block; /* RE-APPLIED: To center border under the text */
-    text-align: center; /* Ensure text inside is centered */
-    width: auto; /* Adjust width to content */
-}
-
-.preview-content h2 {
-    font-size: 2em;
-    border-bottom: 2px solid var(--electric-purple-2); /* Electric purple h2 border */
+.preview-content h1, .preview-content h2, .preview-content h3 {
+    display: inline-block;
+    border-bottom: 2px solid var(--electric-purple-2);
     padding-bottom: 0.4em;
-    display: inline-block; /* RE-APPLIED: To center border under the text */
-    text-align: center; /* Ensure text inside is centered */
-    width: auto; /* Adjust width to content */
 }
 
-.preview-content h3 {
-    font-size: 1.8em;
-    border-bottom: 1px dashed var(--dark-bg-color-7); /* Darker dashed h3 border */
-    padding-bottom: 0.3em;
-    display: inline-block; /* RE-APPLIED: To center border under the text */
-    text-align: center; /* Ensure text inside is centered */
-    width: auto; /* Adjust width to content */
-}
+.preview-content h1 { font-size: 2.5em; }
+.preview-content h2 { font-size: 2em; }
+.preview-content h3 { font-size: 1.8em; border-bottom-style: dashed; }
+.preview-content h4 { font-size: 1.5em; color: var(--electric-purple-2); }
+.preview-content h5 { font-size: 1.2em; color: var(--electric-purple-2); }
+.preview-content h6 { font-size: 1em; color: var(--light-text-color-4); font-style: italic; }
 
-.preview-content h4 {
-    font-size: 1.5em;
-    color: var(--electric-purple-2); /* Electric purple h4 text */
-    text-align: center; /* RE-APPLIED: Center h4 text */
-}
-
-.preview-content h5 {
-    font-size: 1.2em;
-    color: var(--electric-purple-2); /* Electric purple h5 text */
-    text-align: center; /* RE-APPLIED: Center h5 text */
-}
-
-.preview-content h6 {
-    font-size: 1em;
-    color: var(--light-text-color-4); /* Muted h6 text */
-    font-style: italic;
-    text-align: center; /* RE-APPLIED: Center h6 text */
-}
-
-/* --------------------------------------------------
-   Paragraphs
-   -------------------------------------------------- */
+/* Paragraphs */
 .preview-content p {
     margin-bottom: 1.2em;
-    color: var(--light-text-color-3); /* Muted paragraph text */
-    text-align: center; /* RE-APPLIED: Center paragraph text */
+    color: var(--light-text-color-3);
+    text-align: center;
 }
 
-/* --------------------------------------------------
-   Links
-   -------------------------------------------------- */
+/* Links */
 .preview-content a {
-    color: var(--electric-purple-2); /* Electric purple link text */
+    color: var(--electric-purple-2);
     text-decoration: none;
     transition: color 0.2s ease, text-shadow 0.2s ease;
-    text-align: center; /* RE-APPLIED: Center link text */
-    display: block; /* RE-APPLIED: Make links block-level to center them if they are alone in a line */
-    margin: 0 auto; /* RE-APPLIED: Center block-level links horizontally */
-    width: fit-content; /* RE-APPLIED: Fit link width to content */
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 .preview-content a:hover {
-    color: var(--light-text-color-1); /* White link text on hover */
+    color: var(--light-text-color-1);
     text-decoration: underline;
-    text-shadow: 0 0 5px rgba(192, 66, 255, 0.6); /* Neon glow on link hover */
+    text-shadow: 0 0 5px rgba(192, 66, 255, 0.6);
 }
 
-/* --------------------------------------------------
-   Lists - Unordered and Ordered
-   -------------------------------------------------- */
+/* Lists */
 .preview-content ul, .preview-content ol {
-    padding-left: 0; /* RE-APPLIED: Remove default left padding */
+    padding-left: 0;
     margin-bottom: 1.2em;
-    text-align: center; /* RE-APPLIED: Center list text */
-    list-style-position: inside; /* RE-APPLIED: Put markers inside list item to center them */
+    text-align: center;
+    list-style-position: inside;
 }
 
-.preview-content ul {
-    list-style-type: disc;
-}
-
-.preview-content ol {
-    list-style-type: decimal;
-}
+.preview-content ul { list-style-type: disc; }
+.preview-content ol { list-style-type: decimal; }
 
 .preview-content li {
     margin-bottom: 0.5em;
-    color: var(--light-text-color-3); /* Muted list item text */
-    text-align: center; /* RE-APPLIED: Center list item text */
+    color: var(--light-text-color-3);
+    text-align: center;
 }
 
-.preview-content ul li::marker {
-    color: var(--electric-purple-2); /* Electric purple bullet color */
+.preview-content ul li::marker, .preview-content ol li::marker {
+    color: var(--electric-purple-2);
 }
 
-.preview-content ol li::marker {
-    color: var(--electric-purple-2); /* Electric purple number color */
-}
-
-/* --------------------------------------------------
-   Code - Inline and Block
-   -------------------------------------------------- */
+/* Code */
 .preview-content code {
     font-family: 'Fira Code', monospace;
-    background-color: var(--dark-bg-color-5); /* Dark inline code bg */
-    color: var(--electric-purple-2); /* Electric purple inline code text */
+    background-color: var(--dark-bg-color-5);
+    color: var(--electric-purple-2);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
     font-size: 0.9em;
-    text-align: left; /* REVERTED: Code is typically left-aligned for readability */
+    text-align: left;
 }
 
 .preview-content pre code {
     display: block;
     padding: 1rem;
-    background-color: var(--dark-bg-color-5); /* Dark code block bg */
-    color: var(--light-text-color-2); /* Light code block text */
+    background-color: var(--dark-bg-color-5);
+    color: var(--light-text-color-2);
     border-radius: 6px;
     overflow-x: auto;
-    border: 1px solid var(--dark-bg-color-7); /* Darker code block border */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Stronger code block shadow */
-    text-align: left; /* REVERTED: Code block is typically left-aligned for readability */
+    border: 1px solid var(--dark-bg-color-7);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: left;
 }
 
-/* --------------------------------------------------
-   Blockquotes
-   -------------------------------------------------- */
+/* Blockquotes */
 .preview-content blockquote {
-    border-left: 4px solid var(--electric-purple-2); /* Electric purple blockquote border */
-    padding-left: 1.2rem; /* Keep left padding for visual separation of border */
+    border-left: 4px solid var(--electric-purple-2);
+    padding-left: 1.2rem;
     margin: 1.5em 0;
     font-style: italic;
-    color: var(--light-text-color-4); /* Muted blockquote text */
-    background-color: var(--dark-bg-color-5); /* Dark blockquote background */
+    color: var(--light-text-color-4);
+    background-color: var(--dark-bg-color-5);
     border-radius: 6px;
     padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Stronger blockquote shadow */
-    text-align: center; /* RE-APPLIED: Center blockquote text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
-/* --------------------------------------------------
-   Horizontal Rule (---, ***, ___)
-   -------------------------------------------------- */
+/* Horizontal Rule */
 .preview-content hr {
     border: 0;
-    border-top: 2px dashed var(--dark-bg-color-7); /* Darker dashed hr */
-    margin: 2em auto; /* RE-APPLIED: Center hr horizontally */
-    width: 50%; /* RE-APPLIED: Reduce width for visual centering effect */
+    border-top: 2px dashed var(--dark-bg-color-7);
+    margin: 2em auto;
+    width: 50%;
 }
 
-/* --------------------------------------------------
-   Images
-   -------------------------------------------------- */
+/* Images */
 .preview-content img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 1em auto; /* RE-APPLIED: Center images horizontally */
+    margin: 1em auto;
     border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger image shadow */
-    text-align: center; /* RE-APPLIED: For any potential text-align context */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* --------------------------------------------------
-   Tables (if your Markdown processor supports tables)
-   -------------------------------------------------- */
+/* Tables */
 .preview-content table {
     border-collapse: collapse;
-    width: auto; /* RE-APPLIED: Adjust width to content to center properly */
+    width: auto;
     margin-bottom: 1.5em;
-    background-color: var(--dark-bg-color-5); /* Dark table background */
-    color: var(--light-text-color-3); /* Muted table text */
+    background-color: var(--dark-bg-color-5);
+    color: var(--light-text-color-3);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Stronger table shadow */
-    text-align: center; /* RE-APPLIED: Center table content generally */
-    margin-left: auto; /* RE-APPLIED: Center the table itself horizontally */
-    margin-right: auto; /* RE-APPLIED: Center the table itself horizontally */
-    display: inline-block; /* RE-APPLIED: To allow centering using margin auto */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
 }
 
 .preview-content th, .preview-content td {
-    border: 1px solid var(--dark-bg-color-7); /* Darker table cell border */
+    border: 1px solid var(--dark-bg-color-7);
     padding: 8px 12px;
-    text-align: center; /* RE-APPLIED: Center text in table cells */
+    text-align: center;
 }
 
 .preview-content th {
     font-weight: bold;
-    background-color: var(--dark-bg-color-6); /* Even darker table header bg */
-    color: var(--light-text-color-1); /* White table header text */
+    background-color: var(--dark-bg-color-6);
+    color: var(--light-text-color-1);
     text-transform: uppercase;
 }
 
-/* --------------------------------------------------
-   Emphasis - Bold and Italic
-   -------------------------------------------------- */
+/* Emphasis */
 .preview-content strong, .preview-content b {
     font-weight: bold;
-    color: var(--light-text-color-1); /* White bold text */
-    text-align: center; /* RE-APPLIED: Center bold text if needed in a centered context */
+    color: var(--light-text-color-1);
 }
 
 .preview-content em, .preview-content i {
     font-style: italic;
-    color: var(--electric-purple-2); /* Electric purple italic text */
-    text-align: center; /* RE-APPLIED: Center italic text if needed in a centered context */
+    color: var(--electric-purple-2);
 }
 
-/* --------------------------------------------------
-   Responsive adjustments (for smaller screens)
-   -------------------------------------------------- */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .preview-pane .preview-content {
         font-size: 0.95rem;
         padding: 20px;
-        text-align: center; /* Ensure text-align: center; is maintained in responsive mode */
     }
     .preview-content h1 { font-size: 2em; }
     .preview-content h2 { font-size: 1.8em; }
     .preview-content h3 { font-size: 1.6em; }
     .preview-content ul, .preview-content ol {
-        padding-left: 0; /* Ensure padding is removed in responsive mode */
-        list-style-position: inside; /* Ensure list markers are inside in responsive mode */
-        text-align: center; /* Ensure text-align: center; is maintained in responsive mode */
+        padding-left: 0;
+        list-style-position: inside;
     }
     .preview-content pre code {
         padding: 0.8rem;
         font-size: 0.85em;
-        text-align: left; /* Keep code left-aligned in responsive mode */
     }
 }

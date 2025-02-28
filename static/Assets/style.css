@@ -325,7 +325,7 @@ html,body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  cursor:url('/Assets/cursor/cursor1.png'), pointer;
+  cursor:url('cursor/cursor1.png'), pointer;
 }
 
 .skill-box {
@@ -351,7 +351,7 @@ html,body {
   font-size: 20px;
   font-weight: 500;
   color: #ffffff;
-  cursor:url('/Assets/cursor/cursor.png'), pointer;
+  cursor:url('cursor/cursor.png'), pointer;
 }
 
 
@@ -366,18 +366,17 @@ html,body {
 
 
 body{
-  cursor: url('/Assets/cursor/c1.png'), auto;
+  cursor: url('cursor/cursor.png'), auto;
 }
 
 
 a {
 
-  cursor: url('/Assets/cursor/c.png'), pointer;
-
+  cursor: url('cursor/c.png'), pointer;
 }
 p {
 
-  cursor: url('/Assets/cursor/c1.png'), auto;
+  cursor: url('cursor/c1.png'), auto;
 
 }
 
@@ -399,6 +398,7 @@ footer.texts span a {
   text-decoration: underline;
   font-weight: 500;
   color: #ffffff;
+  
 }
 
 footer.texts span a:hover {
