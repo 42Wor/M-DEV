@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Project/asset_browser.css') }}"> <!-- NEW CSS -->
 </head>
 
 <body>
@@ -34,14 +35,19 @@
             {% endif %}
             {% endwith %}
 
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data" id="markdown-form"> <!-- Added enctype -->
                 <div class="form-actions">
-                    <button type="submit" class="save-button">Save</button>
+                    <button type="submit" class="save-button" name="action" value="save">Save</button>  <!-- Added name and value -->
+                    <button type="button" class="save-as-button" id="saveAsButton">Save As</button> <!-- New Save As button -->
                     <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}"
                         class="view-page-button">View Page</a>
                     <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
                     <!-- Optional Admin Panel Link -->
+                    <button type="button" id="openAssetBrowser" class="asset-browser-button">Browse Assets</button>
+                    <input type="file" id="imageUpload" name="image" style="display: none;"> <!-- Hidden file input -->
+                    
                 </div>
+                <input type="hidden" name="action" id="formAction" value="save"> <!-- Hidden input for action -->
 
                 <div class="mode-toggle-buttons">
                     <button type="button" class="mode-toggle-button active" data-mode="editor">Editing</button>
@@ -69,6 +75,37 @@
                     </div>
                 </div>
             </form>
+
+            <!-- Save As Modal -->
+            <div id="saveAsModal" class="asset-browser-modal"> <!-- Reusing asset-browser-modal class for styling -->
+                <div class="asset-browser-content"> <!-- Reusing asset-browser-content class for styling -->
+                    <span class="close-button" id="closeSaveAsModal">×</span>
+                    <h3>Save As</h3>
+                    <div class="form-group">
+                        <label for="saveAsFilename">New Filename (without .md extension):</label>
+                        <input type="text" class="form-control" id="saveAsFilename" placeholder="Enter new filename">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="modal-button" id="confirmSaveAs">Save As</button>
+                        <button type="button" class="modal-button" id="cancelSaveAs">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Asset Browser Modal -->
+            <div id="assetBrowserModal" class="asset-browser-modal">
+                <div class="asset-browser-content">
+                    <span class="close-button" id="closeAssetBrowser">×</span>
+                    <h3>Assets</h3>
+                    <div id="assetGallery" class="asset-gallery">
+                        <!-- Assets will be loaded here -->
+                    </div>
+                    <button type="button" id="uploadImageButton" class="upload-image-button">Upload Image</button>
+                </div>
+                
+            </div>
+
         </main>
 
     </div>
@@ -77,11 +114,27 @@
         const markdownEditor = document.getElementById('markdown-editor');
         const markdownPreview = document.getElementById('markdown-preview');
         const modeToggleButtons = document.querySelectorAll('.mode-toggle-button');
-        console.log("modeToggleButtons:", modeToggleButtons);
-        console.log("markdownEditor:", markdownEditor);
-        console.log("markdownPreview:", markdownPreview);
         const htmlElement = document.documentElement;
-    
+
+        // Asset Browser Elements
+        const openAssetBrowserButton = document.getElementById('openAssetBrowser');
+        const assetBrowserModal = document.getElementById('assetBrowserModal');
+        const closeAssetBrowserButton = document.getElementById('closeAssetBrowser');
+        const assetGallery = document.getElementById('assetGallery');
+        const imageUploadInput = document.getElementById('imageUpload');
+        const uploadImageButton = document.getElementById('uploadImageButton');
+        const markdownForm = document.getElementById('markdown-form'); // Form element
+
+        // Save As Modal Elements
+        const saveAsButton = document.getElementById('saveAsButton');
+        const saveAsModal = document.getElementById('saveAsModal');
+        const closeSaveAsModalButton = document.getElementById('closeSaveAsModal');
+        const confirmSaveAsButton = document.getElementById('confirmSaveAs');
+        const cancelSaveAsButton = document.getElementById('cancelSaveAs');
+        const saveAsFilenameInput = document.getElementById('saveAsFilename');
+        const formActionInput = document.getElementById('formAction'); // Hidden input
+
+
         function updatePreview() {
             const markdownText = markdownEditor.value;
             fetch('/preview', {
@@ -96,18 +149,17 @@
                     markdownPreview.innerHTML = data.html_content;
                 });
         }
-    
+
         markdownEditor.addEventListener('input', updatePreview);
         updatePreview(); // Initial preview on page load
-    
+
         modeToggleButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const mode = this.dataset.mode;
-                console.log("Mode button clicked:", mode);
-    
+
                 modeToggleButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-    
+
                 if (mode === 'editor') {
                     htmlElement.classList.remove('preview-mode');
                     htmlElement.classList.add('editor-mode');
@@ -122,6 +174,153 @@
             this.textContent = "Saving...";
             setTimeout(() => { this.textContent = "Save"; }, 1000);
         });
+
+
+        // Asset Browser Functionality
+        openAssetBrowserButton.addEventListener('click', () => {
+            assetBrowserModal.style.display = "block";
+            loadAssets();
+        });
+
+        closeAssetBrowserButton.addEventListener('click', () => {
+            assetBrowserModal.style.display = "none";
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == assetBrowserModal) {
+                assetBrowserModal.style.display = "none";
+            }
+        });
+
+
+        function loadAssets() {
+            assetGallery.innerHTML = '<p>Loading assets...</p>'; // Initial loading message
+            fetch('/list_assets')
+                .then(response => response.json())
+                .then(data => {
+                    assetGallery.innerHTML = ''; // Clear loading message
+                    if (data.assets && data.assets.length > 0) {
+                        data.assets.forEach(asset => {
+                            const imgContainer = document.createElement('div');
+                            imgContainer.classList.add('asset-item');
+
+                            const img = document.createElement('img');
+                            img.src = `/templates_assets/${asset}`; // Correct path to assets
+                            img.alt = asset;
+                            img.classList.add('asset-thumbnail');
+
+                            // --- NEW: Image Insertion on Click ---
+                            img.addEventListener('click', () => {
+                                const imageName = img.alt;
+                                const markdownImageSyntax = `![${imageName}](/templates_assets/${imageName})`;
+                                insertTextAtCursor(markdownEditor, markdownImageSyntax); // Use helper function
+                                assetBrowserModal.style.display = "none"; // Close modal after insertion
+                            });
+                            img.style.cursor = 'pointer'; // Indicate clickable image
+                            // --- End New Section ---
+
+                            imgContainer.appendChild(img);
+                            assetGallery.appendChild(imgContainer);
+                        });
+                    } else if (data.error) {
+                        assetGallery.innerHTML = `<p class="error">Error loading assets: ${data.error}</p>`;
+                    }
+                    else {
+                        assetGallery.innerHTML = '<p>No assets found.</p>';
+                    }
+                })
+                .catch(error => {
+                    assetGallery.innerHTML = `<p class="error">Failed to load assets.</p>`;
+                    console.error("Error loading assets:", error);
+                });
+        }
+
+        uploadImageButton.addEventListener('click', () => {
+            imageUploadInput.click(); // Programmatically click the hidden file input
+        });
+
+        imageUploadInput.addEventListener('change', () => {
+            const file = imageUploadInput.files[0];
+            if (file) {
+                uploadFile(file);
+            }
+        });
+
+        function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('/upload_image', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.success); // Show success message
+                        loadAssets(); // Reload asset list after upload
+                    } else if (data.error) {
+                        alert(`Upload error: ${data.error}`); // Show error message
+                    }
+                })
+                .catch(error => {
+                    alert("File upload failed.");
+                    console.error("File upload error:", error);
+                });
+        }
+
+        function insertTextAtCursor(textarea, text) {  // insertTextAtCursor function
+            const cursorPosition = textarea.selectionStart;
+            const textBeforeCursor = textarea.value.substring(0, cursorPosition);
+            const textAfterCursor = textarea.value.substring(cursorPosition, textarea.value.length);
+            textarea.value = textBeforeCursor + text + textAfterCursor;
+
+            // Move cursor to after inserted text
+            const newCursorPosition = cursorPosition + text.length;
+            textarea.selectionStart = newCursorPosition;
+            textarea.selectionEnd = newCursorPosition;
+
+            updatePreview(); // Refresh preview after insertion
+        }
+
+
+        // --- Save As Functionality ---
+        saveAsButton.addEventListener('click', () => {
+            saveAsModal.style.display = "block";
+        });
+
+        closeSaveAsModalButton.addEventListener('click', () => {
+            saveAsModal.style.display = "none";
+        });
+
+        cancelSaveAsButton.addEventListener('click', () => {
+            saveAsModal.style.display = "none";
+        });
+
+
+        confirmSaveAsButton.addEventListener('click', () => {
+            const newFilename = saveAsFilenameInput.value.trim();
+            if (newFilename) {
+                formActionInput.value = 'save_as'; // Set action to 'save_as'
+                const filenameInput = document.createElement('input'); // Create input for filename
+                filenameInput.type = 'hidden';
+                filenameInput.name = 'new_filename';
+                filenameInput.value = newFilename;
+                markdownForm.appendChild(filenameInput); // Add to form
+                markdownForm.submit(); // Submit the form
+            } else {
+                alert("Please enter a filename for 'Save As'.");
+            }
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == saveAsModal) {
+                saveAsModal.style.display = "none";
+            }
+        });
+        // --- End Save As Functionality ---
+
+
     </script>
 </body>
 

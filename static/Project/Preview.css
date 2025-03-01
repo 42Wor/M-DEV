@@ -168,6 +168,14 @@
 .preview-content .code-block-container pre {
     margin-bottom: 0; /* Remove bottom margin from <pre> as container provides it */
 }
+/* Images within the preview content */
+.preview-content img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove bottom margin/gap */
+    margin: 20px 0; /* Add some vertical margin */
+    border-radius: 8px; /* Optional: add rounded corners */
+}
 
 
 .copy-button {

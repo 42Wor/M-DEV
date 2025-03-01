@@ -9,6 +9,7 @@ from functools import wraps
 import secrets
 import datetime  # Import the datetime module
 from datetime import timedelta  # Import timedelta from datetime module
+from werkzeug.utils import secure_filename # Import secure_filename
 
 ''' =================================
    2. Flask App Initialization and Secret Key
@@ -21,7 +22,11 @@ app.permanent_session_lifetime = timedelta(minutes=30)
    3. Project Settings and Constants
    ================================= '''
 README_FOLDER = "templates/Project/projectmd"
+README_FOLDER_ASSETS = os.path.join(README_FOLDER, "Assets") # Define Assets folder path
 ADMIN_PASSWORD = "'"
+
+# Ensure Assets folder exists
+os.makedirs(README_FOLDER_ASSETS, exist_ok=True)
 
 ''' =================================
    4. Authentication Decorator
@@ -44,18 +49,47 @@ def login_required(f):
 @login_required  # Protect the editor (optional for scratch, add back later)
 def editor(filename):
     file_path = os.path.join(README_FOLDER, filename)
+    is_new_file = (filename == 'new_file.md') # Check if it's a new file
 
     if request.method == 'POST':
         markdown_content = request.form['markdown_content']
-        try:
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(markdown_content)
-            flash('File saved successfully!', 'success')
-            return redirect(url_for('editor', filename=filename)) # Redirect to reload editor
-        except Exception as e:
-            flash(f"Error saving file: {e}", 'error')
-            return f"Error saving file: {e}", 500
+        action = request.form.get('action') # Get the action (save or save_as)
 
+        if action == 'save_as': # --- Save As Logic ---
+            new_filename_input = request.form.get('new_filename') # Get new filename from form
+            if not new_filename_input:
+                flash("Filename for 'Save As' is missing.", 'error')
+                return redirect(url_for('editor', filename=filename)) # Stay on same editor page
+            new_filename = secure_filename(new_filename_input) # Sanitize filename
+            if not new_filename.endswith(".md"):
+                new_filename += ".md"
+            new_file_path = os.path.join(README_FOLDER, new_filename)
+
+            if os.path.exists(new_file_path) and not is_new_file: # Prevent overwriting existing file (unless original was new_file.md)
+                flash(f"File '{new_filename}' already exists. Choose a different name for 'Save As'.", 'error')
+                return redirect(url_for('editor', filename=filename)) # Stay on same editor page
+
+
+            try:
+                with open(new_file_path, 'w', encoding='utf-8') as f:
+                    f.write(markdown_content)
+                flash(f"File saved as '{new_filename}' successfully!", 'success')
+                return redirect(url_for('editor', filename=new_filename)) # Redirect to editor for new file
+            except Exception as e:
+                flash(f"Error saving file: {e}", 'error')
+                return f"Error saving file: {e}", 500
+
+        else: # --- Regular Save Logic (action == 'save' or default) ---
+            try:
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(markdown_content)
+                flash('File saved successfully!', 'success')
+                return redirect(url_for('editor', filename=filename)) # Redirect to reload editor
+            except Exception as e:
+                flash(f"Error saving file: {e}", 'error')
+                return f"Error saving file: {e}", 500
+
+    # --- GET request (loading editor) remains the same ---
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             markdown_content = f.read()
@@ -153,9 +187,50 @@ def admin_delete_file(filename):
 # --- End File Deletion Route ---
 
 ''' =================================
-   8. Markdown Preview Route
+   8. Asset Management Routes (NEW)
    ================================= '''
+# --- Asset Management ---
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'} # Allowed image extensions
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload_image', methods=['POST'])
+@login_required
+def upload_image():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image part'}), 400
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename) # Use secure_filename
+        file_path = os.path.join(README_FOLDER_ASSETS, filename)
+        try:
+            file.save(file_path)
+            return jsonify({'success': 'Image uploaded successfully', 'filename': filename})
+        except Exception as e:
+            return jsonify({'error': f'Error saving file: {str(e)}'}), 500
+    else:
+        return jsonify({'error': 'Invalid file type'}), 400
+
+@app.route('/list_assets')
+@login_required
+def list_assets():
+    assets = []
+    try:
+        for filename in os.listdir(README_FOLDER_ASSETS):
+            if allowed_file(filename): # Only list allowed image types
+                assets.append(filename)
+    except FileNotFoundError:
+        return jsonify({'error': f'Assets folder not found: {README_FOLDER_ASSETS}'}), 404
+    return jsonify({'assets': assets})
+# --- End Asset Management ---
+# In your app.py, after your existing static route (@app.route('/static/<path:filename>'))
+
+@app.route('/templates_assets/<path:filename>')  # New route prefix - choose something distinct
+def serve_templates_assets(filename):
+    return send_from_directory(os.path.join('templates', 'Project', 'projectmd', 'Assets'), filename)
 
 
 ''' =================================
