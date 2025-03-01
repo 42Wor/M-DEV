@@ -172,11 +172,10 @@
 .preview-content img {
     max-width: 100%; /* Ensure images are responsive */
     height: auto; /* Maintain aspect ratio */
-    display: block; /* Remove bottom margin/gap */
+     /* Remove bottom margin/gap */
     margin: 20px 0; /* Add some vertical margin */
     border-radius: 8px; /* Optional: add rounded corners */
 }
-
 
 .copy-button {
     position: absolute;
