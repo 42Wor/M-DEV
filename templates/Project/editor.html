@@ -37,15 +37,19 @@
 
             <form method="POST" enctype="multipart/form-data" id="markdown-form"> <!-- Added enctype -->
                 <div class="form-actions">
-                    <button type="submit" class="save-button" name="action" value="save">Save</button>  <!-- Added name and value -->
-                    <button type="button" class="save-as-button" id="saveAsButton">Save As</button> <!-- New Save As button -->
-                    <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}"
-                        class="view-page-button">View Page</a>
-                    <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
+                    <button type="submit" class="save-button" name="action" value="save">Save</button>
+                    <!-- Added name and value -->
+                    <button type="button" class="save-as-button" id="saveAsButton">Save As</button>
+                    <!-- New Save As button -->
+
+
                     <!-- Optional Admin Panel Link -->
                     <button type="button" id="openAssetBrowser" class="asset-browser-button">Browse Assets</button>
                     <input type="file" id="imageUpload" name="image" style="display: none;"> <!-- Hidden file input -->
-                    
+                                        <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}"
+                        class="view-page-button">View Page</a>
+
+                    <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
                 </div>
                 <input type="hidden" name="action" id="formAction" value="save"> <!-- Hidden input for action -->
 
@@ -103,7 +107,7 @@
                     </div>
                     <button type="button" id="uploadImageButton" class="upload-image-button">Upload Image</button>
                 </div>
-                
+
             </div>
 
         </main>
