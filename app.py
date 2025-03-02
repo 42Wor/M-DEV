@@ -10,12 +10,13 @@ import secrets
 import datetime  # Import the datetime module
 from datetime import timedelta  # Import timedelta from datetime module
 from werkzeug.utils import secure_filename # Import secure_filename
+import google.generativeai as genai # Import Gemini API library
 
 ''' =================================
    2. Flask App Initialization and Secret Key
    ================================= '''
 app = Flask(__name__)
-app.secret_key = "secrets.token_hex(16)"
+app.secret_key = "secrets.token_hex(16)" # Replace with a more secure method in production
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 ''' =================================
@@ -24,9 +25,19 @@ app.permanent_session_lifetime = timedelta(minutes=30)
 README_FOLDER = "templates/Project/projectmd"
 README_FOLDER_ASSETS = os.path.join(README_FOLDER, "Assets") # Define Assets folder path
 ADMIN_PASSWORD = "'"
+GOOGLE_API_KEY = "YOUR_API_KEY_HERE"  # **REPLACE WITH YOUR ACTUAL API KEY - SECURELY MANAGE THIS IN PRODUCTION**
 
 # Ensure Assets folder exists
 os.makedirs(README_FOLDER_ASSETS, exist_ok=True)
+
+# Configure Gemini API
+genai.configure(api_key=GOOGLE_API_KEY)
+generation_config = genai.GenerationConfig(
+    temperature=0.9, # Adjust temperature as needed for creativity vs. accuracy
+)
+model = genai.GenerativeModel(model_name="gemini-pro",
+                              generation_config=generation_config)
+
 
 ''' =================================
    4. Authentication Decorator
@@ -130,6 +141,21 @@ def preview_markdown():
     markdown_text = data.get('markdown', '')
     html_content = markdown.markdown(markdown_text)
     return jsonify({'html_content': html_content})
+
+# --- Gemini API Route ---
+@app.route('/generate_markdown', methods=['POST'])
+@login_required # Optionally protect this route as well
+def generate_markdown():
+    try:
+        prompt_text = "Write a short paragraph about a fascinating topic." # You can make this dynamic later
+        response = model.generate_content(prompt_text)
+        generated_markdown = response.text # Access the text part of the response.
+        return jsonify({'markdown_content': generated_markdown})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+# --- End Gemini API Route ---
+
+
 # --- End Markdown Editor Routes ---
 
 ''' =================================
@@ -310,6 +336,9 @@ def faqs():
 def Chat():
     return render_template("com/index.html")
 
+@app.route("/syntax/")
+def Syntax():
+    return render_template("Project/Syntax-md.html")
 
 # Form Submission Route
 @app.route("/submit_form", methods=["POST"])
