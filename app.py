@@ -1,7 +1,7 @@
 ''' =================================
    1. Imports and Configurations
    ================================= '''
-from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session, make_response,flash
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session, make_response, flash
 import json
 import markdown
 import os
@@ -10,13 +10,13 @@ import secrets
 import datetime  # Import the datetime module
 from datetime import timedelta  # Import timedelta from datetime module
 from werkzeug.utils import secure_filename # Import secure_filename
-import google.generativeai as genai # Import Gemini API library
+import google.generativeai as genai  # Import the Gemini API library
 
 ''' =================================
    2. Flask App Initialization and Secret Key
    ================================= '''
 app = Flask(__name__)
-app.secret_key = "secrets.token_hex(16)" # Replace with a more secure method in production
+app.secret_key = "secrets.token_hex(16)"
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 ''' =================================
@@ -25,18 +25,40 @@ app.permanent_session_lifetime = timedelta(minutes=30)
 README_FOLDER = "templates/Project/projectmd"
 README_FOLDER_ASSETS = os.path.join(README_FOLDER, "Assets") # Define Assets folder path
 ADMIN_PASSWORD = "'"
-GOOGLE_API_KEY = "YOUR_API_KEY_HERE"  # **REPLACE WITH YOUR ACTUAL API KEY - SECURELY MANAGE THIS IN PRODUCTION**
 
 # Ensure Assets folder exists
 os.makedirs(README_FOLDER_ASSETS, exist_ok=True)
 
-# Configure Gemini API
-genai.configure(api_key=GOOGLE_API_KEY)
-generation_config = genai.GenerationConfig(
-    temperature=0.9, # Adjust temperature as needed for creativity vs. accuracy
+# Configure Gemini API (replace with your actual API key or environment variable)
+# Option 1: Set API key directly (less secure - for testing only)
+# genai.configure(api_key="YOUR_API_KEY")
+genai.configure(api_key='AIzaSyACCG5jwizEchxEb3fnJlchzHY7HLp7QSw')
+
+generation_config = genai.types.GenerationConfig(
+    candidate_count=1,
+    max_output_tokens=200, # Adjust as needed
 )
-model = genai.GenerativeModel(model_name="gemini-pro",
-                              generation_config=generation_config)
+safety_settings = [
+    {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+]
+model = genai.GenerativeModel(model_name="models/gemini-2.0-flash",
+                              generation_config=generation_config,
+                              safety_settings=safety_settings)
 
 
 ''' =================================
@@ -54,7 +76,31 @@ def login_required(f):
 
 
 ''' =================================
-   5. Markdown Editor Routes
+   5. Gemini API Functions
+   ================================= '''
+
+def generate_name_from_gemini(prompt_suffix="for a markdown file"):
+    """Generates a name using Gemini API."""
+    prompt = f"Generate a creative and concise name {prompt_suffix}.  Just return the name, no extra text."
+    try:
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        print(f"Gemini API error during name generation: {e}")
+        return None
+
+def generate_markdown_from_gemini(prompt_prefix, user_markdown_content=""):
+    """Generates markdown content using Gemini API based on a prompt and optionally user content."""
+    prompt = f"{prompt_prefix}\n\n---\n\nCurrent Markdown Content (optional context):\n{user_markdown_content}\n\n---\n\nGenerate Markdown content based on the above. "
+    try:
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        print(f"Gemini API error during markdown generation: {e}")
+        return None
+
+''' =================================
+   6. Markdown Editor Routes
    ================================= '''
 @app.route('/editor/<filename>', methods=['GET', 'POST'])
 @login_required  # Protect the editor (optional for scratch, add back later)
@@ -63,10 +109,28 @@ def editor(filename):
     is_new_file = (filename == 'new_file.md') # Check if it's a new file
 
     if request.method == 'POST':
-        markdown_content = request.form['markdown_content']
-        action = request.form.get('action') # Get the action (save or save_as)
+        action = request.form.get('action') # Get the action (save, save_as, generate_name, etc.)
 
-        if action == 'save_as': # --- Save As Logic ---
+        if action == 'generate_name': # --- Generate Name Request ---
+            generated_name = generate_name_from_gemini()
+            if generated_name:
+                return jsonify({'generated_name': generated_name})
+            else:
+                return jsonify({'error': 'Failed to generate name.'}), 500
+
+        elif action == 'generate_markdown': # --- Generate Markdown Request ---
+            user_prompt_prefix = request.form.get('prompt_prefix', "Expand on this markdown content") # Get prompt prefix from form, default if missing
+            # Get markdown_content only when needed for generate_markdown as context
+            markdown_content = request.form.get('markdown_content', "") # Get it safely, default to empty string
+            generated_markdown = generate_markdown_from_gemini(user_prompt_prefix, markdown_content)
+            if generated_markdown:
+                return jsonify({'generated_markdown': generated_markdown})
+            else:
+                return jsonify({'error': 'Failed to generate markdown.'}), 500
+
+
+        elif action == 'save_as': # --- Save As Logic ---
+            markdown_content = request.form['markdown_content'] # Get markdown_content for save actions
             new_filename_input = request.form.get('new_filename') # Get new filename from form
             if not new_filename_input:
                 flash("Filename for 'Save As' is missing.", 'error')
@@ -90,7 +154,8 @@ def editor(filename):
                 flash(f"Error saving file: {e}", 'error')
                 return f"Error saving file: {e}", 500
 
-        else: # --- Regular Save Logic (action == 'save' or default) ---
+        elif action == 'save': # --- Regular Save Logic (action == 'save') ---
+            markdown_content = request.form['markdown_content'] # Get markdown_content for save actions
             try:
                 with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(markdown_content)
@@ -99,6 +164,9 @@ def editor(filename):
             except Exception as e:
                 flash(f"Error saving file: {e}", 'error')
                 return f"Error saving file: {e}", 500
+        else:
+            return "Invalid action", 400 # Handle unexpected actions
+
 
     # --- GET request (loading editor) remains the same ---
     try:
@@ -110,7 +178,6 @@ def editor(filename):
         return f"Error reading file: {e}", 500
 
     return render_template('Project/editor.html', filename=filename, markdown_content=markdown_content)
-
 
 @app.route('/editor/new', methods=['GET', 'POST'])
 @login_required # Protect new file creation (optional for scratch, add back later)
@@ -141,25 +208,10 @@ def preview_markdown():
     markdown_text = data.get('markdown', '')
     html_content = markdown.markdown(markdown_text)
     return jsonify({'html_content': html_content})
-
-# --- Gemini API Route ---
-@app.route('/generate_markdown', methods=['POST'])
-@login_required # Optionally protect this route as well
-def generate_markdown():
-    try:
-        prompt_text = "Write a short paragraph about a fascinating topic." # You can make this dynamic later
-        response = model.generate_content(prompt_text)
-        generated_markdown = response.text # Access the text part of the response.
-        return jsonify({'markdown_content': generated_markdown})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-# --- End Gemini API Route ---
-
-
 # --- End Markdown Editor Routes ---
 
 ''' =================================
-   6. Admin Panel and Login Routes
+   7. Admin Panel and Login Routes
    ================================= '''
 # --- Admin and Login ---
 @app.route('/admin/')
@@ -196,7 +248,7 @@ def admin_logout():
 
 
 ''' =================================
-   7. File Deletion Route (Admin Feature)
+   8. File Deletion Route (Admin Feature)
    ================================= '''
 # ---  File Deletion (Admin Feature) ---
 @app.route('/admin/delete/<filename>')
@@ -213,7 +265,7 @@ def admin_delete_file(filename):
 # --- End File Deletion Route ---
 
 ''' =================================
-   8. Asset Management Routes (NEW)
+   9. Asset Management Routes (NEW)
    ================================= '''
 # --- Asset Management ---
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'} # Allowed image extensions
@@ -260,7 +312,7 @@ def serve_templates_assets(filename):
 
 
 ''' =================================
-   9. Main Application Routes (Home, Project, Readme, Static)
+   10. Main Application Routes (Home, Project, Readme, Static)
    ================================= '''
 # --- Main Application Routes ---
 # Home Page
@@ -310,7 +362,7 @@ def serve_static(filename):
 
 
 ''' =================================
-   10. Additional Pages (Portfolio, Privacy, FAQs, Chat, Form Submission)
+   11. Additional Pages (Portfolio, Privacy, FAQs, Chat, Form Submission)
    ================================= '''
 # --- Additional Pages ---
 # Portfolio Page
@@ -365,7 +417,7 @@ def faq():
 
 
 ''' =================================
-   11. Error Handling (404)
+   12. Error Handling (404)
    ================================= '''
 # --- 404 Error Handler ---
 @app.errorhandler(404)
@@ -375,7 +427,7 @@ def page_not_found(error):
 
 
 ''' =================================
-   12. Main Execution Block
+   13. Main Execution Block
    ================================= '''
 # --- Main Execution Block ---
 if __name__ == "__main__":

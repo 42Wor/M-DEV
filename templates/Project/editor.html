@@ -41,6 +41,8 @@
                     <!-- Added name and value -->
                     <button type="button" class="save-as-button" id="saveAsButton">Save As</button>
                     <!-- New Save As button -->
+                    <button type="button" class="generate-name-button" id="generateNameButton">Generate Name</button>
+                    <button type="button" class="generate-markdown-button" id="generateMarkdownButton">Generate Markdown</button>
 
 
                     <!-- Optional Admin Panel Link -->
@@ -61,8 +63,12 @@
                 {% if filename == 'new_file.md' %}
                 <div class="form-group">
                     <label for="new_filename">New Filename (without .md extension):</label>
-                    <input type="text" class="form-control" id="new_filename" name="new_filename" required
-                        placeholder="Enter filename">
+                    <div class="filename-input-group">
+                        <input type="text" class="form-control" id="new_filename" name="new_filename" required
+                            placeholder="Enter filename">
+                        <button type="button" class="suggest-name-button" id="suggestNameButton">Suggest Name</button>
+                    </div>
+                    <div id="suggestedFilename" class="suggested-filename"></div>
                 </div>
                 {% endif %}
 
@@ -110,6 +116,23 @@
 
             </div>
 
+            <!-- Generate Markdown Modal -->
+            <div id="generateMarkdownModal" class="asset-browser-modal"> <!-- Reusing asset-browser-modal class -->
+                <div class="asset-browser-content"> <!-- Reusing asset-browser-content class -->
+                    <span class="close-button" id="closeGenerateMarkdownModal">×</span>
+                    <h3>Generate Markdown</h3>
+                    <div class="form-group">
+                        <label for="markdownPrompt">Describe what Markdown to generate:</label>
+                        <textarea class="form-control" id="markdownPrompt" placeholder="e.g., 'Write a blog post about web development'"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="modal-button" id="confirmGenerateMarkdown">Generate</button>
+                        <button type="button" class="modal-button" id="cancelGenerateMarkdown">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+
         </main>
 
     </div>
@@ -119,6 +142,7 @@
         const markdownPreview = document.getElementById('markdown-preview');
         const modeToggleButtons = document.querySelectorAll('.mode-toggle-button');
         const htmlElement = document.documentElement;
+        const markdownForm = document.getElementById('markdown-form'); // Form element
 
         // Asset Browser Elements
         const openAssetBrowserButton = document.getElementById('openAssetBrowser');
@@ -127,7 +151,7 @@
         const assetGallery = document.getElementById('assetGallery');
         const imageUploadInput = document.getElementById('imageUpload');
         const uploadImageButton = document.getElementById('uploadImageButton');
-        const markdownForm = document.getElementById('markdown-form'); // Form element
+
 
         // Save As Modal Elements
         const saveAsButton = document.getElementById('saveAsButton');
@@ -137,6 +161,20 @@
         const cancelSaveAsButton = document.getElementById('cancelSaveAs');
         const saveAsFilenameInput = document.getElementById('saveAsFilename');
         const formActionInput = document.getElementById('formAction'); // Hidden input
+
+        // Generate Name Elements
+        const generateNameButton = document.getElementById('generateNameButton');
+        const suggestNameButton = document.getElementById('suggestNameButton');
+        const suggestedFilenameDiv = document.getElementById('suggestedFilename');
+        const newFilenameInput = document.getElementById('new_filename');
+
+        // Generate Markdown Elements
+        const generateMarkdownButton = document.getElementById('generateMarkdownButton');
+        const generateMarkdownModal = document.getElementById('generateMarkdownModal');
+        const closeGenerateMarkdownModalButton = document.getElementById('closeGenerateMarkdownModal');
+        const confirmGenerateMarkdownButton = document.getElementById('confirmGenerateMarkdown');
+        const cancelGenerateMarkdownButton = document.getElementById('cancelGenerateMarkdown');
+        const markdownPromptTextarea = document.getElementById('markdownPrompt');
 
 
         function updatePreview() {
@@ -323,6 +361,94 @@
             }
         });
         // --- End Save As Functionality ---
+
+        // --- Generate Name Functionality ---
+        generateNameButton.addEventListener('click', () => {
+            markdownForm.action = "{{ url_for('editor', filename=filename) }}"; // Ensure form action is correct
+            formActionInput.value = 'generate_name';
+            markdownForm.submit();
+        });
+
+        suggestNameButton.addEventListener('click', () => {
+            suggestedFilenameDiv.textContent = 'Suggesting filename...';
+            fetch("{{ url_for('editor', filename=filename) }}", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ action: 'generate_name' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.generated_name) {
+                    suggestedFilenameDiv.textContent = `Suggested filename: ${data.generated_name}`;
+                    newFilenameInput.value = data.generated_name; // Optionally fill the input
+                } else if (data.error) {
+                    suggestedFilenameDiv.textContent = `Error: ${data.error}`;
+                } else {
+                    suggestedFilenameDiv.textContent = 'Could not suggest filename.';
+                }
+            })
+            .catch(error => {
+                suggestedFilenameDiv.textContent = 'Error suggesting filename.';
+                console.error("Filename suggestion error:", error);
+            });
+        });
+        // --- End Generate Name Functionality ---
+
+        // --- Generate Markdown Functionality ---
+        generateMarkdownButton.addEventListener('click', () => {
+            generateMarkdownModal.style.display = "block";
+        });
+
+        closeGenerateMarkdownModalButton.addEventListener('click', () => {
+            generateMarkdownModal.style.display = "none";
+        });
+
+        cancelGenerateMarkdownButton.addEventListener('click', () => {
+            generateMarkdownModal.style.display = "none";
+        });
+
+        confirmGenerateMarkdownButton.addEventListener('click', () => {
+            const promptPrefix = markdownPromptTextarea.value.trim();
+            if (promptPrefix) {
+                generateMarkdownModal.style.display = "none"; // Close modal immediately after clicking Generate
+
+                fetch("{{ url_for('editor', filename=filename) }}", { // Use fetch instead of form submit
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // Or 'application/json' if sending JSON
+                    body: new URLSearchParams({
+                        action: 'generate_markdown',
+                        prompt_prefix: promptPrefix,
+                        markdown_content: markdownEditor.value // Send current content as context
+                    }) // Send data as URL-encoded form data
+                })
+                .then(response => response.json()) // Parse JSON response
+                .then(data => {
+                    if (data.generated_markdown) {
+                        // --- MODIFIED LINE TO APPEND INSTEAD OF REPLACE ---
+                        markdownEditor.value = markdownEditor.value + "\n\n" + data.generated_markdown;
+                        updatePreview(); // Refresh the preview
+                    } else if (data.error) {
+                        alert(`Markdown generation error: ${data.error}`); // Show error message
+                    } else {
+                        alert('Could not generate markdown.'); // Generic error message
+                    }
+                })
+                .catch(error => {
+                    alert('Error during markdown generation request.'); // Network or fetch error
+                    console.error("Markdown generation request error:", error);
+                });
+
+            } else {
+                alert("Please enter a prompt for Markdown generation.");
+            }
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == generateMarkdownModal) {
+                generateMarkdownModal.style.display = "none";
+            }
+        });
+        // --- End Generate Markdown Functionality ---
 
 
     </script>
