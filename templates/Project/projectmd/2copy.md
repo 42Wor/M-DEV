@@ -1,1 +1,0 @@
-![Animation_-_1740845310653.gif](/templates_assets/Animation_-_1740845310653.gif)![ti1.webp](/templates_assets/ti1.webp)
