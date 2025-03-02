@@ -164,7 +164,7 @@
 
         // Generate Name Elements
         const generateNameButton = document.getElementById('generateNameButton');
-        const suggestNameButton = document.getElementById('suggestNameButton');
+        const suggestNameButton = document.getElementById('suggestNameButton'); // Line that was causing error
         const suggestedFilenameDiv = document.getElementById('suggestedFilename');
         const newFilenameInput = document.getElementById('new_filename');
 
@@ -369,29 +369,32 @@
             markdownForm.submit();
         });
 
-        suggestNameButton.addEventListener('click', () => {
-            suggestedFilenameDiv.textContent = 'Suggesting filename...';
-            fetch("{{ url_for('editor', filename=filename) }}", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ action: 'generate_name' })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.generated_name) {
-                    suggestedFilenameDiv.textContent = `Suggested filename: ${data.generated_name}`;
-                    newFilenameInput.value = data.generated_name; // Optionally fill the input
-                } else if (data.error) {
-                    suggestedFilenameDiv.textContent = `Error: ${data.error}`;
-                } else {
-                    suggestedFilenameDiv.textContent = 'Could not suggest filename.';
-                }
-            })
-            .catch(error => {
-                suggestedFilenameDiv.textContent = 'Error suggesting filename.';
-                console.error("Filename suggestion error:", error);
+        // ADDED CONDITIONAL CHECK HERE:
+        if (suggestNameButton) {
+            suggestNameButton.addEventListener('click', () => {
+                suggestedFilenameDiv.textContent = 'Suggesting filename...';
+                fetch("{{ url_for('editor', filename=filename) }}", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ action: 'generate_name' })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.generated_name) {
+                        suggestedFilenameDiv.textContent = `Suggested filename: ${data.generated_name}`;
+                        newFilenameInput.value = data.generated_name; // Optionally fill the input
+                    } else if (data.error) {
+                        suggestedFilenameDiv.textContent = `Error: ${data.error}`;
+                    } else {
+                        suggestedFilenameDiv.textContent = 'Could not suggest filename.';
+                    }
+                })
+                .catch(error => {
+                    suggestedFilenameDiv.textContent = 'Error suggesting filename.';
+                    console.error("Filename suggestion error:", error);
+                });
             });
-        });
+        }
         // --- End Generate Name Functionality ---
 
         // --- Generate Markdown Functionality ---
