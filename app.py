@@ -91,7 +91,27 @@ def generate_name_from_gemini(prompt_suffix="for a markdown file"):
 
 def generate_markdown_from_gemini(prompt_prefix, user_markdown_content=""):
     """Generates markdown content using Gemini API based on a prompt and optionally user content."""
-    prompt = f"{prompt_prefix}\n\n---\n\nCurrent Markdown Content (optional context):\n{user_markdown_content}\n\n---\n\nGenerate Markdown content based on the above. 700 line first draft.  No extra text."
+    prompt = f"""
+    You are a helpful assistant for generating high-quality Markdown content.
+
+    **Instructions:**
+    {prompt_prefix}
+
+    **Context (Optional - Current Markdown Content):**
+    ---
+    {user_markdown_content}
+    ---
+
+    **Guidelines for Generation:**
+
+    *   **Generate clear, well-structured, and informative Markdown.**
+    *   **Focus on fulfilling the instructions above.**
+    *   **Use appropriate Markdown formatting (headings, lists, code blocks, etc.) to enhance readability.**
+    *   **Prioritize content quality and completeness over a specific length.**
+    *   **Aim for a helpful and user-friendly tone.**
+
+    **Begin!**
+    """
     try:
         response = model.generate_content(prompt)
         return response.text.strip()
@@ -123,6 +143,7 @@ def editor(filename):
             # Get markdown_content only when needed for generate_markdown as context
             markdown_content = request.form.get('markdown_content', "") # Get it safely, default to empty string
             generated_markdown = generate_markdown_from_gemini(user_prompt_prefix, markdown_content)
+            print("Debug: generated_markdown =", generated_markdown) # ADD THIS LINE
             if generated_markdown:
                 return jsonify({'generated_markdown': generated_markdown})
             else:
