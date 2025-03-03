@@ -91,7 +91,7 @@ def generate_name_from_gemini(prompt_suffix="for a markdown file"):
 
 def generate_markdown_from_gemini(prompt_prefix, user_markdown_content=""):
     """Generates markdown content using Gemini API based on a prompt and optionally user content."""
-    prompt = f"{prompt_prefix}\n\n---\n\nCurrent Markdown Content (optional context):\n{user_markdown_content}\n\n---\n\nGenerate Markdown content based on the above. "
+    prompt = f"{prompt_prefix}\n\n---\n\nCurrent Markdown Content (optional context):\n{user_markdown_content}\n\n---\n\nGenerate Markdown content based on the above. 700 line first draft.  No extra text."
     try:
         response = model.generate_content(prompt)
         return response.text.strip()
