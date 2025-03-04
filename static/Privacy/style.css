@@ -305,7 +305,6 @@ footer{
     position: sticky; /* Optional: Sticky sidebar */
     top: 60px; /* Adjust top position based on navbar height */
     height: calc(100vh - 60px); /* Ensure sidebar height */
-    overflow-y: auto; /* Scroll if sidebar content is long */
 }
 
 /* Clearfix for floated elements if needed */
@@ -406,7 +405,7 @@ footer{
     width: 95%;
     max-width: 800px;
     height: auto;
-    max-height: 90vh;
+
     overflow-y: auto;
     background-color: var(--background-white);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
