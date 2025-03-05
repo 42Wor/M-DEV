@@ -394,8 +394,8 @@ li {
 
 .file-link {
     color: var(--primary-color-light); /* Lighter primary for file links */
-    display: block;
-    overflow: hidden;
+    display:flex;
+    overflow: auto;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
