@@ -63,7 +63,7 @@
         <script>
             // **Conceptual JavaScript - You'll need to write the actual implementation**
             document.addEventListener('DOMContentLoaded', function () {
-                const copyButtons = document.querySelectorAll('.copy-button');
+                const copyButtons = document.querySelectorAll('.preview-content code:not');
 
                 copyButtons.forEach(button => {
                     button.addEventListener('click', function () {
