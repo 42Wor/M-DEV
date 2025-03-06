@@ -36,7 +36,7 @@ genai.configure(api_key='AIzaSyACCG5jwizEchxEb3fnJlchzHY7HLp7QSw')
 
 generation_config = genai.types.GenerationConfig(
     candidate_count=1,
-    max_output_tokens=200, # Adjust as needed
+    max_output_tokens=1500, # Adjust as needed
 )
 safety_settings = [
     {
@@ -91,7 +91,7 @@ def generate_name_from_gemini(prompt_suffix="for a markdown file"):
 
 def generate_markdown_from_gemini(prompt_prefix, user_markdown_content=""):
     """Generates markdown content using Gemini API based on a prompt and optionally user content."""
-    prompt = f"{prompt_prefix}\n\n---\n\nCurrent Markdown Content (optional context):\n{user_markdown_content}\n\n---\n\nGenerate Markdown content based on the above.Generate 700 line ."
+    prompt = f"{prompt_prefix}\n\n---\n\nCurrent Markdown Content (optional context):\n{user_markdown_content}\n\n---\n\nGenerate Markdown content based on the above."
     try:
         response = model.generate_content(prompt)
         return response.text.strip()
@@ -123,7 +123,6 @@ def editor(filename):
             # Get markdown_content only when needed for generate_markdown as context
             markdown_content = request.form.get('markdown_content', "") # Get it safely, default to empty string
             generated_markdown = generate_markdown_from_gemini(user_prompt_prefix, markdown_content)
-            print("Debug: generated_markdown =", generated_markdown) # ADD THIS LINE
             if generated_markdown:
                 return jsonify({'generated_markdown': generated_markdown})
             else:
