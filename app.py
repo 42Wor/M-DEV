@@ -157,11 +157,14 @@ def editor(category, filename):
             return "Invalid action", 400
 
     # --- GET request (loading editor) ---
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            markdown_content = f.read()
-    except FileNotFoundError:
-        return "File not found.", 404
+    if is_new_file: # Handle new_file.md case
+        markdown_content = "" # Set empty content for new file
+    else: # For existing files, try to read content
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                markdown_content = f.read()
+        except FileNotFoundError:
+            return "File not found.", 404
 
     return render_template('Project/editor.html', category=category, filename=filename, markdown_content=markdown_content)
 
