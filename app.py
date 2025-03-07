@@ -1,42 +1,37 @@
-''' =================================
-   1. Imports and Configurations
-   ================================= '''
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session, make_response, flash
 import json
 import markdown
 import os
 from functools import wraps
 import secrets
-import datetime  # Import the datetime module
-from datetime import timedelta  # Import timedelta from datetime module
-from werkzeug.utils import secure_filename # Import secure_filename
-import google.generativeai as genai  # Import the Gemini API library
-
+from datetime import timedelta
+from werkzeug.utils import secure_filename
+import google.generativeai as genai
+import datetime
 ''' =================================
-   2. Flask App Initialization and Secret Key
+   1. Initialization and Configurations
    ================================= '''
 app = Flask(__name__)
-app.secret_key = "secrets.token_hex(16)"
+app.secret_key = secrets.token_hex(16)  # Using secrets for the secret key.
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 ''' =================================
-   3. Project Settings and Constants
+   2. Project Settings and Constants
    ================================= '''
 README_FOLDER = "templates/Project/projectmd"
-README_FOLDER_ASSETS = os.path.join(README_FOLDER, "Assets") # Define Assets folder path
-ADMIN_PASSWORD = "'"
+README_FOLDER_ASSETS = os.path.join(README_FOLDER, "Assets")
+ADMIN_PASSWORD = "'"  #  REPLACE WITH A STRONG PASSWORD!
 
-# Ensure Assets folder exists
+# Ensure the base README_FOLDER and Assets folder exists
+os.makedirs(README_FOLDER, exist_ok=True)
 os.makedirs(README_FOLDER_ASSETS, exist_ok=True)
 
-# Configure Gemini API (replace with your actual API key or environment variable)
-# Option 1: Set API key directly (less secure - for testing only)
-# genai.configure(api_key="YOUR_API_KEY")
-genai.configure(api_key='AIzaSyACCG5jwizEchxEb3fnJlchzHY7HLp7QSw')
+# Gemini API configuration
+genai.configure(api_key='AIzaSyACCG5jwizEchxEb3fnJlchzHY7HLp7QSw') #REPLACE WITH YOUR API KEY
 
 generation_config = genai.types.GenerationConfig(
     candidate_count=1,
-    max_output_tokens=1500, # Adjust as needed
+    max_output_tokens=1500,
 )
 safety_settings = [
     {
@@ -60,11 +55,10 @@ model = genai.GenerativeModel(model_name="models/gemini-2.0-flash",
                               generation_config=generation_config,
                               safety_settings=safety_settings)
 
-
 ''' =================================
-   4. Authentication Decorator
+   3. Authentication Decorator
    ================================= '''
-# --- Authentication Decorator ---
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -72,19 +66,18 @@ def login_required(f):
             return redirect(url_for('admin_login'))
         return f(*args, **kwargs)
     return decorated_function
-# --- End Authentication Decorator ---
-
 
 ''' =================================
-   5. Gemini API Functions
+   4. Gemini API Functions
    ================================= '''
 
 def generate_name_from_gemini(prompt_suffix="for a markdown file"):
     """Generates a name using Gemini API."""
-    prompt = f"Generate a creative and concise name {prompt_suffix}.  Just return the name, no extra text."
+    prompt = f"Generate a creative and concise name {prompt_suffix}. Just return the name in lowercase, no extra text."
     try:
         response = model.generate_content(prompt)
-        return response.text.strip()
+        # Convert to lowercase and replace spaces with hyphens
+        return response.text.strip().lower().replace(" ", "-")
     except Exception as e:
         print(f"Gemini API error during name generation: {e}")
         return None
@@ -100,107 +93,102 @@ def generate_markdown_from_gemini(prompt_prefix, user_markdown_content=""):
         return None
 
 ''' =================================
-   6. Markdown Editor Routes
+   5. Markdown Editor Routes
    ================================= '''
-@app.route('/editor/<filename>', methods=['GET', 'POST'])
-@login_required  # Protect the editor (optional for scratch, add back later)
-def editor(filename):
-    file_path = os.path.join(README_FOLDER, filename)
-    is_new_file = (filename == 'new_file.md') # Check if it's a new file
+
+@app.route('/editor/<category>/<filename>', methods=['GET', 'POST'])
+@login_required
+def editor(category, filename):
+    file_path = os.path.join(README_FOLDER, category, filename)
+    is_new_file = (filename == 'new_file.md')
 
     if request.method == 'POST':
-        action = request.form.get('action') # Get the action (save, save_as, generate_name, etc.)
+        action = request.form.get('action')
 
-        if action == 'generate_name': # --- Generate Name Request ---
+        if action == 'generate_name':
             generated_name = generate_name_from_gemini()
             if generated_name:
                 return jsonify({'generated_name': generated_name})
             else:
                 return jsonify({'error': 'Failed to generate name.'}), 500
 
-        elif action == 'generate_markdown': # --- Generate Markdown Request ---
-            user_prompt_prefix = request.form.get('prompt_prefix', "Expand on this markdown content") # Get prompt prefix from form, default if missing
-            # Get markdown_content only when needed for generate_markdown as context
-            markdown_content = request.form.get('markdown_content', "") # Get it safely, default to empty string
+        elif action == 'generate_markdown':
+            user_prompt_prefix = request.form.get('prompt_prefix', "Expand on this markdown content")
+            markdown_content = request.form.get('markdown_content', "")
             generated_markdown = generate_markdown_from_gemini(user_prompt_prefix, markdown_content)
             if generated_markdown:
                 return jsonify({'generated_markdown': generated_markdown})
             else:
                 return jsonify({'error': 'Failed to generate markdown.'}), 500
 
-
-        elif action == 'save_as': # --- Save As Logic ---
-            markdown_content = request.form['markdown_content'] # Get markdown_content for save actions
-            new_filename_input = request.form.get('new_filename') # Get new filename from form
+        elif action == 'save_as':
+            markdown_content = request.form['markdown_content']
+            new_filename_input = request.form.get('new_filename')
             if not new_filename_input:
                 flash("Filename for 'Save As' is missing.", 'error')
-                return redirect(url_for('editor', filename=filename)) # Stay on same editor page
-            new_filename = secure_filename(new_filename_input) # Sanitize filename
+                return redirect(url_for('editor', category=category, filename=filename))  # Keep category
+            new_filename = secure_filename(new_filename_input)
             if not new_filename.endswith(".md"):
                 new_filename += ".md"
-            new_file_path = os.path.join(README_FOLDER, new_filename)
 
-            if os.path.exists(new_file_path) and not is_new_file: # Prevent overwriting existing file (unless original was new_file.md)
-                flash(f"File '{new_filename}' already exists. Choose a different name for 'Save As'.", 'error')
-                return redirect(url_for('editor', filename=filename)) # Stay on same editor page
+            # Get category for new file, default to current if not provided
+            new_category = request.form.get('new_category', category)
+            new_file_path = os.path.join(README_FOLDER, new_category, new_filename)
 
+            # Ensure the new category directory exists
+            os.makedirs(os.path.dirname(new_file_path), exist_ok=True)
 
-            try:
-                with open(new_file_path, 'w', encoding='utf-8') as f:
-                    f.write(markdown_content)
-                flash(f"File saved as '{new_filename}' successfully!", 'success')
-                return redirect(url_for('editor', filename=new_filename)) # Redirect to editor for new file
-            except Exception as e:
-                flash(f"Error saving file: {e}", 'error')
-                return f"Error saving file: {e}", 500
+            if os.path.exists(new_file_path) and not is_new_file:
+                flash(f"File '{new_filename}' already exists.  Choose a different name for 'Save As'.", 'error')
+                return redirect(url_for('editor', category=category, filename=filename))
 
-        elif action == 'save': # --- Regular Save Logic (action == 'save') ---
-            markdown_content = request.form['markdown_content'] # Get markdown_content for save actions
-            try:
-                with open(file_path, 'w', encoding='utf-8') as f:
-                    f.write(markdown_content)
-                flash('File saved successfully!', 'success')
-                return redirect(url_for('editor', filename=filename)) # Redirect to reload editor
-            except Exception as e:
-                flash(f"Error saving file: {e}", 'error')
-                return f"Error saving file: {e}", 500
+            with open(new_file_path, 'w', encoding='utf-8') as f:
+                f.write(markdown_content)
+            flash(f"File saved as '{new_filename}' successfully!", 'success')
+            return redirect(url_for('editor', category=new_category, filename=new_filename))
+
+        elif action == 'save':
+            markdown_content = request.form['markdown_content']
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(markdown_content)
+            flash('File saved successfully!', 'success')
+            return redirect(url_for('editor', category=category, filename=filename))
         else:
-            return "Invalid action", 400 # Handle unexpected actions
+            return "Invalid action", 400
 
-
-    # --- GET request (loading editor) remains the same ---
+    # --- GET request (loading editor) ---
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             markdown_content = f.read()
     except FileNotFoundError:
         return "File not found.", 404
-    except Exception as e:
-        return f"Error reading file: {e}", 500
 
-    return render_template('Project/editor.html', filename=filename, markdown_content=markdown_content)
+    return render_template('Project/editor.html', category=category, filename=filename, markdown_content=markdown_content)
 
 @app.route('/editor/new', methods=['GET', 'POST'])
-@login_required # Protect new file creation (optional for scratch, add back later)
+@login_required
 def new_editor():
     if request.method == 'POST':
         filename = request.form['new_filename']
+        category = request.form.get('new_category', 'default')  # Get category, default to 'default'
+
         if not filename.endswith(".md"):
             filename += ".md"
-        file_path = os.path.join(README_FOLDER, filename)
+
+        file_path = os.path.join(README_FOLDER, category, filename)
+
+        # Ensure the category directory exists
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
         if os.path.exists(file_path):
             return "File already exists.", 400
 
         markdown_content = request.form['markdown_content']
-        try:
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(markdown_content)
-            return redirect(url_for('readme_page', filename=os.path.splitext(filename)[0])) # Redirect to new page
-        except Exception as e:
-            return f"Error creating file: {e}", 500
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(markdown_content)
+        return redirect(url_for('readme_page', category=category, filename=os.path.splitext(filename)[0]))
 
-    return render_template('Project/editor.html', filename='new_file.md', markdown_content='')
-
+    return render_template('Project/editor.html', filename='new_file.md', category='default', markdown_content='')  # Pass default category
 
 @app.route('/preview', methods=['POST'])
 def preview_markdown():
@@ -208,26 +196,28 @@ def preview_markdown():
     markdown_text = data.get('markdown', '')
     html_content = markdown.markdown(markdown_text)
     return jsonify({'html_content': html_content})
-# --- End Markdown Editor Routes ---
 
 ''' =================================
-   7. Admin Panel and Login Routes
+   6. Admin Panel and Login Routes
    ================================= '''
-# --- Admin and Login ---
+
 @app.route('/admin/')
 @login_required
 def admin():
-    readme_files_base_names = []
+    readme_files_by_category = {}  # Dictionary to store files by category
     try:
-        for filename in os.listdir(README_FOLDER):
-            if filename.endswith(".md") or filename.endswith(".markdown"):
-                base_name = os.path.splitext(filename)[0]
-                readme_files_base_names.append(base_name)
+        for category in os.listdir(README_FOLDER):
+            category_path = os.path.join(README_FOLDER, category)
+            if os.path.isdir(category_path) and category != "Assets":
+                readme_files_by_category[category] = []  # Initialize list for the category
+                for filename in os.listdir(category_path):
+                    if filename.endswith((".md", ".markdown")):
+                        base_name = os.path.splitext(filename)[0]
+                        readme_files_by_category[category].append(base_name)
     except FileNotFoundError:
         return f"Error: Folder '{README_FOLDER}' not found.", 404
 
-    return render_template('admin/admin_panel.html', readme_files=readme_files_base_names)
-
+    return render_template('admin/admin_panel.html', readme_files_by_category=readme_files_by_category)
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
@@ -243,32 +233,29 @@ def admin_login():
 @app.route('/admin/logout')
 def admin_logout():
     session.pop('logged_in', None)
-    return redirect(url_for('home')) # Or admin login page
-# --- End Admin and Login ---
-
+    return redirect(url_for('home'))
 
 ''' =================================
-   8. File Deletion Route (Admin Feature)
+   7. File Deletion Route
    ================================= '''
-# ---  File Deletion (Admin Feature) ---
-@app.route('/admin/delete/<filename>')
+
+@app.route('/admin/delete/<category>/<filename>')
 @login_required
-def admin_delete_file(filename):
-    file_path = os.path.join(README_FOLDER, filename + ".md") # Ensure .md extension for deletion
+def admin_delete_file(category, filename):
+    file_path = os.path.join(README_FOLDER, category, filename + ".md")
     try:
         os.remove(file_path)
-        return redirect(url_for('admin')) # Redirect back to admin panel
+        return redirect(url_for('admin'))
     except FileNotFoundError:
         return "File not found.", 404
     except Exception as e:
         return f"Error deleting file: {e}", 500
-# --- End File Deletion Route ---
 
 ''' =================================
-   9. Asset Management Routes (NEW)
+   8. Asset Management Routes
    ================================= '''
-# --- Asset Management ---
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'} # Allowed image extensions
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -282,13 +269,10 @@ def upload_image():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
     if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename) # Use secure_filename
+        filename = secure_filename(file.filename)
         file_path = os.path.join(README_FOLDER_ASSETS, filename)
-        try:
-            file.save(file_path)
-            return jsonify({'success': 'Image uploaded successfully', 'filename': filename})
-        except Exception as e:
-            return jsonify({'error': f'Error saving file: {str(e)}'}), 500
+        file.save(file_path)
+        return jsonify({'success': 'Image uploaded successfully', 'filename': filename})
     else:
         return jsonify({'error': 'Invalid file type'}), 400
 
@@ -296,94 +280,75 @@ def upload_image():
 @login_required
 def list_assets():
     assets = []
-    try:
-        for filename in os.listdir(README_FOLDER_ASSETS):
-            if allowed_file(filename): # Only list allowed image types
-                assets.append(filename)
-    except FileNotFoundError:
-        return jsonify({'error': f'Assets folder not found: {README_FOLDER_ASSETS}'}), 404
+    for filename in os.listdir(README_FOLDER_ASSETS):
+        if allowed_file(filename):
+            assets.append(filename)
     return jsonify({'assets': assets})
-# --- End Asset Management ---
-# In your app.py, after your existing static route (@app.route('/static/<path:filename>'))
 
-@app.route('/templates_assets/<path:filename>')  # New route prefix - choose something distinct
+@app.route('/templates_assets/<path:filename>')
 def serve_templates_assets(filename):
     return send_from_directory(os.path.join('templates', 'Project', 'projectmd', 'Assets'), filename)
 
-
 ''' =================================
-   10. Main Application Routes (Home, Project, Readme, Static)
+   9. Main Application Routes
    ================================= '''
-# --- Main Application Routes ---
-# Home Page
+
 @app.route("/")
 def home():
-    resp = make_response(render_template("index.html")) # Create a response object
+    resp = make_response(render_template("index.html"))
     now = datetime.datetime.now()
-    resp.set_cookie('last_visit', now.strftime("%Y-%m-%d %H:%M:%S")) # Set the cookie
+    resp.set_cookie('last_visit', now.strftime("%Y-%m-%d %H:%M:%S"))
     return resp
 
-
-
-@app.route("/project/")  # Main page route
+@app.route("/project/")
 def project():
-    readme_files_base_names = []  # Store base filenames (without .md)
+    readme_files_by_category = {} # Dictionary to store files by category
     try:
-        for filename in os.listdir(README_FOLDER):
-            if filename.endswith(".md") or filename.endswith(".markdown"):
-                base_name = os.path.splitext(filename)[0]  # Remove extension
-                readme_files_base_names.append(base_name)
+        for category in os.listdir(README_FOLDER):
+            category_path = os.path.join(README_FOLDER, category)
+            if os.path.isdir(category_path) and category != "Assets":
+                readme_files_by_category[category] = [] # Initialize list for the category
+                for filename in os.listdir(category_path):
+                    if filename.endswith((".md",".markdown")):
+                        base_name = os.path.splitext(filename)[0]
+                        readme_files_by_category[category].append(base_name)
+
     except FileNotFoundError:
         return f"Error: Folder '{README_FOLDER}' not found.", 404
 
-    print("Debug: readme_files_base_names =", readme_files_base_names)  # ADD THIS LINE
-    return render_template("Project/index.html", readme_files=readme_files_base_names)
+    return render_template("Project/index.html", readme_files_by_category=readme_files_by_category)
 
-
-
-@app.route('/readme/<filename>')  # Route expects filename without .md extension
-def readme_page(filename):
-    readme_path = os.path.join(README_FOLDER, filename + ".md") # Add .md extension here
+@app.route('/readme/<category>/<filename>')
+def readme_page(category, filename):
+    readme_path = os.path.join(README_FOLDER, category, filename + ".md")
     try:
         with open(readme_path, "r", encoding="utf-8") as f:
             readme_content = f.read()
-            # Enable the 'toc' extension to generate header IDs
             html_content = markdown.markdown(readme_content, extensions=['toc'])
-            return render_template("Project/readme_page.html", readme_html=html_content, readme_filename=filename + ".md") # Keep .md in title for clarity if you want
+            return render_template("Project/readme_page.html", readme_html=html_content, readme_filename=f"{category}/{filename}.md")
     except FileNotFoundError:
         return "README file not found.", 404
 
-
-# Optional: Serve static files (like CSS) if you use style.css
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
-# --- End Main Application Routes ---
-
 
 ''' =================================
-   11. Additional Pages (Portfolio, Privacy, FAQs, Chat, Form Submission)
+   10. Additional Pages
    ================================= '''
-# --- Additional Pages ---
-# Portfolio Page
+
 @app.route("/com/")
 def portfolio():
     return render_template("com/index.html")
 
-
-# Privacy Page
 @app.route("/Privacy/")
 def privacy():
     return render_template("Privacy/index.html")
 
-
-# FAQs Page
 @app.route("/FAQs/")
 def faqs():
     return render_template("FAQs/index.html")
 
-
-# Chat Page - using com/index.html as template
 @app.route("/Chat/")
 def Chat():
     return render_template("com/index.html")
@@ -392,7 +357,6 @@ def Chat():
 def Syntax():
     return render_template("Project/Syntax-md.html")
 
-# Form Submission Route
 @app.route("/submit_form", methods=["POST"])
 def submit_form():
     if request.method == "POST":
@@ -403,33 +367,25 @@ def submit_form():
         print("Name:", name)
         print("Email:", email)
         print("Message:", message)
-        # Here you can add code to save the data to a database,
-        # send an email, or perform other actions with the form data.
-        return render_template("com/index.html")  # Or redirect to a thank you page
-
+        return render_template("com/index.html")
 
 @app.route("/faq")
 def faq():
     with open("static/FAQs/faq.json") as f:
         faq_data = json.load(f)
     return jsonify(faq_data)
-# --- End Additional Pages ---
-
 
 ''' =================================
-   12. Error Handling (404)
+   11. Error Handling
    ================================= '''
-# --- 404 Error Handler ---
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
-# --- End Error Handling ---
-
 
 ''' =================================
-   13. Main Execution Block
+   12. Main Execution Block
    ================================= '''
-# --- Main Execution Block ---
+
 if __name__ == "__main__":
-    app.run(debug=True)  # Set debug=True for development
-# --- End Main Execution Block ---
+    app.run(debug=True)

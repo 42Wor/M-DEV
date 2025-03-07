@@ -17,7 +17,98 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Assets/Images/M.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+    /* styles.css - For Project Boxes */
+    .boxes {
+        display: flex;
+        flex-wrap: wrap; /* Allow boxes to wrap to the next line */
+        justify-content: space-around; /* Space out boxes evenly */
+        gap: 20px; /* Space between boxes */
+    }
+
+    .project-box {
+        border: 1px solid #ddd; /* Subtle border */
+        padding: 20px;
+        width: 250px; /* Fixed width, adjust as needed */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        text-align: center;
+        transition: transform 0.2s ease; /* Smooth transition for hover effect */
+    }
+
+    .project-box:hover {
+        transform: translateY(-5px); /* Slightly lift the box on hover */
+    }
+
+    .project-box .icon {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .project-box .topic {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .project-box p {
+        color: #666;
+    }
+
+    .box-link {
+        text-decoration: none; /* Remove underline from link */
+        color: inherit; /* Inherit text color from parent */
+        display: block; /* Make the entire box clickable */
+    }
+        .category-title {
+        font-size: 1.5em; /* Larger font size */
+        font-weight: bold;
+        margin-bottom: 15px; /* Space below the title */
+        color: #333; /* Darker text color */
+        text-align: center; /* Center-align the title */
+        border-bottom: 2px solid #007bff; /* Blue underline */
+        padding-bottom: 5px; /* Space between text and underline */
+    }
+
+    </style>
 </head>
+<style>
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Align categories to the start */
+}
+
+.category-section {
+    flex: 1 1 250px; /* Adjust as needed for category box width */
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.category-section h3 {
+    margin-top: 0;
+    color: #0056b3;
+}
+
+.category-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.category-section li {
+    margin-bottom: 8px;
+}
+
+.category-section li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.category-section li a:hover {
+    text-decoration: underline;
+}
+</style>
 <!-- Navigation Header -->
 <header>
     <nav>
@@ -55,72 +146,32 @@
         </div>
     </nav>
 </header>
-
 <body>
-
-
-    <!-- My Services Section Start (adapted for Projects) -->
-    <section class="services" id="Projects">
-        <div class="content">
-            <div class="title"><span>My Projects</span></div>
-
-            <div class="project-search">
-                <input type="text" id="projectSearch" placeholder="Search projects...">
-            </div>
-
-            <div class="boxes" id="projectBoxesContainer">
-                {% for base_name in readme_files %}
-                <!-- Project Box Start -->
-                <div class="box project-box">
-                    <a href="{{ url_for('readme_page', filename=base_name) }}" class="box-link">
-                        <div class="icon">
-                            <i class="fas fa-folder-open"></i>
-                        </div>
-                        <div class="topic">{{ base_name }}</div>
-                        <p>View Documentation</p>
-                    </a>
+    <div class="container">
+        <header>
+            <h1>Project READMEs</h1>
+            <p>Explore our project documentation.</p>
+        </header>
+        <main>
+            <section class="readme-list">
+                <h2>Available READMEs</h2>
+                <div class="category-list">
+                    {% for category, files in readme_files_by_category.items() %}
+                    <div class="category-section">
+                        <h3>{{ category }}</h3>
+                        <ul>
+                            {% for filename in files %}
+                            <li><a href="/readme/{{ category }}/{{ filename }}">{{ filename }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
                 </div>
-                <!-- Project Box End -->
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <!-- My Services Section End -->
-
-    <!-- Footer -->
-    <footer>
-        <div class="texts">
-            <span>
-                Created By <a class="links" href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a> |
-                © 2024 All Rights Reserved |
-                <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Terms &
-                    Conditions</a> |
-                <a class="links" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Privacy
-                    Policy</a>
-            </span>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const searchInput = document.getElementById('projectSearch');
-            const projectBoxesContainer = document.getElementById('projectBoxesContainer');
-            const projectBoxes = projectBoxesContainer.querySelectorAll('.project-box');
-
-            searchInput.addEventListener('input', function () {
-                const searchTerm = searchInput.value.toLowerCase();
-
-                projectBoxes.forEach(box => {
-                    const topic = box.querySelector('.topic').textContent.toLowerCase();
-                    if (topic.includes(searchTerm)) {
-                        box.style.display = '';
-                    } else {
-                        box.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
+            </section>
+        </main>
+        <footer>
+            <p>© 2024 My Project</p>
+        </footer>
+    </div>
 </body>
-
 </html>

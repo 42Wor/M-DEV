@@ -48,7 +48,7 @@
                     <!-- Optional Admin Panel Link -->
                     <button type="button" id="openAssetBrowser" class="asset-browser-button">Browse Assets</button>
                     <input type="file" id="imageUpload" name="image" style="display: none;"> <!-- Hidden file input -->
-                                        <a href="{{ url_for('readme_page', filename=filename.replace('.md', '')) }}"
+                    <a href="{{ url_for('readme_page', category=category, filename=filename.replace('.md', '')) }}"
                         class="view-page-button">View Page</a>
 
                     <a href="{{ url_for('admin') }}" class="admin-button">Admin Panel</a>
@@ -364,7 +364,7 @@
 
         // --- Generate Name Functionality ---
         generateNameButton.addEventListener('click', () => {
-            markdownForm.action = "{{ url_for('editor', filename=filename) }}"; // Ensure form action is correct
+            markdownForm.action = "{{ url_for('editor', category=category, filename=filename) }}"; // Ensure form action is correct
             formActionInput.value = 'generate_name';
             markdownForm.submit();
         });
@@ -373,7 +373,7 @@
         if (suggestNameButton) {
             suggestNameButton.addEventListener('click', () => {
                 suggestedFilenameDiv.textContent = 'Suggesting filename...';
-                fetch("{{ url_for('editor', filename=filename) }}", {
+                fetch("{{ url_for('editor', category=category, filename=filename) }}", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: new URLSearchParams({ action: 'generate_name' })
@@ -415,7 +415,7 @@
             if (promptPrefix) {
                 generateMarkdownModal.style.display = "none"; // Close modal immediately after clicking Generate
 
-                fetch("{{ url_for('editor', filename=filename) }}", { // Use fetch instead of form submit
+                fetch("{{ url_for('editor', category=category, filename=filename) }}", { // Use fetch instead of form submit
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // Or 'application/json' if sending JSON
                     body: new URLSearchParams({

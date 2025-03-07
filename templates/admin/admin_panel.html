@@ -1,140 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Nunito+Sans:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='Project/admin_panel.css') }}">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Project/admin_panel.css') }}">
 </head>
-
 <body>
-    <header class="site-header">
-        <nav class="main-navigation">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to Homepage">
-                        <img src="{{ url_for('static', filename='Assets/Images/M.png') }}" alt="M-DEV Logo"
-                            class="logo-image" />
-                        <span class="logo-text">M-DEV</span>
-                    </a>
+    <div class="admin-container">
+        <h1>Admin Panel</h1>
+        <section class="file-management">
+            <h2>Manage README Files</h2>
+            <div class="file-list">
+                {% for category, files in readme_files_by_category.items() %}
+                <div class="category-section">
+                    <h3>{{ category }}</h3>
+                    <ul>
+                        {% for filename in files %}
+                        <li>
+                            <a href="/editor/{{ category }}/{{ filename }}.md">Edit {{ filename }}</a>
+                            <a href="/admin/delete/{{ category }}/{{ filename }}" class="delete-link">Delete</a>
+                            <a href="/readme/{{ category }}/{{ filename }}" target="_blank">View</a>
+                        </li>
+                        {% endfor %}
+                        <li><a href="/editor/{{ category }}/new_file.md" class="add-new">Add New File in {{category}}</a></li>
+                    </ul>
                 </div>
-                <button class="menu-btn" aria-label="Toggle navigation menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="menu main-menu">
-                    <li class="menu-item"><a href="{{ url_for('home') }}" class="menu-link">Home</a></li>
-                    <li class="menu-item cancel-btn">
-                        <button aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
-                    </li>
-                </ul>
-                <div class="media-icons social-icons">
-                    <a href="#" class="social-icon-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-icon-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-icon-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-icon-link" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                </div>
+                {% endfor %}
             </div>
-        </nav>
-    </header>
+            <a href="/editor/new" class="button">Create New File in New Category</a>
+        </section>
 
-    <div class="container">
-        <main class="admin-main-content">
-            <section class="admin-panel-header">
-                <h1 class="admin-panel-title">Admin Panel</h1>
-
-                <ul class="admin-actions">
-                    <li class="admin-action-item">
-                        <a href="{{ url_for('home') }}" class="admin-action-link button-style-solid-blue">Home</a>
-                    </li>
-                    <li class="admin-action-item">
-                        <a href="{{ url_for('project') }}" class="admin-action-link button-style-solid-green">Projects</a>
-                    </li>
-                    <li class="admin-action-item">
-                        <a href="{{ url_for('admin_logout') }}" class="admin-action-link button-style-solid-danger">Logout</a>
-                    </li>
-                </ul>
-
-            </section>
-
-            <section class="manage-files-section">
-                <h2 class="manage-files-heading">Manage Project Files</h2>
-                <ul class="file-list">
-                    {% for file in readme_files %}
-                    <li class="file-item">
-                        <h3 class="file-name"><a href="{{ url_for('readme_page', filename=file) }}" class="file-link">{{ file }}.md</a></h3>
-                        <div class="file-actions">
-                            <a href="{{ url_for('editor', filename=file + '.md') }}"
-                                class="file-action file-action-edit">Edit</a>
-                            <a href="{{ url_for('admin_delete_file', filename=file) }}"
-                                class="file-action file-action-delete"
-                                onclick="return confirm('Are you sure you want to delete {{ file }}.md?')">Delete</a>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <p class="create-new-file-link"><a href="{{ url_for('new_editor') }}" class="create-button">Create New
-                        File</a></p>
-            </section>
-        </main>
+        <section class="logout-section">
+            <a href="/admin/logout" class="logout-button">Logout</a>
+        </section>
     </div>
-
-    <footer class="site-footer">
-        <div class="footer-texts">
-            <span class="footer-copyright">
-                Created By <a class="footer-link" href="https://github.com/42Wor/" rel="noopener noreferrer">Maaz-Waheed</a>
-                |
-                © 2024 All Rights Reserved |
-                <a class="footer-link" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Terms &
-                    Conditions</a> |
-                <a class="footer-link" href="{{ url_for('privacy') }}" target="_blank" rel="noopener noreferrer">Privacy
-                    Policy</a>
-            </span>
-        </div>
-    </footer>
-
-    <!-- JavaScript for mobile menu -->
-    <script>
-        // ... mobile menu JavaScript (keep this as is) ...
-    
-        // JavaScript for File Box Interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileItems = document.querySelectorAll('.file-item');
-            let currentlySelected = null; // Keep track of the currently selected item
-    
-            fileItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const fileUrl = this.getAttribute('data-href');
-    
-                    // Make the whole box clickable to open the readme page
-                    if (fileUrl) {
-                        window.location.href = fileUrl; // Redirect to readme page
-                    }
-    
-                    // Selection Highlighting Logic
-                    if (currentlySelected) {
-                        currentlySelected.classList.remove('selected'); // Deselect previous
-                    }
-                    this.classList.add('selected'); // Select current
-                    currentlySelected = this; // Update currently selected item
-                });
-            });
-        });
-    </script>
 </body>
-
 </html>
