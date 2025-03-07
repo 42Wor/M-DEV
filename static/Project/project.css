@@ -14,7 +14,7 @@
         5.3  Navigation Menu
         5.4  Social Media Icons
         5.5  Mobile Menu Button and Responsiveness
-    6.  Projects Section
+    6.  Projects Section (Existing Styles - you might adapt some)
         6.1  Section Container
         6.2  Title Styling
         6.3  Project Search Bar
@@ -40,6 +40,7 @@
     13. Print Styles (Optional)
     14. Vendor Prefixes (Consideration for older browsers)
     15. Future Enhancements and Notes
+    16. README List Section        <- NEW SECTION ADDED HERE
 */
 
 /* ----------------------------------------------------------------------- */
@@ -878,3 +879,111 @@ footer .links:focus {
 /* - Consider using a CSS preprocessor (Sass, Less) for better organization and features */
 /* - Optimize CSS for performance (minification, compression) */
 /* - Regularly review and update CSS to maintain consistency and best practices */
+
+
+/* ----------------------------------------------------------------------- */
+/* 16. README List Section                                                */
+/* ----------------------------------------------------------------------- */
+
+.readme-list {
+    padding: 80px 0; /* Adjust padding as needed */
+    text-align: center;
+    background-color: var(--dark-bg-color-2); /* Match section background */
+}
+
+.readme-list h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: var(--light-text-color-1);
+}
+
+.category-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid for categories */
+    gap: 30px;
+    max-width: 1200px; /* Container width */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.category-section {
+    background-color: var(--dark-bg-color-3); /* Category box background */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left; /* Align text within category box to left */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.category-section:hover {
+    background-color: var(--dark-bg-color-4);
+    transform: translateY(-5px);
+}
+
+.category-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--light-text-color-1);
+    border-bottom: 2px solid var(--electric-purple-2); /* Category title underline */
+    padding-bottom: 5px;
+}
+
+.category-section ul {
+    list-style: none; /* Remove default list bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.category-section li {
+    margin-bottom: 10px;
+}
+
+.category-section li:last-child {
+    margin-bottom: 0; /* Remove margin from last item */
+}
+
+.category-section li a {
+    display: block; /* Make link fill line for better click area */
+    padding: 10px 15px;
+    background-color: var(--dark-bg-color-5); /* File box background within category */
+    color: var(--light-text-color-2);
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; /* Remove underline from links */
+}
+
+.category-section li a:hover {
+    background-color: var(--electric-purple-2); /* Hover color for file box */
+    color: var(--dark-bg-color-1);
+}
+
+
+/* Responsive adjustments for README list section (adjust breakpoints as needed) */
+@media (max-width: 768px) {
+    .category-list {
+        grid-template-columns: 1fr; /* Stack categories on smaller screens */
+    }
+
+    .category-section h3 {
+        font-size: 1.6rem; /* Smaller category title on tablet */
+    }
+
+    .category-section li a {
+        padding: 8px 12px; /* Smaller padding for file links on tablet */
+        font-size: 0.95rem;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .readme-list h2 {
+        font-size: 2rem; /* Smaller main title on mobile */
+        margin-bottom: 30px;
+    }
+    .category-section h3 {
+        font-size: 1.4rem; /* Smaller category title on mobile */
+    }
+     .category-section li a {
+        font-size: 0.9rem; /* Even smaller file links on mobile */
+    }
+}
