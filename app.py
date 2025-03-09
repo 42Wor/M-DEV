@@ -168,17 +168,19 @@ def editor(category, filename):
 
     return render_template('Project/editor.html', category=category, filename=filename, markdown_content=markdown_content)
 
+
 @app.route('/editor/new', methods=['GET', 'POST'])
 @login_required
 def new_editor():
     if request.method == 'POST':
         filename = request.form['new_filename']
-        category = request.form.get('new_category', 'default')  # Get category, default to 'default'
+        category = request.form['new_category']  # <---  Getting category from form data
+        print(category,"hh")  # Get category, default to 'default'  <---  This line is good for debugging
 
         if not filename.endswith(".md"):
             filename += ".md"
 
-        file_path = os.path.join(README_FOLDER, category, filename)
+        file_path = os.path.join(README_FOLDER, category, filename) # <--- Using category in file path
 
         # Ensure the category directory exists
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -193,7 +195,7 @@ def new_editor():
 
     return render_template('Project/editor.html', filename='new_file.md', category='default', markdown_content='')  # Pass default category
 
-@app.route('/preview', methods=['POST'])
+
 def preview_markdown():
     data = request.get_json()
     markdown_text = data.get('markdown', '')
