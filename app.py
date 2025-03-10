@@ -196,6 +196,7 @@ def new_editor():
     return render_template('Project/editor.html', filename='new_file.md', category='default', markdown_content='')  # Pass default category
 
 
+@app.route('/preview', methods=['POST'])
 def preview_markdown():
     data = request.get_json()
     markdown_text = data.get('markdown', '')
